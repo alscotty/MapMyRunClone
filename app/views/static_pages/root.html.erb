@@ -1,0 +1,14 @@
+<% if logged_in? %>
+  <script type="text/javascript">
+    window.currentUser = <%= render(
+      "api/users/user.json.jbuilder",
+      user: current_user
+    ).html_safe %>
+  </script>
+<% end %>
+
+<h1>
+<%= logged_in? %>
+</h1>
+
+<div id="root">React no worky :(</div>
