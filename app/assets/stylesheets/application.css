@@ -27,18 +27,32 @@
     margin-top: 0px;
     margin-left: 5px;
     /* font-family: ; */
-    background: linear-gradient(to right, #0c0fbe 0%, #479adf 40%);
+    background: linear-gradient(to right, #0c0fbe 0%, #479adf 20%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
     text-transform: uppercase;
 }
 
+/*
+    Session form styles
+*/
 .login-form-container{
     display:flex;
     justify-content: center;
-    /* align-items: center; */
 }
 .login-form-container > * {
     margin: 8em;
+}
+
+.session-submit {
+    width: 100%;
+    color:white;
+    background-color: rgb(64, 204, 51);
+    font-size: medium;
+    padding: 7px;
+}
+
+.session-submit:hover{
+    background-color: rgb(50, 167, 39);
 }
