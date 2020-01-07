@@ -34,7 +34,7 @@ class SessionForm extends React.Component {
 
   renderErrors() {
     return(
-      <ul>
+      <ul className='login-errors'>
         {this.props.errors.map((error, i) => (
           <li key={`error-${i}`}>
             {error}
@@ -50,12 +50,14 @@ class SessionForm extends React.Component {
         <form onSubmit={this.handleSubmit} className="login-form-box">
           Welcome to MapMyRunClone!
           <br/>
+          <br/>
           Please {this.props.formType} or {this.props.navLink}
           {this.renderErrors()}
           <div className="login-form">
             <br/>
-            <label>Username:
+            <label>
               <input type="text"
+                placeholder='Username'
                 value={this.state.username}
                 onChange={this.update('username')}
                 className="login-input"
@@ -63,8 +65,9 @@ class SessionForm extends React.Component {
             </label>
             <br/>
             <br/>
-            <label>Password:
+            <label>
               <input type="password"
+                placeholder='Password'
                 value={this.state.password}
                 onChange={this.update('password')}
                 className="login-input"

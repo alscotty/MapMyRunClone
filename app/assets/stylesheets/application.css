@@ -33,6 +33,47 @@
     text-decoration: none;
     text-transform: uppercase;
 }
+/* 
+    Greeting Container stuff
+*/
+.login-signup,.header-group {
+    position: absolute;
+    margin-top: 20px;
+    top: 0px;
+    right:5px;
+}
+.header-group{
+    display: flex;
+    height: 10px;
+    align-items:center;
+    justify-content: flex-end;
+}
+
+#logLink,#signLink{
+    text-decoration: none;
+    padding: 10px;
+}
+
+#logLink{
+    color:black;
+}
+
+#logLink:hover{
+    background-color:rgb(195, 201, 207);
+}
+
+#signLink{
+    color:white;
+    background-color: rgb(64, 204, 51);
+}
+#signLink:hover{
+    background-color: rgb(50, 167, 39);
+}
+
+.header-button:hover{
+    background-color:rgb(195, 201, 207);
+}
+
 
 /*
     Session form styles
@@ -44,7 +85,6 @@
 .login-form-container > * {
     margin: 8em;
 }
-
 
 .session-submit {
     width: 100%;
@@ -67,4 +107,14 @@
 
 .demo-login:hover{
     background-color: rgb(29, 66, 167);
+}
+
+.login-input{
+    width:100%;
+}
+
+.login-errors{
+    list-style: none;
+    font-size: smaller;
+    color:rgb(145, 45, 45);
 }
