@@ -52,6 +52,7 @@ class SessionForm extends React.Component {
               />
             </label>
             <br/>
+            <br/>
             <label>Password:
               <input type="password"
                 value={this.state.password}
@@ -59,6 +60,7 @@ class SessionForm extends React.Component {
                 className="login-input"
               />
             </label>
+            <br/>
             <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
           </div>
