@@ -404,6 +404,7 @@ function (_React$Component) {
       password: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleDemoLogin = _this.handleDemoLogin.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -415,6 +416,16 @@ function (_React$Component) {
       return function (e) {
         return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
       };
+    }
+  }, {
+    key: "handleDemoLogin",
+    value: function handleDemoLogin(e) {
+      e.preventDefault;
+      var demo = {
+        username: 'demo',
+        password: '123456'
+      };
+      this.props.processForm(demo);
     }
   }, {
     key: "handleSubmit",
@@ -456,7 +467,10 @@ function (_React$Component) {
         className: "session-submit",
         type: "submit",
         value: this.props.formType
-      }))));
+      }), this.props.formType == 'login' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "demo-login",
+        onClick: this.handleDemoLogin
+      }, "demo login") : '')));
     }
   }]);
 

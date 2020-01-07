@@ -45,6 +45,7 @@
     margin: 8em;
 }
 
+
 .session-submit {
     width: 100%;
     color:white;
@@ -55,4 +56,15 @@
 
 .session-submit:hover{
     background-color: rgb(50, 167, 39);
+}
+.demo-login {
+    width: 100%;
+    color:white;
+    background-color: rgb(51, 130, 204);
+    font-size: medium;
+    padding: 7px;
+}
+
+.demo-login:hover{
+    background-color: rgb(29, 66, 167);
 }
