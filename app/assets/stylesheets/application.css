@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+ body{
+     font-family: papyrus;
+     font-family: 'Helvetica Neue';
+     font-weight:350;
+ }
 
 .header-link{
     font-size: small;
@@ -27,4 +32,13 @@
     -webkit-text-fill-color: transparent;
     text-decoration: none;
     text-transform: uppercase;
+}
+
+.login-form-container{
+    display:flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.login-form-container > * {
+    margin: 8em;
 }
