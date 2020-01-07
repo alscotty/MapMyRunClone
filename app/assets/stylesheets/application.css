@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+.header-link{
+    font-size: small;
+    display:block;
+    top:0px;
+    left:0px;
+    margin-top: 0px;
+    margin-left: 5px;
+    /* font-family: ; */
+    background: linear-gradient(to right, #0c0fbe 0%, #479adf 40%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+    text-transform: uppercase;
+}
