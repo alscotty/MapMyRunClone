@@ -11,7 +11,9 @@ import {
 import GreetingContainer from './greeting/greeting_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
+import RoutesIndex from '../components/routes/routes_index_container'
 import Splash from './splash page/splash_page'
+
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 const App = () => (
@@ -27,6 +29,7 @@ const App = () => (
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
+      <ProtectedRoute path='/routes' component={RoutesIndex} />
     </Switch>
     
   </div>
