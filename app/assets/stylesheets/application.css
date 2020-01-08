@@ -130,8 +130,11 @@
     width:100%;
 }
 
+
+
 .login-errors{
     list-style: none;
-    font-size: smaller;
-    color:rgb(145, 45, 45);
+    font-size: small;
+    color:rgb(184, 42, 42);
+    padding-left:0px;
 }
