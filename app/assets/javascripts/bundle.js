@@ -584,7 +584,7 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         id: "splash1",
-        src: "/assets/splash1.png",
+        src: window.splash1URL,
         alt: "inspirational running pic"
       }));
     }
