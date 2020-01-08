@@ -11,6 +11,10 @@ class SessionForm extends React.Component {
     this.handleDemoLogin=this.handleDemoLogin.bind(this);
   }
 
+  componentDidMount(){
+    this.props.clearErrors();
+  }
+
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -23,13 +27,15 @@ class SessionForm extends React.Component {
       username:'demo',
       password:'123456'
     }
-    this.props.processForm(demo);
+    this.props.processForm(demo)
+      .then(()=>{this.props.history.push('./routes')});
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    this.props.processForm(user)
+      .then(()=>{this.props.history.push('./routes')});
   }
 
   renderErrors() {
@@ -51,7 +57,7 @@ class SessionForm extends React.Component {
           Welcome to MapMyRunClone!
           <br/>
           <br/>
-          Please {this.props.formType} or {this.props.navLink}
+          Please {this.props.formType.toLowerCase()} or {this.props.navLink}
           {this.renderErrors()}
           <div className="login-form">
             <br/>
@@ -77,9 +83,9 @@ class SessionForm extends React.Component {
             <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
             
-            {this.props.formType == 'login' ?  (
+            {this.props.formType == 'LOG IN' ?  (
               <button  className='demo-login' onClick={this.handleDemoLogin}>
-                demo login
+                DEMO LOGIN
                 </button>
             ) : ('')}
 

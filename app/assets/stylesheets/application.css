@@ -17,6 +17,7 @@
      font-family: papyrus;
      font-family: 'Helvetica Neue';
      font-weight:350;
+     color:grey
  }
 
 .header-link{
@@ -41,6 +42,9 @@
     margin-top: 20px;
     top: 0px;
     right:5px;
+    font-size: medium;
+    padding: 10px;
+
 }
 .header-group{
     display: flex;
@@ -56,6 +60,7 @@
 
 #logLink{
     color:black;
+    border-radius: 5px;
 }
 
 #logLink:hover{
@@ -65,9 +70,19 @@
 #signLink{
     color:white;
     background-color: rgb(64, 204, 51);
+    border-radius: 5px;
 }
 #signLink:hover{
     background-color: rgb(50, 167, 39);
+}
+
+.header-button{
+    display: flex;
+    justify-content: center;
+    /* height:30px; */
+    padding: 10px;
+    border-radius: 5px;
+    font-size: medium;
 }
 
 .header-button:hover{
@@ -92,6 +107,7 @@
     background-color: rgb(64, 204, 51);
     font-size: medium;
     padding: 7px;
+    border-radius: 5px;
 }
 
 .session-submit:hover{
@@ -103,6 +119,7 @@
     background-color: rgb(51, 130, 204);
     font-size: medium;
     padding: 7px;
+    border-radius: 5px;
 }
 
 .demo-login:hover{
@@ -113,8 +130,11 @@
     width:100%;
 }
 
+
+
 .login-errors{
     list-style: none;
-    font-size: smaller;
-    color:rgb(145, 45, 45);
+    font-size: small;
+    color:rgb(184, 42, 42);
+    padding-left:0px;
 }
