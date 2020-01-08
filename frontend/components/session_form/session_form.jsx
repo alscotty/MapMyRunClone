@@ -23,13 +23,15 @@ class SessionForm extends React.Component {
       username:'demo',
       password:'123456'
     }
-    this.props.processForm(demo);
+    this.props.processForm(demo)
+      .then(()=>{this.props.history.push('./routes')});
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    this.props.processForm(user)
+      .then(()=>{this.props.history.push('./routes')});
   }
 
   renderErrors() {
