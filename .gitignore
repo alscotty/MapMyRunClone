@@ -1,0 +1,13 @@
+/node_modules/
+/app/assets/javascripts/bundle.js
+/app/assets/javascripts/bundle.js.map
+
+# Ignore all logfiles and tempfiles.
+/log/*
+!/log/.keep
+/tmp
+npm-debug.log
+/log
+
+*/bundle.js
+*/bundle.js.map
