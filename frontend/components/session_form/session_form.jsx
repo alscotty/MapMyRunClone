@@ -53,7 +53,7 @@ class SessionForm extends React.Component {
           Welcome to MapMyRunClone!
           <br/>
           <br/>
-          Please {this.props.formType} or {this.props.navLink}
+          Please {this.props.formType.toLowerCase()} or {this.props.navLink}
           {this.renderErrors()}
           <div className="login-form">
             <br/>
@@ -79,9 +79,9 @@ class SessionForm extends React.Component {
             <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
             
-            {this.props.formType == 'login' ?  (
+            {this.props.formType == 'LOG IN' ?  (
               <button  className='demo-login' onClick={this.handleDemoLogin}>
-                demo login
+                DEMO LOGIN
                 </button>
             ) : ('')}
 
