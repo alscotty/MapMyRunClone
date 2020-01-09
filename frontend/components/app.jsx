@@ -11,7 +11,8 @@ import {
 import GreetingContainer from './greeting/greeting_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
-import RoutesIndex from '../components/routes/routes_index_container'
+import RoutesIndex from './routes/routes_index_container'
+import RoutesForm from './routes/routes_form_container'
 import Splash from './splash page/splash_page'
 
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
@@ -22,7 +23,12 @@ const App = () => (
       <Link to="/" className="header-link">
         <h1>MapMyRunClone</h1>
       </Link>
-      
+      <Link to='/routes/new' className='new-route-link'>
+        Create Route
+      </Link>
+      <Link to='/routes' className='index-routes-link'>
+        All Routes
+      </Link>
       <GreetingContainer />
     </header>
 
@@ -30,6 +36,7 @@ const App = () => (
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
+      <ProtectedRoute path='/routes/new' component={RoutesForm} />
       <ProtectedRoute path='/routes' component={RoutesIndex} />
     </Switch>
     
