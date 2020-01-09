@@ -471,8 +471,9 @@ function (_React$Component) {
           route = _this$props.route,
           currentUser = _this$props.currentUser,
           deleteRoute = _this$props.deleteRoute;
-      console.log(route.id);
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: route.id
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           deleteRoute(route.id);
         }
@@ -499,6 +500,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -532,8 +537,10 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(RoutesForm).call(this, props));
     _this.state = {
-      title: _this.props.title,
-      user_id: _this.props.currentUser.id,
+      routeInfo: {
+        title: _this.props.title,
+        user_id: _this.props.currentUser.id
+      },
       map: '',
       poly: '',
       path: ''
@@ -551,17 +558,25 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault;
-      this.props.action(this.state).then(function () {
+      debugger;
+      this.props.action(this.state.routeInfo).then(function () {
         _this2.props.history.push('./routes');
       });
     }
   }, {
-    key: "update",
-    value: function update(field) {
+    key: "updateTitle",
+    value: function updateTitle() {
       var _this3 = this;
 
       return function (e) {
-        _this3.setState(_defineProperty({}, field, e.target.value));
+        // this.setState({ [field]: e.target.value })
+        var routeInfo = _objectSpread({}, _this3.state.routeInfo);
+
+        routeInfo.title = e.target.value;
+
+        _this3.setState({
+          routeInfo: routeInfo
+        });
       };
     }
   }, {
@@ -623,8 +638,8 @@ function (_React$Component) {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        value: this.state.title,
-        onChange: this.update('title')
+        value: this.state.routeInfo.title,
+        onChange: this.updateTitle()
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderMap(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "Create Route"

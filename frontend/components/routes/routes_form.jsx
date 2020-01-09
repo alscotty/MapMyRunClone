@@ -1,13 +1,13 @@
 import React from 'react'
 
-
-
 class RoutesForm extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            title: this.props.title,
-            user_id: this.props.currentUser.id,
+            routeInfo:{
+                title: this.props.title,
+                user_id: this.props.currentUser.id,
+            },
             map:'',
             poly:'',
             path:''
@@ -21,15 +21,21 @@ class RoutesForm extends React.Component{
     handleSubmit(e) {
         e.preventDefault;
 
-        this.props.action(this.state)
+        debugger
+
+        this.props.action(this.state.routeInfo)
           .then(()=>{this.props.history.push('./routes')});
 
     }
 
-    update(field) {
+    updateTitle() {
         return (
             e => {
-                this.setState({ [field]: e.target.value })
+                // this.setState({ [field]: e.target.value })
+
+                let routeInfo={...this.state.routeInfo};
+                routeInfo.title= e.target.value;
+                this.setState({routeInfo})
             }
         )
     };
@@ -87,8 +93,8 @@ class RoutesForm extends React.Component{
                 <label>Title
                     <br/>
                 <input type="text"
-                        value={this.state.title}
-                        onChange={this.update('title')}
+                        value={this.state.routeInfo.title}
+                        onChange={this.updateTitle()}
                 />
                 </label>
                 <br/>

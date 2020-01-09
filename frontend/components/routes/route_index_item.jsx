@@ -10,9 +10,8 @@ class RouteIndexItem extends React.Component{
 
     render(){
         const {route,currentUser,deleteRoute}=this.props
-        console.log(route.id)
         return(
-            <div>
+            <div key={route.id}>
                 <h3>{route.title}</h3>
                 {currentUser.id == route.user_id ? (
                     <button onClick={()=>{deleteRoute(route.id)}}>Delete Route</button>
