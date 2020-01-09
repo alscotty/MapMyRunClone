@@ -22,6 +22,7 @@ const App = () => (
       <Link to="/" className="header-link">
         <h1>MapMyRunClone</h1>
       </Link>
+      
       <GreetingContainer />
     </header>
 
