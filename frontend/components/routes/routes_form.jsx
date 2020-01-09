@@ -21,8 +21,6 @@ class RoutesForm extends React.Component{
     handleSubmit(e) {
         e.preventDefault;
 
-        debugger
-
         this.props.action(this.state.routeInfo)
           .then(()=>{this.props.history.push('./routes')});
 
@@ -32,7 +30,7 @@ class RoutesForm extends React.Component{
         return (
             e => {
                 // this.setState({ [field]: e.target.value })
-
+                //sets up dummy object, used to assign nested state!
                 let routeInfo={...this.state.routeInfo};
                 routeInfo.title= e.target.value;
                 this.setState({routeInfo})
@@ -43,6 +41,10 @@ class RoutesForm extends React.Component{
     addLatLng(e) {
         const {poly}=this.state;
         this.setState({path: poly.getPath() })
+        //easier way to get coordinates on the go, put in state somewhere:
+        // console.log(e.latLng['lat']())
+        // console.log(e.latLng['lng']())
+
         this.state.path.push(e.latLng)
 
             new google.maps.Marker({

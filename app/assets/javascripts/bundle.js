@@ -558,7 +558,6 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault;
-      debugger;
       this.props.action(this.state.routeInfo).then(function () {
         _this2.props.history.push('./routes');
       });
@@ -570,6 +569,7 @@ function (_React$Component) {
 
       return function (e) {
         // this.setState({ [field]: e.target.value })
+        //sets up dummy object, used to assign nested state!
         var routeInfo = _objectSpread({}, _this3.state.routeInfo);
 
         routeInfo.title = e.target.value;
@@ -585,7 +585,10 @@ function (_React$Component) {
       var poly = this.state.poly;
       this.setState({
         path: poly.getPath()
-      });
+      }); //easier way to get coordinates on the go, put in state somewhere:
+      // console.log(e.latLng['lat']())
+      // console.log(e.latLng['lng']())
+
       this.state.path.push(e.latLng);
       new google.maps.Marker({
         position: e.latLng,
