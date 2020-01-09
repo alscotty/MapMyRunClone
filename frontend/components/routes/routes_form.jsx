@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+
 class RoutesForm extends React.Component{
     constructor(props){
         super(props);
@@ -30,8 +32,8 @@ class RoutesForm extends React.Component{
 
     makeMap(){
             new google.maps.Map(document.getElementById('map'), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8
+                center: { lat: 37.773972, lng: -122.431297 },
+                zoom: 13
             });
     };
 
