@@ -533,11 +533,15 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(RoutesForm).call(this, props));
     _this.state = {
       title: _this.props.title,
-      user_id: _this.props.currentUser.id
+      user_id: _this.props.currentUser.id,
+      map: '',
+      poly: '',
+      path: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.renderMap = _this.renderMap.bind(_assertThisInitialized(_this));
     _this.makeMap = _this.makeMap.bind(_assertThisInitialized(_this));
+    _this.addLatLng = _this.addLatLng.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -561,15 +565,40 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "addLatLng",
+    value: function addLatLng(e) {
+      var poly = this.state.poly;
+      this.setState({
+        path: poly.getPath()
+      });
+      this.state.path.push(e.latLng);
+      new google.maps.Marker({
+        position: e.latLng,
+        title: '#' + this.state.path.getLength(),
+        map: this.state.map
+      });
+    } //maybe should use this.setState({}) check later if errors
+
+  }, {
     key: "makeMap",
     value: function makeMap() {
-      new google.maps.Map(document.getElementById('map'), {
+      this.state.map = new google.maps.Map(document.getElementById('map'), {
         center: {
           lat: 37.773972,
           lng: -122.431297
         },
         zoom: 13
       });
+      this.state.poly = new google.maps.Polyline({
+        strokeColor: '#79d743',
+        strokeOpacity: 1.0,
+        strokeWeight: 3
+      });
+      var _this$state = this.state,
+          map = _this$state.map,
+          poly = _this$state.poly;
+      poly.setMap(map);
+      map.addListener('click', this.addLatLng);
     }
   }, {
     key: "componentDidMount",

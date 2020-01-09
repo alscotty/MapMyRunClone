@@ -7,11 +7,15 @@ class RoutesForm extends React.Component{
         super(props);
         this.state={
             title: this.props.title,
-            user_id: this.props.currentUser.id
+            user_id: this.props.currentUser.id,
+            map:'',
+            poly:'',
+            path:''
         };
         this.handleSubmit=this.handleSubmit.bind(this);
         this.renderMap=this.renderMap.bind(this);
         this.makeMap=this.makeMap.bind(this);
+        this.addLatLng=this.addLatLng.bind(this);
     }
 
     handleSubmit(e) {
@@ -30,11 +34,33 @@ class RoutesForm extends React.Component{
         )
     };
 
+    addLatLng(e) {
+        const {poly}=this.state;
+        this.setState({path: poly.getPath() })
+        this.state.path.push(e.latLng)
+
+            new google.maps.Marker({
+            position: e.latLng,
+            title: '#'+this.state.path.getLength(),
+            map: this.state.map
+        })
+
+    }
+
+    //maybe should use this.setState({}) check later if errors
     makeMap(){
-            new google.maps.Map(document.getElementById('map'), {
+            this.state.map=new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 37.773972, lng: -122.431297 },
                 zoom: 13
             });
+            this.state.poly= new google.maps.Polyline({
+                strokeColor:'#79d743',
+                strokeOpacity: 1.0,
+                strokeWeight: 3
+            });
+            const {map,poly}=this.state;
+            poly.setMap(map);
+            map.addListener('click',this.addLatLng);
     };
 
     componentDidMount(){

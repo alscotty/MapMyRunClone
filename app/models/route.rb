@@ -3,7 +3,8 @@ class Route < ApplicationRecord
 
     has_many :coordinates,
     foreign_key: :route_id,
-    class_name: :Coordinate
+    class_name: :Coordinate,
+    dependent: :destroy
 
     belongs_to :user,
     foreign_key: :user_id,
