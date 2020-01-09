@@ -536,6 +536,8 @@ function (_React$Component) {
       user_id: _this.props.currentUser.id
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.renderMap = _this.renderMap.bind(_assertThisInitialized(_this));
+    _this.makeMap = _this.makeMap.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -559,6 +561,33 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "makeMap",
+    value: function makeMap() {
+      new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: -34.397,
+          lng: 150.644
+        },
+        zoom: 8
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.makeMap();
+    }
+  }, {
+    key: "renderMap",
+    value: function renderMap() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "map"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
+        src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
+        async: true,
+        defer: true
+      }));
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create New Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -567,7 +596,7 @@ function (_React$Component) {
         type: "text",
         value: this.state.title,
         onChange: this.update('title')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderMap(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "Create Route"
       })));

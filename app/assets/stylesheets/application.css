@@ -13,6 +13,13 @@
  *= require_tree .
  *= require_self
  */
+#map{
+    height: 400px;
+    width: 500px;
+}
+
+
+
  body{
      font-family: papyrus;
      font-family: 'Helvetica Neue';
