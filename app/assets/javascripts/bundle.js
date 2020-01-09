@@ -494,8 +494,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props);
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create New Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -544,7 +542,7 @@ var mstp = function mstp(state) {
 var mdtp = function mdtp(dispatch) {
   return {
     action: function action(route) {
-      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["default"])(route));
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["createRoute"])(route));
     }
   };
 };
@@ -589,16 +587,19 @@ var RoutesIndex =
 function (_React$Component) {
   _inherits(RoutesIndex, _React$Component);
 
-  function RoutesIndex() {
+  function RoutesIndex(props) {
     _classCallCheck(this, RoutesIndex);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(RoutesIndex).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(RoutesIndex).call(this, props));
   }
 
   _createClass(RoutesIndex, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome to Routes Index!");
+      var currentUser = this.props.currentUser;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome to Routes Index!"), currentUser.routes ? currentUser.routes.map(function (route) {
+        return route.title;
+      }) : '');
     }
   }]);
 
@@ -624,8 +625,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mstp = function mstp(state) {
+  var entities = state.entities;
+  var session = state.session;
   return {
-    placeholder: null
+    currentUser: entities.users[session.id]
   };
 };
 

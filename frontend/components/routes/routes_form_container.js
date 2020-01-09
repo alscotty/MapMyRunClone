@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import RoutesForm from './routes_form'
-import createRoute from '../../actions/route_actions'
+import {createRoute} from '../../actions/route_actions'
 
 const mstp = state => {
     const {entities}=state;
