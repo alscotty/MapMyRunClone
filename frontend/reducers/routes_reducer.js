@@ -15,7 +15,7 @@ const RoutesReducer=(state={},action)=>{
             newState[action.route.id]=action.route;
             return newState;
         case REMOVE_ROUTE:
-            delete newState[action.routeId]
+            delete newState[action.route.id];
             return newState;    
         default:
             return state;

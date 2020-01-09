@@ -15,9 +15,9 @@ const receiveRoute=(route)=>({
     route
 });
 
-const removeRoute=(routeId)=>({
+const removeRoute=(route)=>({
     type: REMOVE_ROUTE,
-    routeId
+    route
 })
 
 //thunk actions
@@ -36,7 +36,8 @@ export const createRoute=(route)=>dispatch=>(
         .then((route) => dispatch(receiveRoute(route)))
 );
 
-export const deleteRoute=(routeId)=>dispatch=>(
-    RouteAPIUtil.deleteRoute(routeId)
-        .then((routeId)=>dispatch(removeRoute(routeId)))
-)
+export const deleteRoute=(route)=>dispatch=>(    
+    RouteAPIUtil.deleteRoute(route)
+        .then((route)=>dispatch(removeRoute(route)))
+    )
+    

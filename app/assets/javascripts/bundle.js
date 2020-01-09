@@ -122,10 +122,10 @@ var receiveRoute = function receiveRoute(route) {
   };
 };
 
-var removeRoute = function removeRoute(routeId) {
+var removeRoute = function removeRoute(route) {
   return {
     type: REMOVE_ROUTE,
-    routeId: routeId
+    route: route
   };
 }; //thunk actions
 
@@ -151,10 +151,10 @@ var createRoute = function createRoute(route) {
     });
   };
 };
-var deleteRoute = function deleteRoute(routeId) {
+var deleteRoute = function deleteRoute(route) {
   return function (dispatch) {
-    return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["deleteRoute"](routeId).then(function (routeId) {
-      return dispatch(removeRoute(routeId));
+    return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["deleteRoute"](route).then(function (route) {
+      return dispatch(removeRoute(route));
     });
   };
 };
@@ -231,7 +231,7 @@ var login = function login(user) {
 };
 var logout = function logout() {
   return function (dispatch) {
-    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function (user) {
+    return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__["logout"]().then(function () {
       return dispatch(logoutCurrentUser());
     });
   };
@@ -420,6 +420,70 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
+/***/ "./frontend/components/routes/route_index_item.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/routes/route_index_item.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var RouteIndexItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(RouteIndexItem, _React$Component);
+
+  function RouteIndexItem(props) {
+    _classCallCheck(this, RouteIndexItem);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(RouteIndexItem).call(this, props));
+  }
+
+  _createClass(RouteIndexItem, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          route = _this$props.route,
+          deleteRoute = _this$props.deleteRoute;
+      console.log(route.id);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          deleteRoute(route.id);
+        }
+      }, "Delete Route"));
+    }
+  }]);
+
+  return RouteIndexItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (RouteIndexItem);
+
+/***/ }),
+
 /***/ "./frontend/components/routes/routes_form.jsx":
 /*!****************************************************!*\
   !*** ./frontend/components/routes/routes_form.jsx ***!
@@ -562,6 +626,7 @@ var mdtp = function mdtp(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _route_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./route_index_item */ "./frontend/components/routes/route_index_item.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -582,6 +647,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var RoutesIndex =
 /*#__PURE__*/
 function (_React$Component) {
@@ -594,12 +660,25 @@ function (_React$Component) {
   }
 
   _createClass(RoutesIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.requestRoutes();
+    }
+  }, {
     key: "render",
     value: function render() {
-      var currentUser = this.props.currentUser;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome to Routes Index!"), currentUser.routes ? currentUser.routes.map(function (route) {
-        return route.title;
-      }) : '');
+      var _this = this;
+
+      var _this$props = this.props,
+          routes = _this$props.routes,
+          currentUser = _this$props.currentUser;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome to Routes Index!"), routes.map(function (route) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: route.id,
+          route: route,
+          deleteRoute: _this.props.deleteRoute
+        });
+      }));
     }
   }]);
 
@@ -621,6 +700,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _routes_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes_index */ "./frontend/components/routes/routes_index.jsx");
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+
 
 
 
@@ -628,13 +709,19 @@ var mstp = function mstp(state) {
   var entities = state.entities;
   var session = state.session;
   return {
-    currentUser: entities.users[session.id]
+    currentUser: entities.users[session.id],
+    routes: Object.values(state.entities.routes)
   };
 };
 
 var mdtp = function mdtp(dispatch) {
   return {
-    placeholder: null
+    requestRoutes: function requestRoutes() {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["requestRoutes"])());
+    },
+    deleteRoute: function deleteRoute(routeId) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["deleteRoute"])(routeId));
+    }
   };
 };
 
@@ -1082,7 +1169,7 @@ var RoutesReducer = function RoutesReducer() {
       return newState;
 
     case _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_ROUTE"]:
-      delete newState[action.routeId];
+      delete newState[action.route.id];
       return newState;
 
     default:

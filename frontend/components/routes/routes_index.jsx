@@ -1,21 +1,26 @@
 import React from 'react'
-
+import RouteIndexItem from './route_index_item'
 
 class RoutesIndex extends React.Component{
     constructor(props){
         super(props);
     }
 
+    componentDidMount(){
+        this.props.requestRoutes()
+    }
+
     render(){
-        const {currentUser}=this.props
+        const {routes,currentUser}=this.props
+        
         return(
             <div>
             <h2>Welcome to Routes Index!</h2>
-            {currentUser.routes ? currentUser.routes.map(route=>{
+            {routes.map(route=>{
                 return(
-                    route.title
+                    <RouteIndexItem key={route.id} route={route} deleteRoute={this.props.deleteRoute}/>
                 )
-            }): ''}
+            })}
             </div>
         )
     }

@@ -22,7 +22,9 @@ end
 
 #double check later on
 def destroy
+    @route=Route.find(params[:id])
     @route.destroy
+    render json: @route
 end
 
 private
