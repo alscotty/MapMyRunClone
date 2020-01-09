@@ -22,15 +22,12 @@ end
 
 #double check later on
 def destroy
-    @report.destroy
+    @route.destroy
 end
-
-
-
 
 private
 def route_params
-    params.require(:route).permit(:title)
+    params.require(:route).permit(:title, :user_id)
 end
 
 

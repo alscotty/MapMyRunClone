@@ -86,6 +86,81 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/route_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/route_actions.js ***!
+  \*******************************************/
+/*! exports provided: RECEIVE_ROUTES, RECEIVE_ROUTE, REMOVE_ROUTE, requestRoutes, requestRoute, createRoute, deleteRoute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ROUTES", function() { return RECEIVE_ROUTES; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ROUTE", function() { return RECEIVE_ROUTE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ROUTE", function() { return REMOVE_ROUTE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestRoutes", function() { return requestRoutes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestRoute", function() { return requestRoute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRoute", function() { return createRoute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteRoute", function() { return deleteRoute; });
+/* harmony import */ var _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/route_api_utils */ "./frontend/util/route_api_utils.js");
+
+var RECEIVE_ROUTES = 'RECEIVE_ROUTES';
+var RECEIVE_ROUTE = 'RECEIVE_ROUTE';
+var REMOVE_ROUTE = 'REMOVE_ROUTE'; //reg action creators
+
+var receiveRoutes = function receiveRoutes(routes) {
+  return {
+    type: RECEIVE_ROUTES,
+    routes: routes
+  };
+};
+
+var receiveRoute = function receiveRoute(route) {
+  return {
+    type: RECEIVE_ROUTE,
+    route: route
+  };
+};
+
+var removeRoute = function removeRoute(routeId) {
+  return {
+    type: REMOVE_ROUTE,
+    routeId: routeId
+  };
+}; //thunk actions
+
+
+var requestRoutes = function requestRoutes() {
+  return function (dispatch) {
+    return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["fetchRoutes"]().then(function (routes) {
+      return dispatch(receiveRoutes(routes));
+    });
+  };
+};
+var requestRoute = function requestRoute(routeId) {
+  return function (dispatch) {
+    return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["fetchRoute"](routeId).then(function (route) {
+      return dispatch(receiveRoute(route));
+    });
+  };
+};
+var createRoute = function createRoute(route) {
+  return function (dispatch) {
+    return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["createRoute"](route).then(function (route) {
+      return dispatch(receiveRoute(route));
+    });
+  };
+};
+var deleteRoute = function deleteRoute(routeId) {
+  return function (dispatch) {
+    return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["deleteRoute"](routeId).then(function (routeId) {
+      return dispatch(removeRoute(routeId));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -358,6 +433,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -366,9 +443,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -382,15 +459,53 @@ function (_React$Component) {
   _inherits(RoutesForm, _React$Component);
 
   function RoutesForm(props) {
+    var _this;
+
     _classCallCheck(this, RoutesForm);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(RoutesForm).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RoutesForm).call(this, props));
+    _this.state = {
+      title: _this.props.title,
+      user_id: _this.props.currentUser.id
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(RoutesForm, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault;
+      this.props.action(this.state).then(function () {
+        _this2.props.history.push('./routes');
+      });
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this3 = this;
+
+      return function (e) {
+        _this3.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create New Route");
+      console.log(this.props);
+      debugger;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create New Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.title,
+        onChange: this.update('title')
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: "Create Route"
+      })));
     }
   }]);
 
@@ -412,18 +527,25 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _routes_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./routes_form */ "./frontend/components/routes/routes_form.jsx");
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+
 
 
 
 var mstp = function mstp(state) {
+  var entities = state.entities;
+  var session = state.session;
   return {
-    placeholder: null
+    title: '',
+    currentUser: entities.users[session.id]
   };
 };
 
 var mdtp = function mdtp(dispatch) {
   return {
-    placeholder: null
+    action: function action(route) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["default"])(route));
+    }
   };
 };
 
@@ -874,10 +996,13 @@ document.addEventListener('DOMContentLoaded', function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var _routes_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes_reducer */ "./frontend/reducers/routes_reducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  routes: _routes_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
@@ -924,6 +1049,45 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/routes_reducer.js":
+/*!*********************************************!*\
+  !*** ./frontend/reducers/routes_reducer.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/route_actions */ "./frontend/actions/route_actions.js");
+
+
+var RoutesReducer = function RoutesReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var newState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ROUTES"]:
+      return action.routes;
+
+    case _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ROUTE"]:
+      newState[action.route.id] = action.route;
+      return newState;
+
+    case _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_ROUTE"]:
+      delete newState[action.routeId];
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (RoutesReducer);
 
 /***/ }),
 
@@ -1061,6 +1225,50 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/route_api_utils.js":
+/*!******************************************!*\
+  !*** ./frontend/util/route_api_utils.js ***!
+  \******************************************/
+/*! exports provided: fetchRoutes, fetchRoute, createRoute, deleteRoute */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchRoutes", function() { return fetchRoutes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchRoute", function() { return fetchRoute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRoute", function() { return createRoute; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteRoute", function() { return deleteRoute; });
+var fetchRoutes = function fetchRoutes() {
+  return $.ajax({
+    url: '/api/routes'
+  });
+};
+var fetchRoute = function fetchRoute(routeId) {
+  return $.ajax({
+    url: "/api/routes/".concat(routeId),
+    data: {
+      routeId: routeId
+    }
+  });
+};
+var createRoute = function createRoute(route) {
+  return $.ajax({
+    url: '/api/routes',
+    method: 'post',
+    data: {
+      route: route
+    }
+  });
+};
+var deleteRoute = function deleteRoute(routeId) {
+  return $.ajax({
+    url: "/api/routes/".concat(routeId),
+    method: 'delete'
+  });
+};
 
 /***/ }),
 

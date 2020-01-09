@@ -1,4 +1,4 @@
-class Coordinate < ApplicationRecord
+-class Coordinate < ApplicationRecord
     validates :route_id, :lat, :lng, :ord, presence:true
 
     belongs_to :route,
