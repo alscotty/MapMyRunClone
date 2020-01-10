@@ -115,10 +115,11 @@ var receiveRoutes = function receiveRoutes(routes) {
   };
 };
 
-var receiveRoute = function receiveRoute(route) {
+var receiveRoute = function receiveRoute(route, coordinates) {
   return {
     type: RECEIVE_ROUTE,
-    route: route
+    route: route,
+    coordinates: coordinates
   };
 };
 
@@ -144,10 +145,10 @@ var requestRoute = function requestRoute(routeId) {
     });
   };
 };
-var createRoute = function createRoute(route) {
+var createRoute = function createRoute(route, coordinates) {
   return function (dispatch) {
-    return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["createRoute"](route).then(function (route) {
-      return dispatch(receiveRoute(route));
+    return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["createRoute"](route, coordinates).then(function (route, coordinates) {
+      return dispatch(receiveRoute(route, coordinates));
     });
   };
 };
@@ -559,7 +560,7 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault;
-      this.props.action(this.state.routeInfo).then(function () {
+      this.props.action(this.state.routeInfo, this.state.coordinates).then(function () {
         _this2.props.history.push('./routes');
       });
     }
@@ -691,8 +692,8 @@ var mstp = function mstp(state) {
 
 var mdtp = function mdtp(dispatch) {
   return {
-    action: function action(route) {
-      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["createRoute"])(route));
+    action: function action(route, coordinates) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["createRoute"])(route, coordinates));
     }
   };
 };
@@ -1431,12 +1432,13 @@ var fetchRoute = function fetchRoute(routeId) {
     }
   });
 };
-var createRoute = function createRoute(route) {
+var createRoute = function createRoute(route, coordinates) {
   return $.ajax({
     url: '/api/routes',
     method: 'post',
     data: {
-      route: route
+      route: route,
+      coordinates: coordinates
     }
   });
 };

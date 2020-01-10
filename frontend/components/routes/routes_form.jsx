@@ -22,9 +22,7 @@ class RoutesForm extends React.Component{
     handleSubmit(e) {
         e.preventDefault;
         
-
-
-        this.props.action(this.state.routeInfo)
+        this.props.action(this.state.routeInfo,this.state.coordinates)
           .then(()=>{this.props.history.push('./routes')});
 
     }

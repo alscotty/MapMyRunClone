@@ -10,9 +10,10 @@ const receiveRoutes=(routes)=>({
     routes
 });
 
-const receiveRoute=(route)=>({
+const receiveRoute=(route,coordinates)=>({
     type: RECEIVE_ROUTE,
-    route
+    route,
+    coordinates
 });
 
 const removeRoute=(route)=>({
@@ -31,9 +32,9 @@ export const requestRoute=(routeId)=>dispatch=>(
         .then((route)=>dispatch(receiveRoute(route)))
 )
 
-export const createRoute=(route)=>dispatch=>(
-    RouteAPIUtil.createRoute(route)
-        .then((route) => dispatch(receiveRoute(route)))
+export const createRoute=(route,coordinates)=>dispatch=>(
+    RouteAPIUtil.createRoute(route,coordinates)
+        .then((route,coordinates) => dispatch(receiveRoute(route,coordinates)))
 );
 
 export const deleteRoute=(route)=>dispatch=>(    

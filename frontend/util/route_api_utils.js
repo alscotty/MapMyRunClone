@@ -11,11 +11,11 @@ export const fetchRoute=(routeId)=>(
     })
 );
 
-export const createRoute=(route)=>(
+export const createRoute=(route,coordinates)=>(
     $.ajax({
         url:'/api/routes',
         method:'post',
-        data: {route}       
+        data: {route,coordinates}       
     })
 );
 

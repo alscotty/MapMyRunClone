@@ -13,7 +13,7 @@ const mstp = state => {
 };
 
 const mdtp = dispatch => ({
-    action: (route)=>dispatch(createRoute(route))
+    action: (route,coordinates)=>dispatch(createRoute(route,coordinates))
 });
 
 export default connect(mstp, mdtp)(RoutesForm);
