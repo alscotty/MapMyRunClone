@@ -7,7 +7,7 @@ class RouteIndexItem extends React.Component{
     }
 
 
-    //refactor created by, not got
+    
 
     render(){
         const {route,currentUser,deleteRoute,allUsers}=this.props
@@ -16,16 +16,16 @@ class RouteIndexItem extends React.Component{
                 <h3>{route.title}</h3>
                 Coordinates:
                 <br/>
-                {route.coordinates.map(coord=>{
+                {route.coordinates ? route.coordinates.map(coord=>{
                     return (
-                        <div>
+                        <div key={coord.id}>
                         Lat: {coord.lat},
                         Lng: {coord.lng},
                         Route_id: {coord.route_id},
                         Ord: {coord.ord}
                         </div>
                     )
-                })}
+                }) :''}
 
                 {currentUser.id == route.user_id ? (
                     <button onClick={()=>{deleteRoute(route.id)}}>Delete Route</button>

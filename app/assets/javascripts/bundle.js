@@ -463,8 +463,7 @@ function (_React$Component) {
     _classCallCheck(this, RouteIndexItem);
 
     return _possibleConstructorReturn(this, _getPrototypeOf(RouteIndexItem).call(this, props));
-  } //refactor created by, not got
-
+  }
 
   _createClass(RouteIndexItem, [{
     key: "render",
@@ -476,9 +475,11 @@ function (_React$Component) {
           allUsers = _this$props.allUsers;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         key: route.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates.map(function (coord) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Lat: ", coord.lat, ", Lng: ", coord.lng, ", Route_id: ", coord.route_id, ", Ord: ", coord.ord);
-      }), currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? route.coordinates.map(function (coord) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: coord.id
+        }, "Lat: ", coord.lat, ", Lng: ", coord.lng, ", Route_id: ", coord.route_id, ", Ord: ", coord.ord);
+      }) : '', currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           deleteRoute(route.id);
         }
