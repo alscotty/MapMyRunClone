@@ -558,6 +558,7 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault;
+      debugger;
       this.props.action(this.state.routeInfo).then(function () {
         _this2.props.history.push('./routes');
       });

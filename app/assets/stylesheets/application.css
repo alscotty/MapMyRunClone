@@ -29,7 +29,7 @@
 
 .header-link{
     font-size: small;
-    display:block;
+    display:flex;
     top:0px;
     left:0px;
     margin-top: 0px;
@@ -45,7 +45,7 @@
     Greeting Container stuff
 */
 .login-signup,.header-group {
-    position: absolute;
+    position: fixed;
     margin-top: 20px;
     top: 0px;
     right:5px;
