@@ -541,6 +541,7 @@ function (_React$Component) {
         title: _this.props.title,
         user_id: _this.props.currentUser.id
       },
+      coordinates: [],
       map: '',
       poly: '',
       path: ''
@@ -558,7 +559,6 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault;
-      debugger;
       this.props.action(this.state.routeInfo).then(function () {
         _this2.props.history.push('./routes');
       });
@@ -569,7 +569,6 @@ function (_React$Component) {
       var _this3 = this;
 
       return function (e) {
-        // this.setState({ [field]: e.target.value })
         //sets up dummy object, used to assign nested state!
         var routeInfo = _objectSpread({}, _this3.state.routeInfo);
 
@@ -590,6 +589,13 @@ function (_React$Component) {
       // console.log(e.latLng['lat']())
       // console.log(e.latLng['lng']())
 
+      var newLat = e.latLng['lat']();
+      var newLng = e.latLng['lng']();
+      this.state.coordinates.push({
+        lat: newLat,
+        lng: newLng
+      });
+      console.log(this.state.coordinates);
       this.state.path.push(e.latLng);
       new google.maps.Marker({
         position: e.latLng,

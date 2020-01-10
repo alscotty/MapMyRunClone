@@ -8,6 +8,7 @@ class RoutesForm extends React.Component{
                 title: this.props.title,
                 user_id: this.props.currentUser.id,
             },
+            coordinates:[],
             map:'',
             poly:'',
             path:''
@@ -20,7 +21,9 @@ class RoutesForm extends React.Component{
 
     handleSubmit(e) {
         e.preventDefault;
-        debugger
+        
+
+
         this.props.action(this.state.routeInfo)
           .then(()=>{this.props.history.push('./routes')});
 
@@ -29,7 +32,6 @@ class RoutesForm extends React.Component{
     updateTitle() {
         return (
             e => {
-                // this.setState({ [field]: e.target.value })
                 //sets up dummy object, used to assign nested state!
                 let routeInfo={...this.state.routeInfo};
                 routeInfo.title= e.target.value;
@@ -44,6 +46,10 @@ class RoutesForm extends React.Component{
         //easier way to get coordinates on the go, put in state somewhere:
         // console.log(e.latLng['lat']())
         // console.log(e.latLng['lng']())
+        let newLat = e.latLng['lat']()
+        let newLng = e.latLng['lng']()
+        this.state.coordinates.push({lat:newLat,lng:newLng})
+        console.log(this.state.coordinates)
 
         this.state.path.push(e.latLng)
 
