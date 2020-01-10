@@ -12,4 +12,6 @@ npm-debug.log
 */bundle.js
 */bundle.js.map
 
+# ignore master key
 /config/master.key
+*/master.key
