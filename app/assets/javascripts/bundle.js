@@ -567,6 +567,8 @@ function (_React$Component) {
     _this.renderMap = _this.renderMap.bind(_assertThisInitialized(_this));
     _this.makeMap = _this.makeMap.bind(_assertThisInitialized(_this));
     _this.addLatLng = _this.addLatLng.bind(_assertThisInitialized(_this));
+    _this.snapPoint = _this.snapPoint.bind(_assertThisInitialized(_this));
+    _this.processSnappedPosData = _this.processSnappedPosData.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -597,28 +599,67 @@ function (_React$Component) {
       };
     }
   }, {
+    key: "processSnappedPosData",
+    value: function processSnappedPosData(data) {
+      var snappedLat = data.snappedPoints[0].location.latitude;
+      var snappedLng = data.snappedPoints[0].location.longitude;
+      this.state.coordinates.push({
+        lat: snappedLat,
+        lng: snappedLng
+      });
+      this.state.path.push({
+        lat: snappedLat,
+        lng: snappedLng
+      });
+      new google.maps.Marker({
+        position: {
+          lat: snappedLat,
+          lng: snappedLng
+        },
+        title: '#' + this.state.path.getLength(),
+        map: this.state.map
+      });
+      var snappedPoly = new google.maps.Polyline({
+        path: this.state.coordinates,
+        strokeColor: 'green',
+        strokeWeight: 3
+      });
+      snappedPoly.setMap(this.state.map);
+    }
+  }, {
+    key: "snapPoint",
+    value: function snapPoint(lat, lng) {
+      var _this4 = this;
+
+      var posArr = [lat, lng];
+      $.get('https://roads.googleapis.com/v1/snapToRoads', {
+        interpolate: true,
+        key: window.googleAPIKey,
+        path: posArr.join(",") //.join('|')
+
+      }, function (data) {
+        _this4.processSnappedPosData(data);
+      });
+    }
+  }, {
     key: "addLatLng",
     value: function addLatLng(e) {
       var poly = this.state.poly;
       this.setState({
         path: poly.getPath()
-      }); //easier way to get coordinates on the go, put in state somewhere:
-      // console.log(e.latLng['lat']())
-      // console.log(e.latLng['lng']())
+      }); //push in formatted coordinates into state as they are added:
 
       var newLat = e.latLng['lat']();
       var newLng = e.latLng['lng']();
-      this.state.coordinates.push({
-        lat: newLat,
-        lng: newLng
-      });
-      console.log(this.state.coordinates);
-      this.state.path.push(e.latLng);
-      new google.maps.Marker({
-        position: e.latLng,
-        title: '#' + this.state.path.getLength(),
-        map: this.state.map
-      });
+      this.snapPoint(newLat, newLng); // this.state.coordinates.push({lat:newLat,lng:newLng})
+      // console.log(this.state.coordinates)
+      //change here! snap the position before pushing onto path!
+      // this.state.path.push(e.latLng)
+      //     new google.maps.Marker({
+      //     position: e.latLng,
+      //     title: '#'+this.state.path.getLength(),
+      //     map: this.state.map
+      // })
     } //maybe should use this.setState({}) check later if errors
 
   }, {
