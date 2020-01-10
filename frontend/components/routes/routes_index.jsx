@@ -11,14 +11,14 @@ class RoutesIndex extends React.Component{
     }
 
     render(){
-        const {routes,currentUser}=this.props
+        const {routes,currentUser,allUsers}=this.props
         
         return(
             <div>
             <h2>Welcome to Routes Index!</h2>
             {routes.map(route=>{
                 return(
-                    <RouteIndexItem key={route.id} route={route} deleteRoute={this.props.deleteRoute} currentUser={currentUser}/>
+                    <RouteIndexItem key={route.id} route={route} deleteRoute={this.props.deleteRoute} currentUser={currentUser} allUsers={allUsers}/>
                 )
             })}
             </div>

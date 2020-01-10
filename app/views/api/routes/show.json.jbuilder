@@ -1,3 +1,3 @@
 json.set! @route.id do
-    json.extract! @route, :id,:title,:user_id, :time, :miles
+    json.extract! @route, :id,:title,:user_id, :time, :miles, :coordinates
 end

@@ -463,7 +463,8 @@ function (_React$Component) {
     _classCallCheck(this, RouteIndexItem);
 
     return _possibleConstructorReturn(this, _getPrototypeOf(RouteIndexItem).call(this, props));
-  }
+  } //refactor created by, not got
+
 
   _createClass(RouteIndexItem, [{
     key: "render",
@@ -471,10 +472,13 @@ function (_React$Component) {
       var _this$props = this.props,
           route = _this$props.route,
           currentUser = _this$props.currentUser,
-          deleteRoute = _this$props.deleteRoute;
+          deleteRoute = _this$props.deleteRoute,
+          allUsers = _this$props.allUsers;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         key: route.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates.map(function (coord) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Lat: ", coord.lat, ", Lng: ", coord.lng, ", Route_id: ", coord.route_id, ", Ord: ", coord.ord);
+      }), currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           deleteRoute(route.id);
         }
@@ -485,7 +489,18 @@ function (_React$Component) {
   return RouteIndexItem;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (RouteIndexItem);
+/* harmony default export */ __webpack_exports__["default"] = (RouteIndexItem); //display who created the route, works but inefficient,should be a better way:
+
+{
+  /* <h5>{allUsers.map(user => {
+     if (user.id == route.user_id) {
+         return (<div>
+             Created by: {user.username}
+         </div>
+         )
+     }
+  })}</h5> */
+}
 
 /***/ }),
 
@@ -758,13 +773,15 @@ function (_React$Component) {
 
       var _this$props = this.props,
           routes = _this$props.routes,
-          currentUser = _this$props.currentUser;
+          currentUser = _this$props.currentUser,
+          allUsers = _this$props.allUsers;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome to Routes Index!"), routes.map(function (route) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: route.id,
           route: route,
           deleteRoute: _this.props.deleteRoute,
-          currentUser: currentUser
+          currentUser: currentUser,
+          allUsers: allUsers
         });
       }));
     }
@@ -798,7 +815,8 @@ var mstp = function mstp(state) {
   var session = state.session;
   return {
     currentUser: entities.users[session.id],
-    routes: Object.values(state.entities.routes)
+    routes: Object.values(state.entities.routes),
+    allUsers: Object.values(state.entities.users)
   };
 };
 

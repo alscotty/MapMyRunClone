@@ -12,7 +12,8 @@ const mstp=state=>{
 
     return({
         currentUser: (entities.users[session.id]),
-        routes: Object.values(state.entities.routes)
+        routes: Object.values(state.entities.routes),
+        allUsers: Object.values(state.entities.users) 
     })
 
 };
