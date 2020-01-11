@@ -561,7 +561,9 @@ function (_React$Component) {
       coordinates: [],
       map: '',
       poly: '',
-      path: ''
+      path: '',
+      directionsService: '',
+      directionsRenderer: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.renderMap = _this.renderMap.bind(_assertThisInitialized(_this));
@@ -569,6 +571,7 @@ function (_React$Component) {
     _this.addLatLng = _this.addLatLng.bind(_assertThisInitialized(_this));
     _this.snapPoint = _this.snapPoint.bind(_assertThisInitialized(_this));
     _this.processSnappedPosData = _this.processSnappedPosData.bind(_assertThisInitialized(_this));
+    _this.calcAndDisplayRoute = _this.calcAndDisplayRoute.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -619,12 +622,6 @@ function (_React$Component) {
         title: '#' + this.state.path.getLength(),
         map: this.state.map
       });
-      var snappedPoly = new google.maps.Polyline({
-        path: this.state.coordinates,
-        strokeColor: 'green',
-        strokeWeight: 3
-      });
-      snappedPoly.setMap(this.state.map);
     }
   }, {
     key: "snapPoint",
@@ -635,8 +632,7 @@ function (_React$Component) {
       $.get('https://roads.googleapis.com/v1/snapToRoads', {
         interpolate: true,
         key: window.googleAPIKey,
-        path: posArr.join(",") //.join('|')
-
+        path: posArr.join(",")
       }, function (data) {
         _this4.processSnappedPosData(data);
       });
@@ -644,27 +640,48 @@ function (_React$Component) {
   }, {
     key: "addLatLng",
     value: function addLatLng(e) {
-      var poly = this.state.poly;
-      this.setState({
-        path: poly.getPath()
-      }); //push in formatted coordinates into state as they are added:
-
+      // const {poly}=this.state;
+      // this.setState({path: poly.getPath() })
+      //push in formatted coordinates into state as they are added:
       var newLat = e.latLng['lat']();
       var newLng = e.latLng['lng']();
-      this.snapPoint(newLat, newLng); // this.state.coordinates.push({lat:newLat,lng:newLng})
-      // console.log(this.state.coordinates)
-      //change here! snap the position before pushing onto path!
-      // this.state.path.push(e.latLng)
-      //     new google.maps.Marker({
-      //     position: e.latLng,
-      //     title: '#'+this.state.path.getLength(),
-      //     map: this.state.map
-      // })
+      this.snapPoint(newLat, newLng);
+    }
+  }, {
+    key: "calcAndDisplayRoute",
+    value: function calcAndDisplayRoute(directionsService, directionsRenderer) {
+      var waypts = [];
+
+      for (var i = 0; i < this.state.coordinates.length; i++) {
+        waypts.push({
+          location: this.state.coordinates[i],
+          stopover: false
+        });
+      }
+
+      var coordinates = this.state.coordinates;
+      directionsService.route({
+        origin: coordinates[0],
+        destination: coordinates[coordinates.length - 1],
+        waypoints: waypts,
+        optimizeWaypoints: false,
+        travelMode: 'DRIVING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          directionsRenderer.setDirections(response); // let route=response.routes[0]
+        } else {
+          window.alert('Directions request failed due to' + status);
+        }
+      });
     } //maybe should use this.setState({}) check later if errors
 
   }, {
     key: "makeMap",
     value: function makeMap() {
+      var _this5 = this;
+
+      this.state.directionsService = new google.maps.DirectionsService();
+      this.state.directionsRenderer = new google.maps.DirectionsRenderer();
       this.state.map = new google.maps.Map(document.getElementById('map'), {
         center: {
           lat: 37.773972,
@@ -672,16 +689,13 @@ function (_React$Component) {
         },
         zoom: 13
       });
-      this.state.poly = new google.maps.Polyline({
-        strokeColor: '#79d743',
-        strokeOpacity: 1.0,
-        strokeWeight: 3
-      });
       var _this$state = this.state,
-          map = _this$state.map,
-          poly = _this$state.poly;
-      poly.setMap(map);
-      map.addListener('click', this.addLatLng);
+          directionsRenderer = _this$state.directionsRenderer,
+          map = _this$state.map;
+      directionsRenderer.setMap(map);
+      map.addListener('click', function (e) {
+        _this5.addLatLng(e), _this5.calcAndDisplayRoute(_this5.directionsService, _this5.directionsRenderer);
+      });
     }
   }, {
     key: "componentDidMount",
