@@ -44,7 +44,7 @@ end
 
 private
 def route_params
-    params.require(:route).permit(:title, :user_id)
+    params.require(:route).permit(:title, :user_id, :miles)
 end
 
 def coordinate_params

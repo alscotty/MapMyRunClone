@@ -7,6 +7,7 @@ class RoutesForm extends React.Component{
             routeInfo:{
                 title: this.props.title,
                 user_id: this.props.currentUser.id,
+                miles:0,
             },
             coordinates:[],
             map:'',
@@ -57,14 +58,6 @@ class RoutesForm extends React.Component{
         this.calcAndDisplayRoute()
     }
 
-    // componentDidUpdate(){
-    //     this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
-
-
-    //     directionsRenderer.setMap(this.state.map);
-
-    // }
-
     
     snapPoint(lat,lng){
         let posArr=[lat,lng]
@@ -103,10 +96,16 @@ class RoutesForm extends React.Component{
             waypoints:waypts,
             optimizeWaypoints: false,
             travelMode: 'DRIVING'
-        }, function(response, status) {
+        }, (response, status)=> {
             if(status === 'OK'){
                 directionsRenderer.setDirections(response);
-                // let route=response.routes[0]
+                var route=response.routes;
+                let dist=route[0].legs[0].distance.value;
+                let routeInfo = { ...this.state.routeInfo };
+                routeInfo.miles = (dist * 0.00062137).toFixed(2);
+                this.setState({ routeInfo })
+                console.log(this.state.routeInfo.miles)
+
             } else {
                 window.alert('Directions request failed due to' + status)
             } 
@@ -121,14 +120,14 @@ class RoutesForm extends React.Component{
         this.state.directionsRenderer= new google.maps.DirectionsRenderer();
         this.state.map=new google.maps.Map(document.getElementById('map'), {
             center: { lat: 37.773972, lng: -122.431297 },
-            zoom: 13
+            zoom: 13,
+            maxZoom:15
         });
         
         const {directionsRenderer,map}=this.state;
         directionsRenderer.setMap(map);
         map.addListener('click', (e)=>{
             this.addLatLng(e)
-            // this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
         })
     };
 
@@ -160,6 +159,8 @@ class RoutesForm extends React.Component{
                         onChange={this.updateTitle()}
                 />
                 </label>
+                <br/>
+                <label>Total miles: {this.state.routeInfo.miles}</label>
                 <br/>
 
             {this.renderMap()}

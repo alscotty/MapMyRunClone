@@ -432,7 +432,6 @@ var Root = function Root(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -450,7 +449,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -475,7 +473,7 @@ function (_React$Component) {
           allUsers = _this$props.allUsers;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         key: route.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? route.coordinates.map(function (coord) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Distance ", route.miles, "mi"), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? route.coordinates.map(function (coord) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: coord.id
         }, "Lat: ", coord.lat, ", Lng: ", coord.lng, ", Route_id: ", coord.route_id, ", Ord: ", coord.ord);
@@ -556,7 +554,8 @@ function (_React$Component) {
     _this.state = {
       routeInfo: {
         title: _this.props.title,
-        user_id: _this.props.currentUser.id
+        user_id: _this.props.currentUser.id,
+        miles: 0
       },
       coordinates: [],
       map: '',
@@ -619,11 +618,7 @@ function (_React$Component) {
         map: this.state.map
       });
       this.calcAndDisplayRoute();
-    } // componentDidUpdate(){
-    //     this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
-    //     directionsRenderer.setMap(this.state.map);
-    // }
-
+    }
   }, {
     key: "snapPoint",
     value: function snapPoint(lat, lng) {
@@ -651,6 +646,8 @@ function (_React$Component) {
   }, {
     key: "calcAndDisplayRoute",
     value: function calcAndDisplayRoute() {
+      var _this5 = this;
+
       var waypts = [];
 
       for (var i = 0; i < this.state.coordinates.length; i++) {
@@ -672,7 +669,19 @@ function (_React$Component) {
         travelMode: 'DRIVING'
       }, function (response, status) {
         if (status === 'OK') {
-          directionsRenderer.setDirections(response); // let route=response.routes[0]
+          directionsRenderer.setDirections(response);
+          var route = response.routes;
+          var dist = route[0].legs[0].distance.value;
+
+          var routeInfo = _objectSpread({}, _this5.state.routeInfo);
+
+          routeInfo.miles = (dist * 0.00062137).toFixed(2);
+
+          _this5.setState({
+            routeInfo: routeInfo
+          });
+
+          console.log(_this5.state.routeInfo.miles);
         } else {
           window.alert('Directions request failed due to' + status);
         }
@@ -681,7 +690,7 @@ function (_React$Component) {
   }, {
     key: "makeMap",
     value: function makeMap() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.state.directionsService = new google.maps.DirectionsService();
       this.state.directionsRenderer = new google.maps.DirectionsRenderer();
@@ -690,15 +699,15 @@ function (_React$Component) {
           lat: 37.773972,
           lng: -122.431297
         },
-        zoom: 13
+        zoom: 13,
+        maxZoom: 15
       });
       var _this$state2 = this.state,
           directionsRenderer = _this$state2.directionsRenderer,
           map = _this$state2.map;
       directionsRenderer.setMap(map);
       map.addListener('click', function (e) {
-        _this5.addLatLng(e); // this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
-
+        _this6.addLatLng(e);
       });
     }
   }, {
@@ -726,7 +735,7 @@ function (_React$Component) {
         type: "text",
         value: this.state.routeInfo.title,
         onChange: this.updateTitle()
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderMap(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Total miles: ", this.state.routeInfo.miles), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderMap(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "Create Route"
       })));

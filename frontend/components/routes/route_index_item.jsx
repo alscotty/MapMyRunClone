@@ -1,5 +1,4 @@
 import React from 'react'
-import { logoutCurrentUser } from '../../actions/session_actions';
 
 class RouteIndexItem extends React.Component{
     constructor(props){
@@ -14,6 +13,7 @@ class RouteIndexItem extends React.Component{
         return(
             <div key={route.id}>
                 <h3>{route.title}</h3>
+                <h3>Distance {route.miles}mi</h3>
                 Coordinates:
                 <br/>
                 {route.coordinates ? route.coordinates.map(coord=>{
