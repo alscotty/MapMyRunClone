@@ -48,21 +48,22 @@ class RoutesForm extends React.Component{
         let snappedLat=data.snappedPoints[0].location.latitude; 
         let snappedLng=data.snappedPoints[0].location.longitude;
         this.state.coordinates.push({ lat: snappedLat, lng: snappedLng})
-        this.state.path.push({lat:snappedLat,lng:snappedLng})
+        // this.state.path.push({lat:snappedLat,lng:snappedLng})
+
         new google.maps.Marker({
             position: {lat:snappedLat,lng:snappedLng},
             map: this.state.map
         });
-        // this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
+        this.calcAndDisplayRoute()
     }
 
-    componentDidUpdate(){
-        this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
+    // componentDidUpdate(){
+    //     this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
 
 
-        directionsRenderer.setMap(this.state.map);
+    //     directionsRenderer.setMap(this.state.map);
 
-    }
+    // }
 
     
     snapPoint(lat,lng){
@@ -86,7 +87,7 @@ class RoutesForm extends React.Component{
     }
 
 
-    calcAndDisplayRoute(directionsService,directionsRenderer){
+    calcAndDisplayRoute(){
         let waypts=[]
         for(let i=0; i<this.state.coordinates.length; i++){
             waypts.push({
@@ -95,7 +96,7 @@ class RoutesForm extends React.Component{
             });
         }
         
-        const {coordinates}=this.state;
+        const {coordinates,directionsService,directionsRenderer}=this.state;
         directionsService.route({
             origin: coordinates[0],
             destination: coordinates[coordinates.length-1],

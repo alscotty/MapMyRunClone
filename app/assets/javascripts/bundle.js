@@ -609,25 +609,21 @@ function (_React$Component) {
       this.state.coordinates.push({
         lat: snappedLat,
         lng: snappedLng
-      });
-      this.state.path.push({
-        lat: snappedLat,
-        lng: snappedLng
-      });
+      }); // this.state.path.push({lat:snappedLat,lng:snappedLng})
+
       new google.maps.Marker({
         position: {
           lat: snappedLat,
           lng: snappedLng
         },
         map: this.state.map
-      }); // this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.calcAndDisplayRoute(this.directionsService, this.directionsRenderer);
-      directionsRenderer.setMap(this.state.map);
-    }
+      });
+      this.calcAndDisplayRoute();
+    } // componentDidUpdate(){
+    //     this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
+    //     directionsRenderer.setMap(this.state.map);
+    // }
+
   }, {
     key: "snapPoint",
     value: function snapPoint(lat, lng) {
@@ -654,7 +650,7 @@ function (_React$Component) {
     }
   }, {
     key: "calcAndDisplayRoute",
-    value: function calcAndDisplayRoute(directionsService, directionsRenderer) {
+    value: function calcAndDisplayRoute() {
       var waypts = [];
 
       for (var i = 0; i < this.state.coordinates.length; i++) {
@@ -664,7 +660,10 @@ function (_React$Component) {
         });
       }
 
-      var coordinates = this.state.coordinates;
+      var _this$state = this.state,
+          coordinates = _this$state.coordinates,
+          directionsService = _this$state.directionsService,
+          directionsRenderer = _this$state.directionsRenderer;
       directionsService.route({
         origin: coordinates[0],
         destination: coordinates[coordinates.length - 1],
@@ -693,9 +692,9 @@ function (_React$Component) {
         },
         zoom: 13
       });
-      var _this$state = this.state,
-          directionsRenderer = _this$state.directionsRenderer,
-          map = _this$state.map;
+      var _this$state2 = this.state,
+          directionsRenderer = _this$state2.directionsRenderer,
+          map = _this$state2.map;
       directionsRenderer.setMap(map);
       map.addListener('click', function (e) {
         _this5.addLatLng(e); // this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
