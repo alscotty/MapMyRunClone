@@ -11,7 +11,7 @@ class RoutesForm extends React.Component{
             coordinates:[],
             map:'',
             poly:'',
-            path:'',
+            path:[],
             directionsService:'',
             directionsRenderer:''
         };
@@ -51,10 +51,19 @@ class RoutesForm extends React.Component{
         this.state.path.push({lat:snappedLat,lng:snappedLng})
         new google.maps.Marker({
             position: {lat:snappedLat,lng:snappedLng},
-            title: '#' + this.state.path.getLength(),
             map: this.state.map
         });
+        // this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
     }
+
+    componentDidUpdate(){
+        this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
+
+
+        directionsRenderer.setMap(this.state.map);
+
+    }
+
     
     snapPoint(lat,lng){
         let posArr=[lat,lng]
@@ -71,11 +80,11 @@ class RoutesForm extends React.Component{
         // const {poly}=this.state;
         // this.setState({path: poly.getPath() })
         //push in formatted coordinates into state as they are added:
-
         let newLat = e.latLng['lat']()
         let newLng = e.latLng['lng']()
         this.snapPoint(newLat,newLng)
     }
+
 
     calcAndDisplayRoute(directionsService,directionsRenderer){
         let waypts=[]
@@ -85,8 +94,8 @@ class RoutesForm extends React.Component{
                 stopover:false
             });
         }
+        
         const {coordinates}=this.state;
-
         directionsService.route({
             origin: coordinates[0],
             destination: coordinates[coordinates.length-1],
@@ -106,24 +115,20 @@ class RoutesForm extends React.Component{
 
     }
 
-
-
-
-    //maybe should use this.setState({}) check later if errors
     makeMap(){
-        this.state.directionsService= new google.maps.DirectionsService;
-        this.state.directionsRenderer= new google.maps.DirectionsRenderer;
+        this.state.directionsService= new google.maps.DirectionsService();
+        this.state.directionsRenderer= new google.maps.DirectionsRenderer();
         this.state.map=new google.maps.Map(document.getElementById('map'), {
             center: { lat: 37.773972, lng: -122.431297 },
             zoom: 13
         });
         
-            const {directionsRenderer,map}=this.state;
-            directionsRenderer.setMap(map);
-            map.addListener('click', (e)=>{
-                this.addLatLng(e),
-                this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
-            })
+        const {directionsRenderer,map}=this.state;
+        directionsRenderer.setMap(map);
+        map.addListener('click', (e)=>{
+            this.addLatLng(e)
+            // this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
+        })
     };
 
     componentDidMount(){

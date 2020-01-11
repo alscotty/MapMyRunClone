@@ -561,7 +561,7 @@ function (_React$Component) {
       coordinates: [],
       map: '',
       poly: '',
-      path: '',
+      path: [],
       directionsService: '',
       directionsRenderer: ''
     };
@@ -619,9 +619,14 @@ function (_React$Component) {
           lat: snappedLat,
           lng: snappedLng
         },
-        title: '#' + this.state.path.getLength(),
         map: this.state.map
-      });
+      }); // this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.calcAndDisplayRoute(this.directionsService, this.directionsRenderer);
+      directionsRenderer.setMap(this.state.map);
     }
   }, {
     key: "snapPoint",
@@ -673,8 +678,7 @@ function (_React$Component) {
           window.alert('Directions request failed due to' + status);
         }
       });
-    } //maybe should use this.setState({}) check later if errors
-
+    }
   }, {
     key: "makeMap",
     value: function makeMap() {
@@ -694,7 +698,8 @@ function (_React$Component) {
           map = _this$state.map;
       directionsRenderer.setMap(map);
       map.addListener('click', function (e) {
-        _this5.addLatLng(e), _this5.calcAndDisplayRoute(_this5.directionsService, _this5.directionsRenderer);
+        _this5.addLatLng(e); // this.calcAndDisplayRoute(this.directionsService,this.directionsRenderer)
+
       });
     }
   }, {
