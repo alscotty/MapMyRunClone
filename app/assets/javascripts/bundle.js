@@ -442,9 +442,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -458,12 +458,84 @@ function (_React$Component) {
   _inherits(RouteIndexItem, _React$Component);
 
   function RouteIndexItem(props) {
+    var _this;
+
     _classCallCheck(this, RouteIndexItem);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(RouteIndexItem).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RouteIndexItem).call(this, props));
+    _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
+    _this.mapSetup = _this.mapSetup.bind(_assertThisInitialized(_this));
+    _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(RouteIndexItem, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.readyMap();
+    }
+  }, {
+    key: "renderIndMap",
+    value: function renderIndMap(coordinates) {
+      var ren = new google.maps.DirectionsRenderer();
+      var dir = new google.maps.DirectionsService();
+      var map = new google.maps.Map(document.getElementById("index-map-".concat(this.props.route.id)), {
+        center: {
+          lat: 37.773972,
+          lng: -122.431297
+        },
+        zoom: 13,
+        maxZoom: 15
+      });
+      ren.setMap(map);
+      var waypts = [];
+
+      for (var i = 0; i < coordinates.length; i++) {
+        waypts.push({
+          location: coordinates[i],
+          stopover: false
+        });
+      }
+
+      dir.route({
+        origin: coordinates[0],
+        destination: coordinates[coordinates.length - 1],
+        waypoints: waypts,
+        optimizeWaypoints: false,
+        travelMode: 'DRIVING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          ren.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to' + status);
+        }
+      });
+    }
+  }, {
+    key: "readyMap",
+    value: function readyMap() {
+      var formatted_coords = [];
+      this.props.route.coordinates.map(function (coord) {
+        formatted_coords.push({
+          lat: coord['lat'],
+          lng: coord['lng']
+        });
+      });
+      this.renderIndMap(formatted_coords);
+    }
+  }, {
+    key: "mapSetup",
+    value: function mapSetup() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "index-map-".concat(this.props.route.id),
+        className: "index-map"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
+        src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
+        async: true,
+        defer: true
+      })); // crossOrigin = 'false'
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -473,11 +545,7 @@ function (_React$Component) {
           allUsers = _this$props.allUsers;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         key: route.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Distance ", route.miles, "mi"), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? route.coordinates.map(function (coord) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: coord.id
-        }, "Lat: ", coord.lat, ", Lng: ", coord.lng, ", Route_id: ", coord.route_id, ", Ord: ", coord.ord);
-      }) : '', currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Distance ", route.miles, "mi"), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           deleteRoute(route.id);
         }
@@ -490,16 +558,27 @@ function (_React$Component) {
 
 /* harmony default export */ __webpack_exports__["default"] = (RouteIndexItem); //display who created the route, works but inefficient,should be a better way:
 
-{
-  /* <h5>{allUsers.map(user => {
-     if (user.id == route.user_id) {
-         return (<div>
-             Created by: {user.username}
-         </div>
-         )
-     }
-  })}</h5> */
-}
+{}
+/* <h5>{allUsers.map(user => {
+   if (user.id == route.user_id) {
+       return (<div>
+           Created by: {user.username}
+       </div>
+       )
+   }
+})}</h5> */
+// {
+//     route.coordinates ? route.coordinates.map(coord => {
+//         return (
+//             <div key={coord.id}>
+//                 Lat: {coord.lat},
+//                         Lng: {coord.lng},
+//                         Route_id: {coord.route_id},
+//                         Ord: {coord.ord}
+//             </div>
+//         )
+//     }) : ''
+// }
 
 /***/ }),
 
@@ -669,7 +748,8 @@ function (_React$Component) {
         travelMode: 'DRIVING'
       }, function (response, status) {
         if (status === 'OK') {
-          directionsRenderer.setDirections(response);
+          directionsRenderer.setDirections(response); //calc miles
+
           var route = response.routes;
           var dist = route[0].legs[0].distance.value;
 
@@ -729,6 +809,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create New Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {

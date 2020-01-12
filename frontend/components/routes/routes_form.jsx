@@ -99,6 +99,7 @@ class RoutesForm extends React.Component{
         }, (response, status)=> {
             if(status === 'OK'){
                 directionsRenderer.setDirections(response);
+                //calc miles
                 var route=response.routes;
                 let dist=route[0].legs[0].distance.value;
                 let routeInfo = { ...this.state.routeInfo };
@@ -148,6 +149,7 @@ class RoutesForm extends React.Component{
 
 
     render(){
+        debugger
         return(
             <div>
             <h1>Create New Route</h1>
