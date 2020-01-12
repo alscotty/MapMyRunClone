@@ -2,6 +2,7 @@ import {connect} from 'react-redux'
 import RoutesIndex from './routes_index';
 import{
     requestRoutes,
+    requestRoute,
     deleteRoute
 } from '../../actions/route_actions'
 
@@ -20,6 +21,7 @@ const mstp=state=>{
 
 const mdtp=dispatch=>({
     requestRoutes: ()=>dispatch(requestRoutes()),
+    requestRoute: (routeId)=>dispatch(requestRoute(routeId)),
     deleteRoute: (routeId)=>dispatch(deleteRoute(routeId))
 });
 

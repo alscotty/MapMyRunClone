@@ -470,11 +470,6 @@ function (_React$Component) {
   }
 
   _createClass(RouteIndexItem, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.readyMap();
-    }
-  }, {
     key: "renderIndMap",
     value: function renderIndMap(coordinates) {
       var ren = new google.maps.DirectionsRenderer();
@@ -515,13 +510,22 @@ function (_React$Component) {
     key: "readyMap",
     value: function readyMap() {
       var formatted_coords = [];
-      this.props.route.coordinates.map(function (coord) {
-        formatted_coords.push({
-          lat: coord['lat'],
-          lng: coord['lng']
+
+      if (this.props.route.coordinates) {
+        this.props.route.coordinates.map(function (coord) {
+          formatted_coords.push({
+            lat: coord['lat'],
+            lng: coord['lng']
+          });
         });
-      });
-      this.renderIndMap(formatted_coords);
+        this.renderIndMap(formatted_coords);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // this.props.requestRoute(this.props.route.id);
+      this.readyMap();
     }
   }, {
     key: "mapSetup",
@@ -533,7 +537,7 @@ function (_React$Component) {
         src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
         async: true,
         defer: true
-      })); // crossOrigin = 'false'
+      }));
     }
   }, {
     key: "render",
@@ -809,7 +813,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      debugger;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create New Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -924,14 +927,16 @@ function (_React$Component) {
       var _this$props = this.props,
           routes = _this$props.routes,
           currentUser = _this$props.currentUser,
-          allUsers = _this$props.allUsers;
+          allUsers = _this$props.allUsers,
+          requestRoute = _this$props.requestRoute;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome to Routes Index!"), routes.map(function (route) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: route.id,
+          key: route.id * 2,
           route: route,
           deleteRoute: _this.props.deleteRoute,
           currentUser: currentUser,
-          allUsers: allUsers
+          allUsers: allUsers,
+          requestRoute: requestRoute
         });
       }));
     }
@@ -974,6 +979,9 @@ var mdtp = function mdtp(dispatch) {
   return {
     requestRoutes: function requestRoutes() {
       return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["requestRoutes"])());
+    },
+    requestRoute: function requestRoute(routeId) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["requestRoute"])(routeId));
     },
     deleteRoute: function deleteRoute(routeId) {
       return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["deleteRoute"])(routeId));

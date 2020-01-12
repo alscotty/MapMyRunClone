@@ -9,11 +9,6 @@ class RouteIndexItem extends React.Component{
         this.readyMap=this.readyMap.bind(this)
     }
 
-    componentDidMount(){
-        this.readyMap();
-    }
-   
-  
 
     renderIndMap(coordinates){
         let ren= new google.maps.DirectionsRenderer();
@@ -51,10 +46,16 @@ class RouteIndexItem extends React.Component{
 
     readyMap() {
         let formatted_coords = [];
+        if(this.props.route.coordinates){
         this.props.route.coordinates.map(coord => {
             formatted_coords.push({ lat: coord['lat'], lng: coord['lng'] })
         });
-        this.renderIndMap(formatted_coords)
+        this.renderIndMap(formatted_coords)}
+    }
+
+    componentDidMount() {
+        // this.props.requestRoute(this.props.route.id);
+        this.readyMap();
     }
 
     mapSetup() {
@@ -66,7 +67,6 @@ class RouteIndexItem extends React.Component{
 
             </div>
         )
-        // crossOrigin = 'false'
     }
     
 
