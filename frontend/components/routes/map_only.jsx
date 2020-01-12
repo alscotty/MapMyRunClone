@@ -1,14 +1,14 @@
 import React from 'react'
-import MapOnly from './map_only'
 
-class RouteShow extends React.Component{
+class MapOnly extends React.Component{
     constructor(props){
         super(props)
-
+    
         this.renderIndMap = this.renderIndMap.bind(this)
         this.mapSetup = this.mapSetup.bind(this)
         this.readyMap = this.readyMap.bind(this)
     }
+
 
     renderIndMap(coordinates) {
         let ren = new google.maps.DirectionsRenderer();
@@ -57,11 +57,9 @@ class RouteShow extends React.Component{
 
 
     componentDidMount() {
-
-        this.props.requestRoute(this.props.match.params.routeId)
-            // .then(this.readyMap())
+        this.readyMap()
     }
-    
+
     mapSetup() {
 
         return (
@@ -74,26 +72,15 @@ class RouteShow extends React.Component{
         )
     }
 
-
     render(){
-        const {route}=this.props
 
-    //need to call route map render functions here after everything has rendered, create a separate component, much easier
-        if (!route) return null;
         return(
             <div>
-               {route.title}
-               <br/>
-                {route.miles}
-                <br/>
-                <MapOnly route={route}/>
-
-                {/* {route.coordinates ? this.mapSetup() : ''} */}
-                
+                {this.mapSetup()}
             </div>
         )
     }
 
 }
 
-export default RouteShow;
+export default MapOnly;
