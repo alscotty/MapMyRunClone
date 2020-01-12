@@ -75,6 +75,13 @@ class RouteIndexItem extends React.Component{
         return(
             <div key={route.id}>
                 <h3>{route.title}</h3>
+                <h3>{allUsers.map(user => {
+                        if (user.id == route.user_id) {
+                            return (<div key={route.id}>
+                                Created by: {user.username}
+                            </div>
+                            )
+                        }})}</h3>
                 <h3>Distance {route.miles}mi</h3>
                 Coordinates:
                 <br/>
@@ -95,6 +102,7 @@ export default RouteIndexItem;
 
 
 //display who created the route, works but inefficient,should be a better way:
+//better to have id as top level key for user in state?
 {/* <h5>{allUsers.map(user => {
     if (user.id == route.user_id) {
         return (<div>

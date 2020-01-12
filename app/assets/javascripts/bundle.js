@@ -294,6 +294,7 @@ var App = function App() {
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_9__["ProtectedRoute"], {
+    exact: true,
     path: "/routes/new",
     component: _routes_routes_form_container__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_9__["ProtectedRoute"], {
@@ -549,7 +550,13 @@ function (_React$Component) {
           allUsers = _this$props.allUsers;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         key: route.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Distance ", route.miles, "mi"), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, allUsers.map(function (user) {
+        if (user.id == route.user_id) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            key: route.id
+          }, "Created by: ", user.username);
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Distance ", route.miles, "mi"), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           deleteRoute(route.id);
         }
@@ -561,6 +568,7 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (RouteIndexItem); //display who created the route, works but inefficient,should be a better way:
+//better to have id as top level key for user in state?
 
 {}
 /* <h5>{allUsers.map(user => {
