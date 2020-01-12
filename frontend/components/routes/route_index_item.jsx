@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom';
 
 class RouteIndexItem extends React.Component{
     constructor(props){
@@ -54,7 +55,6 @@ class RouteIndexItem extends React.Component{
     }
 
     componentDidMount() {
-        // this.props.requestRoute(this.props.route.id);
         this.readyMap();
     }
 
@@ -74,7 +74,7 @@ class RouteIndexItem extends React.Component{
         const {route,currentUser,deleteRoute,allUsers}=this.props
         return(
             <div key={route.id}>
-                <h3>{route.title}</h3>
+                <Link to={`/routes/${route.id}`}>{route.title}</Link>
                 <h3>{allUsers.map(user => {
                         if (user.id == route.user_id) {
                             return (<div key={route.id}>
