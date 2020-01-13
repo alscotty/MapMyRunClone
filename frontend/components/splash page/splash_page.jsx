@@ -11,7 +11,7 @@ class Splash extends React.Component{
                             </p>
                     </summary>
                     <section>
-                        The 20th best web run tracking run tracking experience, backed by the world's smallest digital health and fitness community. 
+                        The 20th best web run tracking experience, backed by the world's smallest digital health and fitness community. 
                     </section>
                 </div>
 

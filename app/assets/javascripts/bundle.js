@@ -1513,7 +1513,7 @@ function (_React$Component) {
         id: "mtBaldy"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "space-me"
-      }, "Go the extra mile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "The 20th best web run tracking run tracking experience, backed by the world's smallest digital health and fitness community.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Go the extra mile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "The 20th best web run tracking experience, backed by the world's smallest digital health and fitness community.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "pRidge"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, "Image in the background?")));
     }
