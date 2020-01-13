@@ -21,6 +21,9 @@
     font-family: 'Helvetica Neue';
     font-weight:350;
     color:grey;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
     }
 
     .splash,.route-index,.route-form{
