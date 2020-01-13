@@ -139,7 +139,7 @@ class RoutesForm extends React.Component{
     renderMap(){ 
         return(
             <div>
-                <div id="map"></div>
+                <div id="map" class='form-item'></div>
                     <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
                         async defer></script>
 
@@ -150,26 +150,25 @@ class RoutesForm extends React.Component{
 
     render(){
         return(
-            <div className='route-form'>
-            <form onSubmit={this.handleSubmit}>
-                <label>Route Details
+            <div>
+                <form className='route-form' onSubmit=  {this.handleSubmit}>
+                    <summary>
+                    Route Details
+                    </summary>
                     <br/>
-                <input type="text"
-                    id='route-title-input'
-                    placeholder='Name this map'
-                    value={this.state.routeInfo.title}
-                    onChange={this.updateTitle()}
-                />
-                </label>
+                        <input type="text"
+                        id='route-title-input'
+                        placeholder='Name this map'
+                        value={this.state.routeInfo.title}
+                        onChange={this.updateTitle()}
+                        />
+                    <br/>
+                    <label class='form-item'>Total miles: {this.state.routeInfo.miles}</label>
                 <br/>
-                <label>Total miles: {this.state.routeInfo.miles}</label>
-                <br/>
-
-            {this.renderMap()}
-
+                    <input class='form-item' id='route-button' type="submit" value='Save Route'/>
             <br/>
-            <input id='route-button' type="submit" value='Save Route'/>
             </form>
+                {this.renderMap()}
             </div>
         )
     }

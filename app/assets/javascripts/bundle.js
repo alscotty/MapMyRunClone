@@ -1031,7 +1031,8 @@ function (_React$Component) {
     key: "renderMap",
     value: function renderMap() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "map"
+        id: "map",
+        "class": "form-item"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
         src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
         async: true,
@@ -1041,21 +1042,23 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "route-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "route-form",
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Route Details", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, "Route Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         id: "route-title-input",
         placeholder: "Name this map",
         value: this.state.routeInfo.title,
         onChange: this.updateTitle()
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Total miles: ", this.state.routeInfo.miles), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderMap(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        "class": "form-item"
+      }, "Total miles: ", this.state.routeInfo.miles), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        "class": "form-item",
         id: "route-button",
         type: "submit",
         value: "Save Route"
-      })));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), this.renderMap());
     }
   }]);
 
