@@ -1,25 +1,25 @@
 header{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     position: fixed;
+    background-color: white;
+    width:100%;
+    height:3.2em;
+    z-index:1;
 }
 
 .route-links{
     text-decoration: none;
     margin-top:17px;
     color: grey;
-}
-
-.route-links,.header-link{
-    top:10px;
+    padding-left: 1em ;
+    padding-right: 1em;
 }
 
 .header-link{
     font-size: small;
     top:0px;
     left:0px;
-    margin-top: 0px;
-    margin-left: 5px;
     background: linear-gradient(to right, #0c0fbe 0%, #479adf 65%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -29,21 +29,14 @@ header{
 /* 
     Greeting Container stuff
 */
-.login-signup,.header-group {
-    position: fixed;
-    margin-top: 20px;
-    top: 0px;
-    right:5px;
-    font-size: medium;
-    padding: 10px;
 
-}
-.header-group{
+.header-group,.login-signup{
     display: flex;
     height: 10px;
+    margin-top: 20px;
     align-items:center;
     justify-content: flex-end;
-}
+} 
 
 #logLink,#signLink{
     text-decoration: none;
