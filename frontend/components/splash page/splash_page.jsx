@@ -3,7 +3,7 @@ import React from 'react'
 class Splash extends React.Component{
     render(){
         return(
-            <div>
+            <div className='splash'>
                 <h1>Welcome</h1>
                 <img id='splash1' src={window.splash1URL} alt="inspirational running pic"/>
 

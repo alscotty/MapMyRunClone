@@ -14,7 +14,7 @@ class RoutesIndex extends React.Component{
         const {routes,currentUser,allUsers,requestRoute}=this.props
         
         return(
-            <div>
+            <div className='route-index'>
             <h2>Welcome to Routes Index!</h2>
             {routes.map(route=>{
                 return(

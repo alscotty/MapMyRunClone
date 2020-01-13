@@ -150,7 +150,7 @@ class RoutesForm extends React.Component{
 
     render(){
         return(
-            <div>
+            <div className='route-form'>
             <h1>Create New Route</h1>
             <form onSubmit={this.handleSubmit}>
                 <label>Title

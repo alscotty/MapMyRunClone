@@ -8,9 +8,11 @@
   </script>
    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google[:api_key] }" %>
 
-
+    <!-- Stylesheet below:-->
     <%= stylesheet_link_tag 'application', media: 'all' %>
     
+
+    <!-- Images below:-->
     <script type="text/javascript">
     window.splash1URL = "<%= image_url('splash1.png') %>";
   </script>

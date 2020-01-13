@@ -24,10 +24,10 @@ const App = () => (
       <Link to="/" className="header-link">
         <h1>MapMyRunClone</h1>
       </Link>
-      <Link to='/routes/new' className='new-route-link'>
+      <Link to='/routes/new' className='route-links'>
         Create Route
       </Link>
-      <Link to='/routes' className='index-routes-link'>
+      <Link to='/routes' className='route-links'>
         All Routes
       </Link>
       <GreetingContainer />
@@ -39,9 +39,9 @@ const App = () => (
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
       <ProtectedRoute exact path='/routes/new' component={RoutesForm} />
       <ProtectedRoute exact path='/routes/:routeId' component={RouteShow} />
-      <ProtectedRoute path='/routes' component={RoutesIndex} />
+      <ProtectedRoute exact path='/routes' component={RoutesIndex} />
     </Switch>
-    
+
   </div>
 );
 

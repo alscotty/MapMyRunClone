@@ -17,99 +17,16 @@
 /*
     Route Map dimensions:
 */
-#map{
-    height: 400px;
-    width: 500px;
-}
-
-.show-map{
-    height: 400px;
-    width: 500px;
-}
-
-.index-map{
-    height: 200px;
-    width: 300px;
-}
-
-
-
  body{
-     font-family: papyrus;
-     font-family: 'Helvetica Neue';
-     font-weight:350;
-     color:grey
- }
+    font-family: papyrus;
+    font-family: 'Helvetica Neue';
+    font-weight:350;
+    color:grey;
+    }
 
-.header-link{
-    font-size: small;
-    display:flex;
-    top:0px;
-    left:0px;
-    margin-top: 0px;
-    margin-left: 5px;
-    /* font-family: ; */
-    background: linear-gradient(to right, #0c0fbe 0%, #479adf 20%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-decoration: none;
-    text-transform: uppercase;
-}
-/* 
-    Greeting Container stuff
-*/
-.login-signup,.header-group {
-    position: fixed;
-    margin-top: 20px;
-    top: 0px;
-    right:5px;
-    font-size: medium;
-    padding: 10px;
-
-}
-.header-group{
-    display: flex;
-    height: 10px;
-    align-items:center;
-    justify-content: flex-end;
-}
-
-#logLink,#signLink{
-    text-decoration: none;
-    padding: 10px;
-}
-
-#logLink{
-    color:black;
-    border-radius: 5px;
-}
-
-#logLink:hover{
-    background-color:rgb(195, 201, 207);
-}
-
-#signLink{
-    color:white;
-    background-color: rgb(64, 204, 51);
-    border-radius: 5px;
-}
-#signLink:hover{
-    background-color: rgb(50, 167, 39);
-}
-
-.header-button{
-    display: flex;
-    justify-content: center;
-    /* height:30px; */
-    padding: 10px;
-    border-radius: 5px;
-    font-size: medium;
-}
-
-.header-button:hover{
-    background-color:rgb(195, 201, 207);
-}
-
+    .splash,.route-index,.route-form{
+        padding-top:2em;
+    }
 
 /*
     Session form styles

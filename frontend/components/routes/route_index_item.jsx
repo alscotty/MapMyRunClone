@@ -99,29 +99,3 @@ class RouteIndexItem extends React.Component{
 
 export default RouteIndexItem;
 
-
-
-//display who created the route, works but inefficient,should be a better way:
-//better to have id as top level key for user in state?
-{/* <h5>{allUsers.map(user => {
-    if (user.id == route.user_id) {
-        return (<div>
-            Created by: {user.username}
-        </div>
-        )
-    }
-})}</h5> */}
-
-
-// {
-//     route.coordinates ? route.coordinates.map(coord => {
-//         return (
-//             <div key={coord.id}>
-//                 Lat: {coord.lat},
-//                         Lng: {coord.lng},
-//                         Route_id: {coord.route_id},
-//                         Ord: {coord.ord}
-//             </div>
-//         )
-//     }) : ''
-// }
