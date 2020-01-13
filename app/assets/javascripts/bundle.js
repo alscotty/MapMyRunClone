@@ -1043,15 +1043,18 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "route-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create New Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Route Details", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        id: "route-title-input",
+        placeholder: "Name this map",
         value: this.state.routeInfo.title,
         onChange: this.updateTitle()
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Total miles: ", this.state.routeInfo.miles), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderMap(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "route-button",
         type: "submit",
-        value: "Create Route"
+        value: "Save Route"
       })));
     }
   }]);

@@ -151,13 +151,14 @@ class RoutesForm extends React.Component{
     render(){
         return(
             <div className='route-form'>
-            <h1>Create New Route</h1>
             <form onSubmit={this.handleSubmit}>
-                <label>Title
+                <label>Route Details
                     <br/>
                 <input type="text"
-                        value={this.state.routeInfo.title}
-                        onChange={this.updateTitle()}
+                    id='route-title-input'
+                    placeholder='Name this map'
+                    value={this.state.routeInfo.title}
+                    onChange={this.updateTitle()}
                 />
                 </label>
                 <br/>
@@ -167,7 +168,7 @@ class RoutesForm extends React.Component{
             {this.renderMap()}
 
             <br/>
-            <input type="submit" value='Create Route'/>
+            <input id='route-button' type="submit" value='Save Route'/>
             </form>
             </div>
         )

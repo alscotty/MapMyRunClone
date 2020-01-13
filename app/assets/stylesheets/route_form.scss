@@ -1,0 +1,22 @@
+.route-form{
+    display:flex;
+    margin-top: 2em;
+}
+
+#route-button{
+    color:white;
+    background: -webkit-linear-gradient(top, #ff9628 5%, #ff8714 100%);
+    border-radius: 5px;
+    font-size: medium;
+    padding: 5px 15px 5px 15px;
+}
+
+#route-button:hover{
+    cursor: pointer;
+    background: rgb(216, 134, 26);
+}
+
+#route-title-input{
+    border-radius: 5px;
+    font-size: medium;
+}
