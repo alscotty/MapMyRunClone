@@ -1509,11 +1509,13 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "splash"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        id: "splash1",
-        src: window.splash1URL,
-        alt: "inspirational running pic"
-      }));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "mtBaldy"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "space-me"
+      }, "Go the extra mile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "The 20th best web run tracking run tracking experience, backed by the world's smallest digital health and fitness community.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "pRidge"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, "Image in the background?")));
     }
   }]);
 
