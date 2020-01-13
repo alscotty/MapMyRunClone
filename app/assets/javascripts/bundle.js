@@ -300,12 +300,12 @@ var App = function App() {
     path: "/routes/new",
     component: _routes_routes_form_container__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
-    path: "/routes",
-    component: _routes_routes_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
     exact: true,
     path: "/routes/:routeId",
     component: _routes_route_show_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
+    path: "/routes",
+    component: _routes_routes_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   })));
 };
 
