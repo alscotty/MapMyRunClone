@@ -300,12 +300,12 @@ var App = function App() {
     path: "/routes/new",
     component: _routes_routes_form_container__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
+    path: "/routes",
+    component: _routes_routes_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
     exact: true,
     path: "/routes/:routeId",
     component: _routes_route_show_container__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
-    path: "/routes",
-    component: _routes_routes_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   })));
 };
 
@@ -756,9 +756,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -773,85 +773,15 @@ function (_React$Component) {
   _inherits(RouteShow, _React$Component);
 
   function RouteShow(props) {
-    var _this;
-
     _classCallCheck(this, RouteShow);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(RouteShow).call(this, props));
-    _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
-    _this.mapSetup = _this.mapSetup.bind(_assertThisInitialized(_this));
-    _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(RouteShow).call(this, props));
   }
 
   _createClass(RouteShow, [{
-    key: "renderIndMap",
-    value: function renderIndMap(coordinates) {
-      var ren = new google.maps.DirectionsRenderer();
-      var dir = new google.maps.DirectionsService();
-      var map = new google.maps.Map(document.getElementById("show-map-id"), {
-        center: {
-          lat: 37.773972,
-          lng: -122.431297
-        },
-        zoom: 13,
-        maxZoom: 15
-      });
-      ren.setMap(map);
-      var waypts = [];
-
-      for (var i = 0; i < coordinates.length; i++) {
-        waypts.push({
-          location: coordinates[i],
-          stopover: false
-        });
-      }
-
-      dir.route({
-        origin: coordinates[0],
-        destination: coordinates[coordinates.length - 1],
-        waypoints: waypts,
-        optimizeWaypoints: false,
-        travelMode: 'DRIVING'
-      }, function (response, status) {
-        if (status === 'OK') {
-          ren.setDirections(response);
-        } else {
-          window.alert('Directions request failed due to' + status);
-        }
-      });
-    }
-  }, {
-    key: "readyMap",
-    value: function readyMap() {
-      var formatted_coords = [];
-
-      if (this.props.route.coordinates) {
-        this.props.route.coordinates.map(function (coord) {
-          formatted_coords.push({
-            lat: coord['lat'],
-            lng: coord['lng']
-          });
-        });
-        this.renderIndMap(formatted_coords);
-      }
-    }
-  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.requestRoute(this.props.match.params.routeId); // .then(this.readyMap())
-    }
-  }, {
-    key: "mapSetup",
-    value: function mapSetup() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "show-map-id",
-        className: "show-map"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
-        src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
-        async: true,
-        defer: true
-      }));
+      this.props.requestRoute(this.props.match.params.routeId);
     }
   }, {
     key: "render",
@@ -984,7 +914,7 @@ function (_React$Component) {
 
       e.preventDefault;
       this.props.action(this.state.routeInfo, this.state.coordinates).then(function () {
-        _this2.props.history.push('./routes');
+        _this2.props.history.push('/routes');
       });
     }
   }, {
