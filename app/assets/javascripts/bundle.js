@@ -699,7 +699,8 @@ function (_React$Component) {
         className: "mini-flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         id: "distance-only"
-      }, "Distance", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.miles, "mi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? this.mapSetup() : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Distance", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.miles, "mi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "delete-button",
         onClick: function onClick() {
           deleteRoute(route.id);
         }

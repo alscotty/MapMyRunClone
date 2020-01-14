@@ -87,10 +87,10 @@ class RouteIndexItem extends React.Component{
                         <br/>
                         {route.miles}mi</p>
                     <br/>
-                    {route.coordinates ? this.mapSetup() : ''}
                 </div>
+                    {route.coordinates ? this.mapSetup() : ''}
                 <br/>
-                <button onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
+                <button className='delete-button' onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
               
             </div>
             )
