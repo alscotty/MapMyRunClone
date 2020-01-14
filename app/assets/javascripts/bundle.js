@@ -277,7 +277,7 @@ var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/",
     className: "header-link"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "MapMyRunClone")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/routes/new",
     className: "route-links"
   }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
@@ -304,7 +304,6 @@ var App = function App() {
     path: "/routes/:routeId",
     component: _routes_route_show_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_10__["ProtectedRoute"], {
-    exact: true,
     path: "/routes",
     component: _routes_routes_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   })));
@@ -688,27 +687,44 @@ function (_React$Component) {
           deleteRoute = _this$props.deleteRoute,
           allUsers = _this$props.allUsers;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        key: route.id
+        key: route.id,
+        className: "route-index-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "linky",
+        to: "/routes"
+      }, "".concat(currentUser.username, " ")), "created the route", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "linky",
         to: "/routes/".concat(route.id)
-      }, route.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, allUsers.map(function (user) {
-        if (user.id == route.user_id) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-            key: route.id
-          }, "Created by: ", user.username);
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Distance ", route.miles, "mi"), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, " ".concat(route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "mini-flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "distance-only"
+      }, "Distance", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.miles, "mi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? this.mapSetup() : ''), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
           deleteRoute(route.id);
         }
-      }, "Delete Route") : '');
+      }, "Delete Route"));
     }
   }]);
 
   return RouteIndexItem;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (RouteIndexItem);
+/* harmony default export */ __webpack_exports__["default"] = (RouteIndexItem); //bonus logic, used if feed included other users:
+
+{}
+/* <h3>{allUsers.map(user => {
+                       if (user.id == route.user_id) {
+                           return (<div key={route.id}>
+                               Created by: {user.username}
+                           </div>
+                           )
+                       }})}</h3> */
+// {
+// currentUser.id == route.user_id ? (
+//     <button onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
+// ) : ('')
+// }
 
 /***/ }),
 
@@ -1053,7 +1069,7 @@ function (_React$Component) {
         onChange: this.updateTitle()
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         "class": "form-item"
-      }, "Total miles: ", this.state.routeInfo.miles), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "Distance: ", this.state.routeInfo.miles, " MI"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         "class": "form-item",
         id: "route-button",
         type: "submit",
@@ -1167,7 +1183,7 @@ function (_React$Component) {
           requestRoute = _this$props.requestRoute;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "route-index"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome to Routes Index!"), routes.map(function (route) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Activity Feed"), routes.map(function (route) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: route.id * 2,
           route: route,
@@ -1521,7 +1537,9 @@ function (_React$Component) {
         id: "space-me"
       }, "Go the extra mile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "The 20th best web run tracking experience, backed by the world's smallest digital health and fitness community.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "pRidge"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, "Image in the background?")));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "space-me"
+      }, "Find your own path")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Create routes and save them for the next time you're ready to run")));
     }
   }]);
 

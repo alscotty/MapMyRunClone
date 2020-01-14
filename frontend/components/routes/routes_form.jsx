@@ -163,7 +163,7 @@ class RoutesForm extends React.Component{
                         onChange={this.updateTitle()}
                         />
                     <br/>
-                    <label class='form-item'>Total miles: {this.state.routeInfo.miles}</label>
+                    <label class='form-item'>Distance: {this.state.routeInfo.miles} MI</label>
                 <br/>
                     <input class='form-item' id='route-button' type="submit" value='Save Route'/>
             <br/>

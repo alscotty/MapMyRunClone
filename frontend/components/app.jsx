@@ -22,7 +22,7 @@ const App = () => (
   <div>
     <header>
       <Link to="/" className="header-link">
-        <h1>MapMyRunClone</h1>
+        <h1>RapMyMun</h1>
       </Link>
       <Link to='/routes/new' className='route-links'>
         Create Route
@@ -39,7 +39,7 @@ const App = () => (
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
       <ProtectedRoute exact path='/routes/new' component={RoutesForm} />
       <ProtectedRoute exact path='/routes/:routeId' component={RouteShow} />
-      <ProtectedRoute exact path='/routes' component={RoutesIndex} />
+      <ProtectedRoute path='/routes' component={RoutesIndex} />
     </Switch>
 
   </div>

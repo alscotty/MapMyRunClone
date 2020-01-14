@@ -15,7 +15,7 @@ class RoutesIndex extends React.Component{
         
         return(
             <div className='route-index'>
-            <h2>Welcome to Routes Index!</h2>
+            <h2>Activity Feed</h2>
             {routes.map(route=>{
                 return(
                     <RouteIndexItem key={route.id*2} route={route} deleteRoute={this.props.deleteRoute} currentUser={currentUser} allUsers={allUsers} requestRoute={requestRoute}/>

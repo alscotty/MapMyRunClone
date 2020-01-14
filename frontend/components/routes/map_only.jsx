@@ -14,7 +14,7 @@ class MapOnly extends React.Component{
         let ren = new google.maps.DirectionsRenderer();
         let dir = new google.maps.DirectionsService();
 
-        let map = new google.maps.Map(document.getElementById(`show-map-id`), {
+        let map = new google.maps.Map(document.getElementById("show-map-id"), {
             center: { lat: 37.773972, lng: -122.431297 },
             zoom: 13,
             maxZoom: 15
@@ -64,7 +64,7 @@ class MapOnly extends React.Component{
 
         return (
             <div>
-                <div id={`show-map-id`} className='show-map'></div>
+                <div id="show-map-id" className='show-map'></div>
                 <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
                     async defer></script>
 

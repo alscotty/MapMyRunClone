@@ -1,0 +1,26 @@
+.index-map{
+    height: 200px;
+    width:300px;
+    float:left;
+    border: 1px solid grey;
+    margin-left: 1%;
+}
+
+.route-index-item > .linky{
+    color: rgb(51, 130, 204);
+    text-decoration: none;
+}
+
+.route-index-item > .linky:hover{
+  color: rgb(29, 66, 167);
+}
+
+.route-index-item{
+    border: 1px solid grey;
+    height:250px;
+}
+
+#distance-only{
+    float:right;
+}
+

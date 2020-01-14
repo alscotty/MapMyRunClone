@@ -73,25 +73,25 @@ class RouteIndexItem extends React.Component{
     render(){
         const {route,currentUser,deleteRoute,allUsers}=this.props
         return(
-            <div key={route.id}>
-                <Link to={`/routes/${route.id}`}>{route.title}</Link>
-                <h3>{allUsers.map(user => {
-                        if (user.id == route.user_id) {
-                            return (<div key={route.id}>
-                                Created by: {user.username}
-                            </div>
-                            )
-                        }})}</h3>
-                <h3>Distance {route.miles}mi</h3>
-                Coordinates:
+            <div key={route.id} className='route-index-item'>
+                <Link className='linky'to='/routes'>
+                {`${currentUser.username} `}
+                </Link>
+                 created the route
+                <Link className='linky' to={`/routes/${route.id}`}>
+                    {` ${route.title}`}
+                </Link>
                 <br/>
-                {route.coordinates ? this.mapSetup() : ''}
-                
+                <div className='mini-flex'>
+                    <p id='distance-only'>Distance 
+                        <br/>
+                        {route.miles}mi</p>
+                    <br/>
+                    {route.coordinates ? this.mapSetup() : ''}
+                </div>
                 <br/>
-                
-                {currentUser.id == route.user_id ? (
-                    <button onClick={()=>{deleteRoute(route.id)}}>Delete Route</button>
-                ) : ('')}
+                <button onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
+              
             </div>
             )
     }
@@ -99,3 +99,17 @@ class RouteIndexItem extends React.Component{
 
 export default RouteIndexItem;
 
+//bonus logic, used if feed included other users:
+{/* <h3>{allUsers.map(user => {
+                        if (user.id == route.user_id) {
+                            return (<div key={route.id}>
+                                Created by: {user.username}
+                            </div>
+                            )
+                        }})}</h3> */}
+
+// {
+// currentUser.id == route.user_id ? (
+//     <button onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
+// ) : ('')
+// }

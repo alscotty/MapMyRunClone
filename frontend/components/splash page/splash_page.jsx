@@ -5,7 +5,7 @@ class Splash extends React.Component{
         return(
             <div className='splash'>
                 <div id='mtBaldy'>
-                    <summary>
+                    <summary >
                             <p id='space-me'>
                         Go the extra mile
                             </p>
@@ -17,8 +17,13 @@ class Splash extends React.Component{
 
                 <div id='pRidge'>
                     <summary>
-                    Image in the background?
+                        <p id='space-me'>
+                        Find your own path
+                        </p>
                     </summary>
+                    <section>
+                        Create routes and save them for the next time you're ready to run
+                    </section>
                 </div>
             </div>
         )

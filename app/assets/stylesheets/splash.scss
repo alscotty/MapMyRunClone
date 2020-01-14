@@ -15,7 +15,6 @@
     justify-content: center;
     align-items: flex-end;
     padding-right:1em;
-
 }
 
 #mtBaldy:before{
@@ -49,7 +48,12 @@
 #pRidge > summary{
     font-size: x-large;
     z-index: 1;
+}
 
+#pRidge > section{
+    font-size: large;
+    z-index: 1;
+    max-width: 20%;
 }
 
 #pRidge{
@@ -62,6 +66,8 @@
     color:white;
     font-size: x-large;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left:1em;
 }
