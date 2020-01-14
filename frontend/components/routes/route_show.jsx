@@ -17,10 +17,10 @@ class RouteShow extends React.Component{
     //need to call route map render functions here after everything has rendered, create a separate component, much easier
         if (!route) return null;
         return(
-            <div>
+            <div className='route-show'>
                {route.title}
                <br/>
-                {route.miles}
+                {route.miles} miles
                 <br/>
                 <MapOnly route={route}/>
                 

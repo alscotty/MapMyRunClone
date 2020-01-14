@@ -790,7 +790,9 @@ function (_React$Component) {
       var route = this.props.route; //need to call route map render functions here after everything has rendered, create a separate component, much easier
 
       if (!route) return null;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, route.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.miles, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_map_only__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "route-show"
+      }, route.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.miles, " miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_map_only__WEBPACK_IMPORTED_MODULE_1__["default"], {
         route: route
       }));
     }
