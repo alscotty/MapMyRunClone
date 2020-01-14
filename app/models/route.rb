@@ -1,5 +1,6 @@
 class Route < ApplicationRecord
     validates :title,:user_id, presence:true
+    validates_associated :coordinates
 
     has_many :coordinates,
     foreign_key: :route_id,

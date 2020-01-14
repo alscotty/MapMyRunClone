@@ -6,20 +6,13 @@
     margin-left: 1%;
 }
 
-.index-map::after {
-    content:'';
-    clear:both;
-    display: table;
-}
-
 .route-index-item{
     margin-top: 10px;
     border: 1px solid grey;
-    height:280px;
+    height:300px;
     box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
     margin-left: 4%;
     margin-right: 4%;
-
 }
 
 .route-index-item > span > .linky{
@@ -34,11 +27,6 @@
 #distance-only{
     float:right;
 }
-.distance-only::after {
-    content:'';
-    clear:both;
-    display: table;
-}
 
 .mini-flex{
     float:right;
@@ -51,14 +39,8 @@
     border: 1px solid white;
 }
 
-.mini-flex::after{
-     content:'';
-    clear:both;
-    display: table;
-}
-
 .delete-button{
-    margin-top:1%;
+    margin-top:2px;
     margin-left:1%;
     font-size: small;
     border: 1px solid grey;
