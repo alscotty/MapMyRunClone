@@ -689,17 +689,23 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         key: route.id,
         className: "route-index-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "title"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "linky",
         to: "/routes"
       }, "".concat(currentUser.username, " ")), "created the route", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "linky",
         to: "/routes/".concat(route.id)
-      }, " ".concat(route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " ".concat(route.title))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "mini-flex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "distance-only"
-      }, "Distance", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.miles, "mi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "dist"
+      }, "Distance"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "num"
+      }, route.miles), "mi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "delete-button",
         onClick: function onClick() {
           deleteRoute(route.id);
@@ -1048,8 +1054,7 @@ function (_React$Component) {
     key: "renderMap",
     value: function renderMap() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "map",
-        "class": "form-item"
+        id: "map"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
         src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
         async: true,
@@ -1068,10 +1073,7 @@ function (_React$Component) {
         placeholder: "Name this map",
         value: this.state.routeInfo.title,
         onChange: this.updateTitle()
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        "class": "form-item"
-      }, "Distance: ", this.state.routeInfo.miles, " MI"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        "class": "form-item",
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Distance: ", this.state.routeInfo.miles, " MI"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "route-button",
         type: "submit",
         value: "Save Route"

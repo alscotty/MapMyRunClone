@@ -74,22 +74,26 @@ class RouteIndexItem extends React.Component{
         const {route,currentUser,deleteRoute,allUsers}=this.props
         return(
             <div key={route.id} className='route-index-item'>
-                <Link className='linky'to='/routes'>
-                {`${currentUser.username} `}
-                </Link>
-                 created the route
-                <Link className='linky' to={`/routes/${route.id}`}>
-                    {` ${route.title}`}
-                </Link>
-                <br/>
+                    <span id='title'>
+                    <Link className='linky'to='/routes'>
+                    {`${currentUser.username} `}
+                    </Link>
+                    created the route
+                    <Link className='linky' to={`/routes/${route.id}`}>
+                        {` ${route.title}`}
+                    </Link>
+                </span>
                 <div className='mini-flex'>
-                    <p id='distance-only'>Distance 
+                    <div id='distance-only'>
+                        <span id='dist'>
+                        Distance 
+                        </span>
                         <br/>
-                        {route.miles}mi</p>
+                        <span id='num'>{route.miles}</span>
+                         mi</div>
                     <br/>
                 </div>
                     {route.coordinates ? this.mapSetup() : ''}
-                <br/>
                 <button className='delete-button' onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
               
             </div>

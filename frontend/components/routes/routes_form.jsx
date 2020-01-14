@@ -139,7 +139,7 @@ class RoutesForm extends React.Component{
     renderMap(){ 
         return(
             <div>
-                <div id="map" class='form-item'></div>
+                <div id="map"></div>
                     <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
                         async defer></script>
 
@@ -163,9 +163,9 @@ class RoutesForm extends React.Component{
                         onChange={this.updateTitle()}
                         />
                     <br/>
-                    <label class='form-item'>Distance: {this.state.routeInfo.miles} MI</label>
+                    <label>Distance: {this.state.routeInfo.miles} MI</label>
                 <br/>
-                    <input class='form-item' id='route-button' type="submit" value='Save Route'/>
+                    <input id='route-button' type="submit" value='Save Route'/>
             <br/>
             </form>
                 {this.renderMap()}
