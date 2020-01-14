@@ -4,9 +4,50 @@
 
 .show-map{
     margin-right: 1%;
-    top: 1em;
-    width: 77%;
+    margin-left: 1%;
+    width: 97%;
     height: 600px;
     border: 2px solid grey;
 }
 
+.show-box{
+}
+
+.show-map:before{
+    content: '';
+    position: fixed;
+    width: 96.7%;
+    margin-right: 1%;
+    height: 15%;
+    z-index:1;
+    
+    background: rgba(255, 255, 255, 0.829);
+    backdrop-filter: blur(2px);
+}
+
+
+.show-text{
+    z-index:2;
+    position:absolute;
+    margin-top: 1.5em;
+    margin-left:5%;
+}
+
+#tags{
+    display: flex;
+    justify-content: space-evenly;
+    width: 150px;
+}
+
+#show-title{
+    color:black;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+#show-miles,#run-tag{
+    border-radius: 5px;;
+    color:white;
+    background-color: rgb(51, 130, 204);
+    padding: 3px;
+}

@@ -21,15 +21,6 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 const App = () => (
   <div>
     <header>
-      <Link to="/" className="header-link">
-        <h1>RapMyMun</h1>
-      </Link>
-      <Link to='/routes/new' className='route-links'>
-        Create Route
-      </Link>
-      <Link to='/routes' className='route-links'>
-        All Routes
-      </Link>
       <GreetingContainer />
     </header>
 

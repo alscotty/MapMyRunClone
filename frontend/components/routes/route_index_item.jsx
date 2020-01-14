@@ -18,7 +18,9 @@ class RouteIndexItem extends React.Component{
         let map= new google.maps.Map(document.getElementById(`index-map-${this.props.route.id}`), {
             center: { lat: 37.773972, lng: -122.431297 },
             zoom: 13,
-            maxZoom: 15
+            maxZoom: 15,
+            disableDefaultUI: true,
+            gestureHandling:'none'
         });
         ren.setMap(map);
 

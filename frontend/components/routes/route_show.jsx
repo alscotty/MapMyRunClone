@@ -18,12 +18,8 @@ class RouteShow extends React.Component{
         if (!route) return null;
         return(
             <div className='route-show'>
-               {route.title}
-               <br/>
-                {route.miles} miles
-                <br/>
+               
                 <MapOnly route={route}/>
-                
             </div>
         )
     }

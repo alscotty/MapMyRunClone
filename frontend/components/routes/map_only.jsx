@@ -17,7 +17,8 @@ class MapOnly extends React.Component{
         let map = new google.maps.Map(document.getElementById("show-map-id"), {
             center: { lat: 37.773972, lng: -122.431297 },
             zoom: 13,
-            maxZoom: 15
+            maxZoom: 15,
+            disableDefaultUI:true
         });
         ren.setMap(map);
 
@@ -61,10 +62,21 @@ class MapOnly extends React.Component{
     }
 
     mapSetup() {
-
+        const {route}=this.props;
         return (
-            <div>
-                <div id="show-map-id" className='show-map'></div>
+            <div className='show-box'>
+                <span className='show-text'>
+                    <span id='tags'>
+                    <span id='run-tag'> RUN </span>
+                    <span id='show-miles'> {route.miles} MI </span>
+                    </span>
+                    <br/>
+                    <br/>
+                    <span id='show-title'>{route.title}</span>
+                </span>
+                <div id="show-map-id" className='show-map'>
+
+                </div>
                 <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
                     async defer></script>
 

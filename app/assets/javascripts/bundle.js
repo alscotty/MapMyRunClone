@@ -274,16 +274,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/",
-    className: "header-link"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/routes/new",
-    className: "route-links"
-  }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/routes",
-    className: "route-links"
-  }, "All Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/",
     component: _splash_page_splash_page__WEBPACK_IMPORTED_MODULE_9__["default"]
@@ -333,7 +324,16 @@ var Greeting = function Greeting(_ref) {
       logout = _ref.logout;
 
   var sessionLinks = function sessionLinks() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/",
+      className: "header-link"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes/new",
+      className: "route-links"
+    }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes",
+      className: "route-links"
+    }, "All Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
       className: "login-signup"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       id: "logLink",
@@ -341,18 +341,27 @@ var Greeting = function Greeting(_ref) {
     }, "LOG IN"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       id: "signLink",
       to: "/signup"
-    }, "SIGN UP"));
+    }, "SIGN UP")));
   };
 
   var personalGreeting = function personalGreeting() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hgroup", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes",
+      className: "header-link"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes/new",
+      className: "route-links"
+    }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes",
+      className: "route-links"
+    }, "All Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hgroup", {
       className: "header-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
       className: "header-name"
     }, " Hi, ", currentUser.username, "! \xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "header-button",
       onClick: logout
-    }, "LOG OUT"));
+    }, "LOG OUT")));
   };
 
   return currentUser ? personalGreeting() : sessionLinks();
@@ -487,7 +496,8 @@ function (_React$Component) {
           lng: -122.431297
         },
         zoom: 13,
-        maxZoom: 15
+        maxZoom: 15,
+        disableDefaultUI: true
       });
       ren.setMap(map);
       var waypts = [];
@@ -536,7 +546,20 @@ function (_React$Component) {
   }, {
     key: "mapSetup",
     value: function mapSetup() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      var route = this.props.route;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "show-box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "show-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "tags"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "run-tag"
+      }, " RUN "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "show-miles"
+      }, " ", route.miles, " MI ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "show-title"
+      }, route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "show-map-id",
         className: "show-map"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
@@ -620,7 +643,9 @@ function (_React$Component) {
           lng: -122.431297
         },
         zoom: 13,
-        maxZoom: 15
+        maxZoom: 15,
+        disableDefaultUI: true,
+        gestureHandling: 'none'
       });
       ren.setMap(map);
       var waypts = [];
@@ -792,7 +817,7 @@ function (_React$Component) {
       if (!route) return null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "route-show"
-      }, route.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.miles, " miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_map_only__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_map_only__WEBPACK_IMPORTED_MODULE_1__["default"], {
         route: route
       }));
     }
@@ -1188,7 +1213,9 @@ function (_React$Component) {
           requestRoute = _this$props.requestRoute;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "route-index"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Activity Feed"), routes.map(function (route) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        id: "act-feed"
+      }, "Activity Feed"), routes.map(function (route) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: route.id * 2,
           route: route,
