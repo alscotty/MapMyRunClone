@@ -437,151 +437,6 @@ var Root = function Root(_ref) {
 
 /***/ }),
 
-/***/ "./frontend/components/routes/map_only.jsx":
-/*!*************************************************!*\
-  !*** ./frontend/components/routes/map_only.jsx ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var MapOnly =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(MapOnly, _React$Component);
-
-  function MapOnly(props) {
-    var _this;
-
-    _classCallCheck(this, MapOnly);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MapOnly).call(this, props));
-    _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
-    _this.mapSetup = _this.mapSetup.bind(_assertThisInitialized(_this));
-    _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(MapOnly, [{
-    key: "renderIndMap",
-    value: function renderIndMap(coordinates) {
-      var ren = new google.maps.DirectionsRenderer();
-      var dir = new google.maps.DirectionsService();
-      var map = new google.maps.Map(document.getElementById("show-map-id"), {
-        center: {
-          lat: 37.773972,
-          lng: -122.431297
-        },
-        zoom: 13,
-        maxZoom: 15,
-        disableDefaultUI: true
-      });
-      ren.setMap(map);
-      var waypts = [];
-
-      for (var i = 0; i < coordinates.length; i++) {
-        waypts.push({
-          location: coordinates[i],
-          stopover: false
-        });
-      }
-
-      dir.route({
-        origin: coordinates[0],
-        destination: coordinates[coordinates.length - 1],
-        waypoints: waypts,
-        optimizeWaypoints: false,
-        travelMode: 'DRIVING'
-      }, function (response, status) {
-        if (status === 'OK') {
-          ren.setDirections(response);
-        } else {
-          window.alert('Directions request failed due to' + status);
-        }
-      });
-    }
-  }, {
-    key: "readyMap",
-    value: function readyMap() {
-      var formatted_coords = [];
-
-      if (this.props.route.coordinates) {
-        this.props.route.coordinates.map(function (coord) {
-          formatted_coords.push({
-            lat: coord['lat'],
-            lng: coord['lng']
-          });
-        });
-        this.renderIndMap(formatted_coords);
-      }
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.readyMap();
-    }
-  }, {
-    key: "mapSetup",
-    value: function mapSetup() {
-      var route = this.props.route;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "show-box"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "show-text"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        id: "tags"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        id: "run-tag"
-      }, " RUN "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        id: "show-miles"
-      }, " ", route.miles, " MI ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        id: "show-title"
-      }, route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "show-map-id",
-        className: "show-map"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
-        src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
-        async: true,
-        defer: true
-      }));
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.mapSetup());
-    }
-  }]);
-
-  return MapOnly;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (MapOnly);
-
-/***/ }),
-
 /***/ "./frontend/components/routes/route_index_item.jsx":
 /*!*********************************************************!*\
   !*** ./frontend/components/routes/route_index_item.jsx ***!
@@ -771,7 +626,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _map_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./map_only */ "./frontend/components/routes/map_only.jsx");
+/* harmony import */ var _show_map_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./show_map_only */ "./frontend/components/routes/show_map_only.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -817,7 +672,7 @@ function (_React$Component) {
       if (!route) return null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "route-show"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_map_only__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_show_map_only__WEBPACK_IMPORTED_MODULE_1__["default"], {
         route: route
       }));
     }
@@ -940,7 +795,14 @@ function (_React$Component) {
     value: function handleSubmit(e) {
       var _this2 = this;
 
-      e.preventDefault;
+      e.preventDefault; // let that=this;
+      // async function firstSync(){
+      //     let promise = that.props.action(that.state.routeInfo, that.state.coordinates);
+      //     let value=await promise()
+      //     value.then(that.props.history.push('./routes'))
+      // }
+      // firstSync();
+
       this.props.action(this.state.routeInfo, this.state.coordinates).then(function () {
         _this2.props.history.push('/routes');
       });
@@ -997,9 +859,6 @@ function (_React$Component) {
   }, {
     key: "addLatLng",
     value: function addLatLng(e) {
-      // const {poly}=this.state;
-      // this.setState({path: poly.getPath() })
-      //push in formatted coordinates into state as they are added:
       var newLat = e.latLng['lat']();
       var newLng = e.latLng['lng']();
       this.snapPoint(newLat, newLng);
@@ -1111,7 +970,13 @@ function (_React$Component) {
   return RoutesForm;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (RoutesForm);
+/* harmony default export */ __webpack_exports__["default"] = (RoutesForm); // handleSubmit(e) {
+//     e.preventDefault;
+//     this.props.action(this.state.routeInfo, this.state.coordinates)
+//         .then(() => {
+//             this.props.history.push('/routes')
+//         });
+// }
 
 /***/ }),
 
@@ -1276,6 +1141,151 @@ var mdtp = function mdtp(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mstp, mdtp)(_routes_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/routes/show_map_only.jsx":
+/*!******************************************************!*\
+  !*** ./frontend/components/routes/show_map_only.jsx ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var ShowMapOnly =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ShowMapOnly, _React$Component);
+
+  function ShowMapOnly(props) {
+    var _this;
+
+    _classCallCheck(this, ShowMapOnly);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ShowMapOnly).call(this, props));
+    _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
+    _this.mapSetup = _this.mapSetup.bind(_assertThisInitialized(_this));
+    _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ShowMapOnly, [{
+    key: "renderIndMap",
+    value: function renderIndMap(coordinates) {
+      var ren = new google.maps.DirectionsRenderer();
+      var dir = new google.maps.DirectionsService();
+      var map = new google.maps.Map(document.getElementById("show-map-id"), {
+        center: {
+          lat: 37.773972,
+          lng: -122.431297
+        },
+        zoom: 13,
+        maxZoom: 15,
+        disableDefaultUI: true
+      });
+      ren.setMap(map);
+      var waypts = [];
+
+      for (var i = 0; i < coordinates.length; i++) {
+        waypts.push({
+          location: coordinates[i],
+          stopover: false
+        });
+      }
+
+      dir.route({
+        origin: coordinates[0],
+        destination: coordinates[coordinates.length - 1],
+        waypoints: waypts,
+        optimizeWaypoints: false,
+        travelMode: 'DRIVING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          ren.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to' + status);
+        }
+      });
+    }
+  }, {
+    key: "readyMap",
+    value: function readyMap() {
+      var formatted_coords = [];
+
+      if (this.props.route.coordinates) {
+        this.props.route.coordinates.map(function (coord) {
+          formatted_coords.push({
+            lat: coord['lat'],
+            lng: coord['lng']
+          });
+        });
+        this.renderIndMap(formatted_coords);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.readyMap();
+    }
+  }, {
+    key: "mapSetup",
+    value: function mapSetup() {
+      var route = this.props.route;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "show-box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "show-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "tags"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "run-tag"
+      }, " RUN "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "show-miles"
+      }, " ", route.miles, " MI ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "show-title"
+      }, route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "show-map-id",
+        className: "show-map"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
+        src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
+        async: true,
+        defer: true
+      }));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.mapSetup());
+    }
+  }]);
+
+  return ShowMapOnly;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (ShowMapOnly);
 
 /***/ }),
 

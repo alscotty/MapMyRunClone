@@ -1,5 +1,5 @@
 import React from 'react'
-import MapOnly from './map_only'
+import ShowMapOnly from './show_map_only'
 
 class RouteShow extends React.Component{
     constructor(props){
@@ -19,7 +19,7 @@ class RouteShow extends React.Component{
         return(
             <div className='route-show'>
                
-                <MapOnly route={route}/>
+                <ShowMapOnly route={route}/>
             </div>
         )
     }

@@ -1,10 +1,10 @@
 import React from 'react'
 
-class MapOnly extends React.Component{
-    constructor(props){
+class IndexMapOnly extends React.Component {
+    constructor(props) {
         super(props)
-    
-        this.renderIndMap = this.renderIndMap.bind(this)
+
+        // this.renderIndMap = this.renderIndMap.bind(this)
         this.mapSetup = this.mapSetup.bind(this)
         this.readyMap = this.readyMap.bind(this)
     }
@@ -14,11 +14,11 @@ class MapOnly extends React.Component{
         let ren = new google.maps.DirectionsRenderer();
         let dir = new google.maps.DirectionsService();
 
-        let map = new google.maps.Map(document.getElementById("show-map-id"), {
+        let map = new google.maps.Map(document.getElementById(`index-map-${this.props.route.id}`), {
             center: { lat: 37.773972, lng: -122.431297 },
             zoom: 13,
             maxZoom: 15,
-            disableDefaultUI:true
+            disableDefaultUI: true
         });
         ren.setMap(map);
 
@@ -29,6 +29,7 @@ class MapOnly extends React.Component{
                 stopover: false
             });
         }
+
         dir.route({
             origin: coordinates[0],
             destination: coordinates[coordinates.length - 1],
@@ -46,7 +47,6 @@ class MapOnly extends React.Component{
     }
 
     readyMap() {
-
         let formatted_coords = [];
         if (this.props.route.coordinates) {
             this.props.route.coordinates.map(coord => {
@@ -62,21 +62,9 @@ class MapOnly extends React.Component{
     }
 
     mapSetup() {
-        const {route}=this.props;
         return (
-            <div className='show-box'>
-                <span className='show-text'>
-                    <span id='tags'>
-                    <span id='run-tag'> RUN </span>
-                    <span id='show-miles'> {route.miles} MI </span>
-                    </span>
-                    <br/>
-                    <br/>
-                    <span id='show-title'>{route.title}</span>
-                </span>
-                <div id="show-map-id" className='show-map'>
-
-                </div>
+            <div>
+                <div id={`index-map-${this.props.route.id}`} className='index-map'></div>
                 <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
                     async defer></script>
 
@@ -84,9 +72,9 @@ class MapOnly extends React.Component{
         )
     }
 
-    render(){
+    render() {
 
-        return(
+        return (
             <div>
                 {this.mapSetup()}
             </div>
@@ -95,4 +83,4 @@ class MapOnly extends React.Component{
 
 }
 
-export default MapOnly;
+export default IndexMapOnly;

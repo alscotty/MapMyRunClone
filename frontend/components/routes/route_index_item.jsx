@@ -31,6 +31,7 @@ class RouteIndexItem extends React.Component{
                 stopover: false
             });
         }
+
         dir.route({
             origin: coordinates[0],
             destination: coordinates[coordinates.length - 1],

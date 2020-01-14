@@ -28,8 +28,20 @@ class RoutesForm extends React.Component{
     handleSubmit(e) {
         e.preventDefault;
         
+        // let that=this;
+        // async function firstSync(){
+        //     let promise = that.props.action(that.state.routeInfo, that.state.coordinates);
+        //     let value=await promise()
+        //     value.then(that.props.history.push('./routes'))
+
+        // }
+
+        // firstSync();
+
         this.props.action(this.state.routeInfo,this.state.coordinates)
-          .then(()=>{this.props.history.push('/routes')});
+          .then(()=>{
+              this.props.history.push('/routes')
+            });
 
     }
 
@@ -71,9 +83,6 @@ class RoutesForm extends React.Component{
     }
 
     addLatLng(e) {
-        // const {poly}=this.state;
-        // this.setState({path: poly.getPath() })
-        //push in formatted coordinates into state as they are added:
         let newLat = e.latLng['lat']()
         let newLng = e.latLng['lng']()
         this.snapPoint(newLat,newLng)
@@ -175,3 +184,15 @@ class RoutesForm extends React.Component{
 }
 
 export default RoutesForm;
+
+
+
+// handleSubmit(e) {
+//     e.preventDefault;
+
+//     this.props.action(this.state.routeInfo, this.state.coordinates)
+//         .then(() => {
+//             this.props.history.push('/routes')
+//         });
+
+// }
