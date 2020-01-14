@@ -510,7 +510,8 @@ function (_React$Component) {
           location: coordinates[i],
           stopover: false
         });
-      }
+      } // debugger
+
 
       dir.route({
         origin: coordinates[0],
@@ -539,12 +540,17 @@ function (_React$Component) {
           });
         });
         this.renderIndMap(formatted_coords);
-      }
+      } // debugger
+
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.readyMap();
+      var _this2 = this;
+
+      this.props.requestRoute(this.props.route.id).then(function () {
+        _this2.readyMap();
+      });
     }
   }, {
     key: "mapSetup",

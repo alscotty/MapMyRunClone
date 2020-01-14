@@ -12,9 +12,10 @@ class RoutesIndex extends React.Component{
 
     render(){
         const {routes,currentUser,allUsers,requestRoute}=this.props
-        
-        return(
+
+        return(  
             <div className='route-index'>
+         
             <h2 id='act-feed'>Activity Feed</h2>
             {routes.map(route=>{
                 return(
