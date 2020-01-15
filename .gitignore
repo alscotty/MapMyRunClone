@@ -11,3 +11,6 @@ npm-debug.log
 
 */bundle.js
 */bundle.js.map
+
+/config/master.key
+*/master.key
