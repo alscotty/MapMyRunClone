@@ -90,7 +90,7 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/route_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ROUTES, RECEIVE_ROUTE, REMOVE_ROUTE, requestRoutes, requestRoute, createRoute, deleteRoute */
+/*! exports provided: RECEIVE_ROUTES, RECEIVE_ROUTE, REMOVE_ROUTE, RECEIVE_ROUTE_ERRORS, CLEAR_ROUTE_ERRORS, receiveRouteErrors, clearRouteErrors, requestRoutes, requestRoute, createRoute, deleteRoute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,6 +98,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ROUTES", function() { return RECEIVE_ROUTES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ROUTE", function() { return RECEIVE_ROUTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ROUTE", function() { return REMOVE_ROUTE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ROUTE_ERRORS", function() { return RECEIVE_ROUTE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_ROUTE_ERRORS", function() { return CLEAR_ROUTE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveRouteErrors", function() { return receiveRouteErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearRouteErrors", function() { return clearRouteErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestRoutes", function() { return requestRoutes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestRoute", function() { return requestRoute; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRoute", function() { return createRoute; });
@@ -106,7 +110,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var RECEIVE_ROUTES = 'RECEIVE_ROUTES';
 var RECEIVE_ROUTE = 'RECEIVE_ROUTE';
-var REMOVE_ROUTE = 'REMOVE_ROUTE'; //reg action creators
+var REMOVE_ROUTE = 'REMOVE_ROUTE';
+var RECEIVE_ROUTE_ERRORS = 'RECEIVE_ROUTE_ERRORS';
+var CLEAR_ROUTE_ERRORS = 'CLEAR_ROUTE_ERRORS'; //reg action creators
 
 var receiveRoutes = function receiveRoutes(routes) {
   return {
@@ -128,8 +134,19 @@ var removeRoute = function removeRoute(route) {
     type: REMOVE_ROUTE,
     route: route
   };
-}; //thunk actions
+};
 
+var receiveRouteErrors = function receiveRouteErrors(errors) {
+  return {
+    type: RECEIVE_ROUTE_ERRORS,
+    errors: errors
+  };
+};
+var clearRouteErrors = function clearRouteErrors() {
+  return {
+    type: CLEAR_ROUTE_ERRORS
+  };
+}; //thunk actions
 
 var requestRoutes = function requestRoutes() {
   return function (dispatch) {
@@ -149,6 +166,8 @@ var createRoute = function createRoute(route, coordinates) {
   return function (dispatch) {
     return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["createRoute"](route, coordinates).then(function (route, coordinates) {
       return dispatch(receiveRoute(route, coordinates));
+    }, function (err) {
+      dispatch(receiveRouteErrors(err.responseJSON));
     });
   };
 };
@@ -510,8 +529,7 @@ function (_React$Component) {
           location: coordinates[i],
           stopover: false
         });
-      } // debugger
-
+      }
 
       dir.route({
         origin: coordinates[0],
@@ -540,8 +558,7 @@ function (_React$Component) {
           });
         });
         this.renderIndMap(formatted_coords);
-      } // debugger
-
+      }
     }
   }, {
     key: "componentDidMount",
@@ -801,14 +818,7 @@ function (_React$Component) {
     value: function handleSubmit(e) {
       var _this2 = this;
 
-      e.preventDefault; // let that=this;
-      // async function firstSync(){
-      //     let promise = that.props.action(that.state.routeInfo, that.state.coordinates);
-      //     let value=await promise()
-      //     value.then(that.props.history.push('./routes'))
-      // }
-      // firstSync();
-
+      e.preventDefault;
       this.props.action(this.state.routeInfo, this.state.coordinates).then(function () {
         _this2.props.history.push('/routes');
       });
@@ -837,8 +847,7 @@ function (_React$Component) {
       this.state.coordinates.push({
         lat: snappedLat,
         lng: snappedLng
-      }); // this.state.path.push({lat:snappedLat,lng:snappedLng})
-
+      });
       new google.maps.Marker({
         position: {
           lat: snappedLat,
@@ -940,6 +949,7 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.props.clearRouteErrors();
       this.makeMap();
     }
   }, {
@@ -951,6 +961,18 @@ function (_React$Component) {
         src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
         async: true,
         defer: true
+      }));
+    }
+  }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      var errors = this.props.errors;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "login-errors"
+      }, errors.map(function (error, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: "error-".concat(i)
+        }, error);
       }));
     }
   }, {
@@ -969,20 +991,14 @@ function (_React$Component) {
         id: "route-button",
         type: "submit",
         value: "Save Route"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), this.renderMap());
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderErrors()), this.renderMap());
     }
   }]);
 
   return RoutesForm;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (RoutesForm); // handleSubmit(e) {
-//     e.preventDefault;
-//     this.props.action(this.state.routeInfo, this.state.coordinates)
-//         .then(() => {
-//             this.props.history.push('/routes')
-//         });
-// }
+/* harmony default export */ __webpack_exports__["default"] = (RoutesForm);
 
 /***/ }),
 
@@ -1005,9 +1021,11 @@ __webpack_require__.r(__webpack_exports__);
 var mstp = function mstp(state) {
   var entities = state.entities;
   var session = state.session;
+  var errors = state.errors;
   return {
     title: '',
-    currentUser: entities.users[session.id]
+    currentUser: entities.users[session.id],
+    errors: errors.routes
   };
 };
 
@@ -1015,6 +1033,9 @@ var mdtp = function mdtp(dispatch) {
   return {
     action: function action(route, coordinates) {
       return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["createRoute"])(route, coordinates));
+    },
+    clearRouteErrors: function clearRouteErrors() {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["clearRouteErrors"])());
     }
   };
 };
@@ -1680,10 +1701,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
+/* harmony import */ var _routes_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes_errors_reducer */ "./frontend/reducers/routes_errors_reducer.js");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  routes: _routes_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
 
 /***/ }),
@@ -1711,6 +1735,39 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/routes_errors_reducer.js":
+/*!****************************************************!*\
+  !*** ./frontend/reducers/routes_errors_reducer.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/route_actions */ "./frontend/actions/route_actions.js");
+
+
+var RouteErrorsReducer = function RouteErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ROUTE_ERRORS"]:
+      return action.errors;
+
+    case _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_ROUTE_ERRORS"]:
+      return [];
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (RouteErrorsReducer);
 
 /***/ }),
 

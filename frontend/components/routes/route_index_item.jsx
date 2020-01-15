@@ -31,7 +31,6 @@ class RouteIndexItem extends React.Component{
                 stopover: false
             });
         }
-        // debugger
         dir.route({
             origin: coordinates[0],
             destination: coordinates[coordinates.length - 1],
@@ -55,7 +54,6 @@ class RouteIndexItem extends React.Component{
             formatted_coords.push({ lat: coord['lat'], lng: coord['lng'] })
         });
         this.renderIndMap(formatted_coords)}
-        // debugger
     }
 
     componentDidMount() {

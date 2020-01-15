@@ -27,16 +27,6 @@ class RoutesForm extends React.Component{
 
     handleSubmit(e) {
         e.preventDefault;
-        
-        // let that=this;
-        // async function firstSync(){
-        //     let promise = that.props.action(that.state.routeInfo, that.state.coordinates);
-        //     let value=await promise()
-        //     value.then(that.props.history.push('./routes'))
-
-        // }
-
-        // firstSync();
 
         this.props.action(this.state.routeInfo,this.state.coordinates)
           .then(()=>{
@@ -61,7 +51,6 @@ class RoutesForm extends React.Component{
         let snappedLat=data.snappedPoints[0].location.latitude; 
         let snappedLng=data.snappedPoints[0].location.longitude;
         this.state.coordinates.push({ lat: snappedLat, lng: snappedLng})
-        // this.state.path.push({lat:snappedLat,lng:snappedLng})
 
         new google.maps.Marker({
             position: {lat:snappedLat,lng:snappedLng},
@@ -142,7 +131,8 @@ class RoutesForm extends React.Component{
     };
 
     componentDidMount(){
-          this.makeMap();
+        this.props.clearRouteErrors();
+        this.makeMap();
     };   
 
     renderMap(){ 
@@ -156,6 +146,18 @@ class RoutesForm extends React.Component{
         )
     }
 
+    renderErrors(){
+        const {errors}=this.props;
+        return (
+            <ul className='login-errors'>
+                {errors.map((error, i) => (
+                    <li key={`error-${i}`}>
+                        {error}
+                    </li>
+                ))}
+            </ul>
+        );
+    }
 
     render(){
         return(
@@ -176,6 +178,7 @@ class RoutesForm extends React.Component{
                 <br/>
                     <input id='route-button' type="submit" value='Save Route'/>
             <br/>
+                {this.renderErrors()}
             </form>
                 {this.renderMap()}
             </div>
@@ -184,15 +187,3 @@ class RoutesForm extends React.Component{
 }
 
 export default RoutesForm;
-
-
-
-// handleSubmit(e) {
-//     e.preventDefault;
-
-//     this.props.action(this.state.routeInfo, this.state.coordinates)
-//         .then(() => {
-//             this.props.history.push('/routes')
-//         });
-
-// }
