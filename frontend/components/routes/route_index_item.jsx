@@ -74,7 +74,9 @@ class RouteIndexItem extends React.Component{
     
 
     render(){
-        const {route,currentUser,deleteRoute,allUsers}=this.props
+        const {route,currentUser,deleteRoute}=this.props
+
+
         return(
             <div key={route.id} className='route-index-item'>
                     <span id='title'>

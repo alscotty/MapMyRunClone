@@ -587,8 +587,7 @@ function (_React$Component) {
       var _this$props = this.props,
           route = _this$props.route,
           currentUser = _this$props.currentUser,
-          deleteRoute = _this$props.deleteRoute,
-          allUsers = _this$props.allUsers;
+          deleteRoute = _this$props.deleteRoute;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         key: route.id,
         className: "route-index-item"
@@ -1146,9 +1145,12 @@ __webpack_require__.r(__webpack_exports__);
 var mstp = function mstp(state) {
   var entities = state.entities;
   var session = state.session;
+  var routes = Object.values(state.entities.routes).filter(function (route) {
+    return route.user_id === state.session.id;
+  });
   return {
     currentUser: entities.users[session.id],
-    routes: Object.values(state.entities.routes),
+    routes: routes,
     allUsers: Object.values(state.entities.users)
   };
 };
@@ -1422,6 +1424,11 @@ function (_React$Component) {
       this.props.clearErrors();
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clearErrors();
+    }
+  }, {
     key: "update",
     value: function update(field) {
       var _this2 = this;
@@ -1492,7 +1499,7 @@ function (_React$Component) {
         className: "session-submit",
         type: "submit",
         value: this.props.formType
-      }), this.props.formType == 'LOG IN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.formType == 'LOG IN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "demo-login",
         onClick: this.handleDemoLogin
       }, "DEMO LOGIN") : '')));
