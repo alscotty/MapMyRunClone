@@ -93,7 +93,7 @@ class RoutesForm extends React.Component{
             destination: coordinates[coordinates.length-1],
             waypoints:waypts,
             optimizeWaypoints: false,
-            travelMode: 'DRIVING'
+            travelMode: 'WALKING'
         }, (response, status)=> {
             if(status === 'OK'){
                 directionsRenderer.setDirections(response);

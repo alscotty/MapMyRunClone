@@ -37,6 +37,7 @@ const App = () => (
 
     <footer>
       <Footer/>
+      
     </footer>
   </div>
 );

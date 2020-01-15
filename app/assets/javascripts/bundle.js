@@ -609,7 +609,7 @@ function (_React$Component) {
         destination: coordinates[coordinates.length - 1],
         waypoints: waypts,
         optimizeWaypoints: false,
-        travelMode: 'DRIVING'
+        travelMode: 'WALKING'
       }, function (response, status) {
         if (status === 'OK') {
           ren.setDirections(response);
@@ -973,7 +973,7 @@ function (_React$Component) {
         destination: coordinates[coordinates.length - 1],
         waypoints: waypts,
         optimizeWaypoints: false,
-        travelMode: 'DRIVING'
+        travelMode: 'WALKING'
       }, function (response, status) {
         if (status === 'OK') {
           directionsRenderer.setDirections(response); //calc miles
@@ -1323,7 +1323,7 @@ function (_React$Component) {
         destination: coordinates[coordinates.length - 1],
         waypoints: waypts,
         optimizeWaypoints: false,
-        travelMode: 'DRIVING'
+        travelMode: 'WALKING'
       }, function (response, status) {
         if (status === 'OK') {
           ren.setDirections(response);

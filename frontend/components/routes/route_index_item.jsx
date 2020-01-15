@@ -36,7 +36,7 @@ class RouteIndexItem extends React.Component{
             destination: coordinates[coordinates.length - 1],
             waypoints: waypts,
             optimizeWaypoints: false,
-            travelMode: 'DRIVING'
+            travelMode: 'WALKING'
         }, (response, status) => {
             if (status === 'OK') {
                 ren.setDirections(response);
