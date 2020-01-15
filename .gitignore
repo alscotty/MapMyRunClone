@@ -12,5 +12,9 @@ npm-debug.log
 */bundle.js
 */bundle.js.map
 
+<<<<<<< HEAD
+=======
+# ignore master key
+>>>>>>> Routes_directions_snap
 /config/master.key
 */master.key

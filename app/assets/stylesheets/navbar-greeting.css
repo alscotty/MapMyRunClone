@@ -1,0 +1,78 @@
+header>span{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    background-color: white;
+
+    top:0px;
+    width:100%;
+    height:3.2em;
+    z-index:2;
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+}
+
+
+.route-links{
+    text-decoration: none;
+    color: grey;
+    padding-left: 1em ;
+    padding-right: 1em;
+}
+
+.header-link{
+    font-size: small;
+    top:0px;
+    left:0px;
+    background: linear-gradient(to right, #0c0fbe 0%, #479adf 65%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+/* 
+    Greeting Container stuff
+*/
+
+.header-group,.login-signup{
+    display: flex;
+    height: 10px;
+    align-items:center;
+    justify-content: flex-end;
+} 
+
+#logLink,#signLink{
+    text-decoration: none;
+    padding: 10px;
+}
+
+#logLink{
+    color:black;
+    border-radius: 5px;
+}
+
+#logLink:hover{
+    background-color:rgb(195, 201, 207);
+}
+
+#signLink{
+    color:white;
+    background-color: rgb(64, 204, 51);
+    border-radius: 5px;
+}
+#signLink:hover{
+    background-color: rgb(50, 167, 39);
+}
+
+.header-button{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: medium;
+  font-family: 'Arial Rounded MT Bold';
+}
+
+.header-button:hover{
+    background-color:rgb(195, 201, 207);
+}

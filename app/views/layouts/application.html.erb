@@ -3,11 +3,32 @@
   <head>
     <title>MapMyRunClone</title>
 
+<<<<<<< HEAD
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
     
     <script type="text/javascript">
     window.splash1URL = "<%= image_url('splash1.png') %>";
+=======
+  <script type="text/javascript">
+  window.googleAPIKey = "<%= Rails.application.credentials.google[:api_key] %>"
+  </script>
+   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google[:api_key] }" %>
+
+    <!-- Stylesheet below:-->
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    
+
+    <!-- Images below:-->
+    <script type="text/javascript">
+    window.mtBaldyURL = "<%= image_url('mtBaldy.jpg') %>";
+    window.pleasantonRidgeSunsetURL = "<%= image_url('pleasantonRidgeSunset.jpg') %>";
+    window.PondURL = "<%= image_url('Pond.jpg') %>";
+    window.pRidgeURL = "<%= image_url('pRidge.jpg') %>";
+    window.githubURL = "<%= image_url('github.png') %>";
+    window.linkedInURL = "<%= image_url('linkedIn.png') %>";
+
+>>>>>>> Routes_directions_snap
   </script>
 
     <%= csrf_meta_tags %>

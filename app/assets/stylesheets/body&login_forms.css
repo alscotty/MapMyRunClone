@@ -1,0 +1,63 @@
+
+/*
+    Route Map dimensions:
+*/
+ body{
+    font-family: 'Arial Rounded MT Bold';
+    font-weight:350;
+    color:grey;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    }
+
+    .splash,.route-index,.route-form{
+        padding-top:2em;
+    }
+
+/*
+    Session form styles
+*/
+.login-form-container{
+    display:flex;
+    justify-content: center;
+}
+.login-form-container > * {
+    margin: 8em;
+}
+
+.session-submit {
+    width: 100%;
+    color:white;
+    background-color: rgb(64, 204, 51);
+    font-size: medium;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.session-submit:hover{
+    background-color: rgb(50, 167, 39);
+}
+.demo-login {
+    width: 100%;
+    color:white;
+    background-color: rgb(51, 130, 204);
+    font-size: medium;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.demo-login:hover{
+    background-color: rgb(29, 66, 167);
+}
+
+.login-input{
+    width:100%;
+}
+
+.login-errors{
+    list-style: none;
+    font-size: small;
+    color:rgb(184, 42, 42);
+    padding-left:0px;
+}

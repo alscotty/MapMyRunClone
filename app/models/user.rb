@@ -8,6 +8,15 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
 
+<<<<<<< HEAD
+=======
+  has_many :routes,
+  foreign_key: :user_id,
+  class_name: :Route
+
+
+
+>>>>>>> Routes_directions_snap
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil unless user

@@ -1,0 +1,46 @@
+.route-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    float:left;
+    margin-top: 5em;
+    width:21%;
+    border: 1px solid grey;
+}
+
+.route-form > summary{
+    background-color: lightgrey;
+    width: 100%;
+    color:black;
+    border-radius: 5px;
+}
+
+#map{
+    float: right;
+    margin-right: 1%;
+    top: 4em;
+    width: 77%;
+    height: 600px;
+    border: 2px solid grey;
+}
+
+#route-button{
+    color:white;
+    background: -webkit-linear-gradient(top, #ff9628 5%, #ff8714 100%);
+    border-radius: 5px;
+    font-size: medium;
+    padding: 5px 15px 5px 15px;
+    width:120px;
+}
+
+#route-button:hover{
+    cursor: pointer;
+    background: rgb(216, 134, 26);
+}
+
+#route-title-input{
+    border-radius: 5px;
+    font-size: medium;
+    width:80%;
+}

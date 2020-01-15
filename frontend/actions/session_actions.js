@@ -45,7 +45,11 @@ export const login = user => dispatch => (
 );
 
 export const logout = () => dispatch => (
+<<<<<<< HEAD
   APIUtil.logout().then(user => (
+=======
+  APIUtil.logout().then(() => (
+>>>>>>> Routes_directions_snap
     dispatch(logoutCurrentUser())
   ))
 );

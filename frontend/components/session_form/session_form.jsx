@@ -15,6 +15,13 @@ class SessionForm extends React.Component {
     this.props.clearErrors();
   }
 
+<<<<<<< HEAD
+=======
+  componentWillUnmount(){
+    this.props.clearErrors();
+  }
+
+>>>>>>> Routes_directions_snap
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -82,7 +89,11 @@ class SessionForm extends React.Component {
             <br/>
             <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
+<<<<<<< HEAD
             
+=======
+            <br/>
+>>>>>>> Routes_directions_snap
             {this.props.formType == 'LOG IN' ?  (
               <button  className='demo-login' onClick={this.handleDemoLogin}>
                 DEMO LOGIN
