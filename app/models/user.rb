@@ -12,6 +12,9 @@ class User < ApplicationRecord
   foreign_key: :user_id,
   class_name: :Route
 
+  has_many :workouts,
+  foreign_key: :user_id,
+  class_name: :Workout
 
 
   def self.find_by_credentials(username, password)
