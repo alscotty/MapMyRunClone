@@ -12,11 +12,7 @@ class WorkoutForm extends React.Component{
 
     handleSubmit(e) {
         e.preventDefault;
-
-        const { currentUser } = this.props
-        this.setState({user_id: currentUser.id})
         debugger
-
         this.props.action(this.state)
             .then(() => {
                 this.props.history.push('/workouts')})

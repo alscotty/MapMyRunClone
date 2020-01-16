@@ -1880,10 +1880,6 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault;
-      var currentUser = this.props.currentUser;
-      this.setState({
-        user_id: currentUser.id
-      });
       debugger;
       this.props.action(this.state).then(function () {
         _this2.props.history.push('/workouts');
@@ -2089,6 +2085,7 @@ function (_React$Component) {
           errors = _this$props.errors,
           currentUser = _this$props.currentUser;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        history: this.props.history,
         action: action,
         errors: errors,
         currentUser: currentUser,
@@ -2118,8 +2115,10 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _workout_route_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./workout_route_form */ "./frontend/components/workouts/workout_route_form.jsx");
-/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
-/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+
 
 
 
@@ -2132,7 +2131,7 @@ var mstp = function mstp(state, ownProps) {
   var route = entities.routes[ownProps.match.params.routeId];
   return {
     workout: {
-      user_id: '',
+      user_id: entities.users[session.id].id,
       route_id: route.id,
       title: '',
       description: '',
@@ -2149,18 +2148,18 @@ var mstp = function mstp(state, ownProps) {
 var mdtp = function mdtp(dispatch) {
   return {
     action: function action(workout) {
-      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_3__["createWorkout"])(workout));
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__["createWorkout"])(workout));
     },
     clearWorkoutErrors: function clearWorkoutErrors() {
-      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_3__["clearWorkoutErrors"])());
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__["clearWorkoutErrors"])());
     },
     requestRoute: function requestRoute(routeId) {
-      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["requestRoute"])(routeId));
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_3__["requestRoute"])(routeId));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mstp, mdtp)(_workout_route_form__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mstp, mdtp)(_workout_route_form__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ }),
 
@@ -2186,7 +2185,7 @@ var mSTP = function mSTP(state) {
   var errors = state.errors;
   return {
     workout: {
-      user_id: '',
+      user_id: entities.users[session.id].id,
       route_id: '',
       title: '',
       description: '',

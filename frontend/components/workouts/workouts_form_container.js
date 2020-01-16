@@ -10,7 +10,7 @@ const mSTP=state=>{
 
     return({
         workout: {
-            user_id: '',
+            user_id: entities.users[session.id].id,
             route_id: '',
             title: '',
             description: '',

@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
 import WorkoutRouteForm from './workout_route_form'
 
+import {withRouter} from 'react-router-dom'
+
 import {requestRoute} from '../../actions/route_actions'
 import {
     createWorkout,
@@ -16,7 +18,7 @@ const mstp=(state,ownProps)=>{
 
     return({
     workout: {
-        user_id: '',
+        user_id: entities.users[session.id].id,
         route_id: route.id,
         title: '',
         description: '',
@@ -39,4 +41,4 @@ const mdtp=dispatch=>({
 });
 
 
-export default connect(mstp,mdtp)(WorkoutRouteForm);
+export default withRouter(connect(mstp,mdtp)(WorkoutRouteForm));
