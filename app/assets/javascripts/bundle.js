@@ -1881,7 +1881,10 @@ function (_React$Component) {
 
       e.preventDefault;
       var currentUser = this.props.currentUser;
-      this.state.user_id = currentUser.id;
+      this.setState({
+        user_id: currentUser.id
+      });
+      debugger;
       this.props.action(this.state).then(function () {
         _this2.props.history.push('/workouts');
       });

@@ -14,7 +14,8 @@ class WorkoutForm extends React.Component{
         e.preventDefault;
 
         const { currentUser } = this.props
-        this.state.user_id = currentUser.id;
+        this.setState({user_id: currentUser.id})
+        debugger
 
         this.props.action(this.state)
             .then(() => {
