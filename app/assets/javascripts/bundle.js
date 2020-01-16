@@ -259,6 +259,100 @@ var logout = function logout() {
 
 /***/ }),
 
+/***/ "./frontend/actions/workout_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/workout_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_WORKOUTS, RECEIVE_WORKOUT, REMOVE_WORKOUT, RECEIVE_WORKOUT_ERRORS, CLEAR_WORKOUT_ERRORS, receiveWorkoutErrors, clearWorkoutErrors, requestWorkouts, requestWorkout, createWorkout, deleteWorkout */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WORKOUTS", function() { return RECEIVE_WORKOUTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WORKOUT", function() { return RECEIVE_WORKOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_WORKOUT", function() { return REMOVE_WORKOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WORKOUT_ERRORS", function() { return RECEIVE_WORKOUT_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_WORKOUT_ERRORS", function() { return CLEAR_WORKOUT_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveWorkoutErrors", function() { return receiveWorkoutErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearWorkoutErrors", function() { return clearWorkoutErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestWorkouts", function() { return requestWorkouts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestWorkout", function() { return requestWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWorkout", function() { return createWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteWorkout", function() { return deleteWorkout; });
+/* harmony import */ var _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/workout_api_utils */ "./frontend/util/workout_api_utils.js");
+
+var RECEIVE_WORKOUTS = 'RECEIVE_WORKOUTS';
+var RECEIVE_WORKOUT = 'RECEIVE_WORKOUT';
+var REMOVE_WORKOUT = 'REMOVE_WORKOUT';
+var RECEIVE_WORKOUT_ERRORS = 'RECEIVE_WORKOUT_ERRORS';
+var CLEAR_WORKOUT_ERRORS = 'CLEAR_WORKOUT_ERRORS'; //reg action creators
+
+var receiveWorkouts = function receiveWorkouts(workouts) {
+  return {
+    type: RECEIVE_WORKOUTS,
+    workouts: workouts
+  };
+};
+
+var receiveWorkout = function receiveWorkout(workout) {
+  return {
+    type: RECEIVE_WORKOUT,
+    workout: workout
+  };
+};
+
+var removeWorkout = function removeWorkout(workout) {
+  return {
+    type: REMOVE_WORKOUT,
+    workout: workout
+  };
+};
+
+var receiveWorkoutErrors = function receiveWorkoutErrors(errors) {
+  return {
+    type: RECEIVE_WORKOUT_ERRORS,
+    errors: errors
+  };
+};
+var clearWorkoutErrors = function clearWorkoutErrors() {
+  return {
+    type: CLEAR_WORKOUT_ERRORS
+  };
+}; //thunk actions
+
+var requestWorkouts = function requestWorkouts() {
+  return function (dispatch) {
+    return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["fetchWorkouts"]().then(function (workouts) {
+      return dispatch(receiveWorkouts(workouts));
+    });
+  };
+};
+var requestWorkout = function requestWorkout(workoutId) {
+  return function (dispatch) {
+    return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["fetchWorkout"](workoutId).then(function (workout) {
+      return dispatch(receiveWorkout(workout));
+    });
+  };
+};
+var createWorkout = function createWorkout(workout) {
+  return function (dispatch) {
+    return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["createWorkout"](workout).then(function (workout) {
+      return dispatch(receiveWorkout(workout));
+    }, function (err) {
+      dispatch(receiveWorkoutErrors(err.responseJSON));
+    });
+  };
+};
+var deleteWorkout = function deleteWorkout(workout) {
+  return function (dispatch) {
+    return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["deleteWorkout"](workout).then(function (workout) {
+      return dispatch(removeWorkout(workout));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/components/app.jsx":
 /*!*************************************!*\
   !*** ./frontend/components/app.jsx ***!
@@ -1760,12 +1854,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _routes_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes_reducer */ "./frontend/reducers/routes_reducer.js");
+/* harmony import */ var _workout_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./workout_reducer */ "./frontend/reducers/workout_reducer.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  routes: _routes_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  routes: _routes_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  workouts: _workout_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
@@ -1782,12 +1879,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
 /* harmony import */ var _routes_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes_errors_reducer */ "./frontend/reducers/routes_errors_reducer.js");
+/* harmony import */ var _workouts_errors_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./workouts_errors_reducer */ "./frontend/reducers/workouts_errors_reducer.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  routes: _routes_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  routes: _routes_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  workouts: _workouts_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
@@ -1994,6 +2094,78 @@ var usersReducer = function usersReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/workout_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/workout_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+
+
+var WorkoutsReducer = function WorkoutsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var newState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WORKOUTS"]:
+      return action.workouts;
+
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WORKOUT"]:
+      newState[action.workout.id] = action.workout;
+      return newState;
+
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_WORKOUT"]:
+      delete newState[action.workout.id];
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (WorkoutsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/workouts_errors_reducer.js":
+/*!******************************************************!*\
+  !*** ./frontend/reducers/workouts_errors_reducer.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+
+
+var WorkoutErrorsReducer = function WorkoutErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WORKOUT_ERRORS"]:
+      return action.errors;
+
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_WORKOUT_ERRORS"]:
+      return [];
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (WorkoutErrorsReducer);
+
+/***/ }),
+
 /***/ "./frontend/store/store.js":
 /*!*********************************!*\
   !*** ./frontend/store/store.js ***!
@@ -2168,6 +2340,50 @@ var logout = function logout() {
   return $.ajax({
     method: 'DELETE',
     url: '/api/session'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/workout_api_utils.js":
+/*!********************************************!*\
+  !*** ./frontend/util/workout_api_utils.js ***!
+  \********************************************/
+/*! exports provided: fetchWorkouts, fetchWorkout, createWorkout, deleteWorkout */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWorkouts", function() { return fetchWorkouts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWorkout", function() { return fetchWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWorkout", function() { return createWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteWorkout", function() { return deleteWorkout; });
+var fetchWorkouts = function fetchWorkouts() {
+  return $.ajax({
+    url: 'api/workouts'
+  });
+};
+var fetchWorkout = function fetchWorkout(workoutId) {
+  return $.ajax({
+    url: "/api/wokrkouts/".concat(workoutId),
+    data: {
+      workoutId: workoutId
+    }
+  });
+};
+var createWorkout = function createWorkout(workout) {
+  return $.ajax({
+    url: '/api/workouts',
+    method: 'post',
+    data: {
+      workout: workout
+    }
+  });
+};
+var deleteWorkout = function deleteWorkout(workoutId) {
+  return $.ajax({
+    url: "/api/workouts/".concat(workoutId),
+    method: 'delete'
   });
 };
 
