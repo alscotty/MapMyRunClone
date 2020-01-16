@@ -19,9 +19,9 @@ const receiveWorkout = (workout) => ({
     workout
 });
 
-const removeWorkout = (workout) => ({
+const removeWorkout = (workoutId) => ({
     type: REMOVE_WORKOUT,
-    workout
+    workoutId
 })
 
 export const receiveWorkoutErrors = (errors) => ({
@@ -51,7 +51,7 @@ export const createWorkout = (workout) => dispatch => (
         )
 );
 
-export const deleteWorkout = (workout) => dispatch => (
-    WorkoutAPIUtils.deleteWorkout(workout)
-        .then(() => dispatch(removeWorkout(workout)))
+export const deleteWorkout = (workoutId) => dispatch => (
+    WorkoutAPIUtils.deleteWorkout(workoutId)
+        .then(() => dispatch(removeWorkout(workoutId)))
 )

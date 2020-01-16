@@ -15,7 +15,7 @@ const WorkoutsReducer = (state = {}, action) => {
             newState[action.workout.id] = action.workout;
             return newState;
         case REMOVE_WORKOUT:
-            delete newState[action.workout.id];
+            delete newState[action.workoutId];
             return newState;
         default:
             return state;

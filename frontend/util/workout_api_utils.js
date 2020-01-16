@@ -6,7 +6,7 @@ export const fetchWorkouts=()=>(
 
 export const fetchWorkout=(workoutId)=>(
     $.ajax({
-        url:`/api/wokrkouts/${workoutId}`,
+        url:`/api/workouts/${workoutId}`,
         data:{workoutId}
     })
 );

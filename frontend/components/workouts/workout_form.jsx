@@ -8,9 +8,17 @@ class WorkoutForm extends React.Component{
         this.handleSubmit=this.handleSubmit.bind(this);
     }
 
+
+
     handleSubmit(e) {
         e.preventDefault;
-        this.props.action(this.state);
+
+        const { currentUser } = this.props
+        this.state.user_id = currentUser.id;
+
+        this.props.action(this.state)
+            .then(() => {
+                this.props.history.push('/workouts')})
     }
 
     update(field) {
@@ -28,7 +36,7 @@ class WorkoutForm extends React.Component{
     renderErrors() {
         const { errors } = this.props;
         return (
-            <ul className='route-errors'>
+            <ul className='workout-errors'>
                 {errors.map((error, i) => (
                     <li key={`error-${i}`}>
                         {error}
@@ -40,8 +48,7 @@ class WorkoutForm extends React.Component{
 
 
     render(){
-        const {currentUser}=this.props
-        this.state.user_id=currentUser.id;
+
         return(
            <div>
                 <h1>{this.props.formType}</h1>
@@ -62,7 +69,7 @@ class WorkoutForm extends React.Component{
                     <input type='number' value={this.state.miles} onChange={this.update('miles')} placeholder='Miles' />
 
                     <br/>
-                    <input type="submit" value={this.propsformType} />
+                    <input type="submit" value={this.props.formType} />
 
                     {this.renderErrors()}
 

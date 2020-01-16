@@ -6,6 +6,10 @@ class WorkoutsIndex extends React.Component{
         super(props);
     }
 
+    componentDidMount(){
+        this.props.requestWorkouts();
+    }
+
     render(){
         const {workouts,currentUser,requestWorkout,deleteWorkout}=this.props
 

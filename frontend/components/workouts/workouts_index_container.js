@@ -24,7 +24,7 @@ const mstp=state=>{
 const mdtp=dispatch=>({
     requestWorkouts: () => dispatch(requestWorkouts()),
     requestWorkout: (workoutId) => dispatch(requestWorkout(workoutId)),
-    deleteRoute: (workoutId) => dispatch(deleteWorkout(workoutId))
+    deleteWorkout: (workoutId) => dispatch(deleteWorkout(workoutId))
 });
 
 

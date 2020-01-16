@@ -18,6 +18,9 @@ const Greeting = ({ currentUser, logout }) => {
       <Link to='/workouts/new' className='route-links'>
         Create Workout
             </Link>
+      <Link to='/workouts' className='route-links'>
+        All Workouts
+            </Link>
 
     <nav className="login-signup">
       <Link id='logLink' to="/login">LOG IN</Link>
@@ -41,6 +44,9 @@ const Greeting = ({ currentUser, logout }) => {
             </Link>
             <Link to='/workouts/new' className='route-links'>
               Create Workout
+            </Link>
+        <Link to='/workouts' className='route-links'>
+        All Workouts
             </Link>
 
     <hgroup className="header-group">
