@@ -53,5 +53,5 @@ export const createWorkout = (workout) => dispatch => (
 
 export const deleteWorkout = (workout) => dispatch => (
     WorkoutAPIUtils.deleteWorkout(workout)
-        .then((workout) => dispatch(removeWorkout(workout)))
+        .then(() => dispatch(removeWorkout(workout)))
 )

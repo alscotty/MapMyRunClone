@@ -8,7 +8,7 @@ class Api::WorkoutsController < ApplicationController
         if @workout.save
             render 'api/workouts/show'
         else
-            render @workout.errors.full_messages, status:422
+            render json: @workout.errors.full_messages, status:422
         end
     end
 
