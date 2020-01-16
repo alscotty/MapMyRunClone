@@ -1605,7 +1605,7 @@ function (_React$Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      this.props.clearWorkoutErrors();
+      this.props.clearErrors();
     }
   }, {
     key: "update",
@@ -1872,7 +1872,7 @@ function (_React$Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      this.props.clearErrors();
+      this.props.clearWorkoutErrors();
     }
   }, {
     key: "renderErrors",
@@ -1904,6 +1904,16 @@ function (_React$Component) {
         value: this.state.description,
         onChange: this.update('description'),
         placeholder: "description"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time(in minutes)", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        value: this.state.time,
+        onChange: this.update('time'),
+        placeholder: "Time (in minutes)"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        value: this.state.miles,
+        onChange: this.update('miles'),
+        placeholder: "Miles"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: this.propsformType

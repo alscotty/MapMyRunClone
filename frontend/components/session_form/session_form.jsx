@@ -16,7 +16,7 @@ class SessionForm extends React.Component {
   }
 
   componentWillUnmount(){
-    this.props.clearWorkoutErrors();
+    this.props.clearErrors();
   }
 
   update(field) {

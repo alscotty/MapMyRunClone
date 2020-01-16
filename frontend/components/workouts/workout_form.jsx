@@ -22,7 +22,7 @@ class WorkoutForm extends React.Component{
     }
 
     componentWillUnmount() {
-        this.props.clearErrors();
+        this.props.clearWorkoutErrors();
     }
 
     renderErrors() {
@@ -50,6 +50,17 @@ class WorkoutForm extends React.Component{
                     <input type="text" value={this.state.title} onChange={this.update('title')} placeholder='Title' />
                     <br/>
                     <textarea cols="30" rows="10" value={this.state.description} onChange={this.update('description')} placeholder='description'></textarea>
+                    <br/>
+
+                    Time(in minutes)
+                    <br/>
+                    <input type='number' value={this.state.time} onChange={this.update('time')} placeholder='Time (in minutes)' />
+                    <br/>
+
+                    Miles
+                    <br/>
+                    <input type='number' value={this.state.miles} onChange={this.update('miles')} placeholder='Miles' />
+
                     <br/>
                     <input type="submit" value={this.propsformType} />
 
