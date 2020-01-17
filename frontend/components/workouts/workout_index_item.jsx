@@ -58,13 +58,13 @@ class WorkoutIndexItem extends React.Component{
 
 
     componentDidMount(){
-        this.props.requestWorkout(this.props.workout.id)
-            .then(()=>{
-                if(this.props.workout.route_id != ''){
+        this.props.requestWorkout(this.props.workout.id);
+            // .then(()=>{
+                if(this.props.workout.route_id){
                     this.props.requestRoute(this.props.workout.route_id)
                     .then(()=>{this.readyMap()})
                 }
-            })
+            // })
     }
 
 
@@ -74,11 +74,15 @@ class WorkoutIndexItem extends React.Component{
         return(
             <div id='workout-index-item'>
                 Title:{workout.title}
+                {workout.description.length ? 
+                <span>
                 <br/>
-                Description:{workout.description}
+                    Description:{workout.description}
+                </span>
+                : ''}
 
                 {workout.route_id ? (
-                    <div id={`workout-map-${this.props.workout.id}`}>
+                    <div  className='workout-map' id={`workout-map-${this.props.workout.id}`}>
                     </div>
                 ) : ''}
 
@@ -90,9 +94,9 @@ class WorkoutIndexItem extends React.Component{
                     Pace: {(workout.time/workout.miles).toFixed(2)} min./mile
                     </span>
                     )
-                : ''}
-                <br/>
-                Workout:{workout.miles}
+                    : ''}
+                    <br/>
+                Miles:{workout.miles}
                 <br/>
             <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id)}}>Delete Workout</button>
 

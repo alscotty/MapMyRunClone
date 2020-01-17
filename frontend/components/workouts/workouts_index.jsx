@@ -8,7 +8,7 @@ class WorkoutsIndex extends React.Component{
 
     componentDidMount(){
         this.props.requestWorkouts();
-        this.props.requestRoutes();
+        // this.props.requestRoutes();
     }
 
     render(){
