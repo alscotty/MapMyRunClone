@@ -92,17 +92,25 @@ class WorkoutIndexItem extends React.Component{
                     </span>
                 ) : ''}
 
-                {workout.time !=0 ? (
+                {workout.time !=0 && workout.miles ? (
                     <span>
                     <br/>
                     Time:{workout.time} min.
-                    <br/>
-                    Pace: {(workout.time/workout.miles).toFixed(2)} min./mile
+                    {/* <br/> */}
+                    {/* Pace: {(workout.time/workout.miles).toFixed(2)} min./mile */}
                     </span>
                     )
                     : ''}
                     <br/>
-                Miles:{workout.miles}
+                    {workout.route ? (
+                    (<span>
+                        Miles:{workout.route.miles}
+                    </span>)
+                    ): 
+                    (<span>
+                    Miles:{workout.miles}
+                    </span>)
+                }
                 <br/>
             <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id)}}>Delete Workout</button>
 

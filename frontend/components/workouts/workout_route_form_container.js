@@ -16,15 +16,15 @@ const mstp=(state,ownProps)=>{
 
     const route = entities.routes[ownProps.match.params.routeId];
     const currentUser= entities.users[session.id];
-    debugger
+
     return({
     workout: {
         user_id: currentUser.id,
-        route_id: route.id,
+        route_id: ownProps.match.params.routeId,
         title: '',
         description: '',
         time: 0,
-        miles: route.miles,
+        miles: 0,
         },
     route:route,
     
