@@ -14,11 +14,12 @@ const mstp=(state,ownProps)=>{
     const { session } = state;
     const { errors } = state;
 
-    const route = entities.routes[ownProps.match.params.routeId]
-
+    const route = entities.routes[ownProps.match.params.routeId];
+    const currentUser= entities.users[session.id];
+    debugger
     return({
     workout: {
-        user_id: entities.users[session.id].id,
+        user_id: currentUser.id,
         route_id: route.id,
         title: '',
         description: '',
@@ -27,7 +28,7 @@ const mstp=(state,ownProps)=>{
         },
     route:route,
     
-    currentUser: entities.users[session.id],
+    currentUser: currentUser,
     errors: errors.workouts,
     formType: 'Log Workout'
     });

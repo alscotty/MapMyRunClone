@@ -64,7 +64,6 @@ class WorkoutIndexItem extends React.Component{
                     this.props.requestRoute(this.props.workout.route_id)
                     .then(route=>this.readyMap(route))
 
-                    // .then(()=>{this.readyMap()})
                 }
             })
     }
@@ -72,12 +71,6 @@ class WorkoutIndexItem extends React.Component{
 
     render(){
         const {workout,deleteWorkout,currentUser}=this.props;
-        if(this.props.workout.route){
-            if (this.props.route) {
-            debugger
-            this.readyMap();
-            }
-        }
 
         return(
             <div id='workout-index-item'>
@@ -89,7 +82,7 @@ class WorkoutIndexItem extends React.Component{
                 </span>
                 : ''}
 
-                {workout.route_id ? (
+                {workout.route_id && workout.route ? (
                     <span>
                         <br/>
                         {currentUser.username} ran {workout.route.title}

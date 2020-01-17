@@ -47,13 +47,14 @@ class WorkoutForm extends React.Component{
     render(){
 
         return(
-           <div>
+           <div className='workout-form'>
                 <h3>LOG A WORKOUT</h3>
 
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" value={this.state.title} onChange={this.update('title')} placeholder='Title' />
                     <br/>
-                    <textarea cols="30" rows="10" value={this.state.description} onChange={this.update('description')} placeholder='description'></textarea>
+                    <br/>
+                    <textarea cols="30" rows="10" value={this.state.description} onChange={this.update('description')} placeholder='Description'></textarea>
                     <br/>
 
                     Time(in minutes)
@@ -66,7 +67,7 @@ class WorkoutForm extends React.Component{
                     <input type='number' value={this.state.miles} onChange={this.update('miles')} placeholder='Miles' />
 
                     <br/>
-                    <input type="submit" value={this.props.formType} />
+                    <input type="submit" id='workout-button' value={this.props.formType} />
 
                     {this.renderErrors()}
 

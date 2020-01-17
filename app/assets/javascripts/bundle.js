@@ -424,7 +424,6 @@ var App = function App() {
     path: "/workouts/new",
     component: _workouts_workouts_form_container__WEBPACK_IMPORTED_MODULE_11__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
-    exact: true,
     path: "/workouts",
     component: _workouts_workouts_index_container__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
@@ -537,13 +536,13 @@ var Greeting = function Greeting(_ref) {
     }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/routes",
       className: "route-links"
-    }, "All Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    }, "Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/workouts/new",
       className: "route-links"
     }, "Create Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/workouts",
       className: "route-links"
-    }, "All Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    }, "Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
       className: "login-signup"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       id: "logLink",
@@ -564,13 +563,13 @@ var Greeting = function Greeting(_ref) {
     }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/routes",
       className: "route-links"
-    }, "All Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    }, "Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/workouts/new",
       className: "route-links"
     }, "Create Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       to: "/workouts",
       className: "route-links"
-    }, "All Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hgroup", {
+    }, "Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hgroup", {
       className: "header-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
       className: "header-name"
@@ -1910,19 +1909,21 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "LOG A WORKOUT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "workout-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "LOG A WORKOUT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.title,
         onChange: this.update('title'),
         placeholder: "Title"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         cols: "30",
         rows: "10",
         value: this.state.description,
         onChange: this.update('description'),
-        placeholder: "description"
+        placeholder: "Description"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time(in minutes)", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         value: this.state.time,
@@ -1935,6 +1936,7 @@ function (_React$Component) {
         placeholder: "Miles"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
+        id: "workout-button",
         value: this.props.formType
       }), this.renderErrors()));
     }
@@ -2057,8 +2059,7 @@ function (_React$Component) {
         if (_this2.props.workout.route_id) {
           _this2.props.requestRoute(_this2.props.workout.route_id).then(function (route) {
             return _this2.readyMap(route);
-          }); // .then(()=>{this.readyMap()})
-
+          });
         }
       });
     }
@@ -2069,17 +2070,9 @@ function (_React$Component) {
           workout = _this$props.workout,
           deleteWorkout = _this$props.deleteWorkout,
           currentUser = _this$props.currentUser;
-
-      if (this.props.workout.route) {
-        if (this.props.route) {
-          debugger;
-          this.readyMap();
-        }
-      }
-
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "workout-index-item"
-      }, "Title:", workout.title, workout.description.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Description:", workout.description) : '', workout.route_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.username, " ran ", workout.route.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Title:", workout.title, workout.description.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Description:", workout.description) : '', workout.route_id && workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.username, " ran ", workout.route.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-map",
         id: "workout-map-".concat(this.props.workout.id)
       })) : '', workout.time != 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, " min.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Pace: ", (workout.time / workout.miles).toFixed(2), " min./mile") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Miles:", workout.miles, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -2203,9 +2196,11 @@ var mstp = function mstp(state, ownProps) {
   var session = state.session;
   var errors = state.errors;
   var route = entities.routes[ownProps.match.params.routeId];
+  var currentUser = entities.users[session.id];
+  debugger;
   return {
     workout: {
-      user_id: entities.users[session.id].id,
+      user_id: currentUser.id,
       route_id: route.id,
       title: '',
       description: '',
@@ -2213,7 +2208,7 @@ var mstp = function mstp(state, ownProps) {
       miles: route.miles
     },
     route: route,
-    currentUser: entities.users[session.id],
+    currentUser: currentUser,
     errors: errors.workouts,
     formType: 'Log Workout'
   };

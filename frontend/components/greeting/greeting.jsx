@@ -13,13 +13,13 @@ const Greeting = ({ currentUser, logout }) => {
         Create Route
             </Link>
       <Link to='/routes' className='route-links'>
-        All Routes
+        Routes
         </Link>
       <Link to='/workouts/new' className='route-links'>
         Create Workout
             </Link>
       <Link to='/workouts' className='route-links'>
-        All Workouts
+        Workouts
             </Link>
 
     <nav className="login-signup">
@@ -40,13 +40,13 @@ const Greeting = ({ currentUser, logout }) => {
         Create Route
             </Link>
       <Link to='/routes' className='route-links'>
-        All Routes
+        Routes
             </Link>
             <Link to='/workouts/new' className='route-links'>
               Create Workout
             </Link>
         <Link to='/workouts' className='route-links'>
-        All Workouts
+        Workouts
             </Link>
 
     <hgroup className="header-group">
