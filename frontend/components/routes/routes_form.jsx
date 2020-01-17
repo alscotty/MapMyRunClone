@@ -139,12 +139,13 @@ class RoutesForm extends React.Component{
         return(
             <div>
                 <div id="map"></div>
-                    <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
-                        async defer></script>
 
             </div>
         )
     }
+
+    /* <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
 
     renderErrors(){
         const {errors}=this.props;

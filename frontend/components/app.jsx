@@ -16,6 +16,10 @@ import RoutesForm from './routes/routes_form_container'
 import RouteShow from './routes/route_show_container'
 import Splash from './splash page/splash_page'
 import Footer from './footer/footer'
+import WorkoutForm from './workouts/workouts_form_container'
+import WorkoutsIndex from './workouts/workouts_index_container'
+import WorkoutRouteForm from './workouts/workout_route_form_container'
+
 
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
@@ -31,6 +35,12 @@ const App = () => (
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
       <ProtectedRoute exact path='/routes/new' component={RoutesForm} />
       <ProtectedRoute exact path='/routes/:routeId' component={RouteShow} />
+  
+      <ProtectedRoute exact path='/routes/:routeId/workout' component={WorkoutRouteForm} />
+
+      <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
+      <ProtectedRoute path='/workouts' component={WorkoutsIndex}/>
+
       <ProtectedRoute path='/routes' component={RoutesIndex} />
     </Switch>
 

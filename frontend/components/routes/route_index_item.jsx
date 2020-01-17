@@ -65,13 +65,13 @@ class RouteIndexItem extends React.Component{
         return (
             <div>
                 <div id={`index-map-${this.props.route.id}`} className='index-map'></div>
-                <script  src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
-                    async defer></script>
 
             </div>
         )
     }
     
+    /* <script  src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
 
     render(){
         const {route,currentUser,deleteRoute}=this.props
@@ -99,8 +99,11 @@ class RouteIndexItem extends React.Component{
                     <br/>
                 </div>
                     {route.coordinates ? this.mapSetup() : ''}
-                <button className='delete-button' onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
               
+                <Link to={`/routes/${route.id}/workout`}>Save as Workout</Link>              
+              
+                <button className='delete-button' onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
+
             </div>
             )
     }
