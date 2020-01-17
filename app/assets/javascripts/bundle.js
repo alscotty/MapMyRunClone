@@ -2342,7 +2342,9 @@ function (_React$Component) {
           route = _this$props.route;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-index"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Workouts"), workouts.map(function (workout) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        id: "w-title"
+      }, "Workouts"), workouts.map(function (workout) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: workout.id * 3,
           workout: workout,

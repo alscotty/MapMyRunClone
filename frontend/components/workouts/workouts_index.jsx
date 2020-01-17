@@ -16,7 +16,7 @@ class WorkoutsIndex extends React.Component{
 
         return(
             <div className='workout-index'>
-                <h2>Workouts</h2>
+                <h2 id='w-title'>Workouts</h2>
             {workouts.map(workout=>{
                 return(
                 <WorkoutIndexItem key={workout.id*3} workout={workout} currentUser={currentUser} route={route} deleteWorkout={deleteWorkout} requestWorkout={requestWorkout} requestRoute={requestRoute} />
