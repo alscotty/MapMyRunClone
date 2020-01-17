@@ -91,6 +91,7 @@ class WorkoutIndexItem extends React.Component{
 
                 {workout.route_id ? (
                     <span>
+                        <br/>
                         {currentUser.username} ran {workout.route.title}
                         <br/>
                     <div  className='workout-map' id={`workout-map-${this.props.workout.id}`}>

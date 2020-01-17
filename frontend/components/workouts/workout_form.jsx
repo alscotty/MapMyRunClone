@@ -48,7 +48,7 @@ class WorkoutForm extends React.Component{
 
         return(
            <div>
-                <h1>{this.props.formType}</h1>
+                <h3>LOG A WORKOUT</h3>
 
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" value={this.state.title} onChange={this.update('title')} placeholder='Title' />
