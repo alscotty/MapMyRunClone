@@ -8,7 +8,7 @@ const Greeting = ({ currentUser, logout }) => {
       <Link to="/" className="header-link">
         <h1>RapMyMun</h1>
       </Link>
-
+    <h1>HELLO</h1>
       <Link to='/routes/new' className='route-links'>
         Create Route
       </Link>
@@ -35,6 +35,7 @@ const Greeting = ({ currentUser, logout }) => {
       <Link to="/routes" className="header-link">
         <h1>RapMyMun</h1>
       </Link>
+    <h1>HELLO</h1>
 
       <Link to='/routes/new' className='route-links'>
         Create Route
