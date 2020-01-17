@@ -11,5 +11,6 @@ class Workout < ApplicationRecord
     class_name: :Route,
     optional: true
 
+    
 
 end

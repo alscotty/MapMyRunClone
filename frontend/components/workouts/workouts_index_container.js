@@ -5,6 +5,10 @@ import{
     requestWorkout,
     deleteWorkout
 } from '../../actions/workout_actions'
+import {
+    requestRoute,
+    requestRoutes
+} from '../../actions/route_actions'
 
 
 const mstp=state=>{
@@ -24,7 +28,9 @@ const mstp=state=>{
 const mdtp=dispatch=>({
     requestWorkouts: () => dispatch(requestWorkouts()),
     requestWorkout: (workoutId) => dispatch(requestWorkout(workoutId)),
-    deleteWorkout: (workoutId) => dispatch(deleteWorkout(workoutId))
+    deleteWorkout: (workoutId) => dispatch(deleteWorkout(workoutId)),
+    requestRoute: (routeId)=>dispatch(requestRoute(routeId)),
+    requestRoutes: ()=>dispatch(requestRoutes())
 });
 
 

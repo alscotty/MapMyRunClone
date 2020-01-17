@@ -772,12 +772,11 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "index-map-".concat(this.props.route.id),
         className: "index-map"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
-        src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
-        async: true,
-        defer: true
       }));
     }
+    /* <script  src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
+
   }, {
     key: "render",
     value: function render() {
@@ -1155,12 +1154,11 @@ function (_React$Component) {
     value: function renderMap() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "map"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
-        src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
-        async: true,
-        defer: true
       }));
     }
+    /* <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
+
   }, {
     key: "renderErrors",
     value: function renderErrors() {
@@ -1497,12 +1495,11 @@ function (_React$Component) {
       }, route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "show-map-id",
         className: "show-map"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
-        src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
-        async: true,
-        defer: true
       }));
     }
+    /* <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
+
   }, {
     key: "render",
     value: function render() {
@@ -1880,7 +1877,6 @@ function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault;
-      debugger;
       this.props.action(this.state).then(function () {
         _this2.props.history.push('/workouts');
       });
@@ -1972,9 +1968,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -1988,27 +1984,94 @@ function (_React$Component) {
   _inherits(WorkoutIndexItem, _React$Component);
 
   function WorkoutIndexItem(props) {
+    var _this;
+
     _classCallCheck(this, WorkoutIndexItem);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(WorkoutIndexItem).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WorkoutIndexItem).call(this, props));
+    _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
+    _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(WorkoutIndexItem, [{
+    key: "renderIndMap",
+    value: function renderIndMap(coordinates) {
+      var ren = new google.maps.DirectionsRenderer();
+      var dir = new google.maps.DirectionsService();
+      var map = new google.maps.Map(document.getElementById("workout-map-".concat(this.props.workout.id)), {
+        center: {
+          lat: 37.773972,
+          lng: -122.431297
+        },
+        zoom: 13,
+        maxZoom: 15,
+        disableDefaultUI: true,
+        gestureHandling: 'none'
+      });
+      ren.setMap(map);
+      var waypts = [];
+
+      for (var i = 0; i < coordinates.length; i++) {
+        waypts.push({
+          location: coordinates[i],
+          stopover: false
+        });
+      }
+
+      dir.route({
+        origin: coordinates[0],
+        destination: coordinates[coordinates.length - 1],
+        waypoints: waypts,
+        optimizeWaypoints: false,
+        travelMode: 'WALKING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          ren.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to' + status);
+        }
+      });
+    }
+  }, {
+    key: "readyMap",
+    value: function readyMap() {
+      var formatted_coords = [];
+
+      if (this.props.route.coordinates) {
+        this.props.route.coordinates.map(function (coord) {
+          formatted_coords.push({
+            lat: coord['lat'],
+            lng: coord['lng']
+          });
+        });
+        this.renderIndMap(formatted_coords);
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.requestWorkout(this.props.workout.id);
+      var _this2 = this;
+
+      this.props.requestWorkout(this.props.workout.id).then(function () {
+        if (_this2.props.workout.route_id != '') {
+          _this2.props.requestRoute(_this2.props.workout.route_id).then(function () {
+            _this2.readyMap();
+          });
+        }
+      });
     }
   }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           workout = _this$props.workout,
-          currentUser = _this$props.currentUser,
-          requestWorkout = _this$props.requestWorkout,
           deleteWorkout = _this$props.deleteWorkout;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "workout-index-item"
-      }, "Title:", workout.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Description:", workout.description, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Workout:", workout.miles, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Title:", workout.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Description:", workout.description, workout.route_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "workout-map-".concat(this.props.workout.id)
+      }) : '', workout.time != 0 ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, " min.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Pace: ", (workout.time / workout.miles).toFixed(2), " min./mile") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Workout:", workout.miles, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "delete-workout-button",
         onClick: function onClick() {
           deleteWorkout(workout.id);
@@ -2261,6 +2324,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.requestWorkouts();
+      this.props.requestRoutes();
     }
   }, {
     key: "render",
@@ -2269,7 +2333,8 @@ function (_React$Component) {
           workouts = _this$props.workouts,
           currentUser = _this$props.currentUser,
           requestWorkout = _this$props.requestWorkout,
-          deleteWorkout = _this$props.deleteWorkout;
+          deleteWorkout = _this$props.deleteWorkout,
+          requestRoute = _this$props.requestRoute;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Workouts"), workouts.map(function (workout) {
@@ -2278,7 +2343,8 @@ function (_React$Component) {
           workout: workout,
           currentUser: currentUser,
           deleteWorkout: deleteWorkout,
-          requestWorkout: requestWorkout
+          requestWorkout: requestWorkout,
+          requestRoute: requestRoute
         });
       }));
     }
@@ -2303,6 +2369,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _workouts_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./workouts_index */ "./frontend/components/workouts/workouts_index.jsx");
 /* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+
 
 
 
@@ -2329,6 +2397,12 @@ var mdtp = function mdtp(dispatch) {
     },
     deleteWorkout: function deleteWorkout(workoutId) {
       return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__["deleteWorkout"])(workoutId));
+    },
+    requestRoute: function requestRoute(routeId) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_3__["requestRoute"])(routeId));
+    },
+    requestRoutes: function requestRoutes() {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_3__["requestRoutes"])());
     }
   };
 };

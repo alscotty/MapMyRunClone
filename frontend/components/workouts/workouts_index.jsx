@@ -8,17 +8,18 @@ class WorkoutsIndex extends React.Component{
 
     componentDidMount(){
         this.props.requestWorkouts();
+        this.props.requestRoutes();
     }
 
     render(){
-        const {workouts,currentUser,requestWorkout,deleteWorkout}=this.props
+        const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute}=this.props
 
         return(
             <div className='workout-index'>
                 <h2>Workouts</h2>
             {workouts.map(workout=>{
                 return(
-                <WorkoutIndexItem key={workout.id*3} workout={workout} currentUser={currentUser} deleteWorkout={deleteWorkout} requestWorkout={requestWorkout} />
+                <WorkoutIndexItem key={workout.id*3} workout={workout} currentUser={currentUser} deleteWorkout={deleteWorkout} requestWorkout={requestWorkout} requestRoute={requestRoute} />
                 )
             })}
             </div>

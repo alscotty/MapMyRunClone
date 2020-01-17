@@ -77,12 +77,13 @@ class ShowMapOnly extends React.Component{
                 <div id="show-map-id" className='show-map'>
 
                 </div>
-                <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
-                    async defer></script>
 
             </div>
         )
     }
+
+    /* <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
 
     render(){
 

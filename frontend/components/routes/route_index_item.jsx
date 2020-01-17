@@ -65,13 +65,13 @@ class RouteIndexItem extends React.Component{
         return (
             <div>
                 <div id={`index-map-${this.props.route.id}`} className='index-map'></div>
-                <script  src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
-                    async defer></script>
 
             </div>
         )
     }
     
+    /* <script  src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
 
     render(){
         const {route,currentUser,deleteRoute}=this.props
