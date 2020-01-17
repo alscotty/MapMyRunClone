@@ -45,11 +45,11 @@ class WorkoutIndexItem extends React.Component{
     }
 
 
-    readyMap() {
+    readyMap(route) {
 
         let formatted_coords = [];
-        if (this.props.route.coordinates) {
-            this.props.route.coordinates.map(coord => {
+        if (route.route.coordinates) {
+            route.route.coordinates.map(coord => {
                 formatted_coords.push({ lat: coord['lat'], lng: coord['lng'] })
             });
             this.renderIndMap(formatted_coords)
@@ -58,18 +58,26 @@ class WorkoutIndexItem extends React.Component{
 
 
     componentDidMount(){
-        this.props.requestWorkout(this.props.workout.id);
-            // .then(()=>{
+        this.props.requestWorkout(this.props.workout.id)
+            .then(()=>{
                 if(this.props.workout.route_id){
                     this.props.requestRoute(this.props.workout.route_id)
-                    .then(()=>{this.readyMap()})
+                    .then(route=>this.readyMap(route))
+
+                    // .then(()=>{this.readyMap()})
                 }
-            // })
+            })
     }
 
 
     render(){
-        const {workout,deleteWorkout}=this.props;
+        const {workout,deleteWorkout,currentUser}=this.props;
+        if(this.props.workout.route){
+            if (this.props.route) {
+            debugger
+            this.readyMap();
+            }
+        }
 
         return(
             <div id='workout-index-item'>
@@ -82,8 +90,12 @@ class WorkoutIndexItem extends React.Component{
                 : ''}
 
                 {workout.route_id ? (
+                    <span>
+                        {currentUser.username} ran {workout.route.title}
+                        <br/>
                     <div  className='workout-map' id={`workout-map-${this.props.workout.id}`}>
                     </div>
+                    </span>
                 ) : ''}
 
                 {workout.time !=0 ? (
