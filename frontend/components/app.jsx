@@ -13,22 +13,19 @@ import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import RoutesIndex from './routes/routes_index_container'
 import RoutesForm from './routes/routes_form_container'
+import RouteShow from './routes/route_show_container'
 import Splash from './splash page/splash_page'
+import Footer from './footer/footer'
+import WorkoutForm from './workouts/workouts_form_container'
+import WorkoutsIndex from './workouts/workouts_index_container'
+import WorkoutRouteForm from './workouts/workout_route_form_container'
+
 
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
 const App = () => (
   <div>
     <header>
-      <Link to="/" className="header-link">
-        <h1>MapMyRunClone</h1>
-      </Link>
-      <Link to='/routes/new' className='new-route-link'>
-        Create Route
-      </Link>
-      <Link to='/routes' className='index-routes-link'>
-        All Routes
-      </Link>
       <GreetingContainer />
     </header>
 
@@ -36,10 +33,22 @@ const App = () => (
     <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
-      <ProtectedRoute path='/routes/new' component={RoutesForm} />
+      <ProtectedRoute exact path='/routes/new' component={RoutesForm} />
+      <ProtectedRoute exact path='/routes/:routeId' component={RouteShow} />
+  
+      <ProtectedRoute exact path='/routes/:routeId/workout' component={WorkoutRouteForm} />
+
+      <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
+      <ProtectedRoute path='/workouts' component={WorkoutsIndex}/>
+
       <ProtectedRoute path='/routes' component={RoutesIndex} />
     </Switch>
-    
+
+
+    <footer>
+      <Footer/>
+      
+    </footer>
   </div>
 );
 

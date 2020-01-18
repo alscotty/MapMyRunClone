@@ -1,0 +1,33 @@
+.workout-form{
+    margin-top:3.2em;
+    border: 1px solid black;
+    margin-left: 1%;
+    margin-right:1% ;
+    border-radius: 5px;
+    color:white;
+    text-shadow: 2px 2px black;
+   background-image: image-url('pleasantonRidgeSunset.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    padding-left: 2%;
+
+}
+
+#workout-button{
+    margin-top:2px;
+    margin-left:1%;
+    font-size: small;
+    border: 1px solid grey;
+    border-radius:5px;
+    font-family: 'Arial Rounded MT Bold';
+}
+#workout-button:hover{
+    background-color:rgb(195, 201, 207);
+}
+
+
+.workout-errors{
+    font-size: small;
+    color:red;
+}

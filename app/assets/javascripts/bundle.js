@@ -90,7 +90,7 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/route_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ROUTES, RECEIVE_ROUTE, REMOVE_ROUTE, requestRoutes, requestRoute, createRoute, deleteRoute */
+/*! exports provided: RECEIVE_ROUTES, RECEIVE_ROUTE, REMOVE_ROUTE, RECEIVE_ROUTE_ERRORS, CLEAR_ROUTE_ERRORS, receiveRouteErrors, clearRouteErrors, requestRoutes, requestRoute, createRoute, deleteRoute */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -98,6 +98,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ROUTES", function() { return RECEIVE_ROUTES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ROUTE", function() { return RECEIVE_ROUTE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ROUTE", function() { return REMOVE_ROUTE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ROUTE_ERRORS", function() { return RECEIVE_ROUTE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_ROUTE_ERRORS", function() { return CLEAR_ROUTE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveRouteErrors", function() { return receiveRouteErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearRouteErrors", function() { return clearRouteErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestRoutes", function() { return requestRoutes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestRoute", function() { return requestRoute; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRoute", function() { return createRoute; });
@@ -106,7 +110,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var RECEIVE_ROUTES = 'RECEIVE_ROUTES';
 var RECEIVE_ROUTE = 'RECEIVE_ROUTE';
-var REMOVE_ROUTE = 'REMOVE_ROUTE'; //reg action creators
+var REMOVE_ROUTE = 'REMOVE_ROUTE';
+var RECEIVE_ROUTE_ERRORS = 'RECEIVE_ROUTE_ERRORS';
+var CLEAR_ROUTE_ERRORS = 'CLEAR_ROUTE_ERRORS'; //reg action creators
 
 var receiveRoutes = function receiveRoutes(routes) {
   return {
@@ -128,8 +134,19 @@ var removeRoute = function removeRoute(route) {
     type: REMOVE_ROUTE,
     route: route
   };
-}; //thunk actions
+};
 
+var receiveRouteErrors = function receiveRouteErrors(errors) {
+  return {
+    type: RECEIVE_ROUTE_ERRORS,
+    errors: errors
+  };
+};
+var clearRouteErrors = function clearRouteErrors() {
+  return {
+    type: CLEAR_ROUTE_ERRORS
+  };
+}; //thunk actions
 
 var requestRoutes = function requestRoutes() {
   return function (dispatch) {
@@ -149,6 +166,8 @@ var createRoute = function createRoute(route, coordinates) {
   return function (dispatch) {
     return _util_route_api_utils__WEBPACK_IMPORTED_MODULE_0__["createRoute"](route, coordinates).then(function (route, coordinates) {
       return dispatch(receiveRoute(route, coordinates));
+    }, function (err) {
+      dispatch(receiveRouteErrors(err.responseJSON));
     });
   };
 };
@@ -240,6 +259,100 @@ var logout = function logout() {
 
 /***/ }),
 
+/***/ "./frontend/actions/workout_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/workout_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_WORKOUTS, RECEIVE_WORKOUT, REMOVE_WORKOUT, RECEIVE_WORKOUT_ERRORS, CLEAR_WORKOUT_ERRORS, receiveWorkoutErrors, clearWorkoutErrors, requestWorkouts, requestWorkout, createWorkout, deleteWorkout */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WORKOUTS", function() { return RECEIVE_WORKOUTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WORKOUT", function() { return RECEIVE_WORKOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_WORKOUT", function() { return REMOVE_WORKOUT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_WORKOUT_ERRORS", function() { return RECEIVE_WORKOUT_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_WORKOUT_ERRORS", function() { return CLEAR_WORKOUT_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveWorkoutErrors", function() { return receiveWorkoutErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearWorkoutErrors", function() { return clearWorkoutErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestWorkouts", function() { return requestWorkouts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestWorkout", function() { return requestWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWorkout", function() { return createWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteWorkout", function() { return deleteWorkout; });
+/* harmony import */ var _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/workout_api_utils */ "./frontend/util/workout_api_utils.js");
+
+var RECEIVE_WORKOUTS = 'RECEIVE_WORKOUTS';
+var RECEIVE_WORKOUT = 'RECEIVE_WORKOUT';
+var REMOVE_WORKOUT = 'REMOVE_WORKOUT';
+var RECEIVE_WORKOUT_ERRORS = 'RECEIVE_WORKOUT_ERRORS';
+var CLEAR_WORKOUT_ERRORS = 'CLEAR_WORKOUT_ERRORS'; //reg action creators
+
+var receiveWorkouts = function receiveWorkouts(workouts) {
+  return {
+    type: RECEIVE_WORKOUTS,
+    workouts: workouts
+  };
+};
+
+var receiveWorkout = function receiveWorkout(workout) {
+  return {
+    type: RECEIVE_WORKOUT,
+    workout: workout
+  };
+};
+
+var removeWorkout = function removeWorkout(workoutId) {
+  return {
+    type: REMOVE_WORKOUT,
+    workoutId: workoutId
+  };
+};
+
+var receiveWorkoutErrors = function receiveWorkoutErrors(errors) {
+  return {
+    type: RECEIVE_WORKOUT_ERRORS,
+    errors: errors
+  };
+};
+var clearWorkoutErrors = function clearWorkoutErrors() {
+  return {
+    type: CLEAR_WORKOUT_ERRORS
+  };
+}; //thunk actions
+
+var requestWorkouts = function requestWorkouts() {
+  return function (dispatch) {
+    return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["fetchWorkouts"]().then(function (workouts) {
+      return dispatch(receiveWorkouts(workouts));
+    });
+  };
+};
+var requestWorkout = function requestWorkout(workoutId) {
+  return function (dispatch) {
+    return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["fetchWorkout"](workoutId).then(function (workout) {
+      return dispatch(receiveWorkout(workout));
+    });
+  };
+};
+var createWorkout = function createWorkout(workout) {
+  return function (dispatch) {
+    return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["createWorkout"](workout).then(function (workout) {
+      return dispatch(receiveWorkout(workout));
+    }, function (err) {
+      dispatch(receiveWorkoutErrors(err.responseJSON));
+    });
+  };
+};
+var deleteWorkout = function deleteWorkout(workoutId) {
+  return function (dispatch) {
+    return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["deleteWorkout"](workoutId).then(function () {
+      return dispatch(removeWorkout(workoutId));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/components/app.jsx":
 /*!*************************************!*\
   !*** ./frontend/components/app.jsx ***!
@@ -258,8 +371,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./session_form/login_form_container */ "./frontend/components/session_form/login_form_container.jsx");
 /* harmony import */ var _routes_routes_index_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./routes/routes_index_container */ "./frontend/components/routes/routes_index_container.js");
 /* harmony import */ var _routes_routes_form_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./routes/routes_form_container */ "./frontend/components/routes/routes_form_container.js");
-/* harmony import */ var _splash_page_splash_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./splash page/splash_page */ "./frontend/components/splash page/splash_page.jsx");
-/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
+/* harmony import */ var _routes_route_show_container__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./routes/route_show_container */ "./frontend/components/routes/route_show_container.js");
+/* harmony import */ var _splash_page_splash_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./splash page/splash_page */ "./frontend/components/splash page/splash_page.jsx");
+/* harmony import */ var _footer_footer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./footer/footer */ "./frontend/components/footer/footer.jsx");
+/* harmony import */ var _workouts_workouts_form_container__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./workouts/workouts_form_container */ "./frontend/components/workouts/workouts_form_container.js");
+/* harmony import */ var _workouts_workouts_index_container__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./workouts/workouts_index_container */ "./frontend/components/workouts/workouts_index_container.js");
+/* harmony import */ var _workouts_workout_route_form_container__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./workouts/workout_route_form_container */ "./frontend/components/workouts/workout_route_form_container.js");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
+
+
+
+
+
 
 
 
@@ -272,37 +395,115 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/",
-    className: "header-link"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "MapMyRunClone")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/routes/new",
-    className: "new-route-link"
-  }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
-    to: "/routes",
-    className: "index-routes-link"
-  }, "All Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
     exact: true,
     path: "/",
-    component: _splash_page_splash_page__WEBPACK_IMPORTED_MODULE_8__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_9__["AuthRoute"], {
+    component: _splash_page_splash_page__WEBPACK_IMPORTED_MODULE_9__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["AuthRoute"], {
     exact: true,
     path: "/login",
     component: _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_9__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["AuthRoute"], {
     exact: true,
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_9__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
+    exact: true,
     path: "/routes/new",
     component: _routes_routes_form_container__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_9__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
+    exact: true,
+    path: "/routes/:routeId",
+    component: _routes_route_show_container__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
+    exact: true,
+    path: "/routes/:routeId/workout",
+    component: _workouts_workout_route_form_container__WEBPACK_IMPORTED_MODULE_13__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
+    exact: true,
+    path: "/workouts/new",
+    component: _workouts_workouts_form_container__WEBPACK_IMPORTED_MODULE_11__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
+    path: "/workouts",
+    component: _workouts_workouts_index_container__WEBPACK_IMPORTED_MODULE_12__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
     path: "/routes",
     component: _routes_routes_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-  })));
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_footer_footer__WEBPACK_IMPORTED_MODULE_10__["default"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./frontend/components/footer/footer.jsx":
+/*!***********************************************!*\
+  !*** ./frontend/components/footer/footer.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Footer =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Footer, _React$Component);
+
+  function Footer() {
+    _classCallCheck(this, Footer);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Footer).apply(this, arguments));
+  }
+
+  _createClass(Footer, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        id: "git",
+        href: "https://github.com/alscotty"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.githubURL,
+        alt: "githublink"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        id: "linked",
+        href: "https://www.linkedin.com/in/adam-scott-4b0808108/"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: window.linkedInURL,
+        alt: "linkedInlink"
+      })));
+    }
+  }]);
+
+  return Footer;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+;
+/* harmony default export */ __webpack_exports__["default"] = (Footer);
 
 /***/ }),
 
@@ -326,7 +527,22 @@ var Greeting = function Greeting(_ref) {
       logout = _ref.logout;
 
   var sessionLinks = function sessionLinks() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/",
+      className: "header-link"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes/new",
+      className: "route-links"
+    }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes",
+      className: "route-links"
+    }, "Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/workouts/new",
+      className: "route-links"
+    }, "Create Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/workouts",
+      className: "route-links"
+    }, "Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
       className: "login-signup"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       id: "logLink",
@@ -334,18 +550,33 @@ var Greeting = function Greeting(_ref) {
     }, "LOG IN"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
       id: "signLink",
       to: "/signup"
-    }, "SIGN UP"));
+    }, "SIGN UP")));
   };
 
   var personalGreeting = function personalGreeting() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hgroup", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes",
+      className: "header-link"
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes/new",
+      className: "route-links"
+    }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/routes",
+      className: "route-links"
+    }, "Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/workouts/new",
+      className: "route-links"
+    }, "Create Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      to: "/workouts",
+      className: "route-links"
+    }, "Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hgroup", {
       className: "header-group"
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
       className: "header-name"
     }, " Hi, ", currentUser.username, "! \xA0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       className: "header-button",
       onClick: logout
-    }, "LOG OUT"));
+    }, "LOG OUT")));
   };
 
   return currentUser ? personalGreeting() : sessionLinks();
@@ -432,7 +663,189 @@ var Root = function Root(_ref) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var RouteIndexItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(RouteIndexItem, _React$Component);
+
+  function RouteIndexItem(props) {
+    var _this;
+
+    _classCallCheck(this, RouteIndexItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RouteIndexItem).call(this, props));
+    _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
+    _this.mapSetup = _this.mapSetup.bind(_assertThisInitialized(_this));
+    _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(RouteIndexItem, [{
+    key: "renderIndMap",
+    value: function renderIndMap(coordinates) {
+      var ren = new google.maps.DirectionsRenderer();
+      var dir = new google.maps.DirectionsService();
+      var map = new google.maps.Map(document.getElementById("index-map-".concat(this.props.route.id)), {
+        center: {
+          lat: 37.773972,
+          lng: -122.431297
+        },
+        zoom: 13,
+        maxZoom: 15,
+        disableDefaultUI: true,
+        gestureHandling: 'none'
+      });
+      ren.setMap(map);
+      var waypts = [];
+
+      for (var i = 0; i < coordinates.length; i++) {
+        waypts.push({
+          location: coordinates[i],
+          stopover: false
+        });
+      }
+
+      dir.route({
+        origin: coordinates[0],
+        destination: coordinates[coordinates.length - 1],
+        waypoints: waypts,
+        optimizeWaypoints: false,
+        travelMode: 'WALKING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          ren.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to' + status);
+        }
+      });
+    }
+  }, {
+    key: "readyMap",
+    value: function readyMap() {
+      var formatted_coords = [];
+
+      if (this.props.route.coordinates) {
+        this.props.route.coordinates.map(function (coord) {
+          formatted_coords.push({
+            lat: coord['lat'],
+            lng: coord['lng']
+          });
+        });
+        this.renderIndMap(formatted_coords);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.requestRoute(this.props.route.id).then(function () {
+        _this2.readyMap();
+      });
+    }
+  }, {
+    key: "mapSetup",
+    value: function mapSetup() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "index-map-".concat(this.props.route.id),
+        className: "index-map"
+      }));
+    }
+    /* <script  src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
+
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          route = _this$props.route,
+          currentUser = _this$props.currentUser,
+          deleteRoute = _this$props.deleteRoute;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: route.id,
+        className: "route-index-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "title"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "linky",
+        to: "/routes"
+      }, "".concat(currentUser.username, " ")), "created the route", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        className: "linky",
+        to: "/routes/".concat(route.id)
+      }, " ".concat(route.title))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "mini-flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "distance-only"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "dist"
+      }, "Distance"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "num"
+      }, route.miles), "mi"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/routes/".concat(route.id, "/workout")
+      }, "Save as Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "delete-button",
+        onClick: function onClick() {
+          deleteRoute(route.id);
+        }
+      }, "Delete Route"));
+    }
+  }]);
+
+  return RouteIndexItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (RouteIndexItem); //bonus logic, used if feed included other users:
+
+{}
+/* <h3>{allUsers.map(user => {
+                       if (user.id == route.user_id) {
+                           return (<div key={route.id}>
+                               Created by: {user.username}
+                           </div>
+                           )
+                       }})}</h3> */
+// {
+// currentUser.id == route.user_id ? (
+//     <button onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
+// ) : ('')
+// }
+
+/***/ }),
+
+/***/ "./frontend/components/routes/route_show.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/routes/route_show.jsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _show_map_only__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./show_map_only */ "./frontend/components/routes/show_map_only.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -454,54 +867,74 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var RouteIndexItem =
+var RouteShow =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(RouteIndexItem, _React$Component);
+  _inherits(RouteShow, _React$Component);
 
-  function RouteIndexItem(props) {
-    _classCallCheck(this, RouteIndexItem);
+  function RouteShow(props) {
+    _classCallCheck(this, RouteShow);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(RouteIndexItem).call(this, props));
+    return _possibleConstructorReturn(this, _getPrototypeOf(RouteShow).call(this, props));
   }
 
-  _createClass(RouteIndexItem, [{
+  _createClass(RouteShow, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.requestRoute(this.props.match.params.routeId);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          route = _this$props.route,
-          currentUser = _this$props.currentUser,
-          deleteRoute = _this$props.deleteRoute,
-          allUsers = _this$props.allUsers;
+      var route = this.props.route; //need to call route map render functions here after everything has rendered, create a separate component, much easier
+
+      if (!route) return null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        key: route.id
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, route.title), "Coordinates:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), route.coordinates ? route.coordinates.map(function (coord) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: coord.id
-        }, "Lat: ", coord.lat, ", Lng: ", coord.lng, ", Route_id: ", coord.route_id, ", Ord: ", coord.ord);
-      }) : '', currentUser.id == route.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        onClick: function onClick() {
-          deleteRoute(route.id);
-        }
-      }, "Delete Route") : '');
+        className: "route-show"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_show_map_only__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        route: route
+      }));
     }
   }]);
 
-  return RouteIndexItem;
+  return RouteShow;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (RouteIndexItem); //display who created the route, works but inefficient,should be a better way:
+/* harmony default export */ __webpack_exports__["default"] = (RouteShow);
 
-{
-  /* <h5>{allUsers.map(user => {
-     if (user.id == route.user_id) {
-         return (<div>
-             Created by: {user.username}
-         </div>
-         )
-     }
-  })}</h5> */
-}
+/***/ }),
+
+/***/ "./frontend/components/routes/route_show_container.js":
+/*!************************************************************!*\
+  !*** ./frontend/components/routes/route_show_container.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+/* harmony import */ var _route_show__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./route_show */ "./frontend/components/routes/route_show.jsx");
+
+
+
+
+var mSTP = function mSTP(state, ownProps) {
+  return {
+    route: state.entities.routes[ownProps.match.params.routeId]
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    requestRoute: function requestRoute(routeId) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_1__["requestRoute"])(routeId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_route_show__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -556,12 +989,15 @@ function (_React$Component) {
     _this.state = {
       routeInfo: {
         title: _this.props.title,
-        user_id: _this.props.currentUser.id
+        user_id: _this.props.currentUser.id,
+        miles: 0
       },
       coordinates: [],
       map: '',
       poly: '',
-      path: ''
+      path: [],
+      directionsService: '',
+      directionsRenderer: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.renderMap = _this.renderMap.bind(_assertThisInitialized(_this));
@@ -569,6 +1005,7 @@ function (_React$Component) {
     _this.addLatLng = _this.addLatLng.bind(_assertThisInitialized(_this));
     _this.snapPoint = _this.snapPoint.bind(_assertThisInitialized(_this));
     _this.processSnappedPosData = _this.processSnappedPosData.bind(_assertThisInitialized(_this));
+    _this.calcAndDisplayRoute = _this.calcAndDisplayRoute.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -579,7 +1016,7 @@ function (_React$Component) {
 
       e.preventDefault;
       this.props.action(this.state.routeInfo, this.state.coordinates).then(function () {
-        _this2.props.history.push('./routes');
+        _this2.props.history.push('/routes');
       });
     }
   }, {
@@ -607,24 +1044,14 @@ function (_React$Component) {
         lat: snappedLat,
         lng: snappedLng
       });
-      this.state.path.push({
-        lat: snappedLat,
-        lng: snappedLng
-      });
       new google.maps.Marker({
         position: {
           lat: snappedLat,
           lng: snappedLng
         },
-        title: '#' + this.state.path.getLength(),
         map: this.state.map
       });
-      var snappedPoly = new google.maps.Polyline({
-        path: this.state.coordinates,
-        strokeColor: 'green',
-        strokeWeight: 3
-      });
-      snappedPoly.setMap(this.state.map);
+      this.calcAndDisplayRoute();
     }
   }, {
     key: "snapPoint",
@@ -635,8 +1062,7 @@ function (_React$Component) {
       $.get('https://roads.googleapis.com/v1/snapToRoads', {
         interpolate: true,
         key: window.googleAPIKey,
-        path: posArr.join(",") //.join('|')
-
+        path: posArr.join(",")
       }, function (data) {
         _this4.processSnappedPosData(data);
       });
@@ -644,48 +1070,82 @@ function (_React$Component) {
   }, {
     key: "addLatLng",
     value: function addLatLng(e) {
-      var poly = this.state.poly;
-      this.setState({
-        path: poly.getPath()
-      }); //push in formatted coordinates into state as they are added:
-
       var newLat = e.latLng['lat']();
       var newLng = e.latLng['lng']();
-      this.snapPoint(newLat, newLng); // this.state.coordinates.push({lat:newLat,lng:newLng})
-      // console.log(this.state.coordinates)
-      //change here! snap the position before pushing onto path!
-      // this.state.path.push(e.latLng)
-      //     new google.maps.Marker({
-      //     position: e.latLng,
-      //     title: '#'+this.state.path.getLength(),
-      //     map: this.state.map
-      // })
-    } //maybe should use this.setState({}) check later if errors
+      this.snapPoint(newLat, newLng);
+    }
+  }, {
+    key: "calcAndDisplayRoute",
+    value: function calcAndDisplayRoute() {
+      var _this5 = this;
 
+      var waypts = [];
+
+      for (var i = 0; i < this.state.coordinates.length; i++) {
+        waypts.push({
+          location: this.state.coordinates[i],
+          stopover: false
+        });
+      }
+
+      var _this$state = this.state,
+          coordinates = _this$state.coordinates,
+          directionsService = _this$state.directionsService,
+          directionsRenderer = _this$state.directionsRenderer;
+      directionsService.route({
+        origin: coordinates[0],
+        destination: coordinates[coordinates.length - 1],
+        waypoints: waypts,
+        optimizeWaypoints: false,
+        travelMode: 'WALKING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          directionsRenderer.setDirections(response); //calc miles
+
+          var route = response.routes;
+          var dist = route[0].legs[0].distance.value;
+
+          var routeInfo = _objectSpread({}, _this5.state.routeInfo);
+
+          routeInfo.miles = (dist * 0.00062137).toFixed(2);
+
+          _this5.setState({
+            routeInfo: routeInfo
+          });
+
+          console.log(_this5.state.routeInfo.miles);
+        } else {
+          window.alert('Directions request failed due to' + status);
+        }
+      });
+    }
   }, {
     key: "makeMap",
     value: function makeMap() {
+      var _this6 = this;
+
+      this.state.directionsService = new google.maps.DirectionsService();
+      this.state.directionsRenderer = new google.maps.DirectionsRenderer();
       this.state.map = new google.maps.Map(document.getElementById('map'), {
         center: {
           lat: 37.773972,
           lng: -122.431297
         },
-        zoom: 13
+        zoom: 13,
+        maxZoom: 15
       });
-      this.state.poly = new google.maps.Polyline({
-        strokeColor: '#79d743',
-        strokeOpacity: 1.0,
-        strokeWeight: 3
+      var _this$state2 = this.state,
+          directionsRenderer = _this$state2.directionsRenderer,
+          map = _this$state2.map;
+      directionsRenderer.setMap(map);
+      map.addListener('click', function (e) {
+        _this6.addLatLng(e);
       });
-      var _this$state = this.state,
-          map = _this$state.map,
-          poly = _this$state.poly;
-      poly.setMap(map);
-      map.addListener('click', this.addLatLng);
     }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.props.clearRouteErrors();
       this.makeMap();
     }
   }, {
@@ -693,25 +1153,40 @@ function (_React$Component) {
     value: function renderMap() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "map"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
-        src: "https://maps.googleapis.com/maps/api/js?key=".concat(window.googleAPIKey, "&callback=initMap"),
-        async: true,
-        defer: true
+      }));
+    }
+    /* <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
+
+  }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      var errors = this.props.errors;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "login-errors"
+      }, errors.map(function (error, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: "error-".concat(i)
+        }, error);
       }));
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create New Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "route-form",
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Title", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, "Route Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
+        id: "route-title-input",
+        placeholder: "Name this map",
         value: this.state.routeInfo.title,
         onChange: this.updateTitle()
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderMap(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Distance: ", this.state.routeInfo.miles, " MI"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "route-button",
         type: "submit",
-        value: "Create Route"
-      })));
+        value: "Save Route"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderErrors()), this.renderMap());
     }
   }]);
 
@@ -741,9 +1216,11 @@ __webpack_require__.r(__webpack_exports__);
 var mstp = function mstp(state) {
   var entities = state.entities;
   var session = state.session;
+  var errors = state.errors;
   return {
     title: '',
-    currentUser: entities.users[session.id]
+    currentUser: entities.users[session.id],
+    errors: errors.routes
   };
 };
 
@@ -751,6 +1228,9 @@ var mdtp = function mdtp(dispatch) {
   return {
     action: function action(route, coordinates) {
       return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["createRoute"])(route, coordinates));
+    },
+    clearRouteErrors: function clearRouteErrors() {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["clearRouteErrors"])());
     }
   };
 };
@@ -816,14 +1296,20 @@ function (_React$Component) {
       var _this$props = this.props,
           routes = _this$props.routes,
           currentUser = _this$props.currentUser,
-          allUsers = _this$props.allUsers;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Welcome to Routes Index!"), routes.map(function (route) {
+          allUsers = _this$props.allUsers,
+          requestRoute = _this$props.requestRoute;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "route-index"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        id: "act-feed"
+      }, "Activity Feed"), routes.map(function (route) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: route.id,
+          key: route.id * 2,
           route: route,
           deleteRoute: _this.props.deleteRoute,
           currentUser: currentUser,
-          allUsers: allUsers
+          allUsers: allUsers,
+          requestRoute: requestRoute
         });
       }));
     }
@@ -855,9 +1341,12 @@ __webpack_require__.r(__webpack_exports__);
 var mstp = function mstp(state) {
   var entities = state.entities;
   var session = state.session;
+  var routes = Object.values(state.entities.routes).filter(function (route) {
+    return route.user_id === state.session.id;
+  });
   return {
     currentUser: entities.users[session.id],
-    routes: Object.values(state.entities.routes),
+    routes: routes,
     allUsers: Object.values(state.entities.users)
   };
 };
@@ -867,6 +1356,9 @@ var mdtp = function mdtp(dispatch) {
     requestRoutes: function requestRoutes() {
       return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["requestRoutes"])());
     },
+    requestRoute: function requestRoute(routeId) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["requestRoute"])(routeId));
+    },
     deleteRoute: function deleteRoute(routeId) {
       return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_2__["deleteRoute"])(routeId));
     }
@@ -874,6 +1366,150 @@ var mdtp = function mdtp(dispatch) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mstp, mdtp)(_routes_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/routes/show_map_only.jsx":
+/*!******************************************************!*\
+  !*** ./frontend/components/routes/show_map_only.jsx ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var ShowMapOnly =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ShowMapOnly, _React$Component);
+
+  function ShowMapOnly(props) {
+    var _this;
+
+    _classCallCheck(this, ShowMapOnly);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ShowMapOnly).call(this, props));
+    _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
+    _this.mapSetup = _this.mapSetup.bind(_assertThisInitialized(_this));
+    _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ShowMapOnly, [{
+    key: "renderIndMap",
+    value: function renderIndMap(coordinates) {
+      var ren = new google.maps.DirectionsRenderer();
+      var dir = new google.maps.DirectionsService();
+      var map = new google.maps.Map(document.getElementById("show-map-id"), {
+        center: {
+          lat: 37.773972,
+          lng: -122.431297
+        },
+        zoom: 13,
+        maxZoom: 15,
+        disableDefaultUI: true
+      });
+      ren.setMap(map);
+      var waypts = [];
+
+      for (var i = 0; i < coordinates.length; i++) {
+        waypts.push({
+          location: coordinates[i],
+          stopover: false
+        });
+      }
+
+      dir.route({
+        origin: coordinates[0],
+        destination: coordinates[coordinates.length - 1],
+        waypoints: waypts,
+        optimizeWaypoints: false,
+        travelMode: 'WALKING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          ren.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to' + status);
+        }
+      });
+    }
+  }, {
+    key: "readyMap",
+    value: function readyMap() {
+      var formatted_coords = [];
+
+      if (this.props.route.coordinates) {
+        this.props.route.coordinates.map(function (coord) {
+          formatted_coords.push({
+            lat: coord['lat'],
+            lng: coord['lng']
+          });
+        });
+        this.renderIndMap(formatted_coords);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.readyMap();
+    }
+  }, {
+    key: "mapSetup",
+    value: function mapSetup() {
+      var route = this.props.route;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "show-box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "show-text"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "tags"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "run-tag"
+      }, " RUN "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "show-miles"
+      }, " ", route.miles, " MI ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "show-title"
+      }, route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "show-map-id",
+        className: "show-map"
+      }));
+    }
+    /* <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
+        async defer></script> */
+
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.mapSetup());
+    }
+  }]);
+
+  return ShowMapOnly;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (ShowMapOnly);
 
 /***/ }),
 
@@ -983,6 +1619,11 @@ function (_React$Component) {
       this.props.clearErrors();
     }
   }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clearErrors();
+    }
+  }, {
     key: "update",
     value: function update(field) {
       var _this2 = this;
@@ -1053,7 +1694,7 @@ function (_React$Component) {
         className: "session-submit",
         type: "submit",
         value: this.props.formType
-      }), this.props.formType == 'LOG IN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.props.formType == 'LOG IN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "demo-login",
         onClick: this.handleDemoLogin
       }, "DEMO LOGIN") : '')));
@@ -1159,11 +1800,17 @@ function (_React$Component) {
   _createClass(Splash, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        id: "splash1",
-        src: window.splash1URL,
-        alt: "inspirational running pic"
-      }));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "splash"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "mtBaldy"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "space-me"
+      }, "Go the extra mile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "The 20th best web run tracking experience, backed by the world's smallest digital health and fitness community.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "pRidge"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        id: "space-me"
+      }, "Find your own path")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Create routes and save them for the next time you're ready to run")));
     }
   }]);
 
@@ -1171,6 +1818,604 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Splash);
+
+/***/ }),
+
+/***/ "./frontend/components/workouts/workout_form.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/workouts/workout_form.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var WorkoutForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(WorkoutForm, _React$Component);
+
+  function WorkoutForm(props) {
+    var _this;
+
+    _classCallCheck(this, WorkoutForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WorkoutForm).call(this, props));
+    _this.state = _this.props.workout;
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(WorkoutForm, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault;
+      this.props.action(this.state).then(function () {
+        _this2.props.history.push('/workouts');
+      });
+    }
+  }, {
+    key: "update",
+    value: function update(field) {
+      var _this3 = this;
+
+      return function (e) {
+        _this3.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.clearWorkoutErrors();
+    }
+  }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      var errors = this.props.errors;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "workout-errors"
+      }, errors.map(function (error, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: "error-".concat(i)
+        }, error);
+      }));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "workout-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "LOG A WORKOUT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.title,
+        onChange: this.update('title'),
+        placeholder: "Title"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        cols: "30",
+        rows: "10",
+        value: this.state.description,
+        onChange: this.update('description'),
+        placeholder: "Description"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time(in minutes)", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        value: this.state.time,
+        onChange: this.update('time'),
+        placeholder: "Time (in minutes)"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "number",
+        value: this.state.miles,
+        onChange: this.update('miles'),
+        placeholder: "Miles"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        id: "workout-button",
+        value: this.props.formType
+      }), this.renderErrors()));
+    }
+  }]);
+
+  return WorkoutForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (WorkoutForm);
+
+/***/ }),
+
+/***/ "./frontend/components/workouts/workout_index_item.jsx":
+/*!*************************************************************!*\
+  !*** ./frontend/components/workouts/workout_index_item.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var WorkoutIndexItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(WorkoutIndexItem, _React$Component);
+
+  function WorkoutIndexItem(props) {
+    var _this;
+
+    _classCallCheck(this, WorkoutIndexItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WorkoutIndexItem).call(this, props));
+    _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
+    _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(WorkoutIndexItem, [{
+    key: "renderIndMap",
+    value: function renderIndMap(coordinates) {
+      var ren = new google.maps.DirectionsRenderer();
+      var dir = new google.maps.DirectionsService();
+      var map = new google.maps.Map(document.getElementById("workout-map-".concat(this.props.workout.id)), {
+        center: {
+          lat: 37.773972,
+          lng: -122.431297
+        },
+        zoom: 13,
+        maxZoom: 15,
+        disableDefaultUI: true,
+        gestureHandling: 'none'
+      });
+      ren.setMap(map);
+      var waypts = [];
+
+      for (var i = 0; i < coordinates.length; i++) {
+        waypts.push({
+          location: coordinates[i],
+          stopover: false
+        });
+      }
+
+      dir.route({
+        origin: coordinates[0],
+        destination: coordinates[coordinates.length - 1],
+        waypoints: waypts,
+        optimizeWaypoints: false,
+        travelMode: 'WALKING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          ren.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to' + status);
+        }
+      });
+    }
+  }, {
+    key: "readyMap",
+    value: function readyMap(route) {
+      var formatted_coords = [];
+
+      if (route.route.coordinates) {
+        route.route.coordinates.map(function (coord) {
+          formatted_coords.push({
+            lat: coord['lat'],
+            lng: coord['lng']
+          });
+        });
+        this.renderIndMap(formatted_coords);
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.requestWorkout(this.props.workout.id).then(function () {
+        if (_this2.props.workout.route_id) {
+          _this2.props.requestRoute(_this2.props.workout.route_id).then(function (route) {
+            return _this2.readyMap(route);
+          });
+        }
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          workout = _this$props.workout,
+          deleteWorkout = _this$props.deleteWorkout,
+          currentUser = _this$props.currentUser;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "workout-index-item"
+      }, "Title:", workout.title, workout.description.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Description:", workout.description) : '', workout.route_id && workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.username, " ran ", workout.route.title, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "workout-map",
+        id: "workout-map-".concat(this.props.workout.id)
+      })) : '', workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, " min.") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Miles:", workout.route.miles) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Miles:", workout.miles), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "delete-workout-button",
+        onClick: function onClick() {
+          deleteWorkout(workout.id);
+        }
+      }, "Delete Workout"));
+    }
+  }]);
+
+  return WorkoutIndexItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (WorkoutIndexItem);
+
+/***/ }),
+
+/***/ "./frontend/components/workouts/workout_route_form.jsx":
+/*!*************************************************************!*\
+  !*** ./frontend/components/workouts/workout_route_form.jsx ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _workout_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./workout_form */ "./frontend/components/workouts/workout_form.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var WorkoutRouteForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(WorkoutRouteForm, _React$Component);
+
+  function WorkoutRouteForm(props) {
+    _classCallCheck(this, WorkoutRouteForm);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(WorkoutRouteForm).call(this, props));
+  }
+
+  _createClass(WorkoutRouteForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.requestRoute(this.props.match.params.routeId);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          action = _this$props.action,
+          formType = _this$props.formType,
+          route = _this$props.route,
+          clearWorkoutErrors = _this$props.clearWorkoutErrors,
+          workout = _this$props.workout,
+          errors = _this$props.errors,
+          currentUser = _this$props.currentUser;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        history: this.props.history,
+        action: action,
+        errors: errors,
+        currentUser: currentUser,
+        formType: formType,
+        route: route,
+        clearWorkoutErrors: clearWorkoutErrors,
+        workout: workout
+      });
+    }
+  }]);
+
+  return WorkoutRouteForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (WorkoutRouteForm);
+
+/***/ }),
+
+/***/ "./frontend/components/workouts/workout_route_form_container.js":
+/*!**********************************************************************!*\
+  !*** ./frontend/components/workouts/workout_route_form_container.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _workout_route_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./workout_route_form */ "./frontend/components/workouts/workout_route_form.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+
+
+
+
+
+
+var mstp = function mstp(state, ownProps) {
+  var entities = state.entities;
+  var session = state.session;
+  var errors = state.errors;
+  var route = entities.routes[ownProps.match.params.routeId];
+  var currentUser = entities.users[session.id];
+  return {
+    workout: {
+      user_id: currentUser.id,
+      route_id: ownProps.match.params.routeId,
+      title: '',
+      description: '',
+      time: 0,
+      miles: 0
+    },
+    route: route,
+    currentUser: currentUser,
+    errors: errors.workouts,
+    formType: 'Log Workout'
+  };
+};
+
+var mdtp = function mdtp(dispatch) {
+  return {
+    action: function action(workout) {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__["createWorkout"])(workout));
+    },
+    clearWorkoutErrors: function clearWorkoutErrors() {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__["clearWorkoutErrors"])());
+    },
+    requestRoute: function requestRoute(routeId) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_3__["requestRoute"])(routeId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mstp, mdtp)(_workout_route_form__WEBPACK_IMPORTED_MODULE_1__["default"])));
+
+/***/ }),
+
+/***/ "./frontend/components/workouts/workouts_form_container.js":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/workouts/workouts_form_container.js ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _workout_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./workout_form */ "./frontend/components/workouts/workout_form.jsx");
+/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+
+
+
+
+var mSTP = function mSTP(state) {
+  var entities = state.entities;
+  var session = state.session;
+  var errors = state.errors;
+  return {
+    workout: {
+      user_id: entities.users[session.id].id,
+      route_id: '',
+      title: '',
+      description: '',
+      time: 0,
+      miles: 0
+    },
+    currentUser: entities.users[session.id],
+    errors: errors.workouts,
+    formType: 'Create Workout'
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {
+    action: function action(workout) {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__["createWorkout"])(workout));
+    },
+    clearWorkoutErrors: function clearWorkoutErrors() {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__["clearWorkoutErrors"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mSTP, mDTP)(_workout_form__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/workouts/workouts_index.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/workouts/workouts_index.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _workout_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./workout_index_item */ "./frontend/components/workouts/workout_index_item.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var WorkoutsIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(WorkoutsIndex, _React$Component);
+
+  function WorkoutsIndex(props) {
+    _classCallCheck(this, WorkoutsIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(WorkoutsIndex).call(this, props));
+  }
+
+  _createClass(WorkoutsIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.requestWorkouts(); // this.props.requestRoutes();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          workouts = _this$props.workouts,
+          currentUser = _this$props.currentUser,
+          requestWorkout = _this$props.requestWorkout,
+          deleteWorkout = _this$props.deleteWorkout,
+          requestRoute = _this$props.requestRoute,
+          route = _this$props.route;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "workout-index"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        id: "w-title"
+      }, "Workouts"), workouts.map(function (workout) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: workout.id * 3,
+          workout: workout,
+          currentUser: currentUser,
+          route: route,
+          deleteWorkout: deleteWorkout,
+          requestWorkout: requestWorkout,
+          requestRoute: requestRoute
+        });
+      }));
+    }
+  }]);
+
+  return WorkoutsIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (WorkoutsIndex);
+
+/***/ }),
+
+/***/ "./frontend/components/workouts/workouts_index_container.js":
+/*!******************************************************************!*\
+  !*** ./frontend/components/workouts/workouts_index_container.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _workouts_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./workouts_index */ "./frontend/components/workouts/workouts_index.jsx");
+/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+
+
+
+
+
+var mstp = function mstp(state) {
+  var entities = state.entities;
+  var session = state.session;
+  var workouts = Object.values(state.entities.workouts).filter(function (workout) {
+    return workout.user_id === state.session.id;
+  });
+  return {
+    currentUser: entities.users[session.id],
+    workouts: workouts
+  };
+};
+
+var mdtp = function mdtp(dispatch) {
+  return {
+    requestWorkouts: function requestWorkouts() {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__["requestWorkouts"])());
+    },
+    requestWorkout: function requestWorkout(workoutId) {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__["requestWorkout"])(workoutId));
+    },
+    deleteWorkout: function deleteWorkout(workoutId) {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__["deleteWorkout"])(workoutId));
+    },
+    requestRoute: function requestRoute(routeId) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_3__["requestRoute"])(routeId));
+    },
+    requestRoutes: function requestRoutes() {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_3__["requestRoutes"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mstp, mdtp)(_workouts_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1235,12 +2480,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _routes_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes_reducer */ "./frontend/reducers/routes_reducer.js");
+/* harmony import */ var _workout_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./workout_reducer */ "./frontend/reducers/workout_reducer.js");
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  routes: _routes_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  routes: _routes_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  workouts: _workout_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
@@ -1256,10 +2504,16 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
+/* harmony import */ var _routes_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes_errors_reducer */ "./frontend/reducers/routes_errors_reducer.js");
+/* harmony import */ var _workouts_errors_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./workouts_errors_reducer */ "./frontend/reducers/workouts_errors_reducer.js");
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  routes: _routes_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  workouts: _workouts_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
 
 /***/ }),
@@ -1287,6 +2541,39 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   errors: _errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/routes_errors_reducer.js":
+/*!****************************************************!*\
+  !*** ./frontend/reducers/routes_errors_reducer.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/route_actions */ "./frontend/actions/route_actions.js");
+
+
+var RouteErrorsReducer = function RouteErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ROUTE_ERRORS"]:
+      return action.errors;
+
+    case _actions_route_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_ROUTE_ERRORS"]:
+      return [];
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (RouteErrorsReducer);
 
 /***/ }),
 
@@ -1430,6 +2717,78 @@ var usersReducer = function usersReducer() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (usersReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/workout_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/workout_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+
+
+var WorkoutsReducer = function WorkoutsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var newState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WORKOUTS"]:
+      return action.workouts;
+
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WORKOUT"]:
+      newState[action.workout.id] = action.workout;
+      return newState;
+
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_WORKOUT"]:
+      delete newState[action.workoutId];
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (WorkoutsReducer);
+
+/***/ }),
+
+/***/ "./frontend/reducers/workouts_errors_reducer.js":
+/*!******************************************************!*\
+  !*** ./frontend/reducers/workouts_errors_reducer.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+
+
+var WorkoutErrorsReducer = function WorkoutErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_WORKOUT_ERRORS"]:
+      return action.errors;
+
+    case _actions_workout_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_WORKOUT_ERRORS"]:
+      return [];
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (WorkoutErrorsReducer);
 
 /***/ }),
 
@@ -1607,6 +2966,50 @@ var logout = function logout() {
   return $.ajax({
     method: 'DELETE',
     url: '/api/session'
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/workout_api_utils.js":
+/*!********************************************!*\
+  !*** ./frontend/util/workout_api_utils.js ***!
+  \********************************************/
+/*! exports provided: fetchWorkouts, fetchWorkout, createWorkout, deleteWorkout */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWorkouts", function() { return fetchWorkouts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWorkout", function() { return fetchWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWorkout", function() { return createWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteWorkout", function() { return deleteWorkout; });
+var fetchWorkouts = function fetchWorkouts() {
+  return $.ajax({
+    url: 'api/workouts'
+  });
+};
+var fetchWorkout = function fetchWorkout(workoutId) {
+  return $.ajax({
+    url: "/api/workouts/".concat(workoutId),
+    data: {
+      workoutId: workoutId
+    }
+  });
+};
+var createWorkout = function createWorkout(workout) {
+  return $.ajax({
+    url: '/api/workouts',
+    method: 'post',
+    data: {
+      workout: workout
+    }
+  });
+};
+var deleteWorkout = function deleteWorkout(workoutId) {
+  return $.ajax({
+    url: "/api/workouts/".concat(workoutId),
+    method: 'delete'
   });
 };
 

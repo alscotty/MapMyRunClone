@@ -1,0 +1,33 @@
+.workout-map{
+    height:200px;
+    width:200px;
+}
+
+#delete-workout-button{
+    margin-top:2px;
+    margin-left:1%;
+    font-size: small;
+    border: 1px solid grey;
+    border-radius:5px;
+    font-family: 'Arial Rounded MT Bold';
+}
+#delete-workout-button:hover{
+    background-color:rgb(195, 201, 207);
+}
+
+.workout-index{
+    margin-top: 3.2em;
+    margin-bottom: 5em;
+}
+
+#workout-index-item{
+    margin-top: 10px;
+    border: 1px solid grey;
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+#w-title{
+    margin-left:4%;
+}
