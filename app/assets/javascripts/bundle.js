@@ -1016,7 +1016,7 @@ function (_React$Component) {
 
       e.preventDefault;
       this.props.action(this.state.routeInfo, this.state.coordinates).then(function () {
-        _this2.props.history.push('/routes');
+        _this2.props.history.replace('/routes');
       });
     }
   }, {
@@ -1877,7 +1877,7 @@ function (_React$Component) {
 
       e.preventDefault;
       this.props.action(this.state).then(function () {
-        _this2.props.history.push('/workouts');
+        _this2.props.history.replace('/workouts');
       });
     }
   }, {
