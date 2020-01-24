@@ -14,7 +14,7 @@ class RoutesForm extends React.Component{
             poly:'',
             path:[],
             directionsService:'',
-            directionsRenderer:''
+            directionsRenderer:'',
         };
         this.handleSubmit=this.handleSubmit.bind(this);
         this.renderMap=this.renderMap.bind(this);
@@ -25,20 +25,22 @@ class RoutesForm extends React.Component{
         this.calcAndDisplayRoute=this.calcAndDisplayRoute.bind(this);
     }
 
+
     handleSubmit(e) {
         e.preventDefault;
-
+        const {coordinates}=this.state;
+        if(coordinates.length){
         this.props.action(this.state.routeInfo,this.state.coordinates)
           .then(()=>{
               this.props.history.replace('/routes')
             });
-
+        } else{
+        }
     }
 
     updateTitle() {
         return (
             e => {
-                //sets up dummy object, used to assign nested state!
                 let routeInfo={...this.state.routeInfo};
                 routeInfo.title= e.target.value;
                 this.setState({routeInfo})
@@ -103,8 +105,6 @@ class RoutesForm extends React.Component{
                 let routeInfo = { ...this.state.routeInfo };
                 routeInfo.miles = (dist * 0.00062137).toFixed(2);
                 this.setState({ routeInfo })
-                console.log(this.state.routeInfo.miles)
-
             } else {
                 window.alert('Directions request failed due to' + status)
             } 
@@ -144,11 +144,9 @@ class RoutesForm extends React.Component{
         )
     }
 
-    /* <script src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
-        async defer></script> */
 
-    renderErrors(){
-        const {errors}=this.props;
+    renderErrors() {
+        const { errors } = this.props;
         return (
             <ul className='login-errors'>
                 {errors.map((error, i) => (
