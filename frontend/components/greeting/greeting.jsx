@@ -19,10 +19,15 @@ const Greeting = ({ currentUser, logout }) => {
 
   return(
     <span>
+      {currentUser ?
       <Link to="/routes" className="header-link">
         <h1>RapMyMun</h1>
       </Link>
-
+      :
+        <Link to="/" className="header-link">
+          <h1>RapMyMun</h1>
+        </Link>
+      }
       <Link to='/routes/new' className='route-links'>
         Create Route
       </Link>

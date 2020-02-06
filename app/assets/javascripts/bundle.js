@@ -560,8 +560,11 @@ var Greeting = function Greeting(_ref) {
     }, "LOG OUT"));
   };
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/routes",
+    className: "header-link"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/",
     className: "header-link"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/routes/new",
