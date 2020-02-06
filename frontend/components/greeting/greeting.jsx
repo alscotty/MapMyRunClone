@@ -26,6 +26,9 @@ const Greeting = ({ currentUser, logout }) => {
       <Link to='/routes/new' className='route-links'>
         Create Route
       </Link>
+      <div className='route-links-content'>
+        hiddenlink!
+      </div>
       <Link to='/routes' className='route-links'>
         Routes
       </Link>
