@@ -49,24 +49,31 @@ class WorkoutForm extends React.Component{
 
         return(
            <div className='workout-form'>
-                <h3>LOG A WORKOUT</h3>
-
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" value={this.state.title} onChange={this.update('title')} placeholder='Title' />
+          
+                <h3 id='workout-title'>LOG A WORKOUT</h3>
+                <form onSubmit={this.handleSubmit} className='formy'>
                     <br/>
+                    Workout Name:
                     <br/>
-                    <textarea cols="30" rows="10" value={this.state.description} onChange={this.update('description')} placeholder='Description'></textarea>
+                    <input type="text" value={this.state.title} onChange={this.update('title')} />
                     <br/>
-
-                    Time(in minutes)
+                    How did it go?
                     <br/>
-                    <input type='number' value={this.state.time} onChange={this.update('time')} placeholder='Time (in minutes)' />
+                    <textarea cols="30" rows="10" value={this.state.description} onChange={this.update('description')}></textarea>
                     <br/>
-
-                    Miles
-                    <br/>
-                    <input type='number' value={this.state.miles} onChange={this.update('miles')} placeholder='Miles' />
-
+                    <span id='mini-flex'>
+                   
+                        <label> Duration (min.)
+                        <br/>
+                        <input type='number' value={this.state.time} onChange={this.update('time')} />
+                        </label>
+                        <br/>
+                        <label>
+                        Miles
+                        <br/>
+                        <input type='number' value={this.state.miles} onChange={this.update('miles')} />
+                        </label>
+                    </span>
                     <br/>
                     <input type="submit" id='workout-button' value={this.props.formType} />
 

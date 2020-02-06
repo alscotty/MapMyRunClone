@@ -6,12 +6,24 @@
     border-radius: 5px;
     color:white;
     text-shadow: 2px 2px black;
-   background-image: image-url('pleasantonRidgeSunset.jpg');
+   background-image: image-url('missionPeak.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    padding-left: 2%;
+    padding-left: 6%;
+   padding-right: 6%;
 
+}
+
+#workout-icon{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+#workout-title{
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
 }
 
 #workout-button{
@@ -31,3 +43,16 @@
     font-size: small;
     color:red;
 }
+
+.formy > textarea{
+    width:60%;
+}
+
+#mini-flex{
+    display: flex;
+    justify-content: space-evenly;
+}
+#mini-flex>label>input{
+    width: 100%;
+}
+

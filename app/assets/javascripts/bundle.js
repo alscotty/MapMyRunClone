@@ -1911,30 +1911,31 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "LOG A WORKOUT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        id: "workout-title"
+      }, "LOG A WORKOUT"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit,
+        className: "formy"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Workout Name:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.title,
-        onChange: this.update('title'),
-        placeholder: "Title"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        onChange: this.update('title')
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "How did it go?", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
         cols: "30",
         rows: "10",
         value: this.state.description,
-        onChange: this.update('description'),
-        placeholder: "Description"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time(in minutes)", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update('description')
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "mini-flex"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, " Duration (min.)", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         value: this.state.time,
-        onChange: this.update('time'),
-        placeholder: "Time (in minutes)"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update('time')
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         value: this.state.miles,
-        onChange: this.update('miles'),
-        placeholder: "Miles"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update('miles')
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         id: "workout-button",
         value: this.props.formType
