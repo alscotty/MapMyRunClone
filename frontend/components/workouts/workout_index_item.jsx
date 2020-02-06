@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class WorkoutIndexItem extends React.Component{
     constructor(props){
@@ -74,8 +75,8 @@ class WorkoutIndexItem extends React.Component{
 
         return(
             <div id='workout-index-item'>
-                <span>
-                Title:{workout.title}
+                <span className='workout-info'>
+                {workout.title}
                 {workout.description.length ? 
                 <span>
                 <br/>
@@ -86,7 +87,10 @@ class WorkoutIndexItem extends React.Component{
                 {workout.route_id && workout.route ? (
                     <span>
                         <br/>
-                        {currentUser.username} ran {workout.route.title}
+                        <span className='linky'>{currentUser.username}</span> ran 
+                        <Link to={`/routes/${workout.route.id}`} className='linky'>
+                        {` ${workout.route.title}`}
+                        </Link>
                         <br/>
                     </span>
                 ) : ''}
@@ -95,28 +99,27 @@ class WorkoutIndexItem extends React.Component{
                     <span>
                     <br/>
                     Time:{workout.time} min.
-                    {/* <br/> */}
-                    {/* Pace: {(workout.time/workout.miles).toFixed(2)} min./mile */}
                     </span>
                     )
                     : ''}
                     <br/>
                     {workout.route ? (
                     (<span>
-                        Miles:{workout.route.miles}
+                        {`${workout.route.miles} miles`}
                     </span>)
                     ): 
                     (<span>
-                    Miles:{workout.miles}
+                        {`${workout.miles} miles`}
                     </span>)
                 }
                 <br/>
             <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id)}}>Delete Workout</button>
                 </span>
-                <span>
+
+                <span id='mapp'>
                 {workout.route ? 
                     <div className='workout-map' id={`workout-map-${this.props.workout.id}`}></div>
-            :''}
+            : <img src={window.workoutURL}/>}
                 </span>
             </div>
         )

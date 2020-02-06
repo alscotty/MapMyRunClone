@@ -79,7 +79,7 @@ class RouteIndexItem extends React.Component{
 
         return(
             <div key={route.id} className='route-index-item'>
-                    <span id='title'>
+                <span id='route-info'>
                     <Link className='linky'to='/routes'>
                     {`${currentUser.username} `}
                     </Link>
@@ -87,7 +87,11 @@ class RouteIndexItem extends React.Component{
                     <Link className='linky' to={`/routes/${route.id}`}>
                         {` ${route.title}`}
                     </Link>
+                {route.coordinates ? this.mapSetup() : ''}
+                <Link className='delete-button' to={`/routes/${route.id}/workout`}>Save as Workout</Link>              
+                <button className='delete-button' onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
                 </span>
+
                 <div className='mini-flex'>
                     <div id='distance-only'>
                         <span id='dist'>
@@ -98,30 +102,10 @@ class RouteIndexItem extends React.Component{
                          mi</div>
                     <br/>
                 </div>
-                    {route.coordinates ? this.mapSetup() : ''}
-              
-                <Link to={`/routes/${route.id}/workout`}>Save as Workout</Link>              
-              
-                <button className='delete-button' onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
-
+                <br/>
             </div>
             )
     }
 }
 
 export default RouteIndexItem;
-
-//bonus logic, used if feed included other users:
-{/* <h3>{allUsers.map(user => {
-                        if (user.id == route.user_id) {
-                            return (<div key={route.id}>
-                                Created by: {user.username}
-                            </div>
-                            )
-                        }})}</h3> */}
-
-// {
-// currentUser.id == route.user_id ? (
-//     <button onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
-// ) : ('')
-// }

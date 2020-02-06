@@ -1,9 +1,7 @@
 .index-map{
     height: 200px;
-    width:47%;
-    float:left;
+    width:100%;
     border: 1px solid grey;
-    margin-left: 1%;
 }
 
 #act-feed{
@@ -17,11 +15,17 @@
 .route-index-item{
     margin-top: 10px;
     border: 1px solid grey;
-    height:300px;
+    height:280px;
     box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
     margin-left: 4%;
     margin-right: 4%;
+    display: flex;
 }
+
+.route-index-item :first-child{
+    width:70%;
+}
+
 
 .route-index-item > span > .linky{
     color: rgb(51, 130, 204);
@@ -32,12 +36,15 @@
   color: rgb(29, 66, 167);
 }
 
-#distance-only{
-    float:right;
+#route-info{
+    padding-top:5px ;
+    margin-left: 4%;
+    width:100%;
 }
 
+
 .mini-flex{
-    float:right;
+    // float:right;
     width:49%;
     height: 200px;
     margin-right:1%;
@@ -48,12 +55,13 @@
 }
 
 .delete-button{
-    margin-top:2px;
     margin-left:1%;
     font-size: small;
     border: 1px solid grey;
     border-radius:5px;
     font-family: 'Arial Rounded MT Bold';
+    text-decoration: none;
+    padding: 1px;
 }
 .delete-button:hover{
     background-color:rgb(195, 201, 207);
