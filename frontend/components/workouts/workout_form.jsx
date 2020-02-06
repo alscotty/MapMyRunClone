@@ -63,7 +63,7 @@ class WorkoutForm extends React.Component{
                     <input type='number' value={this.state.time} onChange={this.update('time')} placeholder='Time (in minutes)' />
                     <br/>
 
-                    MilesZZZZZ
+                    Miles
                     <br/>
                     <input type='number' value={this.state.miles} onChange={this.update('miles')} placeholder='Miles' />
 
