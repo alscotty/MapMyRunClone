@@ -30,7 +30,6 @@ const App = () => (
     </header>
 
     <Route exact path='/' component={Splash}/>
-    <Switch>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
       <ProtectedRoute exact path='/routes/new' component={RoutesForm} />
@@ -39,10 +38,9 @@ const App = () => (
       <ProtectedRoute exact path='/routes/:routeId/workout' component={WorkoutRouteForm} />
 
       <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
-      <ProtectedRoute path='/workouts' component={WorkoutsIndex}/>
+      <ProtectedRoute exact path='/workouts' component={WorkoutsIndex}/>
 
-      <ProtectedRoute path='/routes' component={RoutesIndex} />
-    </Switch>
+      <ProtectedRoute exact path='/routes' component={RoutesIndex} />
 
 
     <footer>

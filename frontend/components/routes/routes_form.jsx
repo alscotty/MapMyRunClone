@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 
 class RoutesForm extends React.Component{
     constructor(props){
@@ -185,4 +186,4 @@ class RoutesForm extends React.Component{
     }
 }
 
-export default RoutesForm;
+export default withRouter(RoutesForm);

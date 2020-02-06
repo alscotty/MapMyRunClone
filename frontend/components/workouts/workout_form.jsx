@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 
 class WorkoutForm extends React.Component{
     constructor(props){
@@ -62,7 +63,7 @@ class WorkoutForm extends React.Component{
                     <input type='number' value={this.state.time} onChange={this.update('time')} placeholder='Time (in minutes)' />
                     <br/>
 
-                    Miles
+                    MilesZZZZZ
                     <br/>
                     <input type='number' value={this.state.miles} onChange={this.update('miles')} placeholder='Miles' />
 
@@ -83,4 +84,4 @@ class WorkoutForm extends React.Component{
 
 }
 
-export default WorkoutForm;
+export default withRouter(WorkoutForm);
