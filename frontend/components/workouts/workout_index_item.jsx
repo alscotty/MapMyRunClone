@@ -74,6 +74,10 @@ class WorkoutIndexItem extends React.Component{
 
         return(
             <div id='workout-index-item'>
+<<<<<<< HEAD
+=======
+                <span>
+>>>>>>> futureImprov
                 Title:{workout.title}
                 {workout.description.length ? 
                 <span>
@@ -87,8 +91,11 @@ class WorkoutIndexItem extends React.Component{
                         <br/>
                         {currentUser.username} ran {workout.route.title}
                         <br/>
+<<<<<<< HEAD
                     <div  className='workout-map' id={`workout-map-${this.props.workout.id}`}>
                     </div>
+=======
+>>>>>>> futureImprov
                     </span>
                 ) : ''}
 
@@ -113,7 +120,16 @@ class WorkoutIndexItem extends React.Component{
                 }
                 <br/>
             <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id)}}>Delete Workout</button>
+<<<<<<< HEAD
 
+=======
+                </span>
+                <span>
+                {workout.route ? 
+                    <div className='workout-map' id={`workout-map-${this.props.workout.id}`}></div>
+            :''}
+                </span>
+>>>>>>> futureImprov
             </div>
         )
     }

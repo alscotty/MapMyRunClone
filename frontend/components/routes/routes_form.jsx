@@ -14,7 +14,11 @@ class RoutesForm extends React.Component{
             poly:'',
             path:[],
             directionsService:'',
+<<<<<<< HEAD
             directionsRenderer:''
+=======
+            directionsRenderer:'',
+>>>>>>> futureImprov
         };
         this.handleSubmit=this.handleSubmit.bind(this);
         this.renderMap=this.renderMap.bind(this);
@@ -25,20 +29,31 @@ class RoutesForm extends React.Component{
         this.calcAndDisplayRoute=this.calcAndDisplayRoute.bind(this);
     }
 
+
     handleSubmit(e) {
         e.preventDefault;
+<<<<<<< HEAD
 
         this.props.action(this.state.routeInfo,this.state.coordinates)
           .then(()=>{
               this.props.history.push('/routes')
             });
 
+=======
+        const {coordinates}=this.state;
+        if(coordinates.length){
+        this.props.action(this.state.routeInfo,this.state.coordinates)
+          .then(()=>{
+              this.props.history.replace('/routes')
+            });
+        } else{
+        }
+>>>>>>> futureImprov
     }
 
     updateTitle() {
         return (
             e => {
-                //sets up dummy object, used to assign nested state!
                 let routeInfo={...this.state.routeInfo};
                 routeInfo.title= e.target.value;
                 this.setState({routeInfo})
@@ -76,8 +91,13 @@ class RoutesForm extends React.Component{
         let newLng = e.latLng['lng']()
         this.snapPoint(newLat,newLng)
     }
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> futureImprov
     calcAndDisplayRoute(){
         let waypts=[]
         for(let i=0; i<this.state.coordinates.length; i++){
@@ -103,8 +123,11 @@ class RoutesForm extends React.Component{
                 let routeInfo = { ...this.state.routeInfo };
                 routeInfo.miles = (dist * 0.00062137).toFixed(2);
                 this.setState({ routeInfo })
+<<<<<<< HEAD
                 console.log(this.state.routeInfo.miles)
 
+=======
+>>>>>>> futureImprov
             } else {
                 window.alert('Directions request failed due to' + status)
             } 
@@ -149,6 +172,19 @@ class RoutesForm extends React.Component{
 
     renderErrors(){
         const {errors}=this.props;
+        return (
+            <ul className='login-errors'>
+                {errors.map((error, i) => (
+                    <li key={`error-${i}`}>
+                        {error}
+                    </li>
+                ))}
+            </ul>
+        );
+    }
+
+    renderErrors() {
+        const { errors } = this.props;
         return (
             <ul className='login-errors'>
                 {errors.map((error, i) => (

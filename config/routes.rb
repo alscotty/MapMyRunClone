@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   namespace :api, defaults:{format: :json} do
     resources :users, only:[:create]
     resource :session, only:[:create,:destroy]
+<<<<<<< HEAD
     resources :workouts, only:[:create,:destroy, :index, :show]
+=======
+
+    resources :workouts
+>>>>>>> futureImprov
 
     resources :routes, only:[:create,:destroy, :index, :show] do
     resources :coordinates, only:[:create]

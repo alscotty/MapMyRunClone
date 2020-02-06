@@ -1,9 +1,12 @@
 .workout-map{
+    margin:4px;
+    border: 1px solid black;
     height:200px;
     width:200px;
 }
 
 #delete-workout-button{
+    width:80px;
     margin-top:2px;
     margin-left:1%;
     font-size: small;
@@ -26,6 +29,9 @@
     box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
     margin-left: 4%;
     margin-right: 4%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 #w-title{
