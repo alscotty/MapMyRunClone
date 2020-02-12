@@ -32,15 +32,16 @@ const App = () => (
     <Route exact path='/' component={Splash}/>
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
-      <ProtectedRoute exact path='/routes/new' component={RoutesForm} />
-      <ProtectedRoute exact path='/routes/:routeId' component={RouteShow} />
-  
+      <ProtectedRoute exact path='/routes' component={RoutesIndex} />
+      <Switch>
+        <ProtectedRoute exact path='/routes/new' component={RoutesForm} />
+        <ProtectedRoute exact path='/routes/:routeId' component={RouteShow} />
+      </Switch>
       <ProtectedRoute exact path='/routes/:routeId/workout' component={WorkoutRouteForm} />
 
       <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
       <ProtectedRoute exact path='/workouts' component={WorkoutsIndex}/>
 
-      <ProtectedRoute exact path='/routes' component={RoutesIndex} />
 
 
     <footer>
