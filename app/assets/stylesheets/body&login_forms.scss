@@ -20,24 +20,28 @@
 */
 .login-form-container{
     display:flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: 8em;
+    
 }
 .login-form-container > * {
-    margin: 8em;
+
 }
 
 .session-submit {
     width: 100%;
     color:white;
-    background-color: rgb(29, 221, 124);;
+    background-color: rgb(29, 221, 124);
     font-size: medium;
     padding: 7px;
     border-radius: 5px;
 }
 
 .session-submit:hover{
-    background-color: rgb(50, 167, 39);
+    background-color:  rgb(25, 194, 109);
 }
+
 .demo-login {
     width: 100%;
     color:white;
@@ -51,8 +55,14 @@
     background-color: rgb(29, 66, 167);
 }
 
+#log-sign{
+    text-decoration: none;
+    color:grey;
+}
+
 .login-input{
-    width:100%;
+    width:93%;
+    padding:10px;
 }
 
 .login-errors{
