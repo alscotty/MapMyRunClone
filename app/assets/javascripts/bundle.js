@@ -1599,6 +1599,7 @@ function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.handleDemoLogin = _this.handleDemoLogin.bind(_assertThisInitialized(_this));
+    _this.handleDemoFromSignup = _this.handleDemoFromSignup.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1658,6 +1659,20 @@ function (_React$Component) {
       }));
     }
   }, {
+    key: "handleDemoFromSignup",
+    value: function handleDemoFromSignup(e) {
+      var _this5 = this;
+
+      e.preventDefault;
+      var demo = {
+        username: 'demo',
+        password: '123456'
+      };
+      this.props.login(demo).then(function () {
+        _this5.props.history.push('./routes');
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1665,10 +1680,17 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "login-form-box"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.props.navLink), this.props.formType == 'LOG IN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "navLink"
+      }, this.props.navLink), this.props.formType == 'LOG IN' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "demo-login",
         onClick: this.handleDemoLogin
-      }, "DEMO LOGIN") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "LOGIN WITH DEMO") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "demo-login",
+        onClick: this.handleDemoFromSignup
+      }, "SIGNUP WITH DEMO"), this.renderErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "or"
+      }, "  or "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
@@ -1737,6 +1759,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     clearErrors: function clearErrors() {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["clearErrors"])());
+    },
+    login: function login(user) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__["login"])(user));
     }
   };
 };

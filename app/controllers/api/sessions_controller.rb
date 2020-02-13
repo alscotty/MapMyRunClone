@@ -5,15 +5,13 @@ class Api::SessionsController < ApplicationController
       params[:user][:password]
     )
 
-    if @user
+    if @user 
       login(@user)
       render "api/users/show"
     else
-      render json: ["Invalid username/password combination"], status: 401 
+      render json: ["Invalid username/password combination"], status: 401
     end
   end
-
-  # unless @user.username=='demo'
 
   def destroy
     @user = current_user

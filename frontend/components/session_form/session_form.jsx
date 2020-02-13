@@ -9,6 +9,7 @@ class SessionForm extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemoLogin=this.handleDemoLogin.bind(this);
+    this.handleDemoFromSignup=this.handleDemoFromSignup.bind(this);
   }
 
   componentDidMount(){
@@ -54,19 +55,33 @@ class SessionForm extends React.Component {
     );
   }
 
+  handleDemoFromSignup(e) {
+    e.preventDefault;
+    const demo = {
+      username: 'demo',
+      password: '123456'
+    }
+    this.props.login(demo)
+      .then(() => { this.props.history.push('./routes') });
+  }
+
   render() {
     return (
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit} className="login-form-box">
-          <span>{this.props.navLink}</span>
+          <span id='navLink'>{this.props.navLink}</span>
           
           {this.props.formType == 'LOG IN' ? (
             <button className='demo-login' onClick={this.handleDemoLogin}>
-              DEMO LOGIN
+              LOGIN WITH DEMO
                 </button>
-          ) : ('')}
-          <br/>
+          ) : (
+              <button className='demo-login' onClick={this.handleDemoFromSignup}>
+                SIGNUP WITH DEMO
+                </button>
+          )}
           {this.renderErrors()}
+          <span id='or'>  or </span>
           <div className="login-form">
             <br/>
             <input type="text"

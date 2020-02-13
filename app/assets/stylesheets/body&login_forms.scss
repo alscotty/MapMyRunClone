@@ -23,10 +23,25 @@
     flex-direction: column;
     align-items: center;
     margin: 8em;
-    
 }
 .login-form-container > * {
+}
 
+.login-form-box{
+    display: flex;
+    flex-direction: column;
+    width:300px
+}
+
+#navLink{
+    align-self: flex-end;
+}
+
+#or{
+    border-bottom: 1px solid grey;
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
 }
 
 .session-submit {
@@ -61,7 +76,7 @@
 }
 
 .login-input{
-    width:93%;
+    width:92%;
     padding:10px;
 }
 
