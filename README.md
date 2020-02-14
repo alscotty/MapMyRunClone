@@ -12,8 +12,12 @@ The project was designed and built in a week, with some additional improvements 
 * Developed a fluid UI to mimic the original website using SASS and HTML5
 * Implemented user authentication with BCrypt password encryption
 
+![home page](/app/assets/images/homePic.png)
+
 ## Features
 ### Route Creation
+
+![create route](/app/assets/images/createPic.png)
 
 * using Google Maps directions for rendering route and calculating distance:
 ```javascript
@@ -89,6 +93,9 @@ The project was designed and built in a week, with some additional improvements 
 ```
 
 ### Dashboard for Workouts
+
+![workouts](/app/assets/images/workoutPic.png)
+
 * Workout dashboard dynamically renders depending on information provided (saved with a route, miles, time, etc.)
 ```javascript
       {workout.time !=0 && workout.miles ? (
