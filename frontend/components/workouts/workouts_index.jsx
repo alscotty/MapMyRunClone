@@ -25,11 +25,10 @@ class WorkoutsIndex extends React.Component{
 
     render(){
         const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route}=this.props
-
         return(
             <div className='workout-index'>
                 <h2 id='w-title'>Workouts</h2>
-            {workouts.sort(this.dateSorter).map(workout=>{
+            {(workouts).sort(this.dateSorter).map(workout=>{
                 return(
                 <WorkoutIndexItem key={workout.id*3} workout={workout} currentUser={currentUser} route={route} deleteWorkout={deleteWorkout} requestWorkout={requestWorkout} requestRoute={requestRoute} />
                 )

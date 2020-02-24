@@ -11,7 +11,7 @@ const mstp=state=>{
     const { entities } = state;
     const { session } = state;
 
-    let routes = Object.values(state.entities.routes).filter(route => route.user_id === state.session.id);
+    let routes = Object.values(state.entities.routes).filter(route => route.user_id === state.session.id)
 
     return({
         currentUser: (entities.users[session.id]),
