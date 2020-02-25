@@ -12,17 +12,18 @@ class RoutesIndex extends React.Component{
 
 
 
-    dateSorter(a,b){
-        let comparison=0
+    // dateSorter(a,b){
+    //     let comparison=0
 
-        if(a.updated_at>b.updated_at){
-            comparison=1
-        } else{
-            comparison=-1
-        }
+    //     if(a.updated_at>b.updated_at){
+    //         comparison=1
+    //     } else{
+    //         comparison=-1
+    //     }
 
-        return comparison;
-    }
+    //     return comparison;
+    // }
+    // .sort(this.dateSorter)
    
 
     render(){
@@ -33,7 +34,7 @@ class RoutesIndex extends React.Component{
          
             <h2 id='act-feed'>Activity Feed</h2>
 
-                {routes.sort(this.dateSorter).map(route=>{
+                {routes.map(route=>{
                 return(
                     <RouteIndexItem key={route.id*2} route={route} deleteRoute={this.props.deleteRoute} currentUser={currentUser} allUsers={allUsers} requestRoute={requestRoute}/>
                 )

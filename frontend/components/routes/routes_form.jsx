@@ -33,7 +33,7 @@ class RoutesForm extends React.Component{
         if(coordinates.length){
         this.props.action(this.state.routeInfo,this.state.coordinates)
           .then(()=>{
-              this.props.history.replace('/routes')
+              this.props.history.push('/routes')
             });
         } else{
         }

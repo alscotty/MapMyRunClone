@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {formatDateTime} from '../../util/date_util'
 
 class WorkoutIndexItem extends React.Component{
     constructor(props){
@@ -76,13 +77,16 @@ class WorkoutIndexItem extends React.Component{
         return(
             <div id='workout-index-item'>
                 <span className='workout-info'>
+                    {/* <p id='workout-title'> */}
                 {workout.title}
+                    {/* </p> */}
                 {workout.description.length ? 
                 <span>
                 <br/>
                     Description:{workout.description}
                 </span>
                 : ''}
+                <br/>
 
                 {workout.route_id && workout.route ? (
                     <span>
@@ -94,6 +98,9 @@ class WorkoutIndexItem extends React.Component{
                         <br/>
                     </span>
                 ) : ''}
+                    <br/>
+                    {formatDateTime(workout.created_at)}
+                    <br />
 
                 {workout.time !=0 && workout.miles ? (
                     <span>

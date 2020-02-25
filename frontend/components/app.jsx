@@ -39,8 +39,8 @@ const App = () => (
       </Switch>
       <ProtectedRoute exact path='/routes/:routeId/workout' component={WorkoutRouteForm} />
 
-      <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
       <ProtectedRoute exact path='/workouts' component={WorkoutsIndex}/>
+      <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
 
 
 

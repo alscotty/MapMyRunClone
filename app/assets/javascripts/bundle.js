@@ -425,12 +425,12 @@ var App = function App() {
     component: _workouts_workout_route_form_container__WEBPACK_IMPORTED_MODULE_13__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
     exact: true,
-    path: "/workouts/new",
-    component: _workouts_workouts_form_container__WEBPACK_IMPORTED_MODULE_11__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
-    exact: true,
     path: "/workouts",
     component: _workouts_workouts_index_container__WEBPACK_IMPORTED_MODULE_12__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
+    exact: true,
+    path: "/workouts/new",
+    component: _workouts_workouts_form_container__WEBPACK_IMPORTED_MODULE_11__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("footer", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_footer_footer__WEBPACK_IMPORTED_MODULE_10__["default"], null)));
 };
 
@@ -1009,7 +1009,7 @@ function (_React$Component) {
 
       if (coordinates.length) {
         this.props.action(this.state.routeInfo, this.state.coordinates).then(function () {
-          _this2.props.history.replace('/routes');
+          _this2.props.history.push('/routes');
         });
       } else {}
     }
@@ -1275,20 +1275,17 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.requestRoutes();
-    }
-  }, {
-    key: "dateSorter",
-    value: function dateSorter(a, b) {
-      var comparison = 0;
+    } // dateSorter(a,b){
+    //     let comparison=0
+    //     if(a.updated_at>b.updated_at){
+    //         comparison=1
+    //     } else{
+    //         comparison=-1
+    //     }
+    //     return comparison;
+    // }
+    // .sort(this.dateSorter)
 
-      if (a.updated_at > b.updated_at) {
-        comparison = 1;
-      } else {
-        comparison = -1;
-      }
-
-      return comparison;
-    }
   }, {
     key: "render",
     value: function render() {
@@ -1303,7 +1300,7 @@ function (_React$Component) {
         className: "route-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "act-feed"
-      }, "Activity Feed"), routes.sort(this.dateSorter).map(function (route) {
+      }, "Activity Feed"), routes.map(function (route) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: route.id * 2,
           route: route,
@@ -1907,7 +1904,7 @@ function (_React$Component) {
 
       e.preventDefault;
       this.props.action(this.state).then(function () {
-        _this2.props.history.replace('/workouts');
+        _this2.props.history.push('/workouts');
       });
     }
   }, {
@@ -1992,6 +1989,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _util_date_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/date_util */ "./frontend/util/date_util.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2009,6 +2007,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -2107,12 +2106,12 @@ function (_React$Component) {
         id: "workout-index-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "workout-info"
-      }, workout.title, workout.description.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Description:", workout.description) : '', workout.route_id && workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, workout.title, workout.description.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Description:", workout.description) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.route_id && workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "linky"
       }, currentUser.username), " ran", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/routes/".concat(workout.route.id),
         className: "linky"
-      }, " ".concat(workout.route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : '', workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, " min.") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.route.miles, " miles")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.miles, " miles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, " ".concat(workout.route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), Object(_util_date_util__WEBPACK_IMPORTED_MODULE_2__["formatDateTime"])(workout.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, " min.") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.route.miles, " miles")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.miles, " miles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "delete-workout-button",
         onClick: function onClick() {
           deleteWorkout(workout.id);
@@ -2372,21 +2371,18 @@ function (_React$Component) {
   _createClass(WorkoutsIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.requestWorkouts(); // this.props.requestRoutes();
-    }
-  }, {
-    key: "dateSorter",
-    value: function dateSorter(a, b) {
-      var comparison = 0;
+      this.props.requestWorkouts();
+    } // dateSorter(a, b) {
+    //     let comparison = 0
+    //     if (a.updated_at > b.updated_at) {
+    //         comparison = 1
+    //     } else {
+    //         comparison = -1
+    //     }
+    //     return comparison;
+    // }
+    // .sort(this.dateSorter)
 
-      if (a.updated_at > b.updated_at) {
-        comparison = 1;
-      } else {
-        comparison = -1;
-      }
-
-      return comparison;
-    }
   }, {
     key: "render",
     value: function render() {
@@ -2401,7 +2397,7 @@ function (_React$Component) {
         className: "workout-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "w-title"
-      }, "Workouts"), workouts.sort(this.dateSorter).map(function (workout) {
+      }, "Workouts"), workouts.map(function (workout) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: workout.id * 3,
           workout: workout,
@@ -2879,6 +2875,67 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/date_util.js":
+/*!************************************!*\
+  !*** ./frontend/util/date_util.js ***!
+  \************************************/
+/*! exports provided: formatDate, formatTime, formatDateTime */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDate", function() { return formatDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatTime", function() { return formatTime; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "formatDateTime", function() { return formatDateTime; });
+var formatDate = function formatDate(date) {
+  var months = {
+    0: 'January',
+    1: 'February',
+    2: 'March',
+    3: 'April',
+    4: 'May',
+    5: 'June',
+    6: 'July',
+    7: 'August',
+    8: 'September',
+    9: 'October',
+    10: 'November',
+    11: 'December'
+  };
+  var daysOfWeek = {
+    0: 'Sunday',
+    1: 'Monday',
+    2: 'Tuesday',
+    3: 'Wednesday',
+    4: 'Thursday',
+    5: 'Friday',
+    6: 'Saturday'
+  }; //(${dayOfWeek})
+
+  var obj = new Date(date);
+  var month = months[obj.getMonth()];
+  var day = obj.getDate();
+  var year = obj.getFullYear();
+  var dayOfWeek = daysOfWeek[obj.getDay()];
+  return "".concat(month, " ").concat(day, ", ").concat(year, " ");
+};
+var formatTime = function formatTime(date) {
+  var obj = new Date(date);
+  var fullHours = obj.getHours();
+  var hours = fullHours % 12;
+  if (hours === 0) hours = 12;
+  var minutes = obj.getMinutes();
+  var tmp = "0".concat(minutes);
+  var paddedMinutes = tmp.slice(tmp.length - 2);
+  var ampm = fullHours < 12 || fullHours === 0 ? 'am' : 'pm';
+  return "".concat(hours, ":").concat(paddedMinutes).concat(ampm);
+};
+var formatDateTime = function formatDateTime(date) {
+  return "".concat(formatDate(date), " ").concat(formatTime(date));
+};
 
 /***/ }),
 
