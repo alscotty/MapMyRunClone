@@ -16,7 +16,7 @@ class WorkoutForm extends React.Component{
 
         this.props.action(this.state)
             .then(() => {
-                this.props.history.push('/workouts')})
+                this.props.history.push('/workoutsAll')})
     }
 
     update(field) {

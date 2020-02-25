@@ -34,13 +34,13 @@ const Greeting = ({ currentUser, logout }) => {
       <div className='route-links-content'>
         hiddenlink!
       </div>
-      <Link to='/routes' className='route-links'>
+      <Link to='/routesAll' className='route-links'>
         Routes
       </Link>
       <Link to='/workouts/new' className='route-links'>
         Create Workout
       </Link>
-      <Link to='/workouts' className='route-links'>
+      <Link to='/workoutsAll' className='route-links'>
         Workouts
       </Link> 
 

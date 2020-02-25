@@ -33,13 +33,13 @@ const App = () => (
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
       <Switch>
-        <ProtectedRoute exact path='/routes' component={RoutesIndex} />
+        <ProtectedRoute exact path='/routesAll' component={RoutesIndex} />
         <ProtectedRoute exact path='/routes/new' component={RoutesForm} />
         <ProtectedRoute exact path='/routes/:routeId' component={RouteShow} />
       </Switch>
       <ProtectedRoute exact path='/routes/:routeId/workout' component={WorkoutRouteForm} />
 
-      <ProtectedRoute exact path='/workouts' component={WorkoutsIndex}/>
+      <ProtectedRoute exact path='/workoutsAll' component={WorkoutsIndex}/>
       <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
 
 

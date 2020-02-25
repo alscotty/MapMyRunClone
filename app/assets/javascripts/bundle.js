@@ -409,7 +409,7 @@ var App = function App() {
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
     exact: true,
-    path: "/routes",
+    path: "/routesAll",
     component: _routes_routes_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
     exact: true,
@@ -425,7 +425,7 @@ var App = function App() {
     component: _workouts_workout_route_form_container__WEBPACK_IMPORTED_MODULE_13__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
     exact: true,
-    path: "/workouts",
+    path: "/workoutsAll",
     component: _workouts_workouts_index_container__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_14__["ProtectedRoute"], {
     exact: true,
@@ -572,13 +572,13 @@ var Greeting = function Greeting(_ref) {
   }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "route-links-content"
   }, "hiddenlink!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/routes",
+    to: "/routesAll",
     className: "route-links"
   }, "Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/workouts/new",
     className: "route-links"
   }, "Create Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/workouts",
+    to: "/workoutsAll",
     className: "route-links"
   }, "Workouts"), currentUser ? personalGreeting() : sessionLinks());
 };
@@ -1009,7 +1009,7 @@ function (_React$Component) {
 
       if (coordinates.length) {
         this.props.action(this.state.routeInfo, this.state.coordinates).then(function () {
-          _this2.props.history.push('/routes');
+          _this2.props.history.push('/routesAll');
         });
       } else {}
     }
@@ -1643,7 +1643,7 @@ function (_React$Component) {
         password: '123456'
       };
       this.props.processForm(demo).then(function () {
-        _this3.props.history.push('./routes');
+        _this3.props.history.push('./routesAll');
       });
     }
   }, {
@@ -1654,7 +1654,7 @@ function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
-        _this4.props.history.push('./routes');
+        _this4.props.history.push('./routesAll');
       });
     }
   }, {
@@ -1679,7 +1679,7 @@ function (_React$Component) {
         password: '123456'
       };
       this.props.login(demo).then(function () {
-        _this5.props.history.push('./routes');
+        _this5.props.history.push('./routesAll');
       });
     }
   }, {
@@ -1904,7 +1904,7 @@ function (_React$Component) {
 
       e.preventDefault;
       this.props.action(this.state).then(function () {
-        _this2.props.history.push('/workouts');
+        _this2.props.history.push('/workoutsAll');
       });
     }
   }, {

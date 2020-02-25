@@ -33,14 +33,14 @@ class SessionForm extends React.Component {
       password:'123456'
     }
     this.props.processForm(demo)
-      .then(()=>{this.props.history.push('./routes')});
+      .then(()=>{this.props.history.push('./routesAll')});
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.processForm(user)
-      .then(()=>{this.props.history.push('./routes')});
+      .then(()=>{this.props.history.push('./routesAll')});
   }
 
   renderErrors() {
@@ -62,7 +62,7 @@ class SessionForm extends React.Component {
       password: '123456'
     }
     this.props.login(demo)
-      .then(() => { this.props.history.push('./routes') });
+      .then(() => { this.props.history.push('./routesAll') });
   }
 
   render() {
