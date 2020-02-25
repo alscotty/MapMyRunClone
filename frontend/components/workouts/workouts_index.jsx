@@ -11,25 +11,17 @@ class WorkoutsIndex extends React.Component{
         this.props.requestWorkouts()
     }
 
-    // dateSorter(a, b) {
-    //     let comparison = 0
-
-    //     if (a.updated_at > b.updated_at) {
-    //         comparison = 1
-    //     } else {
-    //         comparison = -1
-    //     }
-
-    //     return comparison;
-    // }
-    // .sort(this.dateSorter)
-
     render(){
         const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route}=this.props
+        let numRuns=workouts.length
         return(
             <div className='workout-index'>
-                <h2 id='w-title'>Workouts</h2>
-                <h3 id='total-miles'>0</h3>
+                <h2 className='w-title' id='workouts'>Workouts</h2>
+                <span id='row-me'>
+                    <h4><i>Activity to date:</i></h4>
+                    <h4 className='w-title' id='total-miles'>0</h4>
+                    <h4 className='w-title' >{numRuns} workouts</h4>
+                </span>
             {(workouts).reverse().map(workout=>{               
                 return(
                 <WorkoutIndexItem key={workout.id*3} workout={workout} currentUser={currentUser} route={route} deleteWorkout={deleteWorkout} requestWorkout={requestWorkout} requestRoute={requestRoute} />

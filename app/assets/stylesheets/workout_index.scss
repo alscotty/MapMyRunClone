@@ -24,6 +24,22 @@
     margin-bottom: 5em;
 }
 
+#workouts{
+    border-bottom:1px solid gray;
+    margin-right:4%;
+}
+
+#row-me{
+    display: inline-flex;
+    margin-left: 4%;
+    margin-right: 4%;
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 #workout-index-item{
     margin-top: 10px;
     border: 1px solid grey;
@@ -33,7 +49,7 @@
     display:flex;
 }
 
-#w-title{
+.w-title{
     margin-left:4%;
 }
 

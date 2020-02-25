@@ -72,7 +72,7 @@ class WorkoutIndexItem extends React.Component{
         let num=parseFloat(totalMiles.innerHTML)
         const {workout}=this.props;
         workout.route ? (num+=workout.route.miles) : (num+=workout.miles)
-        totalMiles.innerHTML=num;
+        totalMiles.innerHTML=num + ' miles';
     }
 
 

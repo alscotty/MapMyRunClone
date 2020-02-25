@@ -2098,7 +2098,7 @@ function (_React$Component) {
       var num = parseFloat(totalMiles.innerHTML);
       var workout = this.props.workout;
       workout.route ? num += workout.route.miles : num += workout.miles;
-      totalMiles.innerHTML = num;
+      totalMiles.innerHTML = num + ' miles';
     }
   }, {
     key: "render",
@@ -2377,17 +2377,7 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.requestWorkouts();
-    } // dateSorter(a, b) {
-    //     let comparison = 0
-    //     if (a.updated_at > b.updated_at) {
-    //         comparison = 1
-    //     } else {
-    //         comparison = -1
-    //     }
-    //     return comparison;
-    // }
-    // .sort(this.dateSorter)
-
+    }
   }, {
     key: "render",
     value: function render() {
@@ -2398,13 +2388,20 @@ function (_React$Component) {
           deleteWorkout = _this$props.deleteWorkout,
           requestRoute = _this$props.requestRoute,
           route = _this$props.route;
+      var numRuns = workouts.length;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        id: "w-title"
-      }, "Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "w-title",
+        id: "workouts"
+      }, "Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "row-me"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Activity to date:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "w-title",
         id: "total-miles"
-      }, "0"), workouts.reverse().map(function (workout) {
+      }, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "w-title"
+      }, numRuns, " workouts")), workouts.reverse().map(function (workout) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: workout.id * 3,
           workout: workout,
