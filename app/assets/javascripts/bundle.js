@@ -1300,7 +1300,7 @@ function (_React$Component) {
         className: "route-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "act-feed"
-      }, "Activity Feed"), routes.map(function (route) {
+      }, "Activity Feed"), routes.reverse().map(function (route) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_route_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: route.id * 2,
           route: route,
@@ -2094,6 +2094,11 @@ function (_React$Component) {
           });
         }
       });
+      var totalMiles = document.getElementById("total-miles");
+      var num = parseFloat(totalMiles.innerHTML);
+      var workout = this.props.workout;
+      workout.route ? num += workout.route.miles : num += workout.miles;
+      totalMiles.innerHTML = num;
     }
   }, {
     key: "render",
@@ -2397,7 +2402,9 @@ function (_React$Component) {
         className: "workout-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         id: "w-title"
-      }, "Workouts"), workouts.map(function (workout) {
+      }, "Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        id: "total-miles"
+      }, "0"), workouts.reverse().map(function (workout) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: workout.id * 3,
           workout: workout,

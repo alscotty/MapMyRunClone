@@ -34,7 +34,7 @@ class RoutesIndex extends React.Component{
          
             <h2 id='act-feed'>Activity Feed</h2>
 
-                {routes.map(route=>{
+                {routes.reverse().map(route=>{
                 return(
                     <RouteIndexItem key={route.id*2} route={route} deleteRoute={this.props.deleteRoute} currentUser={currentUser} allUsers={allUsers} requestRoute={requestRoute}/>
                 )

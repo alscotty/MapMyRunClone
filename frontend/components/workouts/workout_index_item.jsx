@@ -67,19 +67,22 @@ class WorkoutIndexItem extends React.Component{
                     .then(route=>this.readyMap(route))
 
                 }
-            })
+            });
+        let totalMiles = document.getElementById("total-miles")
+        let num=parseFloat(totalMiles.innerHTML)
+        const {workout}=this.props;
+        workout.route ? (num+=workout.route.miles) : (num+=workout.miles)
+        totalMiles.innerHTML=num;
     }
 
 
     render(){
         const {workout,deleteWorkout,currentUser}=this.props;
-
+        
         return(
             <div id='workout-index-item'>
                 <span className='workout-info'>
-                    {/* <p id='workout-title'> */}
                 {workout.title}
-                    {/* </p> */}
                 {workout.description.length ? 
                 <span>
                 <br/>
