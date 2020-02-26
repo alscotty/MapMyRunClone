@@ -561,7 +561,7 @@ var Greeting = function Greeting(_ref) {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/routes",
+    to: "/routesAll",
     className: "header-link"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/",
@@ -2112,11 +2112,21 @@ function (_React$Component) {
       var num = parseFloat(totalMiles.innerHTML);
       var workout = this.props.workout;
       workout.route ? num += workout.route.miles : num += workout.miles;
-      totalMiles.innerHTML = num + ' miles';
+      totalMiles.innerHTML = num.toFixed(2) + ' miles';
+    }
+  }, {
+    key: "deduct",
+    value: function deduct(workout) {
+      var totalMiles = document.getElementById("total-miles");
+      var num = parseFloat(totalMiles.innerHTML);
+      workout.route ? num -= workout.route.miles : num -= workout.miles;
+      totalMiles.innerHTML = num.toFixed(2) + ' miles';
     }
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var _this$props = this.props,
           workout = _this$props.workout,
           deleteWorkout = _this$props.deleteWorkout,
@@ -2133,7 +2143,7 @@ function (_React$Component) {
       }, " ".concat(workout.route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), Object(_util_date_util__WEBPACK_IMPORTED_MODULE_2__["formatDateTime"])(workout.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, " min.") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.route.miles, " miles")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.miles, " miles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "delete-workout-button",
         onClick: function onClick() {
-          deleteWorkout(workout.id);
+          deleteWorkout(workout.id).then(_this3.deduct(workout));
         }
       }, "Delete Workout")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "mapp"

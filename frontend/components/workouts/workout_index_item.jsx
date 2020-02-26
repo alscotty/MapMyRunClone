@@ -72,9 +72,15 @@ class WorkoutIndexItem extends React.Component{
         let num=parseFloat(totalMiles.innerHTML)
         const {workout}=this.props;
         workout.route ? (num+=workout.route.miles) : (num+=workout.miles)
-        totalMiles.innerHTML=num + ' miles';
+        totalMiles.innerHTML = num.toFixed(2) + ' miles';
     }
 
+    deduct(workout){
+        let totalMiles = document.getElementById("total-miles")
+        let num = parseFloat(totalMiles.innerHTML)
+        workout.route ? (num -= workout.route.miles) : (num -= workout.miles)
+        totalMiles.innerHTML = num.toFixed(2) + ' miles';
+    }
 
     render(){
         const {workout,deleteWorkout,currentUser}=this.props;
@@ -123,7 +129,7 @@ class WorkoutIndexItem extends React.Component{
                     </span>)
                 }
                 <br/>
-            <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id)}}>Delete Workout</button>
+            <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id).then(this.deduct(workout))}}>Delete Workout</button>
                 </span>
 
                 <span id='mapp'>
