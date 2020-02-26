@@ -12,7 +12,7 @@ class WorkoutForm extends React.Component{
 
 
     handleSubmit(e) {
-        e.preventDefault;
+        e.preventDefault();
 
         this.props.action(this.state)
             .then(() => {

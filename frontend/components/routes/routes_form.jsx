@@ -32,10 +32,10 @@ class RoutesForm extends React.Component{
     }
 
     handleSubmit(e) {
-        e.preventDefault;
+        e.preventDefault();
         const {coordinates}=this.state;
         if(coordinates.length){
-        this.props.action(this.state.routeInfo,this.state.coordinates)
+        this.props.action(this.state.routeInfo,coordinates)
           .then(()=>{
               this.props.history.push('/routesAll')
             });

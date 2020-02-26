@@ -1012,11 +1012,11 @@ function (_React$Component) {
     value: function handleSubmit(e) {
       var _this2 = this;
 
-      e.preventDefault;
+      e.preventDefault();
       var coordinates = this.state.coordinates;
 
       if (coordinates.length) {
-        this.props.action(this.state.routeInfo, this.state.coordinates).then(function () {
+        this.props.action(this.state.routeInfo, coordinates).then(function () {
           _this2.props.history.push('/routesAll');
         });
       } else {
@@ -1916,7 +1916,7 @@ function (_React$Component) {
     value: function handleSubmit(e) {
       var _this2 = this;
 
-      e.preventDefault;
+      e.preventDefault();
       this.props.action(this.state).then(function () {
         _this2.props.history.push('/workoutsAll');
       });
