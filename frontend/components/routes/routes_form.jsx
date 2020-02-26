@@ -16,6 +16,7 @@ class RoutesForm extends React.Component{
             path:[],
             directionsService:'',
             directionsRenderer:'',
+            noCoords:""
         };
         this.handleSubmit=this.handleSubmit.bind(this);
         this.renderMap=this.renderMap.bind(this);
@@ -26,6 +27,9 @@ class RoutesForm extends React.Component{
         this.calcAndDisplayRoute=this.calcAndDisplayRoute.bind(this);
     }
 
+    clearCoords(){
+        this.setState({noCoords:''})
+    }
 
     handleSubmit(e) {
         e.preventDefault;
@@ -36,6 +40,7 @@ class RoutesForm extends React.Component{
               this.props.history.push('/routesAll')
             });
         } else{
+            this.setState({noCoords: 'Coordinates required'})
         }
     }
 
@@ -128,6 +133,7 @@ class RoutesForm extends React.Component{
         directionsRenderer.setMap(map);
         map.addListener('click', (e)=>{
             this.addLatLng(e)
+            this.clearCoords()
         })
     };
 
@@ -150,6 +156,7 @@ class RoutesForm extends React.Component{
         const { errors } = this.props;
         return (
             <ul className='login-errors'>
+                {this.state.noCoords}
                 {errors.map((error, i) => (
                     <li key={`error-${i}`}>
                         {error}
