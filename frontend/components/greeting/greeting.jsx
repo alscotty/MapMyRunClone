@@ -20,7 +20,7 @@ const Greeting = ({ currentUser, logout }) => {
   return(
     <span>
       {currentUser ?
-      <Link to="/routes" className="header-link">
+      <Link to="/routesAll" className="header-link">
         <h1>RapMyMun</h1>
       </Link>
       :
