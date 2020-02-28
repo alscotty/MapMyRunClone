@@ -1131,8 +1131,14 @@ function (_React$Component) {
       this.state.directionsRenderer = new google.maps.DirectionsRenderer();
       this.state.map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
-        maxZoom: 15
+        maxZoom: 15,
+        disableDefaultUI: true
       });
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
       navigator.geolocation.getCurrentPosition(function (position) {
         // Center on user's current location if geolocation prompt allowed
         var initialLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -1143,7 +1149,7 @@ function (_React$Component) {
           lat: 37.773972,
           lng: -122.431297
         });
-      });
+      }, options);
       var _this$state2 = this.state,
           directionsRenderer = _this$state2.directionsRenderer,
           map = _this$state2.map;
@@ -1159,6 +1165,7 @@ function (_React$Component) {
         var places = searchBox.getPlaces();
         map.setCenter(places[0].geometry.location);
       });
+      map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBar);
     }
   }, {
     key: "componentDidMount",
@@ -1192,12 +1199,8 @@ function (_React$Component) {
         className: "route-form",
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, "Route Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "search",
         type: "text",
-        placeholder: "Search other locations"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        id: "route-title-input",
+        className: "route-title-input",
         placeholder: "Name this map",
         value: this.state.routeInfo.title,
         onChange: this.updateTitle()
@@ -1205,7 +1208,11 @@ function (_React$Component) {
         id: "route-button",
         type: "submit",
         value: "Save Route"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderErrors()), this.renderMap());
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderErrors()), this.renderMap(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "search",
+        type: "text",
+        placeholder: "Search other locations"
+      }));
     }
   }]);
 

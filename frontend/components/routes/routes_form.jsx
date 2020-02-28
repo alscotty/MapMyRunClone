@@ -125,8 +125,15 @@ class RoutesForm extends React.Component{
         this.state.directionsRenderer= new google.maps.DirectionsRenderer();
         this.state.map=new google.maps.Map(document.getElementById('map'), {
             zoom: 13,
-            maxZoom:15
+            maxZoom:15,
+            disableDefaultUI: true,
         });
+
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
 
         navigator.geolocation.getCurrentPosition((position) => {
             // Center on user's current location if geolocation prompt allowed
@@ -135,7 +142,7 @@ class RoutesForm extends React.Component{
             map.setZoom(13);
         }, () => {
             map.setCenter({ lat: 37.773972, lng: -122.431297 })
-        })
+        }, options)
 
         
         const {directionsRenderer,map}=this.state;
@@ -151,8 +158,8 @@ class RoutesForm extends React.Component{
         new window.google.maps.event.addListener(searchBox, 'places_changed', () => {
             let places = searchBox.getPlaces();
             map.setCenter(places[0].geometry.location)
-        })
-
+        });
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBar)
     };
 
     componentDidMount(){
@@ -191,11 +198,9 @@ class RoutesForm extends React.Component{
                     <summary>
                     Route Details
                     </summary>
-                    <br/>  
-                    <input id="search" type='text' placeholder='Search other locations' />
                     <br/>
                         <input type="text"
-                        id='route-title-input'
+                        className='route-title-input'
                         placeholder='Name this map'
                         value={this.state.routeInfo.title}
                         onChange={this.updateTitle()}
@@ -208,6 +213,7 @@ class RoutesForm extends React.Component{
                 {this.renderErrors()}
             </form>
                 {this.renderMap()}
+                <input id='search' type='text' placeholder='Search other locations'/>
             </div>
         )
     }

@@ -11,7 +11,7 @@
 
 .route-form > summary{
     background-color: lightgrey;
-    width: 100%;
+    width: 80%;
     color:black;
     border-radius: 5px;
 }
@@ -39,8 +39,22 @@
     background: rgb(216, 134, 26);
 }
 
-#route-title-input{
+.route-title-input{
     border-radius: 5px;
     font-size: medium;
     width:80%;
+}
+
+.hide{
+    display:none;
+    border:9px solid pink;
+}
+
+#search{
+    width:20%;
+    min-width: 18;
+    padding: 4px;
+    margin-left: 7px;
+    margin-top:7px ;
+    position: absolute;
 }
