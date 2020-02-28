@@ -124,17 +124,35 @@ class RoutesForm extends React.Component{
         this.state.directionsService= new google.maps.DirectionsService();
         this.state.directionsRenderer= new google.maps.DirectionsRenderer();
         this.state.map=new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 37.773972, lng: -122.431297 },
             zoom: 13,
             maxZoom:15
         });
+
+        navigator.geolocation.getCurrentPosition((position) => {
+            // Center on user's current location if geolocation prompt allowed
+            var initialLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.setCenter(initialLocation);
+            map.setZoom(13);
+        }, () => {
+            map.setCenter({ lat: 37.773972, lng: -122.431297 })
+        })
+
         
         const {directionsRenderer,map}=this.state;
         directionsRenderer.setMap(map);
         map.addListener('click', (e)=>{
             this.addLatLng(e)
             this.clearCoords()
+        });
+
+        let searchBar = document.getElementById("search");
+        let searchBox = new window.google.maps.places.SearchBox(searchBar)
+
+        new window.google.maps.event.addListener(searchBox, 'places_changed', () => {
+            let places = searchBox.getPlaces();
+            map.setCenter(places[0].geometry.location)
         })
+
     };
 
     componentDidMount(){
@@ -173,6 +191,8 @@ class RoutesForm extends React.Component{
                     <summary>
                     Route Details
                     </summary>
+                    <br/>  
+                    <input id="search" type='text' placeholder='Search other locations' />
                     <br/>
                         <input type="text"
                         id='route-title-input'

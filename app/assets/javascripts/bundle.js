@@ -1130,12 +1130,19 @@ function (_React$Component) {
       this.state.directionsService = new google.maps.DirectionsService();
       this.state.directionsRenderer = new google.maps.DirectionsRenderer();
       this.state.map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-          lat: 37.773972,
-          lng: -122.431297
-        },
         zoom: 13,
         maxZoom: 15
+      });
+      navigator.geolocation.getCurrentPosition(function (position) {
+        // Center on user's current location if geolocation prompt allowed
+        var initialLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        map.setCenter(initialLocation);
+        map.setZoom(13);
+      }, function () {
+        map.setCenter({
+          lat: 37.773972,
+          lng: -122.431297
+        });
       });
       var _this$state2 = this.state,
           directionsRenderer = _this$state2.directionsRenderer,
@@ -1145,6 +1152,12 @@ function (_React$Component) {
         _this6.addLatLng(e);
 
         _this6.clearCoords();
+      });
+      var searchBar = document.getElementById("search");
+      var searchBox = new window.google.maps.places.SearchBox(searchBar);
+      new window.google.maps.event.addListener(searchBox, 'places_changed', function () {
+        var places = searchBox.getPlaces();
+        map.setCenter(places[0].geometry.location);
       });
     }
   }, {
@@ -1179,6 +1192,10 @@ function (_React$Component) {
         className: "route-form",
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, "Route Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "search",
+        type: "text",
+        placeholder: "Search other locations"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         id: "route-title-input",
         placeholder: "Name this map",
