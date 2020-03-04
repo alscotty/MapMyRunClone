@@ -531,7 +531,9 @@ function (_Component) {
       if (!allUsers) return null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "community-page"
-      }, "Other users go here..");
+      }, "Other users go here..", allUsers.map(function (user) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, user.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+      }));
     }
   }]);
 
@@ -561,9 +563,10 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(_ref) {
   var session = _ref.session,
       users = _ref.entities.users;
+  var actualUsers = Object.values(users);
   return {
     currentUser: users[session.id],
-    allUsers: users
+    allUsers: actualUsers
   };
 };
 

@@ -13,11 +13,17 @@ class Community extends Component {
         const {allUsers}=this.props
         if(!allUsers)return null;
 
-
         return (
             <div className='community-page'>
                 Other users go here..
-              
+              {allUsers.map(user=>{
+                  return(
+                      <div>
+                          {user.username}
+                          <br/>
+                      </div>
+                  )
+              })}
             </div>
         )
     }
