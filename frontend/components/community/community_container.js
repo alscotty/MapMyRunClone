@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Community from './community'
-import { getUsers } from '../../util/users_api_utils';
+import {requestUsers} from '../../actions/user_actions'
 
 const mapStateToProps = ({ session, entities: { users } }) => {
     return {
@@ -10,7 +10,7 @@ const mapStateToProps = ({ session, entities: { users } }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    getUsers: () => dispatch(getUsers())
+    requestUsers: () => dispatch(requestUsers())
 });
 
 export default connect(

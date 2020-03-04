@@ -6,7 +6,7 @@ class Community extends Component {
     }
 
     componentDidMount(){
-        this.props.getUsers();
+        this.props.requestUsers();
     }
 
     render() {

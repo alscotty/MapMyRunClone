@@ -522,7 +522,7 @@ function (_Component) {
   _createClass(Community, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getUsers();
+      this.props.requestUsers();
     }
   }, {
     key: "render",
@@ -553,7 +553,7 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _community__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./community */ "./frontend/components/community/community.jsx");
-/* harmony import */ var _util_users_api_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/users_api_utils */ "./frontend/util/users_api_utils.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 
 
 
@@ -569,8 +569,8 @@ var mapStateToProps = function mapStateToProps(_ref) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    getUsers: function getUsers() {
-      return dispatch(Object(_util_users_api_utils__WEBPACK_IMPORTED_MODULE_2__["getUsers"])());
+    requestUsers: function requestUsers() {
+      return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["requestUsers"])());
     }
   };
 };
