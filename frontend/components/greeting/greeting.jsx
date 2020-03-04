@@ -31,9 +31,6 @@ const Greeting = ({ currentUser, logout }) => {
       <Link to='/routes/new' className='route-links'>
         Create Route
       </Link>
-      <div className='route-links-content'>
-        hiddenlink!
-      </div>
       <Link to='/routesAll' className='route-links'>
         Routes
       </Link>
@@ -43,6 +40,7 @@ const Greeting = ({ currentUser, logout }) => {
       <Link to='/workoutsAll' className='route-links'>
         Workouts
       </Link> 
+      <Link to='/community' className='route-links'>Community</Link>
 
       {currentUser ? personalGreeting() : sessionLinks()}
     </span>

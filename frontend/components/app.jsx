@@ -19,7 +19,7 @@ import Footer from './footer/footer'
 import WorkoutForm from './workouts/workouts_form_container'
 import WorkoutsIndex from './workouts/workouts_index_container'
 import WorkoutRouteForm from './workouts/workout_route_form_container'
-
+import CommunityContainer from './community/community_container'
 
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
@@ -42,6 +42,7 @@ const App = () => (
       <ProtectedRoute exact path='/workoutsAll' component={WorkoutsIndex}/>
       <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
 
+      <ProtectedRoute exact path='/community' component={CommunityContainer}/>
 
 
     <footer>
