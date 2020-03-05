@@ -16,7 +16,13 @@ class Community extends Component {
 
     handleFollow(userId){
         const {createFollow, deleteFollow, currentUser} = this.props;
-        if (userId in currentUser.out_follows){
+        
+        let followeeIds = [];
+        currentUser.followees.map(followee => {
+            followeeIds.push(followee.id)
+        })
+        
+        if (userId in followeeIds){
             //unfollow logic:
             deleteFollow(userId);
         } else {
@@ -38,6 +44,7 @@ class Community extends Component {
             <div className='community-page'>
                 Other users go here..
               {allUsers.map(user=>{
+
                   return(
                       currentUser.id !== user.id ?
                         <div key={user.id}>
@@ -55,7 +62,7 @@ class Community extends Component {
 
               <br/>
               Your are following: {currentUser.followees.map(followee=>{
-                  return followee.username
+                  return followee.id
               })}
               {followeeIds}
 

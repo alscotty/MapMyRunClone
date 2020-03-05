@@ -587,8 +587,12 @@ function (_Component) {
           createFollow = _this$props.createFollow,
           deleteFollow = _this$props.deleteFollow,
           currentUser = _this$props.currentUser;
+      var followeeIds = [];
+      currentUser.followees.map(function (followee) {
+        followeeIds.push(followee.id);
+      });
 
-      if (userId in currentUser.out_follows) {
+      if (userId in followeeIds) {
         //unfollow logic:
         deleteFollow(userId);
       } else {
@@ -620,7 +624,7 @@ function (_Component) {
           }
         }, user.id in followeeIds ? "Unfollow" : "Follow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "";
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Your are following: ", currentUser.followees.map(function (followee) {
-        return followee.username;
+        return followee.id;
       }), followeeIds);
     }
   }]);
