@@ -2,8 +2,7 @@ class Api::FollowsController < ApplicationController
     before_action :require_logged_in
 
     def create
-        @follow= current_user.out_follows.create!
-        (followee_id: params[:user_id])
+        @follow= current_user.out_follows.create!(followee_id: params[:user_id])
 
         respond_to do |format|
             format.html {redirect_to request.referrer}

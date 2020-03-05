@@ -1,4 +1,4 @@
-export const APIUtil = {
+const APIUtil = {
 
     followUser: id => APIUtil.changeFollowStatus(id, 'POST'),
 
@@ -6,7 +6,7 @@ export const APIUtil = {
 
     changeFollowStatus: (id, method) => (
         $.ajax({
-            url: `/users/${id}/follow`,
+            url: `/api/users/${id}/follows`,
             dataType: 'json',
             method
         })
@@ -14,3 +14,4 @@ export const APIUtil = {
 
 }
 
+module.exports = APIUtil;

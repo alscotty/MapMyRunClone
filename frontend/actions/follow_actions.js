@@ -1,4 +1,4 @@
-import {APIUtil} from '../util/follows_api_utils'
+const APIUtil = require('../util/follows_api_utils');
 
 export const RECEIVE_FOLLOW='RECEIVE_FOLLOW'
 export const REMOVE_FOLLOW='REMOVE_FOLLOW'
@@ -14,7 +14,7 @@ const removeFollow = follow => ({
 });
 
 export const createFollow = (id) => dispatch =>(
-    APIUtil.followerUser(id)
+    APIUtil.followUser(id)
         .then(follow=>dispatch(receiveFollow(follow)))
 );
 

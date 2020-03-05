@@ -86,6 +86,55 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/follow_actions.js":
+/*!********************************************!*\
+  !*** ./frontend/actions/follow_actions.js ***!
+  \********************************************/
+/*! exports provided: RECEIVE_FOLLOW, REMOVE_FOLLOW, createFollow, deleteFollow */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_FOLLOW", function() { return RECEIVE_FOLLOW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FOLLOW", function() { return REMOVE_FOLLOW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFollow", function() { return createFollow; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteFollow", function() { return deleteFollow; });
+var APIUtil = __webpack_require__(/*! ../util/follows_api_utils */ "./frontend/util/follows_api_utils.js");
+
+var RECEIVE_FOLLOW = 'RECEIVE_FOLLOW';
+var REMOVE_FOLLOW = 'REMOVE_FOLLOW';
+
+var receiveFollow = function receiveFollow(follow) {
+  return {
+    type: RECEIVE_FOLLOW,
+    follow: follow
+  };
+};
+
+var removeFollow = function removeFollow(follow) {
+  return {
+    type: RECEIVE_FOLLOW,
+    follow: follow
+  };
+};
+
+var createFollow = function createFollow(id) {
+  return function (dispatch) {
+    return APIUtil.followUser(id).then(function (follow) {
+      return dispatch(receiveFollow(follow));
+    });
+  };
+};
+var deleteFollow = function deleteFollow(id) {
+  return function (dispatch) {
+    return APIUtil.unfollowUser(id).then(function (follow) {
+      return dispatch(removeFollow(follow));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/route_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/route_actions.js ***!
@@ -498,9 +547,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -514,9 +563,16 @@ function (_Component) {
   _inherits(Community, _Component);
 
   function Community(props) {
+    var _this;
+
     _classCallCheck(this, Community);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Community).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Community).call(this, props));
+    _this.state = {
+      currentfollows: _this.props.currentUser.followees
+    };
+    _this.handleFollow = _this.handleFollow.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(Community, [{
@@ -525,15 +581,47 @@ function (_Component) {
       this.props.requestUsers();
     }
   }, {
+    key: "handleFollow",
+    value: function handleFollow(userId) {
+      var _this$props = this.props,
+          createFollow = _this$props.createFollow,
+          deleteFollow = _this$props.deleteFollow,
+          currentUser = _this$props.currentUser;
+
+      if (userId in currentUser.out_follows) {
+        //unfollow logic:
+        deleteFollow(userId);
+      } else {
+        //follow logic:
+        createFollow(userId);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var allUsers = this.props.allUsers;
+      var _this2 = this;
+
+      var _this$props2 = this.props,
+          currentUser = _this$props2.currentUser,
+          allUsers = _this$props2.allUsers;
       if (!allUsers) return null;
+      var followeeIds = [];
+      currentUser.followees.map(function (followee) {
+        followeeIds.push(followee.id);
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "community-page"
       }, "Other users go here..", allUsers.map(function (user) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, user.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
-      }));
+        return currentUser.id !== user.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: user.id
+        }, user.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this2.handleFollow(user.id);
+          }
+        }, user.id in followeeIds ? "Unfollow" : "Follow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "";
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Your are following: ", currentUser.followees.map(function (followee) {
+        return followee.username;
+      }), followeeIds);
     }
   }]);
 
@@ -556,6 +644,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _community__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./community */ "./frontend/components/community/community.jsx");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_follow_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/follow_actions */ "./frontend/actions/follow_actions.js");
+
 
 
 
@@ -574,6 +664,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     requestUsers: function requestUsers() {
       return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__["requestUsers"])());
+    },
+    createFollow: function createFollow(id) {
+      return dispatch(Object(_actions_follow_actions__WEBPACK_IMPORTED_MODULE_3__["createFollow"])(id));
+    },
+    deleteFollow: function deleteFollow(id) {
+      return dispatch(Object(_actions_follow_actions__WEBPACK_IMPORTED_MODULE_3__["deleteFollow"])(id));
     }
   };
 };
@@ -2731,6 +2827,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _routes_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes_reducer */ "./frontend/reducers/routes_reducer.js");
 /* harmony import */ var _workout_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./workout_reducer */ "./frontend/reducers/workout_reducer.js");
+/* harmony import */ var _follows_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./follows_reducer */ "./frontend/reducers/follows_reducer.js");
+
 
 
 
@@ -2738,7 +2836,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   routes: _routes_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  workouts: _workout_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  workouts: _workout_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  follows: _follows_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 }));
 
 /***/ }),
@@ -2765,6 +2864,41 @@ __webpack_require__.r(__webpack_exports__);
   routes: _routes_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   workouts: _workouts_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 }));
+
+/***/ }),
+
+/***/ "./frontend/reducers/follows_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/follows_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_follow_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/follow_actions */ "./frontend/actions/follow_actions.js");
+
+
+var FollowsReducer = function FollowsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var newState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_follow_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_FOLLOW"]:
+      return action.follow;
+
+    case _actions_follow_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_FOLLOW"]:
+      delete newState[action.follow.id];
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FollowsReducer);
 
 /***/ }),
 
@@ -3138,6 +3272,32 @@ var formatTime = function formatTime(date) {
 var formatDateTime = function formatDateTime(date) {
   return "".concat(formatDate(date), " ").concat(formatTime(date));
 };
+
+/***/ }),
+
+/***/ "./frontend/util/follows_api_utils.js":
+/*!********************************************!*\
+  !*** ./frontend/util/follows_api_utils.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var APIUtil = {
+  followUser: function followUser(id) {
+    return APIUtil.changeFollowStatus(id, 'POST');
+  },
+  unfollowUser: function unfollowUser(id) {
+    return APIUtil.changeFollowStatus(id, 'DELETE');
+  },
+  changeFollowStatus: function changeFollowStatus(id, method) {
+    return $.ajax({
+      url: "/api/users/".concat(id, "/follows"),
+      dataType: 'json',
+      method: method
+    });
+  }
+};
+module.exports = APIUtil;
 
 /***/ }),
 
