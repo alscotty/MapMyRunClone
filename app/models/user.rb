@@ -16,6 +16,23 @@ class User < ApplicationRecord
   foreign_key: :user_id,
   class_name: :Workout
 
+  #follows
+   has_many :in_follows,
+    foreign_key: :followee_id,
+    class_name: :Follow
+
+  has_many :out_follows,
+    foreign_key: :follower_id,
+    class_name: :Follow
+
+  has_many :followers,
+    through: :in_follows,
+    source: :follower
+
+  has_many :followees,
+    through: :out_follows,
+    source: :followee
+
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
