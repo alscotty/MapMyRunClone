@@ -568,9 +568,6 @@ function (_Component) {
     _classCallCheck(this, Community);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Community).call(this, props));
-    _this.state = {
-      currentfollows: _this.props.currentUser.followees
-    };
     _this.handleFollow = _this.handleFollow.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -586,13 +583,9 @@ function (_Component) {
       var _this$props = this.props,
           createFollow = _this$props.createFollow,
           deleteFollow = _this$props.deleteFollow,
-          currentUser = _this$props.currentUser;
-      var followeeIds = [];
-      currentUser.followees.map(function (followee) {
-        followeeIds.push(followee.id);
-      });
+          followeeIds = _this$props.followeeIds;
 
-      if (userId in followeeIds) {
+      if (followeeIds.includes(userId)) {
         //unfollow logic:
         deleteFollow(userId);
       } else {
@@ -607,12 +600,9 @@ function (_Component) {
 
       var _this$props2 = this.props,
           currentUser = _this$props2.currentUser,
-          allUsers = _this$props2.allUsers;
+          allUsers = _this$props2.allUsers,
+          followeeIds = _this$props2.followeeIds;
       if (!allUsers) return null;
-      var followeeIds = [];
-      currentUser.followees.map(function (followee) {
-        followeeIds.push(followee.id);
-      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "community-page"
       }, "Other users go here..", allUsers.map(function (user) {
@@ -622,10 +612,8 @@ function (_Component) {
           onClick: function onClick() {
             return _this2.handleFollow(user.id);
           }
-        }, user.id in followeeIds ? "Unfollow" : "Follow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "";
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Your are following: ", currentUser.followees.map(function (followee) {
-        return followee.id;
-      }), followeeIds);
+        }, followeeIds.includes(user.id) ? "Unfollow" : "Follow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "";
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), followeeIds);
     }
   }]);
 
@@ -656,11 +644,20 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(_ref) {
   var session = _ref.session,
-      users = _ref.entities.users;
+      _ref$entities = _ref.entities,
+      users = _ref$entities.users,
+      follows = _ref$entities.follows;
   var actualUsers = Object.values(users);
+  var currentUser = users[session.id];
+  var followeeIds = [];
+  currentUser.out_follows.forEach(function (followee) {
+    followeeIds.push(followee.followee_id);
+  });
   return {
-    currentUser: users[session.id],
-    allUsers: actualUsers
+    currentUser: currentUser,
+    allUsers: actualUsers,
+    followeeIds: followeeIds,
+    follows: follows
   };
 };
 
@@ -3295,7 +3292,7 @@ var APIUtil = {
   },
   changeFollowStatus: function changeFollowStatus(id, method) {
     return $.ajax({
-      url: "/api/users/".concat(id, "/follows"),
+      url: "/api/users/".concat(id, "/follow"),
       dataType: 'json',
       method: method
     });

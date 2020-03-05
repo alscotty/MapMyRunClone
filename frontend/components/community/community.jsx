@@ -3,9 +3,6 @@ import React, { Component } from 'react'
 class Community extends Component {
     constructor(props){
         super(props);
-        this.state={
-            currentfollows: this.props.currentUser.followees
-        }
 
         this.handleFollow=this.handleFollow.bind(this);
     }
@@ -15,14 +12,9 @@ class Community extends Component {
     }
 
     handleFollow(userId){
-        const {createFollow, deleteFollow, currentUser} = this.props;
-        
-        let followeeIds = [];
-        currentUser.followees.map(followee => {
-            followeeIds.push(followee.id)
-        })
-        
-        if (userId in followeeIds){
+        const {createFollow, deleteFollow, followeeIds} = this.props;
+
+        if (followeeIds.includes(userId)){
             //unfollow logic:
             deleteFollow(userId);
         } else {
@@ -32,26 +24,20 @@ class Community extends Component {
     }
 
     render() {
-        const {currentUser, allUsers}=this.props
+        const {currentUser, allUsers,followeeIds}=this.props
         if(!allUsers)return null;
-
-        let followeeIds=[];
-        currentUser.followees.map(followee=>{
-            followeeIds.push(followee.id)
-        })
 
         return (
             <div className='community-page'>
                 Other users go here..
               {allUsers.map(user=>{
-
                   return(
                       currentUser.id !== user.id ?
                         <div key={user.id}>
                             {user.username}
                             <br/>
                           <button onClick={() => this.handleFollow(user.id)}>
-                          {user.id in followeeIds ? "Unfollow" : "Follow"}
+                            {followeeIds.includes(user.id) ? "Unfollow" : "Follow"}
                           </button>
                             <br/>
                         </div>
@@ -61,10 +47,7 @@ class Community extends Component {
             }
 
               <br/>
-              Your are following: {currentUser.followees.map(followee=>{
-                  return followee.id
-              })}
-              {followeeIds}
+             {followeeIds}
 
             </div>
         )

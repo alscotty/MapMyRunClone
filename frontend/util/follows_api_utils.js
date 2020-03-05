@@ -6,7 +6,7 @@ const APIUtil = {
 
     changeFollowStatus: (id, method) => (
         $.ajax({
-            url: `/api/users/${id}/follows`,
+            url: `/api/users/${id}/follow`,
             dataType: 'json',
             method
         })
