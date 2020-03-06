@@ -583,7 +583,8 @@ function (_Component) {
       var _this$props = this.props,
           createFollow = _this$props.createFollow,
           deleteFollow = _this$props.deleteFollow,
-          followeeIds = _this$props.followeeIds;
+          followeeIds = _this$props.followeeIds,
+          requestUsers = _this$props.requestUsers;
 
       if (followeeIds.includes(userId)) {
         //unfollow logic:
@@ -592,6 +593,8 @@ function (_Component) {
         //follow logic:
         createFollow(userId);
       }
+
+      requestUsers();
     }
   }, {
     key: "render",

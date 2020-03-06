@@ -12,7 +12,7 @@ class Community extends Component {
     }
 
     handleFollow(userId){
-        const {createFollow, deleteFollow, followeeIds} = this.props;
+        const {createFollow, deleteFollow, followeeIds, requestUsers} = this.props;
 
         if (followeeIds.includes(userId)){
             //unfollow logic:
@@ -21,6 +21,7 @@ class Community extends Component {
             //follow logic:
             createFollow(userId)
         }
+        requestUsers();
     }
 
     render() {
