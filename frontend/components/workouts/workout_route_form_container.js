@@ -25,6 +25,7 @@ const mstp=(state,ownProps)=>{
         description: '',
         time: 0,
         miles: 0,
+        creator: currentUser.username
         },
     route:route,
     

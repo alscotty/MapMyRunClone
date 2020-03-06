@@ -32,7 +32,7 @@ class RoutesIndex extends React.Component{
         return(  
             <div className='route-index'>
          
-            <h2 id='act-feed'>Activity Feed</h2>
+            <h2 id='act-feed'>My Routes</h2>
 
                 {routes.reverse().map(route=>{
                 return(

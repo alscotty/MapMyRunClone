@@ -7,6 +7,7 @@ const mSTP=state=>{
     const { entities } = state;
     const { session } = state;
     const { errors } = state;
+    let currentUser = entities.users[session.id]
 
     return({
         workout: {
@@ -16,9 +17,10 @@ const mSTP=state=>{
             description: '',
             time: 0,
             miles: 0,
+            creator: currentUser.username
         },
 
-        currentUser: entities.users[session.id],
+        currentUser: currentUser,
         errors: errors.workouts,
         formType:'Create Workout'
     });

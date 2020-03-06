@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_05_220350) do
+ActiveRecord::Schema.define(version: 2020_03_06_214648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 2020_03_05_220350) do
     t.integer "follower_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["followee_id"], name: "index_follows_on_followee_id", unique: true
   end
 
   create_table "routes", force: :cascade do |t|
@@ -62,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_03_05_220350) do
     t.float "miles", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "creator", null: false
     t.index ["route_id"], name: "index_workouts_on_route_id"
     t.index ["user_id"], name: "index_workouts_on_user_id"
   end

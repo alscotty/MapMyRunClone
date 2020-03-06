@@ -41,6 +41,8 @@ const Greeting = ({ currentUser, logout }) => {
         Workouts
       </Link> 
       <Link to='/community' className='route-links'>Community</Link>
+      <Link to='/activfeed' className='route-links'>Activity Feed</Link>
+      
 
       {currentUser ? personalGreeting() : sessionLinks()}
     </span>

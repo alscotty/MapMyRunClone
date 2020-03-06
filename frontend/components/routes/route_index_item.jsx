@@ -70,9 +70,6 @@ class RouteIndexItem extends React.Component{
         )
     }
     
-    /* <script  src={`https://maps.googleapis.com/maps/api/js?key=${window.googleAPIKey}&callback=initMap`}
-        async defer></script> */
-
     render(){
         const {route,currentUser,deleteRoute}=this.props
 

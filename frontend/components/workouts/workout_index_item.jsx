@@ -68,11 +68,13 @@ class WorkoutIndexItem extends React.Component{
 
                 }
             });
-        let totalMiles = document.getElementById("total-miles")
-        let num=parseFloat(totalMiles.innerHTML)
-        const {workout}=this.props;
-        workout.route ? (num+=workout.route.miles) : (num+=workout.miles)
-        totalMiles.innerHTML = num.toFixed(2) + ' miles';
+            const {currentUser, workout} = this.props;
+            if(currentUser.id===workout.user_id){
+                let totalMiles = document.getElementById("total-miles")
+                let num=parseFloat(totalMiles.innerHTML)
+                workout.route ? (num+=workout.route.miles) : (num+=workout.miles)
+                totalMiles.innerHTML = num.toFixed(2) + ' miles';
+            }
     }
 
     deduct(workout){
@@ -83,12 +85,14 @@ class WorkoutIndexItem extends React.Component{
     }
 
     render(){
-        const {workout,deleteWorkout,currentUser}=this.props;
+        const {workout,deleteWorkout, currentUser}=this.props;
         
         return(
             <div id='workout-index-item'>
                 <span className='workout-info'>
                 {workout.title}
+                <br/>
+                by: {workout.creator}
                 {workout.description.length ? 
                 <span>
                 <br/>
@@ -100,7 +104,7 @@ class WorkoutIndexItem extends React.Component{
                 {workout.route_id && workout.route ? (
                     <span>
                         <br/>
-                        <span className='linky'>{currentUser.username}</span> ran 
+                        <span className='linky'>{workout.creator}</span> ran 
                         <Link to={`/routes/${workout.route.id}`} className='linky'>
                         {` ${workout.route.title}`}
                         </Link>
@@ -129,7 +133,10 @@ class WorkoutIndexItem extends React.Component{
                     </span>)
                 }
                 <br/>
-            <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id).then(this.deduct(workout))}}>Delete Workout</button>
+                {currentUser.id === workout.user_id ? 
+                <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id).then(this.deduct(workout))}}>Delete Workout</button>
+                : ""    
+            }
                 </span>
 
                 <span id='mapp'>
