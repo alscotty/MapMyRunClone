@@ -188,7 +188,7 @@ class WorkoutIndexItem extends React.Component{
 
                 <br/>
                 {workout.comments ? workout.comments.map(comment=>{
-                    return(<div>
+                    return(<div key={comment.id}>
                         {comment.body} by {comment.creator}
                     </div>)
                 }) : ""}

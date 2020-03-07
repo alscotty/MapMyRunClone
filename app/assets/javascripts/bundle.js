@@ -2693,7 +2693,9 @@ function (_React$Component) {
         type: "submit",
         value: "Post"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.comments ? workout.comments.map(function (comment) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, comment.body, " by ", comment.creator);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: comment.id
+        }, comment.body, " by ", comment.creator);
       }) : "");
     }
   }]);
@@ -3559,7 +3561,9 @@ var createComment = function createComment(comment) {
   return $.ajax({
     url: '/api/comments',
     method: 'post',
-    comment: comment
+    data: {
+      comment: comment
+    }
   });
 };
 var deleteComment = function deleteComment(comment) {
