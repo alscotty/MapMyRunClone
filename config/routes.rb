@@ -8,7 +8,8 @@ Rails.application.routes.draw do
 
     resource :session, only:[:create,:destroy]
 
-    resources :workouts
+    resources :workouts 
+    resources :comments, only: [:create, :destroy, :show, :index]
 
     resources :routes, only:[:create,:destroy, :index, :show] do
     resources :coordinates, only:[:create]

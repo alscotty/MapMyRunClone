@@ -9,6 +9,10 @@ import {
     requestRoute,
     requestRoutes
 } from '../../actions/route_actions'
+import {
+    createComment,
+    deleteComment
+} from '../../actions/comment_actions'
 
 const mstp=state=>{
     const { entities } = state;
@@ -29,7 +33,9 @@ const mdtp=dispatch=>({
     requestWorkout: (workoutId) => dispatch(requestWorkout(workoutId)),
     deleteWorkout: (workoutId) => dispatch(deleteWorkout(workoutId)),
     requestRoute: (routeId)=>dispatch(requestRoute(routeId)),
-    requestRoutes: ()=>dispatch(requestRoutes())
+    requestRoutes: ()=>dispatch(requestRoutes()),
+    createComment: comment=>dispatch(createComment(comment)),
+    deleteComment: (comment)=>dispatch(deleteComment(comment))
 });
 
 

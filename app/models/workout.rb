@@ -11,6 +11,12 @@ class Workout < ApplicationRecord
     class_name: :Route,
     optional: true
 
+    has_many :comments,
+    foreign_key: :workout_id,
+    class_name: :Comment,
+    dependent: :destroy
+    
+
     
 
 end

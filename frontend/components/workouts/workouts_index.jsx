@@ -12,7 +12,7 @@ class WorkoutsIndex extends React.Component{
     }
 
     render(){
-        const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route}=this.props
+        const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route, createComment, deleteComment}=this.props
         let numRuns=workouts.length
         return(
             <div className='workout-index'>
@@ -24,7 +24,7 @@ class WorkoutsIndex extends React.Component{
                 </span>
             {(workouts).reverse().map(workout=>{               
                 return(
-                <WorkoutIndexItem key={workout.id*3} workout={workout} currentUser={currentUser} route={route} deleteWorkout={deleteWorkout} requestWorkout={requestWorkout} requestRoute={requestRoute} />
+                <WorkoutIndexItem key={workout.id*3} workout={workout} createComment={createComment} deleteComment={deleteComment} currentUser={currentUser} route={route} deleteWorkout={deleteWorkout} requestWorkout={requestWorkout} requestRoute={requestRoute} />
                 )
             })}
             </div>

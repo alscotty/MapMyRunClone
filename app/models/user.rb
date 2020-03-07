@@ -16,6 +16,11 @@ class User < ApplicationRecord
   foreign_key: :user_id,
   class_name: :Workout
 
+     has_many :comments,
+    foreign_key: :creator_id,
+    class_name: :Comment
+
+
   #follows
    has_many :in_follows,
     foreign_key: :followee_id,

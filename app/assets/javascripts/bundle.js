@@ -86,6 +86,57 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/comment_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/comment_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_COMMENT, REMOVE_COMMENT, createComment, deleteComment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENT", function() { return RECEIVE_COMMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_COMMENT", function() { return REMOVE_COMMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
+/* harmony import */ var _util_comment_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/comment_api_utils */ "./frontend/util/comment_api_utils.js");
+/* harmony import */ var _follow_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./follow_actions */ "./frontend/actions/follow_actions.js");
+
+
+var RECEIVE_COMMENT = 'RECEIVE_COMMENT';
+var REMOVE_COMMENT = 'REMOVE_COMMENT';
+
+var receiveComment = function receiveComment(comment) {
+  return {
+    type: RECEIVE_COMMENT,
+    comment: comment
+  };
+};
+
+var removeComment = function removeComment(comment) {
+  return {
+    type: _follow_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_FOLLOW"],
+    comment: comment
+  };
+};
+
+var createComment = function createComment(comment) {
+  return function (dispatch) {
+    return _util_comment_api_utils__WEBPACK_IMPORTED_MODULE_0__["createComment"](comment).then(function (comment) {
+      return dispatch(receiveComment(comment));
+    });
+  };
+};
+var deleteComment = function deleteComment(comment) {
+  return function (dispatch) {
+    return _util_comment_api_utils__WEBPACK_IMPORTED_MODULE_0__["deleteComment"](comment).then(function (comment) {
+      return dispatch(removeComment(comment));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/follow_actions.js":
 /*!********************************************!*\
   !*** ./frontend/actions/follow_actions.js ***!
@@ -590,7 +641,9 @@ function (_React$Component) {
           requestWorkout = _this$props.requestWorkout,
           deleteWorkout = _this$props.deleteWorkout,
           requestRoute = _this$props.requestRoute,
-          route = _this$props.route;
+          route = _this$props.route,
+          createComment = _this$props.createComment,
+          deleteComment = _this$props.deleteComment;
       var numRuns = currentUser.workouts.length;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-index"
@@ -612,6 +665,8 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workouts_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: workout.id * 3,
           workout: workout,
+          createComment: createComment,
+          deleteComment: deleteComment,
           currentUser: currentUser,
           route: route,
           deleteWorkout: deleteWorkout,
@@ -642,6 +697,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _activity_feed__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./activity_feed */ "./frontend/components/community/activity_feed.jsx");
 /* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
 /* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+
 
 
 
@@ -680,6 +737,12 @@ var mdtp = function mdtp(dispatch) {
     },
     requestRoutes: function requestRoutes() {
       return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_3__["requestRoutes"])());
+    },
+    createComment: function createComment(comment) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_4__["createComment"])(comment));
+    },
+    deleteComment: function deleteComment(comment) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_4__["deleteComment"])(comment));
     }
   };
 };
@@ -2850,7 +2913,9 @@ function (_React$Component) {
           requestWorkout = _this$props.requestWorkout,
           deleteWorkout = _this$props.deleteWorkout,
           requestRoute = _this$props.requestRoute,
-          route = _this$props.route;
+          route = _this$props.route,
+          createComment = _this$props.createComment,
+          deleteComment = _this$props.deleteComment;
       var numRuns = workouts.length;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-index"
@@ -2868,6 +2933,8 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: workout.id * 3,
           workout: workout,
+          createComment: createComment,
+          deleteComment: deleteComment,
           currentUser: currentUser,
           route: route,
           deleteWorkout: deleteWorkout,
@@ -2898,6 +2965,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _workouts_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./workouts_index */ "./frontend/components/workouts/workouts_index.jsx");
 /* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
 /* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+
 
 
 
@@ -2931,6 +3000,12 @@ var mdtp = function mdtp(dispatch) {
     },
     requestRoutes: function requestRoutes() {
       return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_3__["requestRoutes"])());
+    },
+    createComment: function createComment(comment) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_4__["createComment"])(comment));
+    },
+    deleteComment: function deleteComment(comment) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_4__["deleteComment"])(comment));
     }
   };
 };
@@ -2988,6 +3063,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./frontend/reducers/comments_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/comments_reducer.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+
+
+var CommentsReducer = function CommentsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+  var newState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_COMMENT"]:
+      return action.comment;
+
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_COMMENT"]:
+      delete newState[action.comment];
+      return newState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CommentsReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -3002,6 +3112,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes_reducer */ "./frontend/reducers/routes_reducer.js");
 /* harmony import */ var _workout_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./workout_reducer */ "./frontend/reducers/workout_reducer.js");
 /* harmony import */ var _follows_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./follows_reducer */ "./frontend/reducers/follows_reducer.js");
+/* harmony import */ var _comments_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./comments_reducer */ "./frontend/reducers/comments_reducer.js");
+
 
 
 
@@ -3011,7 +3123,8 @@ __webpack_require__.r(__webpack_exports__);
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   routes: _routes_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   workouts: _workout_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
-  follows: _follows_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
+  follows: _follows_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
+  comments: _comments_reducer__WEBPACK_IMPORTED_MODULE_5__["default"]
 }));
 
 /***/ }),
@@ -3385,6 +3498,33 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/comment_api_utils.js":
+/*!********************************************!*\
+  !*** ./frontend/util/comment_api_utils.js ***!
+  \********************************************/
+/*! exports provided: createComment, deleteComment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
+var createComment = function createComment(comment) {
+  return $.ajax({
+    url: '/api/comments',
+    method: 'post',
+    comment: comment
+  });
+};
+var deleteComment = function deleteComment(comment) {
+  return $ / ajax({
+    url: "/api/comments".concat(comment.id),
+    method: 'delete'
+  });
+};
 
 /***/ }),
 
