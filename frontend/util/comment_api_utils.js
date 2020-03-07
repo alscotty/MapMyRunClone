@@ -8,7 +8,7 @@ export const createComment=(comment)=>(
 
 export const deleteComment=(comment)=>(
     $/ajax({
-        url: `/api/comments${comment.id}`,
+        url: `/api/comments/${comment.id}`,
         method: 'delete'
     })
 );

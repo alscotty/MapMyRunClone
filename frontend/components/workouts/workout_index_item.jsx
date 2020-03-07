@@ -5,9 +5,38 @@ import {formatDateTime} from '../../util/date_util'
 class WorkoutIndexItem extends React.Component{
     constructor(props){
         super(props);
+        this.state={
+            body:''
+        }
 
         this.renderIndMap = this.renderIndMap.bind(this)
         this.readyMap = this.readyMap.bind(this)
+        this.handleComment=this.handleComment.bind(this)
+    }
+
+    update(field){
+        return(
+            e=>{
+                this.setState({ [field]: e.target.value })
+            }
+        )
+    }
+
+    handleComment(e){
+        e.preventDefault();
+        const {workout, currentUser}=this.props;
+
+        let comment={
+            body:this.state.body,
+            workout_id: workout.id,
+            creator: currentUser.username,
+            creator_id: currentUser.id
+
+        }
+        this.props.createComment(comment)
+            .then(this.setState({body:''}))
+            .then(this.props.requestWorkout(workout.id))
+
     }
 
     renderIndMap(coordinates) {
@@ -144,6 +173,25 @@ class WorkoutIndexItem extends React.Component{
                     <div className='workout-map' id={`workout-map-${this.props.workout.id}`}></div>
             : <img src={window.workoutURL}/>}
                 </span>
+                    <br/>
+                <form onSubmit={this.handleComment}>
+                <textarea
+                    cols="30"
+                    rows="10"
+                    placeholder='leave a comment'
+                    value={this.state.body}
+                    onChange={this.update("body")}
+                />
+                    <input type="submit" value="Post"></input>
+
+                </form>
+
+                <br/>
+                {workout.comments ? workout.comments.map(comment=>{
+                    return(<div>
+                        {comment.body} by {comment.creator}
+                    </div>)
+                }) : ""}
             </div>
         )
     }

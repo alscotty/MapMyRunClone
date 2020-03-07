@@ -1,5 +1,4 @@
 import * as APIUTIL from '../util/comment_api_utils'
-import { REMOVE_FOLLOW } from './follow_actions';
 
 export const RECEIVE_COMMENT='RECEIVE_COMMENT'
 export const REMOVE_COMMENT='REMOVE_COMMENT'
@@ -10,16 +9,16 @@ const receiveComment=comment=>({
 });
 
 const removeComment = comment =>({
-    type: REMOVE_FOLLOW,
+    type: REMOVE_COMMENT,
     comment
 })
 
 export const createComment= comment=>dispatch=>(
     APIUTIL.createComment(comment)
-        .then(comment=>dispatch(receiveComment(comment)))
+        .then(comment1=>dispatch(receiveComment(comment1)))
 )
 
 export const deleteComment= comment=>dispatch=>(
     APIUTIL.deleteComment(comment)
-        .then(comment=>dispatch(removeComment(comment)))
+        .then(comment2=>dispatch(removeComment(comment2)))
 )

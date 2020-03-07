@@ -100,8 +100,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
 /* harmony import */ var _util_comment_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/comment_api_utils */ "./frontend/util/comment_api_utils.js");
-/* harmony import */ var _follow_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./follow_actions */ "./frontend/actions/follow_actions.js");
-
 
 var RECEIVE_COMMENT = 'RECEIVE_COMMENT';
 var REMOVE_COMMENT = 'REMOVE_COMMENT';
@@ -115,22 +113,22 @@ var receiveComment = function receiveComment(comment) {
 
 var removeComment = function removeComment(comment) {
   return {
-    type: _follow_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_FOLLOW"],
+    type: REMOVE_COMMENT,
     comment: comment
   };
 };
 
 var createComment = function createComment(comment) {
   return function (dispatch) {
-    return _util_comment_api_utils__WEBPACK_IMPORTED_MODULE_0__["createComment"](comment).then(function (comment) {
-      return dispatch(receiveComment(comment));
+    return _util_comment_api_utils__WEBPACK_IMPORTED_MODULE_0__["createComment"](comment).then(function (comment1) {
+      return dispatch(receiveComment(comment1));
     });
   };
 };
 var deleteComment = function deleteComment(comment) {
   return function (dispatch) {
-    return _util_comment_api_utils__WEBPACK_IMPORTED_MODULE_0__["deleteComment"](comment).then(function (comment) {
-      return dispatch(removeComment(comment));
+    return _util_comment_api_utils__WEBPACK_IMPORTED_MODULE_0__["deleteComment"](comment).then(function (comment2) {
+      return dispatch(removeComment(comment2));
     });
   };
 };
@@ -2500,6 +2498,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_date_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/date_util */ "./frontend/util/date_util.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -2531,12 +2531,42 @@ function (_React$Component) {
     _classCallCheck(this, WorkoutIndexItem);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(WorkoutIndexItem).call(this, props));
+    _this.state = {
+      body: ''
+    };
     _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
     _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
+    _this.handleComment = _this.handleComment.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(WorkoutIndexItem, [{
+    key: "update",
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: "handleComment",
+    value: function handleComment(e) {
+      e.preventDefault();
+      var _this$props = this.props,
+          workout = _this$props.workout,
+          currentUser = _this$props.currentUser;
+      var comment = {
+        body: this.state.body,
+        workout_id: workout.id,
+        creator: currentUser.username,
+        creator_id: currentUser.id
+      };
+      this.props.createComment(comment).then(this.setState({
+        body: ''
+      })).then(this.props.requestWorkout(workout.id));
+    }
+  }, {
     key: "renderIndMap",
     value: function renderIndMap(coordinates) {
       var ren = new google.maps.DirectionsRenderer();
@@ -2593,18 +2623,18 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.props.requestWorkout(this.props.workout.id).then(function () {
-        if (_this2.props.workout.route_id) {
-          _this2.props.requestRoute(_this2.props.workout.route_id).then(function (route) {
-            return _this2.readyMap(route);
+        if (_this3.props.workout.route_id) {
+          _this3.props.requestRoute(_this3.props.workout.route_id).then(function (route) {
+            return _this3.readyMap(route);
           });
         }
       });
-      var _this$props = this.props,
-          currentUser = _this$props.currentUser,
-          workout = _this$props.workout;
+      var _this$props2 = this.props,
+          currentUser = _this$props2.currentUser,
+          workout = _this$props2.workout;
 
       if (currentUser.id === workout.user_id) {
         var totalMiles = document.getElementById("total-miles");
@@ -2624,12 +2654,12 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
-      var _this$props2 = this.props,
-          workout = _this$props2.workout,
-          deleteWorkout = _this$props2.deleteWorkout,
-          currentUser = _this$props2.currentUser;
+      var _this$props3 = this.props,
+          workout = _this$props3.workout,
+          deleteWorkout = _this$props3.deleteWorkout,
+          currentUser = _this$props3.currentUser;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "workout-index-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -2642,7 +2672,7 @@ function (_React$Component) {
       }, " ".concat(workout.route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), Object(_util_date_util__WEBPACK_IMPORTED_MODULE_2__["formatDateTime"])(workout.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, " min.") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.route.miles, " miles")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.miles, " miles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id === workout.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "delete-workout-button",
         onClick: function onClick() {
-          deleteWorkout(workout.id).then(_this3.deduct(workout));
+          deleteWorkout(workout.id).then(_this4.deduct(workout));
         }
       }, "Delete Workout") : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "mapp"
@@ -2651,7 +2681,20 @@ function (_React$Component) {
         id: "workout-map-".concat(this.props.workout.id)
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.workoutURL
-      })));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleComment
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        cols: "30",
+        rows: "10",
+        placeholder: "leave a comment",
+        value: this.state.body,
+        onChange: this.update("body")
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: "Post"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.comments ? workout.comments.map(function (comment) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, comment.body, " by ", comment.creator);
+      }) : "");
     }
   }]);
 
@@ -3521,7 +3564,7 @@ var createComment = function createComment(comment) {
 };
 var deleteComment = function deleteComment(comment) {
   return $ / ajax({
-    url: "/api/comments".concat(comment.id),
+    url: "/api/comments/".concat(comment.id),
     method: 'delete'
   });
 };

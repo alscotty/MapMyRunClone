@@ -34,7 +34,7 @@ const mdtp=dispatch=>({
     deleteWorkout: (workoutId) => dispatch(deleteWorkout(workoutId)),
     requestRoute: (routeId)=>dispatch(requestRoute(routeId)),
     requestRoutes: ()=>dispatch(requestRoutes()),
-    createComment: comment=>dispatch(createComment(comment)),
+    createComment: (comment)=>dispatch(createComment(comment)),
     deleteComment: (comment)=>dispatch(deleteComment(comment))
 });
 
