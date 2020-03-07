@@ -12,6 +12,7 @@ class WorkoutIndexItem extends React.Component{
         this.renderIndMap = this.renderIndMap.bind(this)
         this.readyMap = this.readyMap.bind(this)
         this.handleComment=this.handleComment.bind(this)
+        this.handleDeleteComment=this.handleDeleteComment.bind(this)
     }
 
     update(field){
@@ -20,6 +21,12 @@ class WorkoutIndexItem extends React.Component{
                 this.setState({ [field]: e.target.value })
             }
         )
+    }
+
+    handleDeleteComment(workout,comment){
+        this.props.deleteComment(comment)
+            .then(this.props.requestWorkout(workout.id))
+            .catch(this.props.requestWorkout(workout.id))
     }
 
     handleComment(e){
@@ -36,7 +43,7 @@ class WorkoutIndexItem extends React.Component{
         this.props.createComment(comment)
             .then(this.setState({body:''}))
             .then(this.props.requestWorkout(workout.id))
-
+            .catch(this.props.requestWorkout(workout.id))
     }
 
     renderIndMap(coordinates) {
@@ -190,6 +197,10 @@ class WorkoutIndexItem extends React.Component{
                 {workout.comments ? workout.comments.map(comment=>{
                     return(<div key={comment.id}>
                         {comment.body} by {comment.creator}
+                        <br/>
+                        {comment.creator_id===currentUser.id || workout.user_id === currentUser.id ? 
+                        <button onClick={()=>this.handleDeleteComment(workout,comment)}>Delete Comment</button>
+                        :""}
                     </div>)
                 }) : ""}
             </div>

@@ -47,9 +47,6 @@ class Community extends Component {
               })
             }
 
-              <br/>
-             {followeeIds}
-
             </div>
         )
     }

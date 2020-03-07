@@ -18,7 +18,7 @@ class Api::CommentsController < ApplicationController
         @comments=Comment.all
     end
 
-    def delete
+    def destroy
         @comment=Comment.find(params[:id])
         @comment.destroy
         render json: @comment

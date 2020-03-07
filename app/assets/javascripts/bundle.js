@@ -839,7 +839,7 @@ function (_Component) {
             return _this2.handleFollow(user.id);
           }
         }, followeeIds.includes(user.id) ? "Unfollow" : "Follow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "";
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), followeeIds);
+      }));
     }
   }]);
 
@@ -2537,6 +2537,7 @@ function (_React$Component) {
     _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
     _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
     _this.handleComment = _this.handleComment.bind(_assertThisInitialized(_this));
+    _this.handleDeleteComment = _this.handleDeleteComment.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2548,6 +2549,11 @@ function (_React$Component) {
       return function (e) {
         _this2.setState(_defineProperty({}, field, e.target.value));
       };
+    }
+  }, {
+    key: "handleDeleteComment",
+    value: function handleDeleteComment(workout, comment) {
+      this.props.deleteComment(comment).then(this.props.requestWorkout(workout.id))["catch"](this.props.requestWorkout(workout.id));
     }
   }, {
     key: "handleComment",
@@ -2564,7 +2570,7 @@ function (_React$Component) {
       };
       this.props.createComment(comment).then(this.setState({
         body: ''
-      })).then(this.props.requestWorkout(workout.id));
+      })).then(this.props.requestWorkout(workout.id))["catch"](this.props.requestWorkout(workout.id));
     }
   }, {
     key: "renderIndMap",
@@ -2695,7 +2701,11 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.comments ? workout.comments.map(function (comment) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: comment.id
-        }, comment.body, " by ", comment.creator);
+        }, comment.body, " by ", comment.creator, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), comment.creator_id === currentUser.id || workout.user_id === currentUser.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this4.handleDeleteComment(workout, comment);
+          }
+        }, "Delete Comment") : "");
       }) : "");
     }
   }]);
@@ -3567,7 +3577,7 @@ var createComment = function createComment(comment) {
   });
 };
 var deleteComment = function deleteComment(comment) {
-  return $ / ajax({
+  return $.ajax({
     url: "/api/comments/".concat(comment.id),
     method: 'delete'
   });
