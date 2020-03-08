@@ -650,16 +650,26 @@ function (_React$Component) {
         id: "workouts"
       }, "Activity Feed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "row-me"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Activity to date:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        id: "to-date"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Activity to date:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "activ-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "w-title",
         id: "total-miles"
       }, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "w-title"
-      }, numRuns, " workouts")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      }, numRuns, " workouts"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "row-me"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "w-title"
+      }, " ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "activ-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "w-title"
       }, "Following ", currentUser.followees.length), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "w-title"
-      }, "Followers ", currentUser.followers.length), workouts.reverse().map(function (workout) {
+      }, "Followers ", currentUser.followers.length))), workouts.reverse().map(function (workout) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workouts_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: workout.id * 3,
           workout: workout,
@@ -831,7 +841,7 @@ function (_Component) {
       if (!allUsers) return null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "community-page"
-      }, "Other users go here..", allUsers.map(function (user) {
+      }, allUsers.map(function (user) {
         return currentUser.id !== user.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: user.id
         }, user.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -1257,10 +1267,9 @@ function (_React$Component) {
         className: "route-index-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "route-info"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "linky",
-        to: "/routes"
-      }, "".concat(currentUser.username, " ")), "created the route", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "linky"
+      }, "".concat(currentUser.username, " ")), "                   created the route", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "linky",
         to: "/routes/".concat(route.id)
       }, " ".concat(route.title)), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -1644,9 +1653,9 @@ function (_React$Component) {
   }, {
     key: "renderMap",
     value: function renderMap() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "map"
-      }));
+      });
     }
   }, {
     key: "renderErrors",
@@ -2667,6 +2676,8 @@ function (_React$Component) {
           deleteWorkout = _this$props3.deleteWorkout,
           currentUser = _this$props3.currentUser;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "workout-and-comments"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "workout-index-item"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "workout-info"
@@ -2675,7 +2686,9 @@ function (_React$Component) {
       }, workout.creator), " ran", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/routes/".concat(workout.route.id),
         className: "linky"
-      }, " ".concat(workout.route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), Object(_util_date_util__WEBPACK_IMPORTED_MODULE_2__["formatDateTime"])(workout.created_at), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, " min.") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.route.miles, " miles")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.miles, " miles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id === workout.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, " ".concat(workout.route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "date"
+      }, Object(_util_date_util__WEBPACK_IMPORTED_MODULE_2__["formatDateTime"])(workout.created_at)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Time:", workout.time, " min.") : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.route.miles, " miles")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.miles, " miles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id === workout.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "delete-workout-button",
         onClick: function onClick() {
           deleteWorkout(workout.id).then(_this4.deduct(workout));
@@ -2687,26 +2700,37 @@ function (_React$Component) {
         id: "workout-map-".concat(this.props.workout.id)
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: window.workoutURL
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleComment
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        cols: "30",
-        rows: "10",
-        placeholder: "leave a comment",
-        value: this.state.body,
-        onChange: this.update("body")
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "submit",
-        value: "Post"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.comments ? workout.comments.map(function (comment) {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "comments"
+      }, workout.comments ? workout.comments.map(function (comment) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: comment.id
-        }, comment.body, " by ", comment.creator, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), comment.creator_id === currentUser.id || workout.user_id === currentUser.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          id: "space-between"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          id: "blue-text"
+        }, comment.creator), comment.creator_id === currentUser.id || workout.user_id === currentUser.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "linky",
           onClick: function onClick() {
             return _this4.handleDeleteComment(workout, comment);
           }
-        }, "Delete Comment") : "");
-      }) : "");
+        }, "Delete ") : ""), comment.body, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
+      }) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        id: "comment-form",
+        onSubmit: this.handleComment
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        id: "comment-text",
+        cols: "30",
+        rows: "1",
+        placeholder: "Write a comment..",
+        value: this.state.body,
+        onChange: this.update("body")
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "post-button",
+        className: "linky",
+        type: "submit",
+        value: "POST"
+      }))));
     }
   }]);
 
@@ -2830,7 +2854,7 @@ var mstp = function mstp(state, ownProps) {
       title: '',
       description: '',
       time: 0,
-      miles: 0,
+      miles: route.miles,
       creator: currentUser.username
     },
     route: route,
@@ -2978,7 +3002,7 @@ function (_React$Component) {
         className: "w-title",
         id: "workouts"
       }, "Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        id: "row-me"
+        id: "w-me"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Activity to date:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "w-title",
         id: "total-miles"

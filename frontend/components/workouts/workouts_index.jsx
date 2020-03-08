@@ -17,7 +17,7 @@ class WorkoutsIndex extends React.Component{
         return(
             <div className='workout-index'>
                 <h2 className='w-title' id='workouts'>Workouts</h2>
-                <span id='row-me'>
+                <span id='w-me'>
                     <h4><i>Activity to date:</i></h4>
                     <h4 className='w-title' id='total-miles'>0</h4>
                     <h4 className='w-title' >{numRuns} workouts</h4>

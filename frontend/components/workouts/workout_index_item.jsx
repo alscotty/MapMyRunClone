@@ -124,6 +124,7 @@ class WorkoutIndexItem extends React.Component{
         const {workout,deleteWorkout, currentUser}=this.props;
         
         return(
+            <div id='workout-and-comments'>
             <div id='workout-index-item'>
                 <span className='workout-info'>
                 {workout.title}
@@ -148,7 +149,7 @@ class WorkoutIndexItem extends React.Component{
                     </span>
                 ) : ''}
                     <br/>
-                    {formatDateTime(workout.created_at)}
+                        <span id='date'>{formatDateTime(workout.created_at)}</span>
                     <br />
 
                 {workout.time !=0 && workout.miles ? (
@@ -180,29 +181,38 @@ class WorkoutIndexItem extends React.Component{
                     <div className='workout-map' id={`workout-map-${this.props.workout.id}`}></div>
             : <img src={window.workoutURL}/>}
                 </span>
-                    <br/>
-                <form onSubmit={this.handleComment}>
-                <textarea
-                    cols="30"
-                    rows="10"
-                    placeholder='leave a comment'
-                    value={this.state.body}
-                    onChange={this.update("body")}
-                />
-                    <input type="submit" value="Post"></input>
+            
+            </div>
 
-                </form>
-
-                <br/>
+                <span id='comments'>
                 {workout.comments ? workout.comments.map(comment=>{
                     return(<div key={comment.id}>
-                        {comment.body} by {comment.creator}
-                        <br/>
+                        <span id='space-between'>
+                        <span id='blue-text'>{comment.creator}</span>
                         {comment.creator_id===currentUser.id || workout.user_id === currentUser.id ? 
-                        <button onClick={()=>this.handleDeleteComment(workout,comment)}>Delete Comment</button>
+                        <span className='linky' onClick={()=>this.handleDeleteComment(workout,comment)}>Delete </span>
                         :""}
+
+                        </span>
+                        {comment.body} 
+                        <br/>
+                        <br/>
                     </div>)
                 }) : ""}
+
+                    <form id='comment-form' onSubmit={this.handleComment}>
+                        <textarea id='comment-text'
+                            cols="30"
+                            rows="1"
+                            placeholder='Write a comment..'
+                            value={this.state.body}
+                            onChange={this.update("body")}
+                        />
+                        <input id='post-button' className='linky' type="submit" value="POST"></input>
+
+                    </form>
+
+                </span>
             </div>
         )
     }

@@ -29,21 +29,25 @@
     margin-right:4%;
 }
 
-#row-me{
+#w-me{
     display: inline-flex;
     margin-left: 4%;
     margin-right: 4%;
-    width: 100%;
+    width: 35%;
     padding-top: 0px;
     padding-bottom: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
+    border: 1px solid grey;
+    background-color: rgb(240, 242, 244);;
+    border-radius: 5px;
+    padding-left:2%;
 }
 
 #workout-index-item{
     margin-top: 10px;
     border: 1px solid grey;
-    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+    box-shadow: 0px 1px 2px -2px rgba(0,0,0,.2);
     margin-left: 4%;
     margin-right: 4%;
     display:flex;
@@ -60,6 +64,8 @@
 
 .linky:hover{
   color: rgb(29, 66, 167);
+  cursor: pointer;
+
 }
 
 #workout-title{
@@ -86,4 +92,54 @@
 
 #mapp > img{
     transform: scale(1.2);
+}
+
+#workout-and-comments{
+    display: flex;
+    flex-direction: column;
+}
+#comments{
+     border-bottom: 1px solid grey;
+     border-left: 1px solid grey;
+     border-right: 1px solid grey;
+    margin-left: 4%;
+    margin-right: 4%;
+    padding: 5px;
+    box-shadow: 0px 2px 2px -2px rgba(0,0,0,.2);
+
+}
+
+#blue-text{
+    color: rgb(51, 130, 204);
+}
+
+#space-between{
+    display: flex;
+    justify-content: space-between;
+}
+
+#comment-text{
+    padding: 5px;
+    border-radius: 5px;
+    margin-right:7px;
+}
+
+#post-button{
+ border: 2px solid rgb(51, 130, 204);
+ border-radius: 5px;
+    padding-top: 4px;
+    padding-bottom:4px ;
+}
+
+#post-button:hover{
+  color: rgb(29, 66, 167);
+}
+
+#comment-form{
+    display: flex;
+    align-items: center;
+}
+
+#date{
+    font-size: small;
 }

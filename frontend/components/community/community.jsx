@@ -30,7 +30,6 @@ class Community extends Component {
 
         return (
             <div className='community-page'>
-                Other users go here..
               {allUsers.map(user=>{
                   return(
                       currentUser.id !== user.id ?

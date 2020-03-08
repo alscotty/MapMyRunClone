@@ -169,10 +169,8 @@ class RoutesForm extends React.Component{
 
     renderMap(){ 
         return(
-            <div>
                 <div id="map"></div>
 
-            </div>
         )
     }
 

@@ -77,10 +77,9 @@ class RouteIndexItem extends React.Component{
         return(
             <div key={route.id} className='route-index-item'>
                 <span id='route-info'>
-                    <Link className='linky'to='/routes'>
+                    <span className='linky' >
                     {`${currentUser.username} `}
-                    </Link>
-                    created the route
+                    </span>                   created the route
                     <Link className='linky' to={`/routes/${route.id}`}>
                         {` ${route.title}`}
                     </Link>
