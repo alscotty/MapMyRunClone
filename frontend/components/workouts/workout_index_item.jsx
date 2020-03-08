@@ -127,16 +127,15 @@ class WorkoutIndexItem extends React.Component{
             <div id='workout-and-comments'>
             <div id='workout-index-item'>
                 <span className='workout-info'>
-                {workout.title}
-                <br/>
-                by: {workout.creator}
+                    <span id='row'>
+                <span id='blue-text'>{`${workout.title}  `}</span>
+                by: <span id='blue-text'>{`  ${workout.creator}`}</span>
+                    </span>
                 {workout.description.length ? 
                 <span>
-                <br/>
                     Description:{workout.description}
                 </span>
                 : ''}
-                <br/>
 
                 {workout.route_id && workout.route ? (
                     <span>
@@ -148,18 +147,14 @@ class WorkoutIndexItem extends React.Component{
                         <br/>
                     </span>
                 ) : ''}
-                    <br/>
                         <span id='date'>{formatDateTime(workout.created_at)}</span>
-                    <br />
 
                 {workout.time !=0 && workout.miles ? (
                     <span>
-                    <br/>
-                    Time:{workout.time} min.
+                    {workout.time} min.
                     </span>
                     )
                     : ''}
-                    <br/>
                     {workout.route ? (
                     (<span>
                         {`${workout.route.miles} miles`}
