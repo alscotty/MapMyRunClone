@@ -1,3 +1,29 @@
 .community-page{
     margin-top: 3.3em;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+#follow-button{
+    border-radius:5px;
+    font-weight: bold;
+    padding:5px;
+    background-color: rgb(170, 209, 219);
+    border:1px solid black;
+}
+
+#follow-button:hover{
+    cursor: pointer;
+    background-color: rgb(115, 189, 207);
+}
+
+#user-box{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid grey;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: rgb(240, 242, 244);
+
 }

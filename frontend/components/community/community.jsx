@@ -30,15 +30,16 @@ class Community extends Component {
 
         return (
             <div className='community-page'>
+                <h3 id='workouts'>Find Friends</h3>
               {allUsers.map(user=>{
                   return(
                       currentUser.id !== user.id ?
-                        <div key={user.id}>
+                        <div key={user.id} id='user-box'>
                             {user.username}
-                            <br/>
-                          <button onClick={() => this.handleFollow(user.id)}>
+                          <button id='follow-button'onClick={() => this.handleFollow(user.id)}>
                             {followeeIds.includes(user.id) ? "Unfollow" : "Follow"}
                           </button>
+                            <br/>
                             <br/>
                         </div>
                     : ""

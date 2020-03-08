@@ -21,14 +21,14 @@ class ActivityFeed extends React.Component {
             <div className='workout-index'>
 
                 <h2 className='w-title' id='workouts'>Activity Feed</h2>
-                <span id='row-me'>
+                <span id='row-me' className='activ-feed1'>
                     <h4 id='to-date'><i>Activity to date:</i></h4>
                     <span id='activ-header'>
                     <h4 className='w-title' id='total-miles'>0</h4>
                     <h4 className='w-title' >{numRuns} workouts</h4>
                     </span>
                 </span>
-                <span id='row-me'>
+                <span id='row-me' className='activ-feed2'>
                     <h3 className='w-title'> {currentUser.username}</h3>
                     <span id='activ-header'>
                     <h4 className='w-title'>Following {currentUser.followees.length}</h4>                                   

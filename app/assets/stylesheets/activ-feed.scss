@@ -11,12 +11,29 @@
     display: inline-block;
     margin-left: 4%;
     margin-right: 4%;
-    width: 35%;
+    width: 40%;
     padding-top: 0px;
     padding-bottom: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
     border: 1px solid grey;
-    background-color: rgb(240, 242, 244);;
     border-radius: 5px;
+
+    color:white;
+    text-shadow: 2px 2px black;
+    font-size: larger;
+
+}
+
+.activ-feed1{
+    background-image: image-url('losgatos.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.activ-feed2{
+  background-image: image-url('verdugos.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }

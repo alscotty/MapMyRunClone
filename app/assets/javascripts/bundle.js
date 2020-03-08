@@ -649,7 +649,8 @@ function (_React$Component) {
         className: "w-title",
         id: "workouts"
       }, "Activity Feed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        id: "row-me"
+        id: "row-me",
+        className: "activ-feed1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         id: "to-date"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Activity to date:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -660,7 +661,8 @@ function (_React$Component) {
       }, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "w-title"
       }, numRuns, " workouts"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        id: "row-me"
+        id: "row-me",
+        className: "activ-feed2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "w-title"
       }, " ", currentUser.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -841,14 +843,18 @@ function (_Component) {
       if (!allUsers) return null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "community-page"
-      }, allUsers.map(function (user) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        id: "workouts"
+      }, "Find Friends"), allUsers.map(function (user) {
         return currentUser.id !== user.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: user.id
-        }, user.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          key: user.id,
+          id: "user-box"
+        }, user.username, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          id: "follow-button",
           onClick: function onClick() {
             return _this2.handleFollow(user.id);
           }
-        }, followeeIds.includes(user.id) ? "Unfollow" : "Follow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "";
+        }, followeeIds.includes(user.id) ? "Unfollow" : "Follow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "";
       }));
     }
   }]);
