@@ -14,7 +14,6 @@ class Api::FollowsController < ApplicationController
         @follow.destroy!
 
     respond_to do |format|
-      format.html { redirect_to request.referrer }
       format.json { render json: @follow }
     end
     end
