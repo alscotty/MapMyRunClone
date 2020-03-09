@@ -1088,11 +1088,29 @@ function (_React$Component) {
       document.getElementById("myDropdown").classList.toggle("show");
     }
   }, {
+    key: "routeToggle",
+    value: function routeToggle() {
+      document.getElementById("routeDropdown").classList.toggle("show");
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       window.addEventListener('click', function () {
         if (!event.target.matches('.dropbtn')) {
           var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+
+        if (!event.target.matches('.routedropbtn')) {
+          var dropdowns = document.getElementsByClassName("route-dropdown-content");
           var i;
 
           for (i = 0; i < dropdowns.length; i++) {
@@ -1120,13 +1138,23 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/activfeed",
         className: "route-links"
-      }, "Activity Feed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, "Activity Feed"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "route-dropdown"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onClick: function onClick() {
+          return _this2.routeToggle();
+        },
+        className: "routedropbtn"
+      }, "Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "routeDropdown",
+        className: "route-dropdown-content"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/routes/new",
         className: "route-links"
-      }, "Create Route"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+      }, "Create Route")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/routesAll",
         className: "route-links"
-      }, "Routes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, "My Routes")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "dropdown"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         onClick: function onClick() {

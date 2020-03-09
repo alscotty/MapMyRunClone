@@ -33,10 +33,24 @@ class Greeting extends React.Component{
     document.getElementById("myDropdown").classList.toggle("show");
   }
 
+  routeToggle(){
+    document.getElementById("routeDropdown").classList.toggle("show");
+  }
+
   componentDidMount(){
     window.addEventListener('click', () => {
       if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+    } 
+        if(!event.target.matches('.routedropbtn')){
+        var dropdowns = document.getElementsByClassName("route-dropdown-content");
         var i;
         for (i = 0; i < dropdowns.length; i++) {
           var openDropdown = dropdowns[i];
@@ -65,12 +79,28 @@ class Greeting extends React.Component{
       <Link to='/activfeed' className='route-links'>Activity Feed</Link>
 
 
-      <Link to='/routes/new' className='route-links'>
+      {/* <Link to='/routes/new' className='route-links'>
         Create Route
       </Link>
       <Link to='/routesAll' className='route-links'>
         Routes
-      </Link>
+      </Link> */}
+
+      <span className='route-dropdown'>
+        <span onClick={() => this.routeToggle()} className='routedropbtn'>Routes</span>
+        <div id='routeDropdown' className='route-dropdown-content'>
+          <li>
+            <Link to='/routes/new' className='route-links'>
+              Create Route
+            </Link>
+          </li>
+          <li>
+            <Link to='/routesAll' className='route-links'>
+              My Routes
+            </Link>
+          </li>
+        </div>
+      </span>
 
 
 
