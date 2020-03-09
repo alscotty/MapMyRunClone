@@ -1,22 +1,55 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Greeting = ({ currentUser, logout }) => {
+class Greeting extends React.Component{
+  constructor(props){
+    super(props);
 
-  const sessionLinks = () => (
+    this.sessionLinks=this.sessionLinks.bind(this);
+    this.personalGreeting=this.personalGreeting.bind(this);
+  }
+
+  sessionLinks(){
+    return(
     <nav className="login-signup">
       <Link id='logLink' to="/login">LOG IN</Link>
       &nbsp;
       <Link id='signLink' to="/signup">SIGN UP</Link>
     </nav>
-  );
-  const personalGreeting = () => (
+    )
+  };
+  
+  personalGreeting(){
+    const {currentUser, logout} = this.props;
+    return(
     <hgroup className="header-group">
       <h4 className="header-name"> Hi, {currentUser.username}! &nbsp;</h4>
       <button className="header-button" onClick={logout}>LOG OUT</button>
     </hgroup>
-  );
+    )
+  };
 
+  toggle(){
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  componentDidMount(){
+    window.addEventListener('click', () => {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+    }
+  });
+}
+
+  render(){
+    const {currentUser} = this.props
   return(
     <span>
       {currentUser ?
@@ -29,6 +62,9 @@ const Greeting = ({ currentUser, logout }) => {
         </Link>
       }
 
+      <Link to='/activfeed' className='route-links'>Activity Feed</Link>
+
+
       <Link to='/routes/new' className='route-links'>
         Create Route
       </Link>
@@ -36,23 +72,34 @@ const Greeting = ({ currentUser, logout }) => {
         Routes
       </Link>
 
-      <Link to='/workouts/new' className='route-links'>
-        Create Workout
-      </Link>
-      <Link to='/workoutsAll' className='route-links'>
-        Workouts
-      </Link> 
+
+
+      <span className='dropdown'>
+        <span onClick={()=>this.toggle()} className='dropbtn'>Workouts</span>
+        <div id='myDropdown' className='dropdown-content'>
+          <li>
+            <Link className='dropdown' to='/workouts/new' className='route-links'>
+            Create Workout
+            </Link>
+          </li>
+          <li>
+          <Link className='dropdown' to='/workoutsAll' className='route-links'>
+            My Workouts
+          </Link> 
+          </li>
+        </div>
+      </span>
 
 
       <Link to='/community' className='route-links'>Community</Link>
-      <Link to='/activfeed' className='route-links'>Activity Feed</Link>
       
 
-      {currentUser ? personalGreeting() : sessionLinks()}
+      {currentUser ? this.personalGreeting() : this.sessionLinks()}
     </span>
   )
 
-};
+    }
 
+}
 
 export default Greeting;
