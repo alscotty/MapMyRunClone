@@ -1046,7 +1046,7 @@ var Greeting = function Greeting(_ref) {
   };
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/routesAll",
+    to: "/activfeed",
     className: "header-link"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "RapMyMun")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/",
@@ -1478,8 +1478,8 @@ function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.renderMap = _this.renderMap.bind(_assertThisInitialized(_this));
     _this.makeMap = _this.makeMap.bind(_assertThisInitialized(_this));
-    _this.addLatLng = _this.addLatLng.bind(_assertThisInitialized(_this));
-    _this.snapPoint = _this.snapPoint.bind(_assertThisInitialized(_this));
+    _this.addLatLng = _this.addLatLng.bind(_assertThisInitialized(_this)); // this.snapPoint=this.snapPoint.bind(this);
+
     _this.processSnappedPosData = _this.processSnappedPosData.bind(_assertThisInitialized(_this));
     _this.calcAndDisplayRoute = _this.calcAndDisplayRoute.bind(_assertThisInitialized(_this));
     return _this;
@@ -1527,47 +1527,44 @@ function (_React$Component) {
     }
   }, {
     key: "processSnappedPosData",
-    value: function processSnappedPosData(data) {
-      var snappedLat = data.snappedPoints[0].location.latitude;
-      var snappedLng = data.snappedPoints[0].location.longitude;
+    value: function processSnappedPosData(lat, lng) {
+      // let snappedLat=data.snappedPoints[0].location.latitude; 
+      // let snappedLng=data.snappedPoints[0].location.longitude;
       this.state.coordinates.push({
-        lat: snappedLat,
-        lng: snappedLng
+        lat: lat,
+        lng: lng
       });
       new google.maps.Marker({
         position: {
-          lat: snappedLat,
-          lng: snappedLng
+          lat: lat,
+          lng: lng
         },
         map: this.state.map
       });
       this.calcAndDisplayRoute();
-    }
-  }, {
-    key: "snapPoint",
-    value: function snapPoint(lat, lng) {
-      var _this4 = this;
+    } // snapPoint(lat,lng){
+    //     let posArr=[lat,lng]
+    //     $.get('https://roads.googleapis.com/v1/snapToRoads', {
+    //         interpolate: true,
+    //         key: window.googleAPIKey,
+    //         path: posArr.join(",")
+    //     },(data)=>{
+    //         this.processSnappedPosData(data)
+    //     });
+    // }
 
-      var posArr = [lat, lng];
-      $.get('https://roads.googleapis.com/v1/snapToRoads', {
-        interpolate: true,
-        key: window.googleAPIKey,
-        path: posArr.join(",")
-      }, function (data) {
-        _this4.processSnappedPosData(data);
-      });
-    }
   }, {
     key: "addLatLng",
     value: function addLatLng(e) {
       var newLat = e.latLng['lat']();
-      var newLng = e.latLng['lng']();
-      this.snapPoint(newLat, newLng);
+      var newLng = e.latLng['lng'](); // this.snapPoint(newLat,newLng)
+
+      this.processSnappedPosData(newLat, newLng);
     }
   }, {
     key: "calcAndDisplayRoute",
     value: function calcAndDisplayRoute() {
-      var _this5 = this;
+      var _this4 = this;
 
       var waypts = [];
 
@@ -1595,11 +1592,11 @@ function (_React$Component) {
           var route = response.routes;
           var dist = route[0].legs[0].distance.value;
 
-          var routeInfo = _objectSpread({}, _this5.state.routeInfo);
+          var routeInfo = _objectSpread({}, _this4.state.routeInfo);
 
           routeInfo.miles = (dist * 0.00062137).toFixed(2);
 
-          _this5.setState({
+          _this4.setState({
             routeInfo: routeInfo
           });
         } else {
@@ -1610,7 +1607,7 @@ function (_React$Component) {
   }, {
     key: "makeMap",
     value: function makeMap() {
-      var _this6 = this;
+      var _this5 = this;
 
       this.state.directionsService = new google.maps.DirectionsService();
       this.state.directionsRenderer = new google.maps.DirectionsRenderer();
@@ -1640,9 +1637,9 @@ function (_React$Component) {
           map = _this$state2.map;
       directionsRenderer.setMap(map);
       map.addListener('click', function (e) {
-        _this6.addLatLng(e);
+        _this5.addLatLng(e);
 
-        _this6.clearCoords();
+        _this5.clearCoords();
       });
       var searchBar = document.getElementById("search");
       var searchBox = new window.google.maps.places.SearchBox(searchBar);
@@ -2166,7 +2163,7 @@ function (_React$Component) {
         password: '123456'
       };
       this.props.processForm(demo).then(function () {
-        _this3.props.history.push('./routesAll');
+        _this3.props.history.push('./activfeed');
       });
     }
   }, {
@@ -2177,7 +2174,7 @@ function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.processForm(user).then(function () {
-        _this4.props.history.push('./routesAll');
+        _this4.props.history.push('./activfeed');
       });
     }
   }, {
@@ -2202,7 +2199,7 @@ function (_React$Component) {
         password: '123456'
       };
       this.props.login(demo).then(function () {
-        _this5.props.history.push('./routesAll');
+        _this5.props.history.push('./activfeed');
       });
     }
   }, {

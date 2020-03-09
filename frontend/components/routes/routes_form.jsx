@@ -22,7 +22,7 @@ class RoutesForm extends React.Component{
         this.renderMap=this.renderMap.bind(this);
         this.makeMap=this.makeMap.bind(this);
         this.addLatLng=this.addLatLng.bind(this);
-        this.snapPoint=this.snapPoint.bind(this);
+        // this.snapPoint=this.snapPoint.bind(this);
         this.processSnappedPosData=this.processSnappedPosData.bind(this)
         this.calcAndDisplayRoute=this.calcAndDisplayRoute.bind(this);
     }
@@ -55,34 +55,35 @@ class RoutesForm extends React.Component{
     };
 
     
-    processSnappedPosData(data){
-        let snappedLat=data.snappedPoints[0].location.latitude; 
-        let snappedLng=data.snappedPoints[0].location.longitude;
-        this.state.coordinates.push({ lat: snappedLat, lng: snappedLng})
+    processSnappedPosData(lat,lng){
+        // let snappedLat=data.snappedPoints[0].location.latitude; 
+        // let snappedLng=data.snappedPoints[0].location.longitude;
+        this.state.coordinates.push({ lat: lat, lng: lng})
 
         new google.maps.Marker({
-            position: {lat:snappedLat,lng:snappedLng},
+            position: {lat:lat,lng:lng},
             map: this.state.map
         });
         this.calcAndDisplayRoute()
     }
 
     
-    snapPoint(lat,lng){
-        let posArr=[lat,lng]
-        $.get('https://roads.googleapis.com/v1/snapToRoads', {
-            interpolate: true,
-            key: window.googleAPIKey,
-            path: posArr.join(",")
-        },(data)=>{
-            this.processSnappedPosData(data)
-        });
-    }
+    // snapPoint(lat,lng){
+    //     let posArr=[lat,lng]
+    //     $.get('https://roads.googleapis.com/v1/snapToRoads', {
+    //         interpolate: true,
+    //         key: window.googleAPIKey,
+    //         path: posArr.join(",")
+    //     },(data)=>{
+    //         this.processSnappedPosData(data)
+    //     });
+    // }
 
     addLatLng(e) {
         let newLat = e.latLng['lat']()
         let newLng = e.latLng['lng']()
-        this.snapPoint(newLat,newLng)
+        // this.snapPoint(newLat,newLng)
+        this.processSnappedPosData(newLat, newLng)
     }
 
 

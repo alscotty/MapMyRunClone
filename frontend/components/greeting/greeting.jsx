@@ -20,7 +20,7 @@ const Greeting = ({ currentUser, logout }) => {
   return(
     <span>
       {currentUser ?
-      <Link to="/routesAll" className="header-link">
+        <Link to="/activfeed" className="header-link">
         <h1>RapMyMun</h1>
       </Link>
       :
@@ -28,18 +28,22 @@ const Greeting = ({ currentUser, logout }) => {
           <h1>RapMyMun</h1>
         </Link>
       }
+
       <Link to='/routes/new' className='route-links'>
         Create Route
       </Link>
       <Link to='/routesAll' className='route-links'>
         Routes
       </Link>
+
       <Link to='/workouts/new' className='route-links'>
         Create Workout
       </Link>
       <Link to='/workoutsAll' className='route-links'>
         Workouts
       </Link> 
+
+
       <Link to='/community' className='route-links'>Community</Link>
       <Link to='/activfeed' className='route-links'>Activity Feed</Link>
       
