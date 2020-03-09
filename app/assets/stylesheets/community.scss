@@ -1,7 +1,19 @@
+#comm-bkg{
+    height: 85vh;
+    background-image: image-url('colorado.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    margin-top: 3.3em;
+    margin-bottom: 3em;
+}
+
 .community-page{
     margin-top: 3.3em;
     margin-left: 4%;
     margin-right: 4%;
+    color:white;
+    text-shadow: 2px 2px black;
 }
 
 #follow-button{
@@ -24,6 +36,6 @@
     border: 1px solid grey;
     margin-bottom: 5px;
     border-radius: 5px;
-    background-color: rgb(240, 242, 244);
+    background-color: rgba(0, 0, 0, 0.5);
 
 }

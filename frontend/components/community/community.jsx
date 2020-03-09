@@ -29,6 +29,7 @@ class Community extends Component {
         if(!allUsers)return null;
 
         return (
+            <div id='comm-bkg'>
             <div className='community-page'>
                 <h3 id='workouts'>Find Friends</h3>
               {allUsers.map(user=>{
@@ -47,6 +48,7 @@ class Community extends Component {
               })
             }
 
+            </div>
             </div>
         )
     }

@@ -842,6 +842,8 @@ function (_Component) {
           followeeIds = _this$props2.followeeIds;
       if (!allUsers) return null;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "comm-bkg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "community-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         id: "workouts"
@@ -855,7 +857,7 @@ function (_Component) {
             return _this2.handleFollow(user.id);
           }
         }, followeeIds.includes(user.id) ? "Unfollow" : "Follow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : "";
-      }));
+      })));
     }
   }]);
 
