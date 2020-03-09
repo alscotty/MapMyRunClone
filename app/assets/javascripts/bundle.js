@@ -2290,7 +2290,7 @@ function (_React$Component) {
     value: function renderErrors() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "login-errors"
-      }, this.props.errors ? this.props.errors.map(function (error, i) {
+      }, this.props.errors ? Object.values(this.props.errors).map(function (error, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: "error-".concat(i)
         }, error);
