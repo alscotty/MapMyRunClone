@@ -38,14 +38,6 @@ class User < ApplicationRecord
     through: :out_follows,
     source: :followee
 
-  # def followed_user_ids
-  #   @followed_user_ids ||= out_follows.pluck(:followee_id)
-  # end
-
-  # def follows(user)
-  #   followed_user_ids.include?(user.id)
-  # end
-
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil unless user
