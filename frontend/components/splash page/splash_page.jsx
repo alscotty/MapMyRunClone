@@ -14,6 +14,11 @@ class Splash extends React.Component{
                         The 20th best web run tracking experience, backed by the world's smallest digital health and fitness community. 
                     </section>
                 </div>
+{/* 
+            <marquee id='updates' scrolldelay='200'>
+                Updates: 2/14 Follow other users and comment on their runs! 
+                3/10 
+            </marquee> */}
 
                 <div id='pRidge'>
                     <summary>

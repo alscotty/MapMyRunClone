@@ -2315,8 +2315,7 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-form-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit,
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "login-form-box"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "navLink"
@@ -2326,7 +2325,10 @@ function (_React$Component) {
       }, "LOGIN WITH DEMO") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "demo-login",
         onClick: this.handleDemoFromSignup
-      }, "SIGNUP WITH DEMO"), this.renderErrors(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, "SIGNUP WITH DEMO"), this.renderErrors()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit,
+        className: "login-form-box"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "or"
       }, "  or "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "login-form"

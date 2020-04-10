@@ -5,7 +5,7 @@ class SessionForm extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDemoLogin=this.handleDemoLogin.bind(this);
@@ -33,7 +33,7 @@ class SessionForm extends React.Component {
       password:'123456'
     }
     this.props.processForm(demo)
-      .then(() => { this.props.history.push('./activfeed')});
+      .then(() => { this.props.history.push('./activfeed')})
   }
 
   handleSubmit(e) {
@@ -42,6 +42,7 @@ class SessionForm extends React.Component {
     this.props.processForm(user)
       .then(() => { this.props.history.push('./activfeed')});
   }
+
 
   renderErrors() {
     return(
@@ -68,7 +69,9 @@ class SessionForm extends React.Component {
   render() {
     return (
       <div className="login-form-container">
-        <form onSubmit={this.handleSubmit} className="login-form-box">
+
+        <span className='login-form-box'>
+
           <span id='navLink'>{this.props.navLink}</span>
           
           {this.props.formType == 'LOG IN' ? (
@@ -76,11 +79,17 @@ class SessionForm extends React.Component {
               LOGIN WITH DEMO
                 </button>
           ) : (
-              <button className='demo-login' onClick={this.handleDemoFromSignup}>
+            <button className='demo-login' onClick={this.handleDemoFromSignup}>
                 SIGNUP WITH DEMO
                 </button>
           )}
           {this.renderErrors()}
+
+        </span>
+          
+
+          <form onSubmit={this.handleSubmit} className="login-form-box">
+
           <span id='or'>  or </span>
           <div className="login-form">
             <br/>
