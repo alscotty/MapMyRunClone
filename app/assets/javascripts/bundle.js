@@ -2419,60 +2419,56 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Splash; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
+function Splash() {
+  var rotateText = ['great job', 'too fast', 'slow down'];
+  var images = [window.losgatosURL, window.boulderURL, window.verdugoURL];
 
-var Splash =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Splash, _React$Component);
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      imgIdx = _useState2[0],
+      rotateImageIdx = _useState2[1];
 
-  function Splash() {
-    _classCallCheck(this, Splash);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    var _int = setInterval(function () {
+      var currIdx = (imgIdx + 1) % 3;
+      rotateImageIdx(currIdx);
+      var item = document.getElementById('rotator');
+      item.innerText = rotateText[currIdx];
+    }, 3000);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Splash).apply(this, arguments));
-  }
-
-  _createClass(Splash, [{
-    key: "render",
-    value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "splash"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "mtBaldy"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        id: "space-me"
-      }, "Go the extra mile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "The 20th best web run tracking experience, backed by the world's smallest digital health and fitness community.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "pRidge"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        id: "space-me"
-      }, "Find your own path")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Create routes and save them for the next time you're ready to run")));
-    }
-  }]);
-
-  return Splash;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
-/* harmony default export */ __webpack_exports__["default"] = (Splash);
+    return function () {
+      clearInterval(_int);
+    };
+  });
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "splash"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "mtBaldy"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    id: "space-me"
+  }, "Go the extra mile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "The 20th best web run tracking experience, backed by the world's smallest digital health and fitness community.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "rotator"
+  }), imgIdx, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: images[imgIdx],
+    alt: "scenic pictures"
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "pRidge"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    id: "space-me"
+  }, "Find your own path")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Create routes and save them for the next time you're ready to run")));
+}
 
 /***/ }),
 

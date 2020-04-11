@@ -1,9 +1,35 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
-class Splash extends React.Component{
-    render(){
+export default function Splash(){
+    let rotateText=[
+        'great job',
+        'too fast',
+        'slow down'
+    ]
+
+    let images = [
+        window.losgatosURL,
+        window.boulderURL,
+        window.verdugoURL,
+    ]
+
+    const [imgIdx, rotateImageIdx] = useState(0);
+
+     useEffect(()=>{
+        let int = setInterval(()=>{
+            let currIdx = (imgIdx + 1) % 3
+            rotateImageIdx(currIdx);
+            let item = document.getElementById('rotator');
+            item.innerText = rotateText[currIdx];
+        }, 3000);
+        return(
+            ()=> {clearInterval(int)}
+        );
+        })
+
         return(
             <div className='splash'>
+               
                 <div id='mtBaldy'>
                     <summary >
                             <p id='space-me'>
@@ -14,11 +40,10 @@ class Splash extends React.Component{
                         The 20th best web run tracking experience, backed by the world's smallest digital health and fitness community. 
                     </section>
                 </div>
-{/* 
-            <marquee id='updates' scrolldelay='200'>
-                Updates: 2/14 Follow other users and comment on their runs! 
-                3/10 
-            </marquee> */}
+                <div id='rotator'>
+                </div>
+                {imgIdx}
+                <img src={images[imgIdx]} alt="scenic pictures"/>
 
                 <div id='pRidge'>
                     <summary>
@@ -32,9 +57,4 @@ class Splash extends React.Component{
                 </div>
             </div>
         )
-    }
-
-
 }
-
-export default Splash;
