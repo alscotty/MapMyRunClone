@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :workouts 
     resources :comments, only: [:create, :destroy, :show, :index]
 
+    resources :likes, only: [:create, :destroy, :show, :index]
+
     resources :routes, only:[:create,:destroy, :index, :show] do
     resources :coordinates, only:[:create]
     end

@@ -35,7 +35,7 @@ export default function Splash(){
         return(
             <div className='splash'>
                
-                <div id='mtBaldy'>
+                <div id='sfview'>
                     <summary >
                             <p id='space-me'>
                         Go the extra mile
@@ -63,7 +63,7 @@ export default function Splash(){
                     </section>
                 </div>
 
-                <div id='sfview'>
+                <div id='mtBaldy'>
                     <summary >
                         <p id='space-me'>
                             Get social

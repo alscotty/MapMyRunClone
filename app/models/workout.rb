@@ -16,6 +16,11 @@ class Workout < ApplicationRecord
     class_name: :Comment,
     dependent: :destroy
     
+    has_many :likes,
+    foreign_key: :workout_id,
+    class_name: :Like,
+    dependent: :destroy
+    
 
     
 

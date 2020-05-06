@@ -2460,7 +2460,7 @@ function Splash() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "splash"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "mtBaldy"
+    id: "sfview"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     id: "space-me"
   }, "Go the extra mile")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "The 20th best web run tracking experience, backed by the world's smallest digital health and fitness community.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2468,7 +2468,7 @@ function Splash() {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     id: "space-me"
   }, "Find your own path")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Create routes and save them for the next time you're ready to run")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    id: "sfview"
+    id: "mtBaldy"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     id: "space-me"
   }, "Get social")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Follow other runners and share favorite routes")));
