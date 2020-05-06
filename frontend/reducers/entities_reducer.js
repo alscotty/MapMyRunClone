@@ -5,11 +5,13 @@ import RoutesReducer from './routes_reducer';
 import WorkoutsReducer from './workout_reducer'
 import FollowsReducer from './follows_reducer'
 import CommentsReducer from './comments_reducer';
+import LikesReducer from './likes_reducer';
 
 export default combineReducers({
   users,
   routes: RoutesReducer,
   workouts: WorkoutsReducer,
   follows: FollowsReducer,
-  comments: CommentsReducer
+  comments: CommentsReducer,
+  likes: LikesReducer
 });
