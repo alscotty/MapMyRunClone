@@ -13,7 +13,50 @@ class WorkoutIndexItem extends React.Component{
         this.readyMap = this.readyMap.bind(this)
         this.handleComment=this.handleComment.bind(this)
         this.handleDeleteComment=this.handleDeleteComment.bind(this)
+        this.likeHandler=this.likeHandler.bind(this);
+        this.handleCreateLike=this.handleCreateLike.bind(this);
     }
+
+    handleCreateLike(user,workout){
+        const {createLike} = this.props;
+        let like={
+            user_id:user.id,
+            creator_name: user.username,
+            workout_id: workout.id
+        }
+        createLike(like)
+            .then(this.props.requestWorkout(workout.id))
+            .catch(this.props.requestWorkout(workout.id))
+    }
+
+    likeHandler(){
+        const {workout,currentUser} = this.props
+        let likeUserIds = []
+        let myLike
+        workout.likes.map(like=> {
+            likeUserIds.push(like.user_id)
+            if(like.user_id == currentUser.id) myLike=like;
+        });
+       
+        if(myLike){
+            return(
+                    <img className='like-images' src={window.likedURL} alt="liked" onClick={(e)=>{
+                        e.preventDefault()
+                        this.props.deleteLike(myLike)
+                            .then(this.props.requestWorkout(workout.id))
+                            .catch(this.props.requestWorkout(workout.id))
+                    }}/>
+            )
+        } else {
+            return (
+                    <img className='like-images' src={window.unlikedURL} alt='unliked' onClick={(e)=>{
+                        e.preventDefault();
+                        this.handleCreateLike(currentUser,workout)}}/>
+            )
+        }
+
+    }
+
 
     update(field){
         return(
@@ -180,6 +223,10 @@ class WorkoutIndexItem extends React.Component{
             </div>
 
                 <span id='comments'>
+                   {workout.likes.length}
+                   {this.likeHandler()}
+                   {workout.likes.length > 0 ? '':' Be the first to give kudos'}
+
                 {workout.comments ? workout.comments.map(comment=>{
                     return(<div key={comment.id}>
                         <span id='space-between'>

@@ -13,6 +13,8 @@ import {
     createComment,
     deleteComment
 } from '../../actions/comment_actions'
+import {createLike, deleteLike} from '../../actions/like_actions'
+
 
 const mstp=state=>{
     const { entities } = state;
@@ -35,7 +37,9 @@ const mdtp=dispatch=>({
     requestRoute: (routeId)=>dispatch(requestRoute(routeId)),
     requestRoutes: ()=>dispatch(requestRoutes()),
     createComment: (comment)=>dispatch(createComment(comment)),
-    deleteComment: (comment)=>dispatch(deleteComment(comment))
+    deleteComment: (comment)=>dispatch(deleteComment(comment)),
+    createLike: (like)=>dispatch(createLike(like)),
+    deleteLike: (like)=>dispatch(deleteLike(like))
 });
 
 
