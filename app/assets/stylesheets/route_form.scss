@@ -58,3 +58,22 @@
     margin-top:7px ;
     position: absolute;
 }
+
+#search::placeholder{
+    color:rgb(74, 139, 199);
+    font-weight: bold;
+    font-style: italic;
+}
+
+#search{
+     color:rgb(74, 139, 199);
+    font-weight: bold;
+    font-style: italic;
+}
+
+#instructions{
+    font-style: italic;
+    color:rgb(74, 139, 199);
+    margin-left: 5px;
+    margin-right: 5px;
+}

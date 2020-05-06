@@ -25,6 +25,22 @@
     padding-right:1em;
 }
 
+#sfview{
+    margin-top: 0.7em;
+    background-image: image-url('sfview.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height:480px;
+    color:white;
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right:1em;
+}
+
 #mtBaldy:before{
     content: '';
     position: fixed;
@@ -32,7 +48,19 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background: rgba(44, 43, 43, 0.3);
+    background: rgba(44, 43, 43, 0.2);
+}
+
+#sfview > summary{
+    font-size: x-large;
+    z-index: 1;
+}
+
+#sfview > section{
+    font-size: large;
+    z-index: 1;
+    max-width: 20%;
+
 }
 
 #mtBaldy > summary{
@@ -64,6 +92,8 @@
     max-width: 20%;
 }
 
+
+
 #pRidge{
     margin-top: 0.7em;
     background-image: image-url('pRidge.jpg');
@@ -79,3 +109,4 @@
     align-items: flex-start;
     padding-left:1em;
 }
+

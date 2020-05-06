@@ -62,6 +62,18 @@ export default function Splash(){
                         Create routes and save them for the next time you're ready to run
                     </section>
                 </div>
+
+                <div id='sfview'>
+                    <summary >
+                        <p id='space-me'>
+                            Get social
+                            </p>
+                    </summary>
+                    <section>
+                        Follow other runners and share favorite routes
+                    </section>
+                </div>
+
             </div>
         )
 }

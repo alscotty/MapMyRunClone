@@ -1581,7 +1581,8 @@ function (_React$Component) {
       path: [],
       directionsService: '',
       directionsRenderer: '',
-      noCoords: ""
+      noCoords: "",
+      userDirections: "Click on the map to start creating a route"
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.renderMap = _this.renderMap.bind(_assertThisInitialized(_this));
@@ -1748,6 +1749,10 @@ function (_React$Component) {
         _this5.addLatLng(e);
 
         _this5.clearCoords();
+
+        _this5.setState({
+          userDirections: ""
+        });
       });
       var searchBar = document.getElementById("search");
       var searchBox = new window.google.maps.places.SearchBox(searchBar);
@@ -1785,7 +1790,11 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "search",
+        type: "text",
+        placeholder: "Search other locations"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "route-form",
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, "Route Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -1798,11 +1807,9 @@ function (_React$Component) {
         id: "route-button",
         type: "submit",
         value: "Save Route"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.renderErrors()), this.renderMap(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "search",
-        type: "text",
-        placeholder: "Search other locations"
-      }));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "instructions"
+      }, this.state.userDirections), this.renderErrors()), this.renderMap());
     }
   }]);
 
@@ -2460,7 +2467,11 @@ function Splash() {
     id: "pRidge"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     id: "space-me"
-  }, "Find your own path")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Create routes and save them for the next time you're ready to run")));
+  }, "Find your own path")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Create routes and save them for the next time you're ready to run")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "sfview"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("summary", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    id: "space-me"
+  }, "Get social")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, "Follow other runners and share favorite routes")));
 }
 
 /***/ }),

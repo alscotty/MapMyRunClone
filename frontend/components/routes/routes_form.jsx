@@ -16,7 +16,8 @@ class RoutesForm extends React.Component{
             path:[],
             directionsService:'',
             directionsRenderer:'',
-            noCoords:""
+            noCoords:"",
+            userDirections:"Click on the map to start creating a route"
         };
         this.handleSubmit=this.handleSubmit.bind(this);
         this.renderMap=this.renderMap.bind(this);
@@ -151,6 +152,7 @@ class RoutesForm extends React.Component{
         map.addListener('click', (e)=>{
             this.addLatLng(e)
             this.clearCoords()
+            this.setState({userDirections:""})
         });
 
         let searchBar = document.getElementById("search");
@@ -193,6 +195,7 @@ class RoutesForm extends React.Component{
     render(){
         return(
             <div>
+                <input id='search' type='text' placeholder='Search other locations' />
                 <form className='route-form' onSubmit=  {this.handleSubmit}>
                     <summary>
                     Route Details
@@ -209,10 +212,10 @@ class RoutesForm extends React.Component{
                 <br/>
                     <input id='route-button' type="submit" value='Save Route'/>
             <br/>
+                <span id='instructions'>{this.state.userDirections}</span>
                 {this.renderErrors()}
             </form>
                 {this.renderMap()}
-                <input id='search' type='text' placeholder='Search other locations'/>
             </div>
         )
     }
