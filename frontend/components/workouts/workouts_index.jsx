@@ -13,6 +13,7 @@ class WorkoutsIndex extends React.Component{
 
     render(){
         const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route, createComment, deleteComment,createLike, deleteLike}=this.props
+
         let numRuns=workouts.length
         return(
             <div className='workout-index'>

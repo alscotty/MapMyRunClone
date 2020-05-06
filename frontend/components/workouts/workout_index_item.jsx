@@ -6,7 +6,7 @@ class WorkoutIndexItem extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            body:''
+            body:'',
         }
 
         this.renderIndMap = this.renderIndMap.bind(this)
@@ -25,14 +25,14 @@ class WorkoutIndexItem extends React.Component{
             workout_id: workout.id
         }
         createLike(like)
-            .then(this.props.requestWorkout(workout.id))
-            .catch(this.props.requestWorkout(workout.id))
+            .then(()=>this.props.requestWorkout(workout.id))
     }
 
     likeHandler(){
         const {workout,currentUser} = this.props
         let likeUserIds = []
         let myLike
+        let likeCount= workout.likes.length
         workout.likes.map(like=> {
             likeUserIds.push(like.user_id)
             if(like.user_id == currentUser.id) myLike=like;
@@ -40,18 +40,23 @@ class WorkoutIndexItem extends React.Component{
        
         if(myLike){
             return(
+                <div>
                     <img className='like-images' src={window.likedURL} alt="liked" onClick={(e)=>{
                         e.preventDefault()
                         this.props.deleteLike(myLike)
-                            .then(this.props.requestWorkout(workout.id))
-                            .catch(this.props.requestWorkout(workout.id))
+                            .then(()=>this.props.requestWorkout(workout.id))
                     }}/>
+                    {likeCount > 1 ? `You and ${likeCount-1} others like this`:''}
+                </div>
             )
         } else {
             return (
+                <div>
                     <img className='like-images' src={window.unlikedURL} alt='unliked' onClick={(e)=>{
                         e.preventDefault();
                         this.handleCreateLike(currentUser,workout)}}/>
+                        {likeCount>0 ? `${likeCount} kudos`:""}
+                </div>
             )
         }
 
@@ -68,8 +73,7 @@ class WorkoutIndexItem extends React.Component{
 
     handleDeleteComment(workout,comment){
         this.props.deleteComment(comment)
-            .then(this.props.requestWorkout(workout.id))
-            .catch(this.props.requestWorkout(workout.id))
+            .then(()=>this.props.requestWorkout(workout.id))
     }
 
     handleComment(e){
@@ -85,8 +89,7 @@ class WorkoutIndexItem extends React.Component{
         }
         this.props.createComment(comment)
             .then(this.setState({body:''}))
-            .then(this.props.requestWorkout(workout.id))
-            .catch(this.props.requestWorkout(workout.id))
+            .then(()=>this.props.requestWorkout(workout.id))
     }
 
     renderIndMap(coordinates) {
@@ -165,7 +168,7 @@ class WorkoutIndexItem extends React.Component{
 
     render(){
         const {workout,deleteWorkout, currentUser}=this.props;
-        
+
         return(
             <div id='workout-and-comments'>
             <div id='workout-index-item'>
@@ -223,9 +226,8 @@ class WorkoutIndexItem extends React.Component{
             </div>
 
                 <span id='comments'>
-                   {workout.likes.length}
                    {this.likeHandler()}
-                   {workout.likes.length > 0 ? '':' Be the first to give kudos'}
+                    {workout.likes.length < 1 ? ' Be the first to give kudos':''}
 
                 {workout.comments ? workout.comments.map(comment=>{
                     return(<div key={comment.id}>

@@ -683,6 +683,8 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
+          createLike = _this$props.createLike,
+          deleteLike = _this$props.deleteLike,
           workouts = _this$props.workouts,
           currentUser = _this$props.currentUser,
           requestWorkout = _this$props.requestWorkout,
@@ -723,6 +725,8 @@ function (_React$Component) {
       }, "Followers ", currentUser.followers.length))), workouts.reverse().map(function (workout) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workouts_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: workout.id * 3,
+          createLike: createLike,
+          deleteLike: deleteLike,
           workout: workout,
           createComment: createComment,
           deleteComment: deleteComment,
@@ -757,6 +761,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
 /* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
 /* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+/* harmony import */ var _actions_like_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+
 
 
 
@@ -802,6 +808,12 @@ var mdtp = function mdtp(dispatch) {
     },
     deleteComment: function deleteComment(comment) {
       return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_4__["deleteComment"])(comment));
+    },
+    createLike: function createLike(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_5__["createLike"])(like));
+    },
+    deleteLike: function deleteLike(like) {
+      return dispatch(Object(_actions_like_actions__WEBPACK_IMPORTED_MODULE_5__["deleteLike"])(like));
     }
   };
 };
@@ -2719,70 +2731,83 @@ function (_React$Component) {
   _createClass(WorkoutIndexItem, [{
     key: "handleCreateLike",
     value: function handleCreateLike(user, workout) {
+      var _this2 = this;
+
       var createLike = this.props.createLike;
       var like = {
         user_id: user.id,
         creator_name: user.username,
         workout_id: workout.id
       };
-      createLike(like).then(this.props.requestWorkout(workout.id))["catch"](this.props.requestWorkout(workout.id));
+      createLike(like).then(function () {
+        return _this2.props.requestWorkout(workout.id);
+      });
     }
   }, {
     key: "likeHandler",
     value: function likeHandler() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _this$props = this.props,
           workout = _this$props.workout,
           currentUser = _this$props.currentUser;
       var likeUserIds = [];
       var myLike;
+      var likeCount = workout.likes.length;
       workout.likes.map(function (like) {
         likeUserIds.push(like.user_id);
         if (like.user_id == currentUser.id) myLike = like;
       });
 
       if (myLike) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "like-images",
           src: window.likedURL,
           alt: "liked",
           onClick: function onClick(e) {
             e.preventDefault();
 
-            _this2.props.deleteLike(myLike).then(_this2.props.requestWorkout(workout.id))["catch"](_this2.props.requestWorkout(workout.id));
+            _this3.props.deleteLike(myLike).then(function () {
+              return _this3.props.requestWorkout(workout.id);
+            });
           }
-        });
+        }), likeCount > 1 ? "You and ".concat(likeCount - 1, " others like this") : '');
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "like-images",
           src: window.unlikedURL,
           alt: "unliked",
           onClick: function onClick(e) {
             e.preventDefault();
 
-            _this2.handleCreateLike(currentUser, workout);
+            _this3.handleCreateLike(currentUser, workout);
           }
-        });
+        }), likeCount > 0 ? "".concat(likeCount, " kudos") : "");
       }
     }
   }, {
     key: "update",
     value: function update(field) {
-      var _this3 = this;
+      var _this4 = this;
 
       return function (e) {
-        _this3.setState(_defineProperty({}, field, e.target.value));
+        _this4.setState(_defineProperty({}, field, e.target.value));
       };
     }
   }, {
     key: "handleDeleteComment",
     value: function handleDeleteComment(workout, comment) {
-      this.props.deleteComment(comment).then(this.props.requestWorkout(workout.id))["catch"](this.props.requestWorkout(workout.id));
+      var _this5 = this;
+
+      this.props.deleteComment(comment).then(function () {
+        return _this5.props.requestWorkout(workout.id);
+      });
     }
   }, {
     key: "handleComment",
     value: function handleComment(e) {
+      var _this6 = this;
+
       e.preventDefault();
       var _this$props2 = this.props,
           workout = _this$props2.workout,
@@ -2795,7 +2820,9 @@ function (_React$Component) {
       };
       this.props.createComment(comment).then(this.setState({
         body: ''
-      })).then(this.props.requestWorkout(workout.id))["catch"](this.props.requestWorkout(workout.id));
+      })).then(function () {
+        return _this6.props.requestWorkout(workout.id);
+      });
     }
   }, {
     key: "renderIndMap",
@@ -2854,12 +2881,12 @@ function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this4 = this;
+      var _this7 = this;
 
       this.props.requestWorkout(this.props.workout.id).then(function () {
-        if (_this4.props.workout.route_id) {
-          _this4.props.requestRoute(_this4.props.workout.route_id).then(function (route) {
-            return _this4.readyMap(route);
+        if (_this7.props.workout.route_id) {
+          _this7.props.requestRoute(_this7.props.workout.route_id).then(function (route) {
+            return _this7.readyMap(route);
           });
         }
       });
@@ -2885,7 +2912,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this8 = this;
 
       var _this$props4 = this.props,
           workout = _this$props4.workout,
@@ -2913,7 +2940,7 @@ function (_React$Component) {
       }, Object(_util_date_util__WEBPACK_IMPORTED_MODULE_2__["formatDateTime"])(workout.created_at)), workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, workout.time, " min.") : '', workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.route.miles, " miles")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.miles, " miles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id === workout.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "delete-workout-button",
         onClick: function onClick() {
-          deleteWorkout(workout.id).then(_this5.deduct(workout));
+          deleteWorkout(workout.id).then(_this8.deduct(workout));
         }
       }, "Delete Workout") : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "mapp"
@@ -2924,7 +2951,7 @@ function (_React$Component) {
         src: window.workoutURL
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "comments"
-      }, workout.likes.length, this.likeHandler(), workout.likes.length > 0 ? '' : ' Be the first to give kudos', workout.comments ? workout.comments.map(function (comment) {
+      }, this.likeHandler(), workout.likes.length < 1 ? ' Be the first to give kudos' : '', workout.comments ? workout.comments.map(function (comment) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: comment.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -2934,7 +2961,7 @@ function (_React$Component) {
         }, comment.creator), comment.creator_id === currentUser.id || workout.user_id === currentUser.id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "linky",
           onClick: function onClick() {
-            return _this5.handleDeleteComment(workout, comment);
+            return _this8.handleDeleteComment(workout, comment);
           }
         }, "Delete ") : ""), comment.body, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null));
       }) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
