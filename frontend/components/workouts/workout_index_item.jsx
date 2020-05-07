@@ -40,22 +40,22 @@ class WorkoutIndexItem extends React.Component{
        
         if(myLike){
             return(
-                <div>
+                <div className='like-div'>
                     <img className='like-images' src={window.likedURL} alt="liked" onClick={(e)=>{
                         e.preventDefault()
                         this.props.deleteLike(myLike)
                             .then(()=>this.props.requestWorkout(workout.id))
                     }}/>
-                    {likeCount > 1 ? `You and ${likeCount-1} others like this`:''}
+                    <span id='like-text'>{likeCount > 1 ? `You and ${likeCount - 1} others like this` : ''}</span>
                 </div>
             )
         } else {
             return (
-                <div>
+                <div className='like-div'>
                     <img className='like-images' src={window.unlikedURL} alt='unliked' onClick={(e)=>{
                         e.preventDefault();
                         this.handleCreateLike(currentUser,workout)}}/>
-                        {likeCount>0 ? `${likeCount} kudos`:""}
+                        <span id='like-text'>{likeCount>0 ? ` ${likeCount} kudos`:" Be the first to give kudos"}</span>
                 </div>
             )
         }
@@ -227,7 +227,6 @@ class WorkoutIndexItem extends React.Component{
 
                 <span id='comments'>
                    {this.likeHandler()}
-                    {workout.likes.length < 1 ? ' Be the first to give kudos':''}
 
                 {workout.comments ? workout.comments.map(comment=>{
                     return(<div key={comment.id}>

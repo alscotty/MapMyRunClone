@@ -15,6 +15,13 @@
     cursor: pointer;
 }
 
+#like-text{margin-left: 3px;}
+
+.like-div{
+    display: flex;
+    align-items: center;
+}
+
 #delete-workout-button{
     width:80%;
     margin-top:2px;
