@@ -1,5 +1,6 @@
 class Workout < ApplicationRecord
     validates :user_id, :title, :time, :miles, presence:true
+    validates :time, :numericality => { greater_than: 0, message: " must be a positive number" }
 
     belongs_to :user,
     foreign_key: :user_id,

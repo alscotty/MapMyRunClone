@@ -46,7 +46,7 @@ class WorkoutForm extends React.Component{
 
 
     render(){
-
+        const { formType } = this.props;
         return(
            <div className='workout-form'>
           
@@ -71,11 +71,15 @@ class WorkoutForm extends React.Component{
                         <label>
                         Miles
                         <br/>
+                        {formType == 'Create Workout' ? 
                         <input type='number' value={this.state.miles} onChange={this.update('miles')} />
+                        :
+                        <input id='not-allowed' type='number' value={this.state.miles}/>                        
+                        }
                         </label>
                     </span>
                     <br/>
-                    <input type="submit" id='workout-button' value={this.props.formType} />
+                    <input type="submit" id='workout-button' value={formType} />
 
                     {this.renderErrors()}
 

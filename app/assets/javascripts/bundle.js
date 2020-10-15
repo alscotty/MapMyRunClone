@@ -2627,6 +2627,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var formType = this.props.formType;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -2649,14 +2650,18 @@ function (_React$Component) {
         type: "number",
         value: this.state.time,
         onChange: this.update('time')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), formType == 'Create Workout' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         value: this.state.miles,
         onChange: this.update('miles')
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "not-allowed",
+        type: "number",
+        value: this.state.miles
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         id: "workout-button",
-        value: this.props.formType
+        value: formType
       }), this.renderErrors()));
     }
   }]);
@@ -2717,7 +2722,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(WorkoutIndexItem).call(this, props));
     _this.state = {
-      body: ''
+      body: '',
+      formattedCoords: []
     };
     _this.renderIndMap = _this.renderIndMap.bind(_assertThisInitialized(_this));
     _this.readyMap = _this.readyMap.bind(_assertThisInitialized(_this));
@@ -2725,10 +2731,40 @@ function (_React$Component) {
     _this.handleDeleteComment = _this.handleDeleteComment.bind(_assertThisInitialized(_this));
     _this.likeHandler = _this.likeHandler.bind(_assertThisInitialized(_this));
     _this.handleCreateLike = _this.handleCreateLike.bind(_assertThisInitialized(_this));
+    _this.convertCoordinatesToGPXString = _this.convertCoordinatesToGPXString.bind(_assertThisInitialized(_this));
+    _this.downloadGPXFile = _this.downloadGPXFile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(WorkoutIndexItem, [{
+    key: "convertCoordinatesToGPXString",
+    value: function convertCoordinatesToGPXString(coordinatesArray, runName, runTime) {
+      var currentTime = new Date();
+      var timeSplit = runTime / coordinatesArray.length;
+      var xmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<gpx creator= \"StravaGPX Android\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\" version=\"1.1\" xmlns=\"http://www.topografix.com/GPX/1/1\"> \n <metadata> \n  <time>".concat(currentTime.toISOString(), "</time> \n </metadata> \n <trk> \n  <name>").concat(runName, "</name> \n  <type>9</type>\n  <trkseg>");
+      var runPoints = '';
+      var mSec = 60000;
+      var startTime = new Date(currentTime - runTime * mSec);
+      var timeDiff = timeSplit;
+      coordinatesArray.forEach(function (coordPair) {
+        var timestamp = new Date(startTime.getTime() + timeDiff * mSec).toISOString();
+        runPoints += "\n   <trkpt lat=\"".concat(coordPair.lat.toFixed(7), "\" lon=\"").concat(coordPair.lng.toFixed(7), "\">\n    <ele>0.0</ele>\n    <time>").concat(timestamp, "</time>\n   </trkpt>");
+        timeDiff += timeSplit;
+      });
+      runPoints += "\n  </trkseg> \n </trk>\n</gpx>";
+      return xmlString + runPoints;
+    }
+  }, {
+    key: "downloadGPXFile",
+    value: function downloadGPXFile(gpxString, fileName) {
+      var url = 'data:text/json;charset=utf-8,' + gpxString;
+      var link = document.createElement('a');
+      link.download = "".concat(fileName, ".gpx");
+      link.href = url;
+      document.body.appendChild(link);
+      link.click();
+    }
+  }, {
     key: "handleCreateLike",
     value: function handleCreateLike(user, workout) {
       var _this2 = this;
@@ -2883,6 +2919,9 @@ function (_React$Component) {
             lng: coord['lng']
           });
         });
+        this.setState({
+          formattedCoords: formatted_coords
+        });
         this.renderIndMap(formatted_coords);
       }
     }
@@ -2945,12 +2984,19 @@ function (_React$Component) {
         className: "linky"
       }, " ".concat(workout.route.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "date"
-      }, Object(_util_date_util__WEBPACK_IMPORTED_MODULE_2__["formatDateTime"])(workout.created_at)), workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, workout.time, " min.") : '', workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.route.miles, " miles")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.miles, " miles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id === workout.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, Object(_util_date_util__WEBPACK_IMPORTED_MODULE_2__["formatDateTime"])(workout.created_at)), workout.time != 0 && workout.miles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, workout.time, " min.") : '', workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.route.miles, " miles")) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(workout.miles, " miles")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), currentUser.id === workout.user_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "delete-workout-button",
         onClick: function onClick() {
           deleteWorkout(workout.id).then(_this8.deduct(workout));
         }
-      }, "Delete Workout") : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, "Delete Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "gpx",
+        onClick: function onClick() {
+          var gpxString = _this8.convertCoordinatesToGPXString(_this8.state.formattedCoords, workout.title, workout.time);
+
+          _this8.downloadGPXFile(gpxString, workout.title);
+        }
+      }, "Download GPX file")) : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "mapp"
       }, workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-map",

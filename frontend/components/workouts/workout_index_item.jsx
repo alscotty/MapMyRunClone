@@ -7,6 +7,7 @@ class WorkoutIndexItem extends React.Component{
         super(props);
         this.state={
             body:'',
+            formattedCoords: [],
         }
 
         this.renderIndMap = this.renderIndMap.bind(this)
@@ -15,7 +16,56 @@ class WorkoutIndexItem extends React.Component{
         this.handleDeleteComment=this.handleDeleteComment.bind(this)
         this.likeHandler=this.likeHandler.bind(this);
         this.handleCreateLike=this.handleCreateLike.bind(this);
+        this.convertCoordinatesToGPXString=this.convertCoordinatesToGPXString.bind(this);
+        this.downloadGPXFile = this.downloadGPXFile.bind(this);
     }
+
+    convertCoordinatesToGPXString (coordinatesArray, runName, runTime) {
+        let currentTime = new Date();
+        let timeSplit = runTime / coordinatesArray.length;
+
+        let xmlString =`<?xml version="1.0" encoding="UTF-8"?>
+<gpx creator= "StravaGPX Android" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" version="1.1" xmlns="http://www.topografix.com/GPX/1/1"> 
+ <metadata> 
+  <time>${currentTime.toISOString()}</time> 
+ </metadata> 
+ <trk> 
+  <name>${runName}</name> 
+  <type>9</type>
+  <trkseg>`;
+
+        let runPoints = '';
+        let mSec = 60000;
+        let startTime = new Date(currentTime - (runTime * mSec));
+        let timeDiff = timeSplit;
+
+        coordinatesArray.forEach(coordPair => {
+            let timestamp = new Date(startTime.getTime() + (timeDiff * mSec)).toISOString();
+            runPoints += `
+   <trkpt lat="${coordPair.lat.toFixed(7)}" lon="${coordPair.lng.toFixed(7)}">
+    <ele>0.0</ele>
+    <time>${timestamp}</time>
+   </trkpt>`;
+            timeDiff += timeSplit;
+        })
+
+        runPoints += `
+  </trkseg> 
+ </trk>
+</gpx>`;
+
+        return xmlString + runPoints;
+    }
+
+     downloadGPXFile (gpxString,fileName) {
+        const url = 'data:text/json;charset=utf-8,' + gpxString;
+        const link = document.createElement('a');
+        link.download = `${fileName}.gpx`;
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+    }
+
 
     handleCreateLike(user,workout){
         const {createLike} = this.props;
@@ -136,6 +186,7 @@ class WorkoutIndexItem extends React.Component{
             route.route.coordinates.map(coord => {
                 formatted_coords.push({ lat: coord['lat'], lng: coord['lng'] })
             });
+            this.setState({ formattedCoords: formatted_coords });
             this.renderIndMap(formatted_coords)
         }
     }
@@ -212,7 +263,14 @@ class WorkoutIndexItem extends React.Component{
                 }
                 <br/>
                 {currentUser.id === workout.user_id ? 
+                <span>
                 <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id).then(this.deduct(workout))}}>Delete Workout</button>
+                <br/>
+                <button id='gpx' onClick={()=>{
+                    const gpxString = this.convertCoordinatesToGPXString(this.state.formattedCoords,workout.title,workout.time);
+                    this.downloadGPXFile(gpxString,workout.title);
+                    }}>Download GPX file</button>
+                </span>
                 : ""    
             }
                 </span>
