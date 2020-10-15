@@ -6,12 +6,12 @@
     width: 100%;
 }
 
-.like-images{
+#strava,.like-images{
     height: 30px;
     width: 30px;
 }
 
-.like-images:hover{
+#strava,.like-images:hover{
     cursor: pointer;
 }
 
@@ -22,7 +22,7 @@
     align-items: center;
 }
 
-#delete-workout-button{
+#delete-workout-button,#gpx{
     width:80%;
     margin-top:2px;
     margin-left:1%;
@@ -31,8 +31,9 @@
     border-radius:5px;
     font-family: 'Arial Rounded MT Bold';
 }
-#delete-workout-button:hover{
+#delete-workout-button:hover,#gpx:hover{
     background-color:rgb(195, 201, 207);
+    cursor:pointer;
 }
 
 .workout-index{

@@ -269,7 +269,13 @@ class WorkoutIndexItem extends React.Component{
                 <button id='gpx' onClick={()=>{
                     const gpxString = this.convertCoordinatesToGPXString(this.state.formattedCoords,workout.title,workout.time);
                     this.downloadGPXFile(gpxString,workout.title);
-                    }}>Download GPX file</button>
+                                }}>Download as GPX</button> 
+                                <br/>
+
+                                 Compatible with
+                                 <a href='https://www.strava.com/upload/select' target='_blank'>
+                                 <img id='strava' src={window.strava}/>
+                                 </a>
                 </span>
                 : ""    
             }

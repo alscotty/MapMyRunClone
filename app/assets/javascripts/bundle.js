@@ -2996,7 +2996,13 @@ function (_React$Component) {
 
           _this8.downloadGPXFile(gpxString, workout.title);
         }
-      }, "Download GPX file")) : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }, "Download as GPX"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "Compatible with", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.strava.com/upload/select",
+        target: "_blank"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        id: "strava",
+        src: window.strava
+      }))) : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "mapp"
       }, workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-map",
