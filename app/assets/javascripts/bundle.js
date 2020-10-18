@@ -2989,7 +2989,7 @@ function (_React$Component) {
         onClick: function onClick() {
           deleteWorkout(workout.id).then(_this8.deduct(workout));
         }
-      }, "Delete Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Delete Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "gpx",
         onClick: function onClick() {
           var gpxString = _this8.convertCoordinatesToGPXString(_this8.state.formattedCoords, workout.title, workout.time);

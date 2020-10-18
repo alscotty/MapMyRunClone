@@ -266,6 +266,7 @@ class WorkoutIndexItem extends React.Component{
                 <span>
                 <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id).then(this.deduct(workout))}}>Delete Workout</button>
                 <br/>
+                <br/>
                 <button id='gpx' onClick={()=>{
                     const gpxString = this.convertCoordinatesToGPXString(this.state.formattedCoords,workout.title,workout.time);
                     this.downloadGPXFile(gpxString,workout.title);

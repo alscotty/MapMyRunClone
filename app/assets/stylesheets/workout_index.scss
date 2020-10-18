@@ -29,6 +29,14 @@
     align-items: center;
 }
 
+#strava:hover{
+    opacity: 1;
+}
+
+#strava{
+    opacity: 0.9;
+}
+
 #delete-workout-button,#gpx{
     width:80%;
     margin-top:2px;
