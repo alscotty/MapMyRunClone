@@ -3300,34 +3300,37 @@ function (_React$Component) {
     }
   }, {
     key: "milesGraph",
-    value: function milesGraph(milesArray) {
-      var svgWidth = 600,
-          svgHeight = 400;
+    value: function milesGraph(milesData) {
+      if (!document.getElementById('svg')) {
+        return;
+      }
+
+      var dimensions = document.getElementById('svg').getBoundingClientRect();
       var margin = {
         top: 20,
         right: 20,
         bottom: 30,
         left: 60
       },
-          width = svgWidth - margin.left - margin.right,
-          height = svgHeight - margin.top - margin.bottom;
-      var svg = d3.select('#svg').attr("width", svgWidth).attr("height", svgHeight);
+          width = dimensions.width - margin.left - margin.right,
+          height = dimensions.height - margin.top - margin.bottom;
+      var svg = d3.select('#svg').attr("width", dimensions.width).attr("height", dimensions.height);
       var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       var x = d3.scaleLinear().range([0, width]);
       var y = d3.scaleLinear().range([height, 0]);
-      y.domain([0, 2000000]);
-      x.domain([0, 4]);
-      var data = milesArray.map(function (mile, index) {
-        return [index, mile];
-      });
-      console.log(data);
-      var line = d3.line().x(function (data) {
-        return x(data[0]);
-      }).y(function (data) {
-        return y(data[1]);
-      });
-      g.append("path").datum(data).attr("fill", "none").attr("stroke", "rgb(51, 130, 204)").attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 4.0).attr("d", line).attr("class", "hidden-line"); // .attr("id", `${neighborhood}`);
+      x.domain(d3.extent(milesData, function (d) {
+        return d.date;
+      }));
+      y.domain([0, d3.max(milesData, function (d) {
+        return d.miles;
+      })]);
+      var line = d3.line().x(function (milesData) {
+        return x(milesData.date);
+      }).y(function (milesData) {
+        return y(milesData.miles);
+      }); // g.append("path").datum(milesData).attr("fill", "none").attr("stroke", `rgb(51, 130, 204)`).attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 4.0).attr("d", line)
 
+      g.append("path").attr('class', 'line').attr('d', line(milesData));
       g.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickFormat(d3.format("d")));
       g.append("g").call(d3.axisLeft(y)).append("text").attr("fill", "#000").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", "0.71em").attr("text-anchor", "end").text("Miles");
       svg.append("text").attr("x", (width + 60) / 2).attr("y", 20).style("text-anchor", "middle").text("Recent Run Mileage");
@@ -3347,10 +3350,14 @@ function (_React$Component) {
           createLike = _this$props.createLike,
           deleteLike = _this$props.deleteLike;
       var numRuns = workouts.length;
-      var recentRunsMiles = workouts.reverse().map(function (workout) {
-        return workout.miles;
+      var recentRunsData = workouts.reverse().map(function (workout) {
+        var workoutDate = new Date(workout.created_at);
+        return {
+          miles: workout.miles,
+          date: "".concat(workoutDate.getMonth(), "/").concat(workoutDate.getDay())
+        };
       }).slice(0, 5);
-      recentRunsMiles ? this.milesGraph(recentRunsMiles) : "";
+      recentRunsData ? this.milesGraph(recentRunsData) : "";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {

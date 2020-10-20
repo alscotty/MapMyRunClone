@@ -12,29 +12,33 @@ class WorkoutsIndex extends React.Component{
         this.props.requestWorkouts()
     }
 
-    milesGraph(milesArray) {
-    var svgWidth = 600, svgHeight = 400;
-    var margin = { top: 20, right: 20, bottom: 30, left: 60 },
-        width = svgWidth - margin.left - margin.right,
-        height = svgHeight - margin.top - margin.bottom;
-    var svg = d3.select('#svg').attr("width", svgWidth).attr("height", svgHeight);
-    var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    var x = d3.scaleLinear()
+    milesGraph(milesData) {
+    if (!document.getElementById('svg')){
+        return
+    }
+    let dimensions = document.getElementById('svg').getBoundingClientRect();
+    let margin = { top: 20, right: 20, bottom: 30, left: 60 },
+        width = dimensions.width - margin.left - margin.right,
+        height = dimensions.height - margin.top - margin.bottom;
+    let svg = d3.select('#svg').attr("width", dimensions.width).attr("height", dimensions.height);
+    let g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    let x = d3.scaleLinear()
         .range([0, width]);
 
-    var y = d3.scaleLinear()
+    let y = d3.scaleLinear()
         .range([height, 0]);
 
-    y.domain([0, 2000000])
-    x.domain([0, 4])
+        x.domain(d3.extent(milesData, (d) => { return d.date; }));
+        y.domain([0, d3.max(milesData, (d) => { return d.miles; })]);
 
-    let data = milesArray.map((mile,index)=>[index,mile]);
-    console.log(data)
-        let line = d3.line().x((data) => { return x(data[0]) })
-            .y((data) => { return y(data[1]) })
+        let line = d3.line()
+            .x((milesData) => { return x(milesData.date) })
+            .y((milesData) => { return y(milesData.miles) });
 
-        g.append("path").datum(data).attr("fill", "none").attr("stroke", `rgb(51, 130, 204)`).attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 4.0).attr("d", line).attr("class", "hidden-line")
-        // .attr("id", `${neighborhood}`);
+        // g.append("path").datum(milesData).attr("fill", "none").attr("stroke", `rgb(51, 130, 204)`).attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 4.0).attr("d", line)
+    g.append("path")
+        .attr('class','line')
+        .attr('d',line(milesData))
 
     g.append("g").attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x)
@@ -55,8 +59,11 @@ class WorkoutsIndex extends React.Component{
         const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route, createComment, deleteComment,createLike, deleteLike}=this.props
 
         let numRuns=workouts.length
-        let recentRunsMiles = workouts.reverse().map(workout=>workout.miles).slice(0,5);
-        recentRunsMiles ? this.milesGraph(recentRunsMiles) : "";
+        let recentRunsData = workouts.reverse().map(workout=>{
+            let workoutDate = new Date(workout.created_at);
+            return {miles:workout.miles, date: `${workoutDate.getMonth()}/${workoutDate.getDay()}` }
+        }).slice(0,5);
+        recentRunsData ? this.milesGraph(recentRunsData) : "";
         return(
             <div className='workout-index'>
                 <h2 className='w-title' id='workouts'>Workouts</h2>
