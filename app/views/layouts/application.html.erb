@@ -7,6 +7,9 @@
   <script type="text/javascript">
   window.googleAPIKey = "<%= Rails.application.credentials.google[:api_key] %>"
   </script>
+  
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google[:api_key]}&libraries=places" %>
 
     <!-- Stylesheet below:-->

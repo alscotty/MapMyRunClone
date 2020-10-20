@@ -2989,7 +2989,7 @@ function (_React$Component) {
         onClick: function onClick() {
           deleteWorkout(workout.id).then(_this8.deduct(workout));
         }
-      }, "Delete Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, "Delete Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), workout.route_id ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "gpx",
         onClick: function onClick() {
           var gpxString = _this8.convertCoordinatesToGPXString(_this8.state.formattedCoords, workout.title, workout.time);
@@ -3004,7 +3004,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         id: "strava",
         src: window.strava
-      })))) : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      })))) : "") : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "mapp"
       }, workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-map",
@@ -3267,9 +3267,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -3284,15 +3284,53 @@ function (_React$Component) {
   _inherits(WorkoutsIndex, _React$Component);
 
   function WorkoutsIndex(props) {
+    var _this;
+
     _classCallCheck(this, WorkoutsIndex);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(WorkoutsIndex).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WorkoutsIndex).call(this, props));
+    _this.milesGraph = _this.milesGraph.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(WorkoutsIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.requestWorkouts();
+    }
+  }, {
+    key: "milesGraph",
+    value: function milesGraph(milesArray) {
+      var svgWidth = 600,
+          svgHeight = 400;
+      var margin = {
+        top: 20,
+        right: 20,
+        bottom: 30,
+        left: 60
+      },
+          width = svgWidth - margin.left - margin.right,
+          height = svgHeight - margin.top - margin.bottom;
+      var svg = d3.select('#svg').attr("width", svgWidth).attr("height", svgHeight);
+      var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      var x = d3.scaleLinear().range([0, width]);
+      var y = d3.scaleLinear().range([height, 0]);
+      y.domain([0, 2000000]);
+      x.domain([0, 4]);
+      var data = milesArray.map(function (mile, index) {
+        return [index, mile];
+      });
+      console.log(data);
+      var line = d3.line().x(function (data) {
+        return x(data[0]);
+      }).y(function (data) {
+        return y(data[1]);
+      });
+      g.append("path").datum(data).attr("fill", "none").attr("stroke", "rgb(51, 130, 204)").attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 4.0).attr("d", line).attr("class", "hidden-line"); // .attr("id", `${neighborhood}`);
+
+      g.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x).tickFormat(d3.format("d")));
+      g.append("g").call(d3.axisLeft(y)).append("text").attr("fill", "#000").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", "0.71em").attr("text-anchor", "end").text("Miles");
+      svg.append("text").attr("x", (width + 60) / 2).attr("y", 20).style("text-anchor", "middle").text("Recent Run Mileage");
     }
   }, {
     key: "render",
@@ -3309,19 +3347,32 @@ function (_React$Component) {
           createLike = _this$props.createLike,
           deleteLike = _this$props.deleteLike;
       var numRuns = workouts.length;
+      var recentRunsMiles = workouts.reverse().map(function (workout) {
+        return workout.miles;
+      }).slice(0, 5);
+      recentRunsMiles ? this.milesGraph(recentRunsMiles) : "";
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-index"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         className: "w-title",
         id: "workouts"
       }, "Workouts"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        id: "w-me"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Activity to date:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        id: "row-me",
+        className: "workout-tile"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        id: "to-date"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", null, "Activity to date:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "activ-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "w-title",
         id: "total-miles"
       }, "0"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "w-title"
-      }, numRuns, " workouts")), workouts.reverse().map(function (workout) {
+      }, numRuns, " workouts"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "row-me"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "svg"
+      })), workouts.reverse().map(function (workout) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: workout.id * 3,
           workout: workout,

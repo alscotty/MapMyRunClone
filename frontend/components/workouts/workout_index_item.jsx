@@ -266,20 +266,24 @@ class WorkoutIndexItem extends React.Component{
                 <span>
                 <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id).then(this.deduct(workout))}}>Delete Workout</button>
                 <br/>
-                <br/>
-                <button id='gpx' onClick={()=>{
-                    const gpxString = this.convertCoordinatesToGPXString(this.state.formattedCoords,workout.title,workout.time);
-                    this.downloadGPXFile(gpxString,workout.title);
-                                }}>Download as GPX</button> 
-                                <br/>
-                                <span id='strav-text'>
-                                    <span>
-                                    GPX compatible with
+                {workout.route_id ? 
+                    <div>
+                    <br/>
+                    <button id='gpx' onClick={()=>{
+                        const gpxString = this.convertCoordinatesToGPXString(this.state.formattedCoords,workout.title,workout.time);
+                        this.downloadGPXFile(gpxString,workout.title);
+                                    }}>Download as GPX</button> 
+                                    <br/>
+                                    <span id='strav-text'>
+                                        <span>
+                                        GPX compatible with
+                                        </span>
+                                        <a href='https://www.strava.com/upload/select' target='_blank'>
+                                        <img id='strava' src={window.strava}/>
+                                        </a>
                                     </span>
-                                    <a href='https://www.strava.com/upload/select' target='_blank'>
-                                    <img id='strava' src={window.strava}/>
-                                    </a>
-                                </span>
+                    </div>
+                : ""}
                 </span>
                 : ""    
             }
