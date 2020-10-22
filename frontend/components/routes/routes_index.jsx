@@ -11,21 +11,6 @@ class RoutesIndex extends React.Component{
     }
 
 
-
-    // dateSorter(a,b){
-    //     let comparison=0
-
-    //     if(a.updated_at>b.updated_at){
-    //         comparison=1
-    //     } else{
-    //         comparison=-1
-    //     }
-
-    //     return comparison;
-    // }
-    // .sort(this.dateSorter)
-   
-
     render(){
         const {routes,currentUser,allUsers,requestRoute}=this.props
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import WorkoutIndexItem from './workout_index_item'
+import * as d3 from 'd3'
 
 class WorkoutsIndex extends React.Component{
     constructor(props){
@@ -10,42 +11,55 @@ class WorkoutsIndex extends React.Component{
 
     componentDidMount(){
         this.props.requestWorkouts()
+        .then(()=>this.milesGraph());
     }
 
-    milesGraph(milesData) {
-    if (!document.getElementById('svg')){
-        return
-    }
-    let dimensions = document.getElementById('svg').getBoundingClientRect();
-    let margin = { top: 20, right: 20, bottom: 30, left: 60 },
+    milesGraph() {
+    let milesData = this.props.workouts.reverse().map((workout,index) => {
+        // var formatTime = d3.timeFormat("%B %d, %Y");
+        // let workoutDate = formatTime(new Date(workout.created_at));
+
+        return { miles: workout.miles, date: index }
+        // return { miles: workout.miles, date: workoutDate }
+    }).slice(0, 5);
+
+    // let dimensions = document.getElementById('svg').getBoundingClientRect();
+    let dimensions = { height:600, width:600 }
+    let margin = { top: 20, right: 20, bottom: 30, left: 30 },
         width = dimensions.width - margin.left - margin.right,
         height = dimensions.height - margin.top - margin.bottom;
     let svg = d3.select('#svg').attr("width", dimensions.width).attr("height", dimensions.height);
     let g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     let x = d3.scaleLinear()
+        .domain([1,5])
         .range([0, width]);
 
-    let y = d3.scaleLinear()
+        let y = d3.scaleLinear()
+        .domain([0, d3.max(milesData, (d) => { return d.miles; })])
         .range([height, 0]);
 
-        x.domain(d3.extent(milesData, (d) => { return d.date; }));
-        y.domain([0, d3.max(milesData, (d) => { return d.miles; })]);
+    let myLine = d3.line()
+        .x((milesData) => { return x(milesData.date) })
+        .y((milesData) => { return y(milesData.miles) });
 
-        let line = d3.line()
-            .x((milesData) => { return x(milesData.date) })
-            .y((milesData) => { return y(milesData.miles) });
-
-        // g.append("path").datum(milesData).attr("fill", "none").attr("stroke", `rgb(51, 130, 204)`).attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 4.0).attr("d", line)
     g.append("path")
-        .attr('class','line')
-        .attr('d',line(milesData))
+        .data(milesData)
+        // .attr("fill", "none")
+        .attr("stroke", `rgb(51, 130, 204)`)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 4.0)
+        .attr("d", myLine)
 
-    g.append("g").attr("transform", "translate(0," + height + ")")
+    g.append("g")
+        .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x)
-            .tickFormat(d3.format("d")))
+        .tickFormat(d3.format("d")))
 
-
-    g.append("g").call(d3.axisLeft(y)).append("text").attr("fill", "#000").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", "0.71em").attr("text-anchor", "end").text("Miles");
+    g.append("g").call(d3.axisLeft(y))
+    .append("text").attr("fill", "#000").attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", "0.71em").attr("text-anchor", "end").text("Miles");
 
     svg.append("text")
         .attr("x", (width + 60) / 2)
@@ -59,11 +73,6 @@ class WorkoutsIndex extends React.Component{
         const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route, createComment, deleteComment,createLike, deleteLike}=this.props
 
         let numRuns=workouts.length
-        let recentRunsData = workouts.reverse().map(workout=>{
-            let workoutDate = new Date(workout.created_at);
-            return {miles:workout.miles, date: `${workoutDate.getMonth()}/${workoutDate.getDay()}` }
-        }).slice(0,5);
-        recentRunsData ? this.milesGraph(recentRunsData) : "";
         return(
             <div className='workout-index'>
                 <h2 className='w-title' id='workouts'>Workouts</h2>
