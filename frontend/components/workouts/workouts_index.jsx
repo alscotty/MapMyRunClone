@@ -1,11 +1,16 @@
 import React from 'react'
 import WorkoutIndexItem from './workout_index_item'
 import * as d3 from 'd3'
+import { AreaChart, LineChart } from 'react-chartkick'
+import 'chart.js'
 
 class WorkoutsIndex extends React.Component{
     constructor(props){
         super(props);
-       
+       this.state = {
+           graphPoints: null,
+       };
+
         this.milesGraph = this.milesGraph.bind(this);
     }
 
@@ -15,77 +20,39 @@ class WorkoutsIndex extends React.Component{
     }
 
     milesGraph() {
-    let data = this.props.workouts.reverse().map((workout,index) => {
+    let milesHash = {};
+     this.props.workouts.reverse().slice(0,5).map((workout,index) => {
         // var formatTime = d3.timeFormat("%B %d, %Y");
         // let workoutDate = formatTime(new Date(workout.created_at));
+        milesHash[index] = workout.miles
+    });
 
-        return { miles: workout.miles, date: index }
-        // return { miles: workout.miles, date: workoutDate }
-    }).slice(0, 5);
-
-    // let dimensions = document.getElementById('svg').getBoundingClientRect();
-    let dimensions = { height:600, width:600 }
-    let margin = { top: 20, right: 20, bottom: 30, left: 30 },
-        width = dimensions.width - margin.left - margin.right,
-        height = dimensions.height - margin.top - margin.bottom;
-    let svg = d3.select('#svg').attr("width", dimensions.width).attr("height", dimensions.height);
-    let g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    let x = d3.scaleLinear()
-        .domain([1,5])
-        .range([0, width]);
-
-        let y = d3.scaleLinear()
-        .domain([0, d3.max(data, (d) => { return d.miles; })])
-        .range([height, 0]);
-
-    let line = d3.line()
-        .x((data) => { return x(data.date) })
-        .y((data) => { return y(data.miles) });
-
-    g.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", `rgb(51, 130, 204)`)
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 4.0)
-        .attr("class", "line")
-        .attr("d", line)
-
-    g.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x)
-        .tickFormat(d3.format("d")))
-
-    g.append("g").call(d3.axisLeft(y))
-    .append("text").attr("fill", "#000").attr("transform", "rotate(-90)")
-    .attr("y", 6)
-    .attr("dy", "0.71em").attr("text-anchor", "end").text("Miles");
-
-    svg.append("text")
-        .attr("x", (width + 60) / 2)
-        .attr("y", 20)
-        .style("text-anchor", "middle")
-        .text("Recent Run Mileage");
-
+    this.setState({graphPoints: milesHash});
+    let canvas = document.querySelector('canvas');
+    canvas.setAttribute('style','');
+    document.querySelector('#chart-1').setAttribute('style','');
 }
 
     render(){
-        const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route, createComment, deleteComment,createLike, deleteLike}=this.props
-
+        const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route, createComment, deleteComment,createLike, deleteLike}=this.props;
+        const {graphPoints} = this.state;
         let numRuns=workouts.length
         return(
             <div className='workout-index'>
                 <h2 className='w-title' id='workouts'>Workouts</h2>
-                <span id="row-me" className='workout-tile'>
-                        <h4 id='to-date'><i>Activity to date:</i></h4>
-                    <span id='activ-header'>
-                        <h4 className='w-title' id='total-miles'>0</h4>
-                        <h4 className='w-title' >{numRuns} workouts</h4>
+                <span className='flex'>
+                    <span id="row-me" className='workout-tile'>
+                            <h4 id='to-date'><i>Activity to date:</i></h4>
+                        <span id='activ-header'>
+                            <h4 className='w-title' id='total-miles'>0</h4>
+                            <h4 className='w-title' >{numRuns} workouts</h4>
+                        </span>
                     </span>
-                </span>
-                <span id="row-me">
-                        <div id="svg"></div>
+                    <span id='row-me'>
+                        {graphPoints ? 
+                            <AreaChart className='graph' message={{ empty: 'No run data to show' }} height='150px' ytitle="Miles" xtitle="Recent Run Mileage" data={graphPoints} font-family='Arial Rounded MT Bold' font-weight='350px' style='' />
+                        : ''}
+                    </span>
                 </span>
             {(workouts).reverse().map(workout=>{               
                 return(
