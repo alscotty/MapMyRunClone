@@ -3297,7 +3297,7 @@ function (_React$Component) {
   }, {
     key: "milesGraph",
     value: function milesGraph() {
-      var milesData = this.props.workouts.reverse().map(function (workout, index) {
+      var data = this.props.workouts.reverse().map(function (workout, index) {
         // var formatTime = d3.timeFormat("%B %d, %Y");
         // let workoutDate = formatTime(new Date(workout.created_at));
         return {
@@ -3321,16 +3321,15 @@ function (_React$Component) {
       var svg = d3__WEBPACK_IMPORTED_MODULE_2__["select"]('#svg').attr("width", dimensions.width).attr("height", dimensions.height);
       var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
       var x = d3__WEBPACK_IMPORTED_MODULE_2__["scaleLinear"]().domain([1, 5]).range([0, width]);
-      var y = d3__WEBPACK_IMPORTED_MODULE_2__["scaleLinear"]().domain([0, d3__WEBPACK_IMPORTED_MODULE_2__["max"](milesData, function (d) {
+      var y = d3__WEBPACK_IMPORTED_MODULE_2__["scaleLinear"]().domain([0, d3__WEBPACK_IMPORTED_MODULE_2__["max"](data, function (d) {
         return d.miles;
       })]).range([height, 0]);
-      var myLine = d3__WEBPACK_IMPORTED_MODULE_2__["line"]().x(function (milesData) {
-        return x(milesData.date);
-      }).y(function (milesData) {
-        return y(milesData.miles);
+      var line = d3__WEBPACK_IMPORTED_MODULE_2__["line"]().x(function (data) {
+        return x(data.date);
+      }).y(function (data) {
+        return y(data.miles);
       });
-      g.append("path").data(milesData) // .attr("fill", "none")
-      .attr("stroke", "rgb(51, 130, 204)").attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 4.0).attr("d", myLine);
+      g.append("path").datum(data).attr("fill", "none").attr("stroke", "rgb(51, 130, 204)").attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 4.0).attr("class", "line").attr("d", line);
       g.append("g").attr("transform", "translate(0," + height + ")").call(d3__WEBPACK_IMPORTED_MODULE_2__["axisBottom"](x).tickFormat(d3__WEBPACK_IMPORTED_MODULE_2__["format"]("d")));
       g.append("g").call(d3__WEBPACK_IMPORTED_MODULE_2__["axisLeft"](y)).append("text").attr("fill", "#000").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", "0.71em").attr("text-anchor", "end").text("Miles");
       svg.append("text").attr("x", (width + 60) / 2).attr("y", 20).style("text-anchor", "middle").text("Recent Run Mileage");

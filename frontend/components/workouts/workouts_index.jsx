@@ -15,7 +15,7 @@ class WorkoutsIndex extends React.Component{
     }
 
     milesGraph() {
-    let milesData = this.props.workouts.reverse().map((workout,index) => {
+    let data = this.props.workouts.reverse().map((workout,index) => {
         // var formatTime = d3.timeFormat("%B %d, %Y");
         // let workoutDate = formatTime(new Date(workout.created_at));
 
@@ -35,21 +35,22 @@ class WorkoutsIndex extends React.Component{
         .range([0, width]);
 
         let y = d3.scaleLinear()
-        .domain([0, d3.max(milesData, (d) => { return d.miles; })])
+        .domain([0, d3.max(data, (d) => { return d.miles; })])
         .range([height, 0]);
 
-    let myLine = d3.line()
-        .x((milesData) => { return x(milesData.date) })
-        .y((milesData) => { return y(milesData.miles) });
+    let line = d3.line()
+        .x((data) => { return x(data.date) })
+        .y((data) => { return y(data.miles) });
 
     g.append("path")
-        .data(milesData)
-        // .attr("fill", "none")
+        .datum(data)
+        .attr("fill", "none")
         .attr("stroke", `rgb(51, 130, 204)`)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 4.0)
-        .attr("d", myLine)
+        .attr("class", "line")
+        .attr("d", line)
 
     g.append("g")
         .attr("transform", "translate(0," + height + ")")
