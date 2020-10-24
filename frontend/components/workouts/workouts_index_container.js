@@ -20,7 +20,7 @@ const mstp=state=>{
     const { entities } = state;
     const { session } = state;
 
-    let workouts = Object.values(state.entities.workouts).filter(workout => workout.user_id === state.session.id)
+    let workouts = Object.values(state.entities.workouts).filter(workout => workout.user_id === state.session.id).reverse();
 
     return({
         currentUser: (entities.users[session.id]),

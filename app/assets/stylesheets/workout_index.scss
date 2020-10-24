@@ -6,6 +6,18 @@
     width: 100%;
 }
 
+.workout-tile{
+    background-image: image-url('boulder.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.flex{
+    display:flex;
+    align-content: center;
+}
+
 #strava,.like-images{
     height: 30px;
     width: 30px;

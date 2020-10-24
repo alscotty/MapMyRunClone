@@ -1,33 +1,58 @@
 import React from 'react'
 import WorkoutIndexItem from './workout_index_item'
+import { AreaChart } from 'react-chartkick'
+import 'chart.js'
 
-class WorkoutsIndex extends React.Component{
-    constructor(props){
+class WorkoutsIndex extends React.Component {
+    constructor(props) {
         super(props);
-       
+        this.state = {
+            graphPoints: null,
+        };
+
+        this.milesGraph = this.milesGraph.bind(this);
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.requestWorkouts()
+            .then(() => this.milesGraph());
     }
 
-    render(){
-        const {workouts,currentUser,requestWorkout,deleteWorkout, requestRoute,route, createComment, deleteComment,createLike, deleteLike}=this.props
+    milesGraph() {
+        let milesHash = {};
+        this.props.workouts.slice(0, 5).reverse().map((workout, index) => {
+            milesHash[index] = workout.miles
+        });
 
-        let numRuns=workouts.length
-        return(
+        this.setState({ graphPoints: milesHash });
+    }
+
+    render() {
+        const { workouts, currentUser, requestWorkout, deleteWorkout, requestRoute, route, createComment, deleteComment, createLike, deleteLike } = this.props;
+        const { graphPoints } = this.state;
+        let numRuns = workouts.length
+        return (
             <div className='workout-index'>
                 <h2 className='w-title' id='workouts'>Workouts</h2>
-                <span id='w-me'>
-                    <h4><i>Activity to date:</i></h4>
-                    <h4 className='w-title' id='total-miles'>0</h4>
-                    <h4 className='w-title' >{numRuns} workouts</h4>
+                <span className='flex'>
+                    <span id="row-me" className='workout-tile'>
+                        <h4 id='to-date'><i>Activity to date:</i></h4>
+                        <span id='activ-header'>
+                            <h4 className='w-title' id='total-miles'>0</h4>
+                            <h4 className='w-title' >{numRuns} workouts</h4>
+                        </span>
+                    </span>
+                    <span id='row-me'>
+                        {graphPoints ?
+                            <AreaChart className='graph' message={{ empty: 'No run data to show' }} height='150px' ytitle="Miles" xtitle="Recent Run Mileage" data={graphPoints} font-family='Arial Rounded MT Bold' font-weight='350px' style='' />
+                            : ''}
+                    </span>
                 </span>
-            {(workouts).reverse().map(workout=>{               
-                return(
-                <WorkoutIndexItem key={workout.id*3} workout={workout} createComment={createComment} deleteComment={deleteComment} currentUser={currentUser} route={route} deleteWorkout={deleteWorkout} requestWorkout={requestWorkout} requestRoute={requestRoute} createLike={createLike} deleteLike={deleteLike}/>
-                )
-            })}
+                {workouts.map(workout => {
+                    return (
+                        <WorkoutIndexItem key={workout.id * 3} workout={workout} createComment={createComment} deleteComment={deleteComment} currentUser={currentUser} route={route} deleteWorkout={deleteWorkout} requestWorkout={requestWorkout} requestRoute={requestRoute} createLike={createLike} deleteLike={deleteLike} />
+                    )
+                })}
             </div>
         )
     }
