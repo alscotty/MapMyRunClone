@@ -443,7 +443,7 @@ var requestUsers = function requestUsers() {
 /*!*********************************************!*\
   !*** ./frontend/actions/workout_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_WORKOUTS, RECEIVE_WORKOUT, REMOVE_WORKOUT, RECEIVE_WORKOUT_ERRORS, CLEAR_WORKOUT_ERRORS, receiveWorkoutErrors, clearWorkoutErrors, requestWorkouts, requestWorkout, createWorkout, deleteWorkout */
+/*! exports provided: RECEIVE_WORKOUTS, RECEIVE_WORKOUT, REMOVE_WORKOUT, RECEIVE_WORKOUT_ERRORS, CLEAR_WORKOUT_ERRORS, receiveWorkoutErrors, clearWorkoutErrors, requestWorkouts, requestWorkout, createWorkout, updateWorkout, deleteWorkout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -458,6 +458,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestWorkouts", function() { return requestWorkouts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "requestWorkout", function() { return requestWorkout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWorkout", function() { return createWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateWorkout", function() { return updateWorkout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteWorkout", function() { return deleteWorkout; });
 /* harmony import */ var _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/workout_api_utils */ "./frontend/util/workout_api_utils.js");
 
@@ -517,6 +518,15 @@ var requestWorkout = function requestWorkout(workoutId) {
 var createWorkout = function createWorkout(workout) {
   return function (dispatch) {
     return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["createWorkout"](workout).then(function (workout) {
+      return dispatch(receiveWorkout(workout));
+    }, function (err) {
+      dispatch(receiveWorkoutErrors(err.responseJSON));
+    });
+  };
+};
+var updateWorkout = function updateWorkout(workout) {
+  return function (dispatch) {
+    return _util_workout_api_utils__WEBPACK_IMPORTED_MODULE_0__["updateWorkout"](workout).then(function (workout) {
       return dispatch(receiveWorkout(workout));
     }, function (err) {
       dispatch(receiveWorkoutErrors(err.responseJSON));
@@ -4301,7 +4311,7 @@ var getUsers = function getUsers() {
 /*!********************************************!*\
   !*** ./frontend/util/workout_api_utils.js ***!
   \********************************************/
-/*! exports provided: fetchWorkouts, fetchWorkout, createWorkout, deleteWorkout */
+/*! exports provided: fetchWorkouts, fetchWorkout, createWorkout, updateWorkout, deleteWorkout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4309,6 +4319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWorkouts", function() { return fetchWorkouts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchWorkout", function() { return fetchWorkout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createWorkout", function() { return createWorkout; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateWorkout", function() { return updateWorkout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteWorkout", function() { return deleteWorkout; });
 var fetchWorkouts = function fetchWorkouts() {
   return $.ajax({
@@ -4327,6 +4338,15 @@ var createWorkout = function createWorkout(workout) {
   return $.ajax({
     url: '/api/workouts',
     method: 'post',
+    data: {
+      workout: workout
+    }
+  });
+};
+var updateWorkout = function updateWorkout(workout) {
+  return $.ajax({
+    url: "/api/workouts".concat(workout.id),
+    method: 'patch',
     data: {
       workout: workout
     }

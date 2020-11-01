@@ -19,6 +19,14 @@ export const createWorkout=(workout)=>(
     })
 );
 
+export const updateWorkout = (workout) => (
+    $.ajax({
+        url:`/api/workouts${workout.id}`,
+        method: 'patch',
+        data:{workout},
+    })
+)
+
 export const deleteWorkout=(workoutId)=>(
     $.ajax({
         url:`/api/workouts/${workoutId}`,

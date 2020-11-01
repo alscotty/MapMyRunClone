@@ -12,6 +12,14 @@ class Api::WorkoutsController < ApplicationController
         end
     end
 
+    def update
+        @workout = current_user.workouts.find(params[:id])
+        if @workout.update(workout_params)
+            render 'api/workouts/show'
+        else
+            render json: @workout.errors.full_messages, status:422
+        end
+    end
 
     def show
         @workout=Workout.find(params[:id])
