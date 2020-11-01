@@ -1,15 +1,15 @@
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import WorkoutForm from './workout_form'
 
-import { createWorkout, clearWorkoutErrors } from '../../actions/workout_actions'
+import { updateWorkout, clearWorkoutErrors } from '../../actions/workout_actions'
 
-const mSTP=state=>{
+const mSTP = state => {
     const { entities } = state;
     const { session } = state;
     const { errors } = state;
     let currentUser = entities.users[session.id]
 
-    return({
+    return ({
         workout: {
             user_id: entities.users[session.id].id,
             route_id: '',
@@ -23,13 +23,13 @@ const mSTP=state=>{
         currentUser: currentUser,
         errors: errors.workouts,
         hasMiles: false,
-        formType:'Create Workout'
+        formType: 'Update Workout'
     });
 };
 
-const mDTP=dispatch=>({
-    action: (workout)=>dispatch(createWorkout(workout)),
-    clearWorkoutErrors: ()=>dispatch(clearWorkoutErrors())
+const mDTP = dispatch => ({
+    action: (workout) => dispatch(updateWorkout(workout)),
+    clearWorkoutErrors: () => dispatch(clearWorkoutErrors())
 });
 
-export default connect(mSTP,mDTP)(WorkoutForm);
+export default connect(mSTP, mDTP)(WorkoutForm);

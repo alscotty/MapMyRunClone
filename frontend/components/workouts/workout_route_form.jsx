@@ -11,10 +11,10 @@ class WorkoutRouteForm extends React.Component{
     }
 
     render(){
-        const {action, formType, route, clearWorkoutErrors, workout,errors,currentUser}=this.props;
+        const {action, formType, route, clearWorkoutErrors, workout,errors,currentUser,hasMiles}=this.props;
         return(
             <WorkoutForm history={this.props.history} action={action} errors={errors} currentUser={currentUser }formType={formType} 
-            route={route} clearWorkoutErrors={clearWorkoutErrors} workout={workout}/>
+            route={route} clearWorkoutErrors={clearWorkoutErrors} workout={workout} hasMiles={hasMiles}/>
         )
     }
 

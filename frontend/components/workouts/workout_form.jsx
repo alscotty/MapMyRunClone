@@ -46,7 +46,7 @@ class WorkoutForm extends React.Component{
 
 
     render(){
-        const { formType } = this.props;
+        const { formType,hasMiles } = this.props;
         return(
            <div className='workout-form'>
           
@@ -71,7 +71,7 @@ class WorkoutForm extends React.Component{
                         <label>
                         Miles
                         <br/>
-                        {formType == 'Create Workout' ? 
+                        {!hasMiles ? 
                         <input type='number' value={this.state.miles} onChange={this.update('miles')} />
                         :
                         <input id='not-allowed' type='number' value={this.state.miles}/>                        

@@ -31,6 +31,7 @@ const mstp=(state,ownProps)=>{
     
     currentUser: currentUser,
     errors: errors.workouts,
+    hasMiles: true,
     formType: 'Log Workout'
     });
 };

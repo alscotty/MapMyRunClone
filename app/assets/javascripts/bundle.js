@@ -2637,7 +2637,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var formType = this.props.formType;
+      var _this$props = this.props,
+          formType = _this$props.formType,
+          hasMiles = _this$props.hasMiles;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
@@ -2660,7 +2662,7 @@ function (_React$Component) {
         type: "number",
         value: this.state.time,
         onChange: this.update('time')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), formType == 'Create Workout' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Miles", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), !hasMiles ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         value: this.state.miles,
         onChange: this.update('miles')
@@ -3121,7 +3123,8 @@ function (_React$Component) {
           clearWorkoutErrors = _this$props.clearWorkoutErrors,
           workout = _this$props.workout,
           errors = _this$props.errors,
-          currentUser = _this$props.currentUser;
+          currentUser = _this$props.currentUser,
+          hasMiles = _this$props.hasMiles;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
         history: this.props.history,
         action: action,
@@ -3130,7 +3133,8 @@ function (_React$Component) {
         formType: formType,
         route: route,
         clearWorkoutErrors: clearWorkoutErrors,
-        workout: workout
+        workout: workout,
+        hasMiles: hasMiles
       });
     }
   }]);
@@ -3181,6 +3185,7 @@ var mstp = function mstp(state, ownProps) {
     route: route,
     currentUser: currentUser,
     errors: errors.workouts,
+    hasMiles: true,
     formType: 'Log Workout'
   };
 };
@@ -3236,6 +3241,7 @@ var mSTP = function mSTP(state) {
     },
     currentUser: currentUser,
     errors: errors.workouts,
+    hasMiles: false,
     formType: 'Create Workout'
   };
 };
