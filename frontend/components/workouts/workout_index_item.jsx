@@ -283,6 +283,7 @@ class WorkoutIndexItem extends React.Component{
                                     <img id='strava' src={window.strava} />
                                 </a>
                             </span>
+                            <Link to={`/workouts/edit/${workout.id}/route/${workout.route_id}`}>Edit</Link>
                         </div>
                         : ""}
                 </span>

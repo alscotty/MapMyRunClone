@@ -21,7 +21,7 @@ export const createWorkout=(workout)=>(
 
 export const updateWorkout = (workout) => (
     $.ajax({
-        url:`/api/workouts${workout.id}`,
+        url:`/api/workouts/${workout.id}`,
         method: 'patch',
         data:{workout},
     })

@@ -16,7 +16,7 @@ class WorkoutForm extends React.Component{
 
         this.props.action(this.state)
             .then(() => {
-                this.props.history.push('/workoutsAll')})
+                this.props.history.push('/workouts')})
     }
 
     update(field) {
@@ -74,7 +74,7 @@ class WorkoutForm extends React.Component{
                         {!hasMiles ? 
                         <input type='number' value={this.state.miles} onChange={this.update('miles')} />
                         :
-                        <input id='not-allowed' type='number' value={this.state.miles}/>                        
+                        <input id='not-allowed' type='number' readOnly value={this.state.miles}/>                        
                         }
                         </label>
                     </span>

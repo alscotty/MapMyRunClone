@@ -569,7 +569,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _workouts_workout_route_form_container__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./workouts/workout_route_form_container */ "./frontend/components/workouts/workout_route_form_container.js");
 /* harmony import */ var _community_community_container__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./community/community_container */ "./frontend/components/community/community_container.js");
 /* harmony import */ var _community_activity_feed_container__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./community/activity_feed_container */ "./frontend/components/community/activity_feed_container.js");
-/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
+/* harmony import */ var _workouts_edit_workout_route_form_container__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./workouts/edit_workout_route_form_container */ "./frontend/components/workouts/edit_workout_route_form_container.js");
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
+
 
 
 
@@ -593,43 +595,46 @@ var App = function App() {
     exact: true,
     path: "/",
     component: _splash_page_splash_page__WEBPACK_IMPORTED_MODULE_9__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["AuthRoute"], {
     exact: true,
     path: "/login",
     component: _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_5__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["AuthRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["AuthRoute"], {
     exact: true,
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["ProtectedRoute"], {
     exact: true,
-    path: "/routesAll",
+    path: "/routes",
     component: _routes_routes_index_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["ProtectedRoute"], {
     exact: true,
     path: "/routes/new",
     component: _routes_routes_form_container__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["ProtectedRoute"], {
     exact: true,
     path: "/routes/:routeId",
     component: _routes_route_show_container__WEBPACK_IMPORTED_MODULE_8__["default"]
-  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["ProtectedRoute"], {
+  })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["ProtectedRoute"], {
     exact: true,
     path: "/routes/:routeId/workout",
     component: _workouts_workout_route_form_container__WEBPACK_IMPORTED_MODULE_13__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["ProtectedRoute"], {
     exact: true,
-    path: "/workoutsAll",
+    path: "/workouts",
     component: _workouts_workouts_index_container__WEBPACK_IMPORTED_MODULE_12__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["ProtectedRoute"], {
     exact: true,
     path: "/workouts/new",
     component: _workouts_workouts_form_container__WEBPACK_IMPORTED_MODULE_11__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["ProtectedRoute"], {
+    path: "/workouts/edit/:workoutId/route/:routeId",
+    component: _workouts_edit_workout_route_form_container__WEBPACK_IMPORTED_MODULE_16__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["ProtectedRoute"], {
     exact: true,
     path: "/community",
     component: _community_community_container__WEBPACK_IMPORTED_MODULE_14__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_16__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_17__["ProtectedRoute"], {
     exact: true,
     path: "/activfeed",
     component: _community_activity_feed_container__WEBPACK_IMPORTED_MODULE_15__["default"]
@@ -1223,7 +1228,7 @@ function (_React$Component) {
         to: "/routes/new",
         className: "route-links"
       }, "Create Route")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/routesAll",
+        to: "/routes",
         className: "route-links"
       }, "My Routes")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "dropdown"
@@ -1240,7 +1245,7 @@ function (_React$Component) {
         to: "/workouts/new"
       }, "className", "route-links"), "Create Workout")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], _defineProperty({
         className: "dropdown",
-        to: "/workoutsAll"
+        to: "/workouts"
       }, "className", "route-links"), "My Workouts")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/community",
         className: "route-links"
@@ -1682,7 +1687,7 @@ function (_React$Component) {
 
       if (coordinates.length) {
         this.props.action(this.state.routeInfo, coordinates).then(function () {
-          _this2.props.history.push('/routesAll');
+          _this2.props.history.push('/routes');
         });
       } else {
         this.setState({
@@ -2547,6 +2552,72 @@ function Splash() {
 
 /***/ }),
 
+/***/ "./frontend/components/workouts/edit_workout_route_form_container.js":
+/*!***************************************************************************!*\
+  !*** ./frontend/components/workouts/edit_workout_route_form_container.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _workout_route_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./workout_route_form */ "./frontend/components/workouts/workout_route_form.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _actions_route_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/route_actions */ "./frontend/actions/route_actions.js");
+/* harmony import */ var _actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/workout_actions */ "./frontend/actions/workout_actions.js");
+
+
+
+
+
+
+var mstp = function mstp(state, ownProps) {
+  var entities = state.entities,
+      session = state.session,
+      errors = state.errors;
+  var route = entities.routes[ownProps.match.params.routeId];
+  var currentUser = entities.users[session.id];
+  return {
+    workout: entities.workouts[ownProps.match.params.workoutId],
+    // workout: {
+    //     user_id: currentUser.id,
+    //     route_id: ownProps.match.params.routeId,
+    //     title: '',
+    //     description: '',
+    //     time: 0,
+    //     miles: route.miles,
+    //     creator: currentUser.username
+    // },
+    route: route,
+    currentUser: currentUser,
+    errors: errors.workouts,
+    hasMiles: true,
+    formType: 'Update Workout'
+  };
+};
+
+var mdtp = function mdtp(dispatch) {
+  return {
+    action: function action(workout) {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__["updateWorkout"])(workout));
+    },
+    clearWorkoutErrors: function clearWorkoutErrors() {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__["clearWorkoutErrors"])());
+    },
+    requestRoute: function requestRoute(routeId) {
+      return dispatch(Object(_actions_route_actions__WEBPACK_IMPORTED_MODULE_3__["requestRoute"])(routeId));
+    },
+    requestWorkout: function requestWorkout(workoutId) {
+      return dispatch(Object(_actions_workout_actions__WEBPACK_IMPORTED_MODULE_4__["requestWorkout"])(workoutId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mstp, mdtp)(_workout_route_form__WEBPACK_IMPORTED_MODULE_1__["default"])));
+
+/***/ }),
+
 /***/ "./frontend/components/workouts/workout_form.jsx":
 /*!*******************************************************!*\
   !*** ./frontend/components/workouts/workout_form.jsx ***!
@@ -2605,7 +2676,7 @@ function (_React$Component) {
 
       e.preventDefault();
       this.props.action(this.state).then(function () {
-        _this2.props.history.push('/workoutsAll');
+        _this2.props.history.push('/workouts');
       });
     }
   }, {
@@ -2669,6 +2740,7 @@ function (_React$Component) {
       }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         id: "not-allowed",
         type: "number",
+        readOnly: true,
         value: this.state.miles
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
@@ -3016,7 +3088,9 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         id: "strava",
         src: window.strava
-      })))) : "") : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/workouts/edit/".concat(workout.id, "/route/").concat(workout.route_id)
+      }, "Edit")) : "") : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "mapp"
       }, workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "workout-map",
@@ -3111,6 +3185,10 @@ function (_React$Component) {
   _createClass(WorkoutRouteForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      if (this.props.formType == 'Update Workout') {
+        this.props.requestWorkout(this.props.workout.id);
+      }
+
       this.props.requestRoute(this.props.match.params.routeId);
     }
   }, {
@@ -3125,6 +3203,11 @@ function (_React$Component) {
           errors = _this$props.errors,
           currentUser = _this$props.currentUser,
           hasMiles = _this$props.hasMiles;
+
+      if (formType == 'Update Workout' && !workout) {
+        return null;
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_workout_form__WEBPACK_IMPORTED_MODULE_1__["default"], {
         history: this.props.history,
         action: action,
@@ -4351,7 +4434,7 @@ var createWorkout = function createWorkout(workout) {
 };
 var updateWorkout = function updateWorkout(workout) {
   return $.ajax({
-    url: "/api/workouts".concat(workout.id),
+    url: "/api/workouts/".concat(workout.id),
     method: 'patch',
     data: {
       workout: workout

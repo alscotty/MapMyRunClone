@@ -82,7 +82,7 @@ class Greeting extends React.Component{
       {/* <Link to='/routes/new' className='route-links'>
         Create Route
       </Link>
-      <Link to='/routesAll' className='route-links'>
+      <Link to='/routes' className='route-links'>
         Routes
       </Link> */}
 
@@ -95,7 +95,7 @@ class Greeting extends React.Component{
             </Link>
           </li>
           <li>
-            <Link to='/routesAll' className='route-links'>
+            <Link to='/routes' className='route-links'>
               My Routes
             </Link>
           </li>
@@ -113,7 +113,7 @@ class Greeting extends React.Component{
             </Link>
           </li>
           <li>
-          <Link className='dropdown' to='/workoutsAll' className='route-links'>
+          <Link className='dropdown' to='/workouts' className='route-links'>
             My Workouts
           </Link> 
           </li>

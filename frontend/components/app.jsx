@@ -21,6 +21,7 @@ import WorkoutsIndex from './workouts/workouts_index_container'
 import WorkoutRouteForm from './workouts/workout_route_form_container'
 import CommunityContainer from './community/community_container'
 import ActivityFeedContainer from './community/activity_feed_container'
+import EditWorkoutRouteContainer from './workouts/edit_workout_route_form_container'
 
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
@@ -34,14 +35,15 @@ const App = () => (
       <AuthRoute exact path="/login" component={LogInFormContainer} />
       <AuthRoute exact path="/signup" component={SignUpFormContainer} />
       <Switch>
-        <ProtectedRoute exact path='/routesAll' component={RoutesIndex} />
+        <ProtectedRoute exact path='/routes' component={RoutesIndex} />
         <ProtectedRoute exact path='/routes/new' component={RoutesForm} />
         <ProtectedRoute exact path='/routes/:routeId' component={RouteShow} />
       </Switch>
       <ProtectedRoute exact path='/routes/:routeId/workout' component={WorkoutRouteForm} />
 
-      <ProtectedRoute exact path='/workoutsAll' component={WorkoutsIndex}/>
+      <ProtectedRoute exact path='/workouts' component={WorkoutsIndex}/>
       <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
+      <ProtectedRoute path='/workouts/edit/:workoutId/route/:routeId' component={EditWorkoutRouteContainer}/>
 
       <ProtectedRoute exact path='/community' component={CommunityContainer}/>
       <ProtectedRoute exact path='/activfeed' component={ActivityFeedContainer}/>
