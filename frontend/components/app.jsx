@@ -22,6 +22,7 @@ import WorkoutRouteForm from './workouts/workout_route_form_container'
 import CommunityContainer from './community/community_container'
 import ActivityFeedContainer from './community/activity_feed_container'
 import EditWorkoutRouteContainer from './workouts/edit_workout_route_form_container'
+import EditWorkoutContainer from './workouts/edit_workout_form_container'
 
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 
@@ -43,12 +44,13 @@ const App = () => (
 
       <ProtectedRoute exact path='/workouts' component={WorkoutsIndex}/>
       <ProtectedRoute exact path='/workouts/new' component={WorkoutForm} />
-      <ProtectedRoute path='/workouts/edit/:workoutId/route/:routeId' component={EditWorkoutRouteContainer}/>
+      <Switch>
+        <ProtectedRoute path='/workouts/edit/:workoutId/route/:routeId' component={EditWorkoutRouteContainer}/>
+        <ProtectedRoute path='/workouts/edit/:workoutId' component={EditWorkoutContainer}/>
+      </Switch>
 
       <ProtectedRoute exact path='/community' component={CommunityContainer}/>
       <ProtectedRoute exact path='/activfeed' component={ActivityFeedContainer}/>
-
-
     <footer>
       <Footer/>
       

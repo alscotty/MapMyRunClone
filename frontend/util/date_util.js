@@ -13,22 +13,23 @@ export const formatDate = date => {
         10: 'November',
         11: 'December',
     };
-    const daysOfWeek = {
-        0: 'Sunday',
-        1: 'Monday',
-        2: 'Tuesday',
-        3: 'Wednesday',
-        4: 'Thursday',
-        5: 'Friday',
-        6: 'Saturday',
-    };
-    //(${dayOfWeek})
+    // const daysOfWeek = {
+    //     0: 'Sunday',
+    //     1: 'Monday',
+    //     2: 'Tuesday',
+    //     3: 'Wednesday',
+    //     4: 'Thursday',
+    //     5: 'Friday',
+    //     6: 'Saturday',
+    // };
     const obj = new Date(date);
-    const month = months[obj.getMonth()];
+    // const month = months[obj.getMonth()];
+    const month = obj.getMonth();
     const day = obj.getDate();
     const year = obj.getFullYear();
-    const dayOfWeek = daysOfWeek[obj.getDay()];
-    return `${month} ${day}, ${year} `;
+    // const dayOfWeek = daysOfWeek[obj.getDay()];
+    // return `${month} ${day}, ${year} `;
+    return `${month}/${day}/${year}`;
 };
 
 export const formatTime = date => {
@@ -44,5 +45,5 @@ export const formatTime = date => {
 };
 
 export const formatDateTime = date => (
-    `${formatDate(date)} ${formatTime(date)}`
+    `${formatDate(date)} at ${formatTime(date)}`
 );

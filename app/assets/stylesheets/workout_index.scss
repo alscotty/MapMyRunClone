@@ -49,7 +49,7 @@
     opacity: 0.9;
 }
 
-#delete-workout-button,#gpx{
+#delete-workout-button{
     width:80%;
     margin-top:2px;
     margin-left:1%;
@@ -58,8 +58,24 @@
     border-radius:5px;
     font-family: 'Arial Rounded MT Bold';
 }
-#delete-workout-button:hover,#gpx:hover{
+#delete-workout-button:hover{
     background-color:rgb(195, 201, 207);
+    cursor:pointer;
+}
+
+#gpx{
+    width:80%;
+    margin-top:2px;
+    margin-left:1%;
+    font-size: small;
+    border: none;
+    color: white;
+    background: #ff9933;
+    border-radius:5px;
+}
+
+#gpx:hover{
+    background: #ff8000;
     cursor:pointer;
 }
 

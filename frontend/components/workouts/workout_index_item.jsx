@@ -264,12 +264,8 @@ class WorkoutIndexItem extends React.Component{
                 <br/>
                 {currentUser.id === workout.user_id ? 
                 <span>
-                <button id='delete-workout-button' onClick={()=>{deleteWorkout(workout.id).then(this.deduct(workout))}}>Delete Workout</button>
-                <br/>
-                <br/>
                     {workout.route_id ?
                         <div>
-                            <br />
                             <button id='gpx' onClick={() => {
                                 const gpxString = this.convertCoordinatesToGPXString(this.state.formattedCoords, workout.title, workout.time);
                                 this.downloadGPXFile(gpxString, workout.title);
@@ -283,9 +279,13 @@ class WorkoutIndexItem extends React.Component{
                                     <img id='strava' src={window.strava} />
                                 </a>
                             </span>
-                            <Link to={`/workouts/edit/${workout.id}/route/${workout.route_id}`}>Edit</Link>
+                            <Link className='linky' to={`/workouts/edit/${workout.id}/route/${workout.route_id}`}>Edit</Link> | <span className="linky" onClick={() => { deleteWorkout(workout.id).then(this.deduct(workout)) }}>Delete</span>
                         </div>
-                        : ""}
+                                    : 
+                                    <div>
+                        <Link className='linky' to={`/workouts/edit/${workout.id}`}>Edit</Link> | <span className="linky" onClick={() => { deleteWorkout(workout.id).then(this.deduct(workout)) }}>Delete</span>
+                                    </div>
+                        }
                 </span>
                 : ""
                 }

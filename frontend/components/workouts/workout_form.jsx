@@ -9,6 +9,12 @@ class WorkoutForm extends React.Component{
         this.handleSubmit=this.handleSubmit.bind(this);
     }
 
+    componentDidMount(){
+        const {requestWorkout,formType,hasMiles,workout} = this.props;
+        if (formType == 'Update Workout' && !hasMiles) {
+            requestWorkout(workout.id)
+        }
+    }
 
 
     handleSubmit(e) {
@@ -46,7 +52,11 @@ class WorkoutForm extends React.Component{
 
 
     render(){
-        const { formType,hasMiles } = this.props;
+        const { formType,hasMiles,workout } = this.props;
+        if (formType == 'Update Workout' && !hasMiles && !workout){
+            return null;
+        }
+
         return(
            <div className='workout-form'>
           

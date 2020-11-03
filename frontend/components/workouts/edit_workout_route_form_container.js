@@ -14,17 +14,7 @@ const mstp = (state, ownProps) => {
 
     return ({
         workout: entities.workouts[ownProps.match.params.workoutId],
-        // workout: {
-        //     user_id: currentUser.id,
-        //     route_id: ownProps.match.params.routeId,
-        //     title: '',
-        //     description: '',
-        //     time: 0,
-        //     miles: route.miles,
-        //     creator: currentUser.username
-        // },
         route: route,
-
         currentUser: currentUser,
         errors: errors.workouts,
         hasMiles: true,
