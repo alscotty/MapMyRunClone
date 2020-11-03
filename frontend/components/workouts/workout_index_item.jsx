@@ -237,7 +237,7 @@ class WorkoutIndexItem extends React.Component{
                 {workout.route_id && workout.route ? (
                     <span>
                         <br/>
-                        <span className='linky'>{workout.creator}</span> ran 
+                        <span id='blue-text'>{workout.creator}</span> ran 
                         <Link to={`/routes/${workout.route.id}`} className='linky'>
                         {` ${workout.route.title}`}
                         </Link>

@@ -1465,7 +1465,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "route-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "linky"
+        id: "blue-text"
       }, "".concat(currentUser.username, " ")), "                   created the route", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "linky",
         to: "/routes/".concat(route.id)
@@ -3125,7 +3125,7 @@ function (_React$Component) {
       }, "".concat(workout.title, "  ")), "by: ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "blue-text"
       }, "  ".concat(workout.creator))), workout.description.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Description:", workout.description) : '', workout.route_id && workout.route ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "linky"
+        id: "blue-text"
       }, workout.creator), " ran", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/routes/".concat(workout.route.id),
         className: "linky"
