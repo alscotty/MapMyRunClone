@@ -84,8 +84,8 @@ class RouteIndexItem extends React.Component{
                         {` ${route.title}`}
                     </Link>
                 {route.coordinates ? this.mapSetup() : ''}
-                <Link className='delete-button' to={`/routes/${route.id}/workout`}>Save as Workout</Link>              
-                <button className='delete-button' onClick={() => { deleteRoute(route.id) }}>Delete Route</button>
+                <br/>
+                <Link id='saveWorkout' to={`/routes/${route.id}/workout`}>Save as Workout</Link> | <span className='linky' onClick={() => { deleteRoute(route.id) }}>Delete</span>
                 </span>
 
                 <div className='mini-flex'>

@@ -4,6 +4,17 @@
     border: 1px solid grey;
 }
 
+#saveWorkout{
+    color:white;
+    background-color: rgb(29, 221, 124);
+    padding:2px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+#saveWorkout:hover{
+    background-color: rgb(25, 194, 109);
+}
+
 #act-feed{
     margin-left: 4%;
 }

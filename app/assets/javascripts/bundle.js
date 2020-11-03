@@ -1469,15 +1469,15 @@ function (_React$Component) {
       }, "".concat(currentUser.username, " ")), "                   created the route", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         className: "linky",
         to: "/routes/".concat(route.id)
-      }, " ".concat(route.title)), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        className: "delete-button",
+      }, " ".concat(route.title)), route.coordinates ? this.mapSetup() : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        id: "saveWorkout",
         to: "/routes/".concat(route.id, "/workout")
-      }, "Save as Workout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "delete-button",
+      }, "Save as Workout"), " | ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "linky",
         onClick: function onClick() {
           deleteRoute(route.id);
         }
-      }, "Delete Route")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Delete")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "mini-flex"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "distance-only"
@@ -4226,7 +4226,7 @@ var formatDate = function formatDate(date) {
 
   var obj = new Date(date); // const month = months[obj.getMonth()];
 
-  var month = obj.getMonth();
+  var month = obj.getMonth() + 1;
   var day = obj.getDate();
   var year = obj.getFullYear(); // const dayOfWeek = daysOfWeek[obj.getDay()];
   // return `${month} ${day}, ${year} `;
